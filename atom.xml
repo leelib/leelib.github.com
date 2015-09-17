@@ -1,0 +1,892 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  
+  <title><![CDATA[李略帅]]></title>
+  <subtitle><![CDATA[少壮不努力，一生在内地]]></subtitle>
+  <link href="/atom.xml" rel="self"/>
+  <link href="http://www.leelib.com//"/>
+  <updated>2015-09-17T09:03:43.998Z</updated>
+  <id>http://www.leelib.com//</id>
+  
+  <author>
+    <name><![CDATA[leaker]]></name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[Win10里添加目录右键菜单 VS2013 Command Prompt Here]]></title>
+    <link href="http://www.leelib.com/2015/09/16/vs2013-command-prompt-here.html"/>
+    <id>http://www.leelib.com/2015/09/16/vs2013-command-prompt-here.html</id>
+    <published>2015-09-15T20:08:21.000Z</published>
+    <updated>2015-09-17T09:03:43.998Z</updated>
+    <content type="html"><![CDATA[<h1 id="需求">需求</h1><p>我有时需要在命令行里对某个VS项目目录进行编译或部署等操作，总是需要以下步骤：</p>
+<ol>
+<li>打开VS的Command Prompt</li>
+<li>进入该项目目录</li>
+<li>进行编译操作</li>
+</ol>
+<p>个人觉得这样太浪费时间，于是萌生了添加类似 <strong>Command Here</strong> 右键菜单的想法。<br>办法很简单，在注册表添加相关项就可以了</p>
+<h1 id="解决方案">解决方案</h1><h2 id="Windows7_添加方法">Windows7 添加方法</h2><p>将以下内容修改到自己对应VS目录后以文本形式保存到 VS2013-Command-Prompt-Here-win7.reg 文件，然后双击导入即可<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Windows Registry Editor Version 5.00&#10;&#10;[HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Folder\shell\VS2013 Command Prompt Here]&#10;&#10;[HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Folder\shell\VS2013 Command Prompt Here\command]&#10;@=&#34;cmd.exe /s /k pushd \&#34;%1\&#34; &#38; \&#34;C:\\Program Files (x86)\\Microsoft Visual Studio 12.0\\VC\\vcvarsall.bat\&#34; x86&#34;</span><br></pre></td></tr></table></figure></p>
+<h2 id="Windows10_添加方法">Windows10 添加方法</h2><p>将以下内容修改到自己对应VS目录后以文本形式保存到 VS2013-Command-Prompt-Here-win10.reg 文件，然后双击导入即可<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Windows Registry Editor Version 5.00&#10;&#10;[HKEY_CLASSES_ROOT\Directory\Background\shell\VS2013 Command Prompt Here]&#10;&#10;[HKEY_CLASSES_ROOT\Directory\Background\shell\VS2013 Command Prompt Here\command]&#10;@=&#34;cmd.exe /s /k pushd \&#34;%V\&#34; &#38; \&#34;C:\\Program Files (x86)\\Microsoft Visual Studio 12.0\\VC\\vcvarsall.bat\&#34; x86&#34;</span><br></pre></td></tr></table></figure></p>
+<h1 id="为什么区分Windows版本">为什么区分Windows版本</h1><p>因为对于Windows来说传参的方式有所改变<br><strong>pushd %1</strong> 是用于Windows7的<br><strong>pushd %V</strong> 是用于Windows10的</p>
+<h1 id="下载">下载</h1><p>for Windows7: <a href="/files/regfiles/VS2013-Command-Prompt-Here-win7.reg">VS2013-Command-Prompt-Here-win7.reg</a><br>for Windows10: <a href="/files/regfiles/VS2013-Command-Prompt-Here-win10.reg">VS2013-Command-Prompt-Here-win10.reg</a></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="需求">需求</h1><p>我有时需要在命令行里对某个VS项目目录进行编译或部署等操作，总是需要以下步骤：</p>
+<ol>
+<li>打开VS的Command Prompt</li>
+<li>进入该项目目录</li>
+<li>进行编译操作</li>
+</ol>
+<]]>
+    </summary>
+    
+      <category term="VS2013" scheme="http://www.leelib.com/tags/VS2013/"/>
+    
+      <category term="Windows10" scheme="http://www.leelib.com/tags/Windows10/"/>
+    
+      <category term="经验总结" scheme="http://www.leelib.com/categories/%E7%BB%8F%E9%AA%8C%E6%80%BB%E7%BB%93/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[VS2013静态编译openssl批处理]]></title>
+    <link href="http://www.leelib.com/2015/09/14/vs2013-build-openssl-static.html"/>
+    <id>http://www.leelib.com/2015/09/14/vs2013-build-openssl-static.html</id>
+    <published>2015-09-14T04:26:46.000Z</published>
+    <updated>2015-09-17T09:03:43.998Z</updated>
+    <content type="html"><![CDATA[<h1 id="打开_Visual_Studio_2013_Command_Prompt">打开 Visual Studio 2013 Command Prompt</h1><figure class="highlight bat"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">wget http://www.nasm.us/pub/nasm/releasebuilds/<span class="number">2</span>.<span class="number">11</span>.<span class="number">08</span>/win32/nasm-<span class="number">2</span>.<span class="number">11</span>.<span class="number">08</span>-win32.zip</span><br><span class="line">unzip nasm-<span class="number">2</span>.<span class="number">11</span>.<span class="number">08</span>-win32.zip -d C:/nasm</span><br><span class="line"><span class="keyword">set</span> <span class="built_in">PATH</span>=<span class="envvar">%PATH%</span>;C:/nasm/</span><br><span class="line">wget https://www.openssl.org/source/openssl-<span class="number">1</span>.<span class="number">0</span>.<span class="number">2</span>d.tar.gz</span><br><span class="line">tar xzf openssl-<span class="number">1</span>.<span class="number">0</span>.<span class="number">2</span>d.tar.gz</span><br><span class="line"><span class="built_in">cd</span> openssl-<span class="number">1</span>.<span class="number">0</span>.<span class="number">2</span>d</span><br><span class="line">perl configure VC-WIN32 --prefix=C:/openssl</span><br><span class="line">ms\do_nasm</span><br><span class="line">nmake -f ms\nt.mak</span><br><span class="line">nmake -f ms\nt.mak install</span><br><span class="line"><span class="keyword">echo</span> "build successed."</span><br></pre></td></tr></table></figure>
+<p>这样编译不会产生 <strong>error A2070:invalid instruction operands</strong> 这个错误</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="打开_Visual_Studio_2013_Command_Prompt">打开 Visual Studio 2013 Command Prompt</h1><figure class="highlight bat"><table><tr><td class="g]]>
+    </summary>
+    
+      <category term="A2070" scheme="http://www.leelib.com/tags/A2070/"/>
+    
+      <category term="nasm" scheme="http://www.leelib.com/tags/nasm/"/>
+    
+      <category term="nmake" scheme="http://www.leelib.com/tags/nmake/"/>
+    
+      <category term="openssl" scheme="http://www.leelib.com/tags/openssl/"/>
+    
+      <category term="perl" scheme="http://www.leelib.com/tags/perl/"/>
+    
+      <category term="C/C++" scheme="http://www.leelib.com/categories/C-C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[好玩的暴雪战网错误提示]]></title>
+    <link href="http://www.leelib.com/2015/08/05/fun-battle-net-client-error.html"/>
+    <id>http://www.leelib.com/2015/08/05/fun-battle-net-client-error.html</id>
+    <published>2015-08-05T14:08:24.000Z</published>
+    <updated>2015-09-17T09:03:43.951Z</updated>
+    <content type="html"><![CDATA[<p><img src="/images/20150805/battle-net-error.jpg" alt=""></p>
+<p>可能是网络或者其他原因引起的。但没想到暴雪竟然会萌萌的掀桌子 0.0///</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p><img src="/images/20150805/battle-net-error.jpg" alt=""></p>
+<p>可能是网络或者其他原因引起的。但没想到暴雪竟然会萌萌的掀桌子 0.0///</p>
+]]>
+    </summary>
+    
+      <category term="闲言碎语" scheme="http://www.leelib.com/tags/%E9%97%B2%E8%A8%80%E7%A2%8E%E8%AF%AD/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[VS里std::max和max宏混淆问题的解决方案]]></title>
+    <link href="http://www.leelib.com/2015/02/09/fix-std-max-error.html"/>
+    <id>http://www.leelib.com/2015/02/09/fix-std-max-error.html</id>
+    <published>2015-02-09T03:27:16.000Z</published>
+    <updated>2015-09-17T09:03:43.936Z</updated>
+    <content type="html"><![CDATA[<p>有时,把旧项目转换成新版本项目时,旧版本项目里使用的 max 和 min 宏无法在新版本中正常编译.</p>
+<p>原因是: 新版本内有了新的函数 std::max 和 std::min 函数来实现这一功能</p>
+<h4 id="这时可以尝试使用如下方案解决:">这时可以尝试使用如下方案解决:</h4><ol>
+<li>包含algorithm文件（#include <algorithm>）</algorithm></li>
+<li>明确使用 std::max(a,b) 而非 max(a,b)</li>
+<li>定义宏 NOMINMAX</li>
+</ol>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>有时,把旧项目转换成新版本项目时,旧版本项目里使用的 max 和 min 宏无法在新版本中正常编译.</p>
+<p>原因是: 新版本内有了新的函数 std::max 和 std::min 函数来实现这一功能</p>
+<h4 id="这时可以尝试使用如下方案解决:">这时可以]]>
+    </summary>
+    
+      <category term="algorithm" scheme="http://www.leelib.com/tags/algorithm/"/>
+    
+      <category term="max" scheme="http://www.leelib.com/tags/max/"/>
+    
+      <category term="min" scheme="http://www.leelib.com/tags/min/"/>
+    
+      <category term="std" scheme="http://www.leelib.com/tags/std/"/>
+    
+      <category term="C/C++" scheme="http://www.leelib.com/categories/C-C/"/>
+    
+      <category term="经验总结" scheme="http://www.leelib.com/categories/C-C/%E7%BB%8F%E9%AA%8C%E6%80%BB%E7%BB%93/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Windows下的DLL卸载本身模块的方法]]></title>
+    <link href="http://www.leelib.com/2015/01/16/windows-dll-freelibrary-self.html"/>
+    <id>http://www.leelib.com/2015/01/16/windows-dll-freelibrary-self.html</id>
+    <published>2015-01-15T17:35:37.000Z</published>
+    <updated>2015-09-17T09:03:43.998Z</updated>
+    <content type="html"><![CDATA[<p>在 Windows 里 DLL 卸载自身模块是无法通过字节调用 FreeLibrary 自己来实现的。</p>
+<h2 id="原因分析">原因分析</h2><blockquote>
+<p>在当前线程中调用 FreeLibrary 后，当前模块就会立即被释放掉，而当前线程还没有运行结束。所以程序就运行到了一块不可访问的内存里，产生异常从而导致程序崩溃。</p>
+</blockquote>
+<h2 id="解决方案">解决方案</h2><blockquote>
+<p>Windows 里面 提供了一条可以用来释放自身模块的函数 <strong>FreeLibraryAndExitThread</strong> 可以释放自身。</p>
+</blockquote>
+<p>函数</p>
+<pre><code>VOID WINAPI <span class="function"><span class="title">FreeLibraryAndExitThread</span><span class="params">(_In_ HMODULE hLibModule, _In_ DWORD dwExitCode)</span></span>
+</code></pre>]]></content>
+    <summary type="html">
+    <![CDATA[<p>在 Windows 里 DLL 卸载自身模块是无法通过字节调用 FreeLibrary 自己来实现的。</p>
+<h2 id="原因分析">原因分析</h2><blockquote>
+<p>在当前线程中调用 FreeLibrary 后，当前模块就会立即被释放掉，而当前线程还]]>
+    </summary>
+    
+      <category term="FreeLibrary" scheme="http://www.leelib.com/tags/FreeLibrary/"/>
+    
+      <category term="FreeLibraryAndExitThread" scheme="http://www.leelib.com/tags/FreeLibraryAndExitThread/"/>
+    
+      <category term="dll" scheme="http://www.leelib.com/tags/dll/"/>
+    
+      <category term="windows" scheme="http://www.leelib.com/tags/windows/"/>
+    
+      <category term="C/C++" scheme="http://www.leelib.com/categories/C-C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Linux里面查看登录日志，并统计次数和排序，查看尝试破解密码的IP]]></title>
+    <link href="http://www.leelib.com/2015/01/06/linux-auth-log.html"/>
+    <id>http://www.leelib.com/2015/01/06/linux-auth-log.html</id>
+    <published>2015-01-06T05:42:53.000Z</published>
+    <updated>2015-09-17T09:03:43.967Z</updated>
+    <content type="html"><![CDATA[<p>仅需一条命令</p>
+<pre><code><span class="title">grep</span> <span class="string">"Failed password for root"</span> /var/log/secure | awk <span class="string">'{print <span class="variable">$11</span>}'</span> | sort | uniq -c | sort -nr | more
+
+
+结果类似下面这样：
+
+   <span class="number">4377</span> <span class="number">103.41.124.18</span>
+   <span class="number">4368</span> <span class="number">103.41.124.65</span>
+   <span class="number">3900</span> <span class="number">62.210.178.226</span>
+   <span class="number">2214</span> <span class="number">103.41.124.33</span>
+    <span class="number">409</span> <span class="number">62.210.142.105</span>
+    <span class="number">404</span> <span class="number">115.231.222.45</span>
+    <span class="number">152</span> <span class="number">122.225.97.91</span>
+     <span class="number">95</span> <span class="number">122.225.109.205</span>
+     <span class="number">81</span> <span class="number">109.195.69.233</span>
+     <span class="number">42</span> <span class="number">74.52.105.154</span>
+     <span class="number">21</span> <span class="number">87.106.184.62</span>
+     <span class="number">21</span> <span class="number">87.106.1.211</span>
+     <span class="number">21</span> <span class="number">82.165.154.23</span>
+     <span class="number">21</span> <span class="number">69.64.64.62</span>
+     <span class="number">21</span> <span class="number">67.226.156.239</span>
+     <span class="number">21</span> <span class="number">61.40.192.52</span>
+     <span class="number">21</span> <span class="number">60.213.190.98</span>
+     <span class="number">21</span> <span class="number">27.251.179.130</span>
+     <span class="number">21</span> <span class="number">222.77.190.33</span>
+     <span class="number">21</span> <span class="number">211.172.219.251</span>
+     <span class="number">21</span> <span class="number">210.249.105.10</span>
+     <span class="number">15</span> <span class="number">220.194.46.36</span>
+     <span class="number">12</span> <span class="number">203.184.128.106</span>
+      <span class="number">1</span> <span class="number">60.190.71.52</span>
+      <span class="number">1</span> <span class="number">193.104.41.58</span>
+</code></pre><p>这样我们就可以很清楚的了解有谁在尝试破解我们的密码了，之后做个相关安全策略就可以简单防治了</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>仅需一条命令</p>
+<pre><code><span class="title">grep</span> <span class="string">"Failed password for root"</span> /var/log/secure | awk <span ]]>
+    </summary>
+    
+      <category term="awk" scheme="http://www.leelib.com/tags/awk/"/>
+    
+      <category term="grep" scheme="http://www.leelib.com/tags/grep/"/>
+    
+      <category term="linux" scheme="http://www.leelib.com/tags/linux/"/>
+    
+      <category term="secure" scheme="http://www.leelib.com/tags/secure/"/>
+    
+      <category term="sort" scheme="http://www.leelib.com/tags/sort/"/>
+    
+      <category term="uniq" scheme="http://www.leelib.com/tags/uniq/"/>
+    
+      <category term="CentOS" scheme="http://www.leelib.com/categories/CentOS/"/>
+    
+      <category term="RedHat" scheme="http://www.leelib.com/categories/CentOS/RedHat/"/>
+    
+      <category term="Ubuntu" scheme="http://www.leelib.com/categories/CentOS/RedHat/Ubuntu/"/>
+    
+      <category term="经验总结" scheme="http://www.leelib.com/categories/CentOS/RedHat/Ubuntu/%E7%BB%8F%E9%AA%8C%E6%80%BB%E7%BB%93/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Linux里Git出现fatal: Unable to find remote helper for 'https'的解决方案]]></title>
+    <link href="http://www.leelib.com/2014/12/30/linux-git-remote-helper-for-https.html"/>
+    <id>http://www.leelib.com/2014/12/30/linux-git-remote-helper-for-https.html</id>
+    <published>2014-12-30T15:42:43.000Z</published>
+    <updated>2015-09-17T09:03:43.967Z</updated>
+    <content type="html"><![CDATA[<p>在Linux内源码编译安装的Git如果出现了 “<strong>Unable to find remote helper for ‘https’</strong>” 错误，则说明<strong>编译没有完全</strong>。</p>
+<p>解决办法就是在编译之前安装相关的开发包就可以了。<br>在CentOS系统中使用下面命令来安装：</p>
+<pre><code>yum <span class="keyword">install</span> curl-devel expat-devel gettext-devel openssl-devel zlib-devel
+</code></pre>]]></content>
+    <summary type="html">
+    <![CDATA[<p>在Linux内源码编译安装的Git如果出现了 “<strong>Unable to find remote helper for ‘https’</strong>” 错误，则说明<strong>编译没有完全</strong>。</p>
+<p>解决办法就是在编译之前安装相关的]]>
+    </summary>
+    
+      <category term="fatal" scheme="http://www.leelib.com/tags/fatal/"/>
+    
+      <category term="git" scheme="http://www.leelib.com/tags/git/"/>
+    
+      <category term="https" scheme="http://www.leelib.com/tags/https/"/>
+    
+      <category term="linux" scheme="http://www.leelib.com/tags/linux/"/>
+    
+      <category term="C/C++" scheme="http://www.leelib.com/categories/C-C/"/>
+    
+      <category term="CentOS" scheme="http://www.leelib.com/categories/C-C/CentOS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Windows里Git出现fatal: Unable to find remote helper for 'https'的解决方案]]></title>
+    <link href="http://www.leelib.com/2014/12/25/git-remote-helper-for-https.html"/>
+    <id>http://www.leelib.com/2014/12/25/git-remote-helper-for-https.html</id>
+    <published>2014-12-25T08:10:02.000Z</published>
+    <updated>2015-09-17T09:03:43.951Z</updated>
+    <content type="html"><![CDATA[<p>在升级win8.1之后，重新安装的Git虽然可以正常使用<br>但遇到https时会报“<strong>Unable to find remote helper for ‘https’</strong>”的错误</p>
+<p>网络搜索了许久未果，于是自己研究</p>
+<blockquote>
+<ol>
+<li>检查安装的文件<br>结果：所有文件均完整<p></p></li>
+<li><p>检查文件的访问权限<br>结果：所有文件当前用户均可访问</p>
+</li>
+<li><p>为调用的git等exe文件授予管理员运行权限<br>结果：问题依旧存在</p>
+</li>
+</ol>
+</blockquote>
+<p></p><p>按理说，只要当前用户拥有文件的所有访问权限，就可以正常使用了。<br>并且，按这个错误来分析。应该是remote-https模块没有权限访问</p>
+<p>挣扎了半天，尝试重装解决。</p>
+<p>在重装的时候选择了 <strong>管理员权限运行</strong><br>结果意外的发现重装后，https可以正常使用了。</p>
+<p>至此问题解决。</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>在升级win8.1之后，重新安装的Git虽然可以正常使用<br>但遇到https时会报“<strong>Unable to find remote helper for ‘https’</strong>”的错误</p>
+<p>网络搜索了许久未果，于是自己研究</p>
+<bl]]>
+    </summary>
+    
+      <category term="git" scheme="http://www.leelib.com/tags/git/"/>
+    
+      <category term="https" scheme="http://www.leelib.com/tags/https/"/>
+    
+      <category term="remote" scheme="http://www.leelib.com/tags/remote/"/>
+    
+      <category term="windows" scheme="http://www.leelib.com/tags/windows/"/>
+    
+      <category term="经验总结" scheme="http://www.leelib.com/categories/%E7%BB%8F%E9%AA%8C%E6%80%BB%E7%BB%93/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[python代码简单加密解密工具]]></title>
+    <link href="http://www.leelib.com/2014/11/21/python-simple-crypt-code.html"/>
+    <id>http://www.leelib.com/2014/11/21/python-simple-crypt-code.html</id>
+    <published>2014-11-21T11:13:45.000Z</published>
+    <updated>2015-09-17T09:03:43.982Z</updated>
+    <content type="html"><![CDATA[<pre><code><span class="built_in">#</span><span class="built_in">!</span>/usr/env python
+<span class="string">""</span><span class="string">"
+:license: MIT
+
+Copyright (C) 2012 HustMoon
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of
+this software and associated documentation files (the "</span>Software<span class="string">"), to deal in
+the Software without restriction, including without limitation the rights to
+use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+of the Software, and to permit persons to whom the Software is furnished to do
+so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "</span>AS IS<span class="string">", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+"</span><span class="string">""</span>
+from __future__ <span class="built_in">import</span> with_statement
+
+<span class="built_in">import</span> zlib, sys
+
+def b128encode<span class="params">(buf, escape=False)</span>:
+    <span class="keyword">if</span> not buf: return ''
+    buf = bytearray<span class="params">(buf)</span>
+    res = bytearray<span class="params">(<span class="params">(len<span class="params">(buf)</span> * <span class="number">8</span> + <span class="number">6</span>)</span> / <span class="number">7</span>)</span>
+    p, s, i = <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>
+    <span class="keyword">for</span> n in buf:
+        res[i] = <span class="params">(<span class="params">(p &lt;&lt; <span class="params">(<span class="number">8</span> - s)</span> | <span class="params">(n &gt;&gt; s)</span>)</span> &amp;amp; <span class="number">0</span>x7F)</span> | <span class="number">0</span>x80; i += <span class="number">1</span>
+        <span class="keyword">if</span> s == <span class="number">7</span>:
+            res[i] = n | <span class="number">0</span>x80; i += <span class="number">1</span>
+            p, s = <span class="number">0</span>, <span class="number">1</span>
+        <span class="keyword">else</span>:
+            p, s = n, <span class="params">(s + <span class="number">1</span>)</span> <span class="built_in">%</span> <span class="number">8</span>
+    <span class="keyword">if</span> s <span class="built_in">!</span>= <span class="number">1</span>:
+        <span class="keyword">if</span> s == <span class="number">2</span> and p &lt; <span class="number">0</span>x80:
+            i -= <span class="number">1</span>
+        <span class="keyword">else</span>:
+            p = <span class="params">(p &lt;&lt; <span class="params">(<span class="number">8</span> - s)</span>)</span> &amp;amp; <span class="number">0</span>x7F
+        p = <span class="built_in">chr</span><span class="params">(p)</span>
+        <span class="keyword">if</span> escape:
+            p = p.encode<span class="params">('string-escape')</span>
+        res[i:] = p
+    return <span class="built_in">str</span><span class="params">(res)</span>
+
+def dcode<span class="params">()</span>:
+    code = r'''def code<span class="params">(__=code)</span>:
+ <span class="params">(_______)</span>=<span class="params">(globals)</span><span class="params">()</span>;del<span class="params">(<span class="params">(_______)</span>['code'])</span>
+ <span class="keyword">if</span><span class="params">(<span class="params">(<span class="params">(_______)</span>.get<span class="params">('__doc__')</span>)</span>is<span class="params">(<span class="params">(None)</span>)</span>)</span>:
+  <span class="params">(__)</span>=<span class="params">(map)</span><span class="params">(<span class="params">(ord)</span>,<span class="params">(__)</span>[<span class="params">(<span class="number">339</span>)</span>:])</span>;<span class="params">(______)</span>=[<span class="number">0</span>]<span class="built_in">*</span><span class="params">(<span class="params">(<span class="params">(<span class="params">(<span class="params">(len)</span><span class="params">(<span class="params">(__)</span>)</span>+<span class="params">(<span class="number">1</span>)</span>)</span>*<span class="params">(<span class="number">7</span>)</span>)</span>/<span class="params">(<span class="number">8</span>)</span>)</span>)</span>;<span class="params">(<span class="params">(___)</span>,<span class="params">(____)</span>,<span class="params">(_____)</span>)</span>=<span class="params">(<span class="params">(<span class="number">0</span>)</span>,<span class="params">(<span class="number">0</span>)</span>,<span class="params">(<span class="number">0</span>)</span>)</span>
+  <span class="keyword">for</span><span class="params">(<span class="params">(__)</span>)</span>in<span class="params">(<span class="params">(__)</span>)</span>:
+   <span class="keyword">if</span><span class="params">(<span class="params">(__)</span>&lt;<span class="params">(<span class="number">128</span>)</span>)</span>:break
+   <span class="keyword">if</span><span class="params">(<span class="params">(____)</span>==<span class="params">(<span class="number">0</span>)</span>)</span>:<span class="params">(<span class="params">(___)</span>,<span class="params">(____)</span>)</span>=<span class="params">(<span class="params">(__)</span>,<span class="params">(<span class="number">1</span>)</span>)</span>
+   <span class="keyword">else</span>:
+    <span class="params">(______)</span>[<span class="params">(_____)</span>]=<span class="params">(<span class="params">(<span class="params">(<span class="params">(___)</span>&lt;&lt;<span class="params">(____)</span>)</span>|<span class="params">(<span class="params">(<span class="params">(__)</span>&amp;amp;<span class="params">(<span class="number">127</span>)</span>)</span>&gt;&gt;<span class="params">(<span class="params">(<span class="number">7</span>)</span>-<span class="params">(____)</span>)</span>)</span>)</span>&amp;amp;<span class="params">(<span class="number">255</span>)</span>)</span>;<span class="params">(_____)</span>+=<span class="params">(<span class="number">1</span>)</span>;<span class="params">(<span class="params">(___)</span>,<span class="params">(____)</span>)</span>=<span class="params">(<span class="params">(__)</span>,<span class="params">(<span class="params">(<span class="params">(____)</span>+<span class="params">(<span class="number">1</span>)</span>)</span>%<span class="params">(<span class="number">8</span>)</span>)</span>)</span>
+  <span class="keyword">if</span><span class="params">(<span class="params">(__)</span>&lt;<span class="params">(<span class="number">128</span>)</span>)</span>:
+   <span class="keyword">if</span><span class="params">(<span class="params">(____)</span>!=<span class="params">(<span class="number">0</span>)</span>)</span>:
+    <span class="params">(__)</span>=<span class="params">(<span class="params">(<span class="params">(<span class="params">(___)</span>&lt;&lt;<span class="params">(____)</span>)</span>|<span class="params">(<span class="params">(__)</span>&gt;&gt;<span class="params">(<span class="params">(<span class="number">7</span>)</span>-<span class="params">(____)</span>)</span>)</span>)</span>&amp;amp;<span class="params">(<span class="number">255</span>)</span>)</span>
+   <span class="params">(______)</span>[<span class="params">(_____)</span>:]=[<span class="params">(<span class="params">(__)</span>)</span>]
+  elif<span class="params">(<span class="params">(____)</span>!=<span class="params">(<span class="number">0</span>)</span>)</span>:del<span class="params">(<span class="params">(______)</span>[<span class="params">(_____)</span>:])</span>
+  exec<span class="params">(<span class="params">(''.join<span class="params">(<span class="params">(map)</span><span class="params">(<span class="params">(chr)</span>,<span class="params">(______)</span>)</span>)</span>.decode<span class="params">('zlib')</span>)</span>)</span>in<span class="params">(<span class="params">(_______)</span>)</span>
+  <span class="keyword">if</span><span class="params">(<span class="params">(<span class="params">(_______)</span>.get<span class="params">('__doc__')</span>)</span>is<span class="params">(<span class="params">(None)</span>)</span>)</span>:<span class="params">(_______)</span>['__doc__']=''
+code<span class="params">()</span>
+'''
+    return ''.join<span class="params">([c.encode<span class="params">('string-escape')</span> if ord<span class="params">(c)</span> &lt; <span class="number">128</span> else c
+                    for c in zlib.compress<span class="params">(code, <span class="number">9</span>)</span>])</span>
+dcode = dcode<span class="params">()</span>
+
+def encode<span class="params">(infile, outfile)</span>:
+    with open<span class="params">(infile, 'rU')</span> as fp:
+        code = fp.read<span class="params">()</span>.rstrip<span class="params">('n')</span> + 'n'
+    code = b128encode<span class="params">(zlib.compress<span class="params">(code, <span class="number">9</span>)</span>, True)</span>
+    code = r'''<span class="built_in">#</span> -<span class="built_in">*</span>- coding: latin-<span class="number">1</span> -<span class="built_in">*</span>-
+code = '<span class="built_in">%</span>s'
+exec<span class="params">(code.decode<span class="params">('zlib')</span>)</span>
+''' <span class="built_in">%</span> <span class="params">(dcode + code)</span>
+    with open<span class="params">(outfile, 'wb')</span> as fp:
+        fp.write<span class="params">(code)</span>
+
+def decode<span class="params">(infile, outfile)</span>:
+    with open<span class="params">(infile, 'rU')</span> as fp:
+        code = fp.read<span class="params">()</span>.rstrip<span class="params">('n')</span> + 'n'
+    code = code.replace<span class="params">(<span class="string">"exec(code.decode('zlib'))"</span>, <span class="string">"exec(code.decode('zlib')"</span>
+        <span class="string">".replace('exec','fp.write').replace('in((_______))',''))"</span>)</span>
+    with open<span class="params">(outfile, 'wb')</span> as fp:
+        eval<span class="params">(compile<span class="params">(code, 's', 'exec')</span>, {'fp':fp})</span>
+
+def main<span class="params">()</span>:
+    try:
+        <span class="keyword">if</span> sys.argv[<span class="number">1</span>] == '-d':
+            func = decode
+            infile, outfile = sys.argv[<span class="number">2</span>:<span class="number">4</span>]
+        <span class="keyword">else</span>:
+            func = encode
+            infile, outfile = sys.argv[<span class="number">1</span>:<span class="number">3</span>]
+    except ValueError:
+        print &gt;&gt;sys.stderr, 'Usage: zipcode.py [-d] infile.py outfile.py'
+        raise SystemExit<span class="params">(-<span class="number">1</span>)</span>
+    func<span class="params">(infile, outfile)</span>
+
+<span class="keyword">if</span> __name__ == '__main__':
+    main<span class="params">()</span>
+</code></pre>]]></content>
+    <summary type="html">
+    <![CDATA[<pre><code><span class="built_in">#</span><span class="built_in">!</span>/usr/env python
+<span class="string">""</span><span class="string">]]>
+    </summary>
+    
+      <category term="Uncategorized" scheme="http://www.leelib.com/categories/Uncategorized/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[VS2013上直接使用ATL的注意事项]]></title>
+    <link href="http://www.leelib.com/2014/11/21/vs2013-use-atl.html"/>
+    <id>http://www.leelib.com/2014/11/21/vs2013-use-atl.html</id>
+    <published>2014-11-21T04:15:21.000Z</published>
+    <updated>2015-09-17T09:03:43.998Z</updated>
+    <content type="html"><![CDATA[<blockquote>
+<p>不再需要导入atl.lib库了，直接包含以下头文件就可以了</p>
+</blockquote>
+<pre><code><span class="preprocessor">#<span class="keyword">include</span> &lt;atlbase.h&gt;</span>
+<span class="preprocessor">#<span class="keyword">include</span> &lt;atlcom.h&gt;</span>
+<span class="preprocessor">#<span class="keyword">include</span> &lt;atlctl.h&gt;</span>
+
+
+&gt; 要使用 AtlAxAttachControl 等函数的话，则必须初始化ATL模块
+
+CComModule _Module;
+_pAtlModule = &amp;amp;_Module;
+</code></pre>]]></content>
+    <summary type="html">
+    <![CDATA[<blockquote>
+<p>不再需要导入atl.lib库了，直接包含以下头文件就可以了</p>
+</blockquote>
+<pre><code><span class="preprocessor">#<span class="keyword">include</span> ]]>
+    </summary>
+    
+      <category term="atl" scheme="http://www.leelib.com/tags/atl/"/>
+    
+      <category term="com" scheme="http://www.leelib.com/tags/com/"/>
+    
+      <category term="C/C++" scheme="http://www.leelib.com/categories/C-C/"/>
+    
+      <category term="经验总结" scheme="http://www.leelib.com/categories/C-C/%E7%BB%8F%E9%AA%8C%E6%80%BB%E7%BB%93/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[CentOS安装GO编译环境]]></title>
+    <link href="http://www.leelib.com/2014/11/01/centos-install-go.html"/>
+    <id>http://www.leelib.com/2014/11/01/centos-install-go.html</id>
+    <published>2014-11-01T00:42:17.000Z</published>
+    <updated>2015-09-17T09:03:43.920Z</updated>
+    <content type="html"><![CDATA[<p>我们这里使用源码编译安装，直接按顺序执行下列命令就可以成功(我都是假设已经有root权限的情况下，所以执行之前请确认自己已有root权限)：</p>
+<pre><code>yum <span class="operator"><span class="keyword">install</span> -y mercurial gcc-c++ gcc
+mkdir /usr/<span class="keyword">local</span>
+cd /usr/<span class="keyword">local</span>
+hg clone -r <span class="keyword">release</span> https://<span class="keyword">go</span>.googlecode.com/hg/ <span class="keyword">go</span>
+cd /usr/<span class="keyword">local</span>/<span class="keyword">go</span>/src
+chmox +x <span class="keyword">all</span>.bash
+./<span class="keyword">all</span>.bash
+mkdir /root/<span class="keyword">go</span>
+export GOROOT=/usr/<span class="keyword">local</span>/<span class="keyword">go</span>
+export GOPATH=/root/<span class="keyword">go</span>
+export GOBIN=/usr/<span class="keyword">local</span>/<span class="keyword">go</span>/<span class="keyword">bin</span>
+export GOOS=linux
+export PATH=.:$PATH:/usr/<span class="keyword">local</span>/<span class="keyword">go</span>/<span class="keyword">bin</span>
+
+
+现在应该已经可以执行<span class="keyword">go</span>命令测试了：
+
+[root@root]# <span class="keyword">go</span> <span class="keyword">version</span>
+<span class="keyword">go</span> <span class="keyword">version</span> go1.3.3 linux/amd64
+
+
+如果想要每次进入bash时都拥有<span class="keyword">go</span>环境，则需要新建一个文件：**/etc/<span class="keyword">profile</span>.d/<span class="keyword">go</span>.sh**
+并写入以下内容
+
+export GOROOT=/usr/<span class="keyword">local</span>/<span class="keyword">go</span>
+export GOPATH=/root/<span class="keyword">go</span>
+export GOBIN=/usr/<span class="keyword">local</span>/<span class="keyword">go</span>/<span class="keyword">bin</span>
+export GOOS=linux
+export PATH=.:$PATH:/usr/<span class="keyword">local</span>/<span class="keyword">go</span>/<span class="keyword">bin</span></span>
+</code></pre><p>现在随时都可以执行go命令了。</p>
+<p>:)</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>我们这里使用源码编译安装，直接按顺序执行下列命令就可以成功(我都是假设已经有root权限的情况下，所以执行之前请确认自己已有root权限)：</p>
+<pre><code>yum <span class="operator"><span class="keyword">in]]>
+    </summary>
+    
+      <category term="bash" scheme="http://www.leelib.com/tags/bash/"/>
+    
+      <category term="centos" scheme="http://www.leelib.com/tags/centos/"/>
+    
+      <category term="export" scheme="http://www.leelib.com/tags/export/"/>
+    
+      <category term="go" scheme="http://www.leelib.com/tags/go/"/>
+    
+      <category term="CentOS" scheme="http://www.leelib.com/categories/CentOS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[让CentOS的yum命令可以直接安装最新的nginx]]></title>
+    <link href="http://www.leelib.com/2014/10/31/yum-install-last-nginx.html"/>
+    <id>http://www.leelib.com/2014/10/31/yum-install-last-nginx.html</id>
+    <published>2014-10-31T14:46:53.000Z</published>
+    <updated>2015-09-17T09:03:44.014Z</updated>
+    <content type="html"><![CDATA[<p>先执行下面这个bash：</p>
+<pre><code>cat &gt; /etc/yum<span class="class">.repos</span><span class="class">.d</span>/nginx<span class="class">.repo</span> &lt;&lt; EOF
+[nginx]
+name=nginx repo
+baseurl=http:<span class="comment">//nginx.org/packages/centos/6/x86_64</span>
+gpgcheck=<span class="number">0</span>
+enabled=<span class="number">1</span>
+EOF
+
+
+然后现在试试：
+
+yum update
+yum install nginx
+</code></pre><p>是不是直接安装了最新版的nginx呢？</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>先执行下面这个bash：</p>
+<pre><code>cat &gt; /etc/yum<span class="class">.repos</span><span class="class">.d</span>/nginx<span class="class">.rep]]>
+    </summary>
+    
+      <category term="CentOS" scheme="http://www.leelib.com/categories/CentOS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[解决yum安装 openssl-devel时产生的Multilib version problems found错误]]></title>
+    <link href="http://www.leelib.com/2014/06/29/fix-yum-openssl-devel-multilib-version-problems-found.html"/>
+    <id>http://www.leelib.com/2014/06/29/fix-yum-openssl-devel-multilib-version-problems-found.html</id>
+    <published>2014-06-28T22:56:31.000Z</published>
+    <updated>2015-09-17T09:03:43.951Z</updated>
+    <content type="html"><![CDATA[<p>今天给一台CentOS系统安装openssl-devel时，出现了如下信息：</p>
+<pre><code>Loaded plugins: fastestmirror, security
+Repository updates <span class="keyword">is</span> listed more than once <span class="keyword">in</span> <span class="keyword">the</span> configuration
+Repository centosplus <span class="keyword">is</span> listed more than once <span class="keyword">in</span> <span class="keyword">the</span> configuration
+Repository contrib <span class="keyword">is</span> listed more than once <span class="keyword">in</span> <span class="keyword">the</span> configuration
+Repository extras <span class="keyword">is</span> listed more than once <span class="keyword">in</span> <span class="keyword">the</span> configuration
+Loading mirror speeds <span class="keyword">from</span> cached hostfile
+ * base: mirrors.tuna.tsinghua.edu.cn
+ * extras: mirrors.tuna.tsinghua.edu.cn
+ * updates: mirrors.tuna.tsinghua.edu.cn
+Setting up Install Process
+Resolving Dependencies
+<span class="comment">--&gt; Running transaction check</span>
+<span class="comment">---&gt; Package openssl-devel.x86_64 0:1.0.1e-16.el6_5.14 will be installed</span>
+<span class="comment">--&gt; Processing Dependency: krb5-devel for package: openssl-devel-1.0.1e-16.el6_5.14.x86_64</span>
+<span class="comment">--&gt; Running transaction check</span>
+<span class="comment">---&gt; Package krb5-devel.x86_64 0:1.10.3-15.el6_5.1 will be installed</span>
+<span class="comment">--&gt; Processing Dependency: libselinux-devel for package: krb5-devel-1.10.3-15.el6_5.1.x86_64</span>
+<span class="comment">--&gt; Processing Dependency: libcom_err-devel for package: krb5-devel-1.10.3-15.el6_5.1.x86_64</span>
+<span class="comment">--&gt; Processing Dependency: keyutils-libs-devel for package: krb5-devel-1.10.3-15.el6_5.1.x86_64</span>
+<span class="comment">--&gt; Running transaction check</span>
+<span class="comment">---&gt; Package keyutils-libs-devel.x86_64 0:1.4-4.el6 will be installed</span>
+<span class="comment">---&gt; Package libcom_err-devel.x86_64 0:1.41.12-18.el6 will be installed</span>
+<span class="comment">---&gt; Package libselinux-devel.x86_64 0:2.0.94-5.3.el6_4.1 will be installed</span>
+<span class="comment">--&gt; Processing Dependency: libselinux = 2.0.94-5.3.el6_4.1 for package: libselinux-devel-2.0.94-5.3.el6_4.1.x86_64</span>
+<span class="comment">--&gt; Processing Dependency: libsepol-devel &gt;= 2.0.32-1 for package: libselinux-devel-2.0.94-5.3.el6_4.1.x86_64</span>
+<span class="comment">--&gt; Processing Dependency: pkgconfig(libsepol) for package: libselinux-devel-2.0.94-5.3.el6_4.1.x86_64</span>
+<span class="comment">--&gt; Running transaction check</span>
+<span class="comment">---&gt; Package libselinux.i686 0:2.0.94-5.3.el6_4.1 will be installed</span>
+<span class="comment">--&gt; Processing Dependency: libdl.so.2(GLIBC_2.1) for package: libselinux-2.0.94-5.3.el6_4.1.i686</span>
+<span class="comment">--&gt; Processing Dependency: libdl.so.2(GLIBC_2.0) for package: libselinux-2.0.94-5.3.el6_4.1.i686</span>
+<span class="comment">--&gt; Processing Dependency: libdl.so.2 for package: libselinux-2.0.94-5.3.el6_4.1.i686</span>
+<span class="comment">--&gt; Processing Dependency: libc.so.6(GLIBC_2.8) for package: libselinux-2.0.94-5.3.el6_4.1.i686</span>
+<span class="comment">--&gt; Processing Dependency: ld-linux.so.2(GLIBC_2.3) for package: libselinux-2.0.94-5.3.el6_4.1.i686</span>
+<span class="comment">--&gt; Processing Dependency: ld-linux.so.2 for package: libselinux-2.0.94-5.3.el6_4.1.i686</span>
+<span class="comment">---&gt; Package libsepol-devel.x86_64 0:2.0.41-4.el6 will be installed</span>
+<span class="comment">--&gt; Running transaction check</span>
+<span class="comment">---&gt; Package glibc.i686 0:2.12-1.132.el6_5.2 will be installed</span>
+<span class="comment">--&gt; Processing Dependency: libfreebl3.so(NSSRAWHASH_3.12.3) for package: glibc-2.12-1.132.el6_5.2.i686</span>
+<span class="comment">--&gt; Processing Dependency: libfreebl3.so for package: glibc-2.12-1.132.el6_5.2.i686</span>
+<span class="comment">--&gt; Running transaction check</span>
+<span class="comment">---&gt; Package nss-softokn-freebl.i686 0:3.14.3-10.el6_5 will be installed</span>
+<span class="comment">--&gt; Finished Dependency Resolution</span>
+Error:  Multilib <span class="property">version</span> problems found. This often means <span class="keyword">that</span> <span class="keyword">the</span> root
+       cause <span class="keyword">is</span> something <span class="keyword">else</span> <span class="keyword">and</span> multilib <span class="property">version</span> checking <span class="keyword">is</span> just
+       pointing out <span class="keyword">that</span> there <span class="keyword">is</span> a problem. Eg.:
+
+         <span class="number">1</span>\. You have an upgrade <span class="keyword">for</span> libselinux which <span class="keyword">is</span> missing <span class="keyword">some</span>
+            dependency <span class="keyword">that</span> another package requires. Yum <span class="keyword">is</span> trying <span class="keyword">to</span>
+            solve this <span class="keyword">by</span> installing an older <span class="property">version</span> <span class="keyword">of</span> libselinux <span class="keyword">of</span> <span class="keyword">the</span>
+            different architecture. If you exclude <span class="keyword">the</span> bad architecture
+            yum will <span class="keyword">tell</span> you what <span class="keyword">the</span> root cause <span class="keyword">is</span> (which package
+            requires what). You can <span class="keyword">try</span> redoing <span class="keyword">the</span> upgrade <span class="keyword">with</span>
+            <span class="comment">--exclude libselinux.otherarch ... this should give you an error</span>
+            message showing <span class="keyword">the</span> root cause <span class="keyword">of</span> <span class="keyword">the</span> problem.
+
+         <span class="number">2</span>\. You have multiple architectures <span class="keyword">of</span> libselinux installed, <span class="keyword">but</span>
+            yum can only see an upgrade <span class="keyword">for</span> one <span class="keyword">of</span> those arcitectures.
+            If you don't want/need both architectures anymore <span class="keyword">then</span> you
+            can remove <span class="keyword">the</span> one <span class="keyword">with</span> <span class="keyword">the</span> missing update <span class="keyword">and</span> everything
+            will work.
+
+         <span class="number">3</span>\. You have duplicate versions <span class="keyword">of</span> libselinux installed already.
+            You can use <span class="string">"yum check"</span> <span class="keyword">to</span> <span class="keyword">get</span> yum show these errors.
+
+       ...you can also use <span class="comment">--setopt=protected_multilib=false to remove</span>
+       this checking, however this <span class="keyword">is</span> almost never <span class="keyword">the</span> correct thing <span class="keyword">to</span>
+       do <span class="keyword">as</span> something <span class="keyword">else</span> <span class="keyword">is</span> very likely <span class="keyword">to</span> go wrong (often causing
+       much more problems).
+
+       Protected multilib versions: libselinux-<span class="number">2.0</span>.94-<span class="number">5.3</span>.el6_4.1.i686 != libselinux-<span class="number">2.0</span>.94-<span class="number">5.3</span>.0.1.el6.centos.plus.x86_64
+ You could <span class="keyword">try</span> using <span class="comment">--skip-broken to work around the problem</span>
+ You could <span class="keyword">try</span> <span class="property">running</span>: rpm -Va <span class="comment">--nofiles --nodigest</span>
+
+
+**最后在一个日文的网站上找到了解决办法：**
+
+yum install <span class="comment">--enablerepo=centosplus openssl-devel</span>
+</code></pre><p>引用：<a href="http://blog.urban-theory.net/2014/06/16/openssl-devel-install-fails-on-centos-with-docker" target="_blank" rel="external">http://blog.urban-theory.net/2014/06/16/openssl-devel-install-fails-on-centos-with-docker</a></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>今天给一台CentOS系统安装openssl-devel时，出现了如下信息：</p>
+<pre><code>Loaded plugins: fastestmirror, security
+Repository updates <span class="keyword">is]]>
+    </summary>
+    
+      <category term="centos" scheme="http://www.leelib.com/tags/centos/"/>
+    
+      <category term="install" scheme="http://www.leelib.com/tags/install/"/>
+    
+      <category term="linux" scheme="http://www.leelib.com/tags/linux/"/>
+    
+      <category term="yum" scheme="http://www.leelib.com/tags/yum/"/>
+    
+      <category term="CentOS" scheme="http://www.leelib.com/categories/CentOS/"/>
+    
+      <category term="RedHat" scheme="http://www.leelib.com/categories/CentOS/RedHat/"/>
+    
+      <category term="经验总结" scheme="http://www.leelib.com/categories/CentOS/RedHat/%E7%BB%8F%E9%AA%8C%E6%80%BB%E7%BB%93/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[一句话经验]]></title>
+    <link href="http://www.leelib.com/2014/04/08/dmesg-tail.html"/>
+    <id>http://www.leelib.com/2014/04/08/dmesg-tail.html</id>
+    <published>2014-04-07T16:37:23.000Z</published>
+    <updated>2015-09-17T09:03:43.920Z</updated>
+    <content type="html"><![CDATA[<p>当内核加载失败时，使用以下命令查看出错记录，可以帮助找到问题所在：</p>
+<pre><code>dmesg <span class="string">| tail -n 30</span>
+</code></pre>]]></content>
+    <summary type="html">
+    <![CDATA[<p>当内核加载失败时，使用以下命令查看出错记录，可以帮助找到问题所在：</p>
+<pre><code>dmesg <span class="string">| tail -n 30</span>
+</code></pre>]]>
+    </summary>
+    
+      <category term="dmesg" scheme="http://www.leelib.com/tags/dmesg/"/>
+    
+      <category term="tail" scheme="http://www.leelib.com/tags/tail/"/>
+    
+      <category term="CentOS" scheme="http://www.leelib.com/categories/CentOS/"/>
+    
+      <category term="RedHat" scheme="http://www.leelib.com/categories/CentOS/RedHat/"/>
+    
+      <category term="Ubuntu" scheme="http://www.leelib.com/categories/CentOS/RedHat/Ubuntu/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[升级Linux内核3.8.10记录]]></title>
+    <link href="http://www.leelib.com/2014/04/08/upgrade-linux-kernel-to-3-8-10.html"/>
+    <id>http://www.leelib.com/2014/04/08/upgrade-linux-kernel-to-3-8-10.html</id>
+    <published>2014-04-07T16:10:19.000Z</published>
+    <updated>2015-09-17T09:03:43.982Z</updated>
+    <content type="html"><![CDATA[<pre><code>yum install rpmdevtools yum-utils ncurses-devel make rpm-build rpm-devel
+wget https://www.kernel.org/pub/linux/kernel/<span class="variable">v3</span>.x/linux-3.8.10.tar.gz
+tar xvf linux-3.8.10.tar.gz
+cd linux-3.8.10
+make mrproper <span class="comment"># 第一次可忽略</span>
+make menuconfig <span class="comment"># 记得保存</span>
+make
+make modules_install
+make install<span class="instruction">
+new-kernel-pkg </span>--mkinitrd --depmod --install 3.8.10
+</code></pre>]]></content>
+    <summary type="html">
+    <![CDATA[<pre><code>yum install rpmdevtools yum-utils ncurses-devel make rpm-build rpm-devel
+wget https://www.kernel.org/pub/linux/kernel/<span class]]>
+    </summary>
+    
+      <category term="CentOS" scheme="http://www.leelib.com/categories/CentOS/"/>
+    
+      <category term="RedHat" scheme="http://www.leelib.com/categories/CentOS/RedHat/"/>
+    
+      <category term="Ubuntu" scheme="http://www.leelib.com/categories/CentOS/RedHat/Ubuntu/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Alienware系列 COMPAL Embedded System Control 驱动问题解决方案]]></title>
+    <link href="http://www.leelib.com/2014/03/30/fix-alienware-compal-embedded-system-control.html"/>
+    <id>http://www.leelib.com/2014/03/30/fix-alienware-compal-embedded-system-control.html</id>
+    <published>2014-03-29T21:05:56.000Z</published>
+    <updated>2015-09-17T09:03:43.936Z</updated>
+    <content type="html"><![CDATA[<p>每次重装系统后，装驱动很容易有一个名为“COMPAL Embedded System Control”的驱动未安装。<br>而使用驱动精灵等驱动智能安装类的软件安装后很容易出现驱动显示是装好了，但会提示个感叹号说明该设备无法正常工作。</p>
+<p>网上搜了半天终于找到一个说法：<br>这个驱动是热量控制，64位win7/win8无法完全安装设备管理器里更新驱动然后手动定位到C盘ProgramData里的Vista64安装即可</p>
+<p>尝试后问题解决。<br>记录此文章，留给跟我出现同样问题的朋友。希望能有所帮助。</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>每次重装系统后，装驱动很容易有一个名为“COMPAL Embedded System Control”的驱动未安装。<br>而使用驱动精灵等驱动智能安装类的软件安装后很容易出现驱动显示是装好了，但会提示个感叹号说明该设备无法正常工作。</p>
+<p>网上搜了半天终于找到一个]]>
+    </summary>
+    
+      <category term="经验总结" scheme="http://www.leelib.com/categories/%E7%BB%8F%E9%AA%8C%E6%80%BB%E7%BB%93/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[在使用boost库时发生 error C4996: 'std::_Copy_impl' 的解决方案]]></title>
+    <link href="http://www.leelib.com/2013/11/23/boost-c4996-std-copy-impl.html"/>
+    <id>http://www.leelib.com/2013/11/23/boost-c4996-std-copy-impl.html</id>
+    <published>2013-11-23T05:21:44.000Z</published>
+    <updated>2015-09-17T09:03:43.920Z</updated>
+    <content type="html"><![CDATA[<p>原本的程序是控制台的。<br>但最近需要移植到windows下使用。<br>所以以MFC来做UI，代码照搬。<br>一面的一处代码使用了如下语句：</p>
+<pre><code>boost<span class="tag">::split</span>(v, <span class="built_in">data</span>, boost<span class="tag">::is_any_of</span>(_T(<span class="string">"n"</span>)));
+
+
+结果编译时出现了如下错误：
+
+error C4996: <span class="string">'std::_Copy_impl'</span>
+
+
+而且是无论怎么修改都不认，差点打算重写了。
+
+在网络中搜索了半天未果，只能自己分析。好在被我乱猜给猜对了。
+
+我猜是因为boost的<span class="built_in">string</span>和std的<span class="built_in">string</span>产生了冲突而导致的。
+所以添加上boost的<span class="built_in">string</span>引用后，问题得以解决。
+
+<span class="variable">#include</span> <span class="subst">&lt;</span>boost/algorithm/<span class="built_in">string</span><span class="built_in">.</span>hpp<span class="subst">&gt;</span>
+</code></pre><p>在此留字，希望能帮到遇到同样问题的人。</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>原本的程序是控制台的。<br>但最近需要移植到windows下使用。<br>所以以MFC来做UI，代码照搬。<br>一面的一处代码使用了如下语句：</p>
+<pre><code>boost<span class="tag">::split</span>(v, <span c]]>
+    </summary>
+    
+      <category term="C4996" scheme="http://www.leelib.com/tags/C4996/"/>
+    
+      <category term="boost" scheme="http://www.leelib.com/tags/boost/"/>
+    
+      <category term="is_any_of" scheme="http://www.leelib.com/tags/is-any-of/"/>
+    
+      <category term="mfc" scheme="http://www.leelib.com/tags/mfc/"/>
+    
+      <category term="split" scheme="http://www.leelib.com/tags/split/"/>
+    
+      <category term="string" scheme="http://www.leelib.com/tags/string/"/>
+    
+      <category term="C/C++" scheme="http://www.leelib.com/categories/C-C/"/>
+    
+      <category term="经验总结" scheme="http://www.leelib.com/categories/C-C/%E7%BB%8F%E9%AA%8C%E6%80%BB%E7%BB%93/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Starting httpd: (13)Permission denied: make_sock: could not bind to address 解决方案]]></title>
+    <link href="http://www.leelib.com/2013/11/01/httpd-permission-denied-make-sock-could-not-bind-to-address.html"/>
+    <id>http://www.leelib.com/2013/11/01/httpd-permission-denied-make-sock-could-not-bind-to-address.html</id>
+    <published>2013-11-01T00:36:55.000Z</published>
+    <updated>2015-09-17T09:03:43.967Z</updated>
+    <content type="html"><![CDATA[<p>原因：修改了conf里面的Listen端口</p>
+<p>解决：<br>1. 修改成SELinux安全机制里面默认允许的端口（80, 443, 488, 8008, 8009, 8443）等等。<br>2. 修改SELinux安全设置<br>如：</p>
+<pre><code>semanage port -<span class="tag">a</span> -t http_port_t -<span class="tag">p</span> tcp &lt;listen port&gt;
+</code></pre>]]></content>
+    <summary type="html">
+    <![CDATA[<p>原因：修改了conf里面的Listen端口</p>
+<p>解决：<br>1. 修改成SELinux安全机制里面默认允许的端口（80, 443, 488, 8008, 8009, 8443）等等。<br>2. 修改SELinux安全设置<br>如：</p>
+<pre><cod]]>
+    </summary>
+    
+      <category term="SELinux" scheme="http://www.leelib.com/tags/SELinux/"/>
+    
+      <category term="apache" scheme="http://www.leelib.com/tags/apache/"/>
+    
+      <category term="bind" scheme="http://www.leelib.com/tags/bind/"/>
+    
+      <category term="conf" scheme="http://www.leelib.com/tags/conf/"/>
+    
+      <category term="denied" scheme="http://www.leelib.com/tags/denied/"/>
+    
+      <category term="http_port" scheme="http://www.leelib.com/tags/http-port/"/>
+    
+      <category term="httpd" scheme="http://www.leelib.com/tags/httpd/"/>
+    
+      <category term="listen" scheme="http://www.leelib.com/tags/listen/"/>
+    
+      <category term="permission" scheme="http://www.leelib.com/tags/permission/"/>
+    
+      <category term="semanage" scheme="http://www.leelib.com/tags/semanage/"/>
+    
+      <category term="CentOS" scheme="http://www.leelib.com/categories/CentOS/"/>
+    
+      <category term="RedHat" scheme="http://www.leelib.com/categories/CentOS/RedHat/"/>
+    
+      <category term="Ubuntu" scheme="http://www.leelib.com/categories/CentOS/RedHat/Ubuntu/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[解决WinRAR压缩包分卷乱序导致无法解压的问题]]></title>
+    <link href="http://www.leelib.com/2013/10/30/fix-winrar-order.html"/>
+    <id>http://www.leelib.com/2013/10/30/fix-winrar-order.html</id>
+    <published>2013-10-29T16:24:38.000Z</published>
+    <updated>2015-09-17T09:03:43.951Z</updated>
+    <content type="html"><![CDATA[<p>下载游戏：《古墓丽影9》中文免安装绿色豪华硬盘版[1.1.732.1升级档][解压即玩]<br>光压缩包所有分卷加起来就有快10个G<br>结果用QQ旋风下载下来后成乱序的了<br>然后到网站上一看发现QQ旋风本身就把链接那些顺序没搞对。<br>参考下载地址：<a href="http://fenxiang.qq.com/x/3SSKsVNycfRNc3CJcuCA0~NHIcT5rX133GN0qnvKZltI" title="http://fenxiang.qq.com/x/3SSKsVNycfRNc3CJcuCA0~NHIcT5rX133GN0qnvKZltI" target="_blank" rel="external">http://fenxiang.qq.com/x/3SSKsVNycfRNc3CJcuCA0~NHIcT5rX133GN0qnvKZltI</a></p>
+<p>自己根据使用7-zip打开压缩包的“之前分割”和“之后分割”信息拼凑了半天，结果还是有一个文件“bigfile.001.tiger”不能成功解压。最终放弃。</p>
+<p>结果在网上搜索了半天，竟然发现“360压缩”竟然宣称自己可以修复。</p>
+<p>原文在：<a href="http://yasuo.360.cn/update.html" title="http://yasuo.360.cn/update.html" target="_blank" rel="external">http://yasuo.360.cn/update.html</a><br>1.6正式版（2011-5-26） 下<br><strong>5. 分卷压缩智能解压，智能判断解压rar分卷包时的文件夹名乱序问题。</strong></p>
+<p>抱着尝试的心态，下载了一个最新版的安装上尝试后。发现真的正常解压了所有压缩包。<br>总算是解决了目前的尴尬问题，所以在此留文提醒有遇到跟我同样问题的朋友。</p>
+<p>成功解压版本：<a href="http://dl.360safe.com/360zip_beta_3.1.0.1071.exe" title="360zip_beta_3.1.0.1071" target="_blank" rel="external">360zip_beta_3.1.0.1071</a></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>下载游戏：《古墓丽影9》中文免安装绿色豪华硬盘版[1.1.732.1升级档][解压即玩]<br>光压缩包所有分卷加起来就有快10个G<br>结果用QQ旋风下载下来后成乱序的了<br>然后到网站上一看发现QQ旋风本身就把链接那些顺序没搞对。<br>参考下载地址：<a href]]>
+    </summary>
+    
+      <category term="360" scheme="http://www.leelib.com/tags/360/"/>
+    
+      <category term="360zip" scheme="http://www.leelib.com/tags/360zip/"/>
+    
+      <category term="Tomb Raider" scheme="http://www.leelib.com/tags/Tomb-Raider/"/>
+    
+      <category term="disorder" scheme="http://www.leelib.com/tags/disorder/"/>
+    
+      <category term="winrar" scheme="http://www.leelib.com/tags/winrar/"/>
+    
+      <category term="经验总结" scheme="http://www.leelib.com/categories/%E7%BB%8F%E9%AA%8C%E6%80%BB%E7%BB%93/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[让Socket通过HTTP代理通讯]]></title>
+    <link href="http://www.leelib.com/2013/10/29/make-socket-proxy.html"/>
+    <id>http://www.leelib.com/2013/10/29/make-socket-proxy.html</id>
+    <published>2013-10-29T08:06:54.000Z</published>
+    <updated>2015-09-17T09:03:43.967Z</updated>
+    <content type="html"><![CDATA[<h2 id="如果socket想使用HTTP代理，需要进行下面步骤：">如果socket想使用HTTP代理，需要进行下面步骤：</h2><ol>
+<li>connect到代理服务器</li>
+<li>send(Format(“CONNECT %s:%s HTTP/1.1rnUser-Agent: MyApp/0.1rnrn”, &lt;真正目标IP&gt;, &lt;真正目标端口&gt;)</li>
+<li>recv 数据，并且根据数据内容判断CONNECT协议是否成功（是否有返回”HTTP/1.1 200”）</li>
+<li>如果第3步成功了，那么这个socket就已经是通过HTTP代理来连接的了，剩下的该怎么发包收包都照旧了</li>
+</ol>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="如果socket想使用HTTP代理，需要进行下面步骤：">如果socket想使用HTTP代理，需要进行下面步骤：</h2><ol>
+<li>connect到代理服务器</li>
+<li>send(Format(“CONNECT %s:%s HTTP/1.1rnUs]]>
+    </summary>
+    
+      <category term="connect" scheme="http://www.leelib.com/tags/connect/"/>
+    
+      <category term="http" scheme="http://www.leelib.com/tags/http/"/>
+    
+      <category term="proxy" scheme="http://www.leelib.com/tags/proxy/"/>
+    
+      <category term="recv" scheme="http://www.leelib.com/tags/recv/"/>
+    
+      <category term="socket" scheme="http://www.leelib.com/tags/socket/"/>
+    
+      <category term="C/C++" scheme="http://www.leelib.com/categories/C-C/"/>
+    
+      <category term="经验总结" scheme="http://www.leelib.com/categories/C-C/%E7%BB%8F%E9%AA%8C%E6%80%BB%E7%BB%93/"/>
+    
+  </entry>
+  
+</feed>
