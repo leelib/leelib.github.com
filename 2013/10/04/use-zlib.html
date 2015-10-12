@@ -11,40 +11,31 @@
     
 
     
-    <meta name="description" content="error LNK2019: unresolved external symbol _deflateEnd@4
-
-
+    <meta name="description" content="错误1error LNK2019: unresolved external symbol _deflateEnd@4
 原因1: 未使用zlib的链接库
-解决：
-pragma comment(lib, “zlibstat.lib”) // for static libpragma comment(lib, “zdll.lib”) // for dll lib
+解决：12#pragma comment(lib, &quot;zlibstat.lib&quot;) // for static lib#pragma comment(lib, &quot;zdll.lib&quot;) // for dll lib
 
 
-原因2：在使用静态库时即使包含了zli">
+原因2：在使用静态库时即使包含">
 <meta property="og:type" content="article">
 <meta property="og:title" content="自己使用过程中使用zlib链接时出的错误总结">
 <meta property="og:url" content="http://www.leelib.com/2013/10/04/use-zlib.html">
 <meta property="og:site_name" content="李略帅">
-<meta property="og:description" content="error LNK2019: unresolved external symbol _deflateEnd@4
-
-
+<meta property="og:description" content="错误1error LNK2019: unresolved external symbol _deflateEnd@4
 原因1: 未使用zlib的链接库
-解决：
-pragma comment(lib, “zlibstat.lib”) // for static libpragma comment(lib, “zdll.lib”) // for dll lib
+解决：12#pragma comment(lib, &quot;zlibstat.lib&quot;) // for static lib#pragma comment(lib, &quot;zdll.lib&quot;) // for dll lib
 
 
-原因2：在使用静态库时即使包含了zli">
-<meta property="og:updated_time" content="2015-09-17T09:03:43.998Z">
+原因2：在使用静态库时即使包含">
+<meta property="og:updated_time" content="2015-09-18T07:07:50.084Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="自己使用过程中使用zlib链接时出的错误总结">
-<meta name="twitter:description" content="error LNK2019: unresolved external symbol _deflateEnd@4
-
-
+<meta name="twitter:description" content="错误1error LNK2019: unresolved external symbol _deflateEnd@4
 原因1: 未使用zlib的链接库
-解决：
-pragma comment(lib, “zlibstat.lib”) // for static libpragma comment(lib, “zdll.lib”) // for dll lib
+解决：12#pragma comment(lib, &quot;zlibstat.lib&quot;) // for static lib#pragma comment(lib, &quot;zdll.lib&quot;) // for dll lib
 
 
-原因2：在使用静态库时即使包含了zli">
+原因2：在使用静态库时即使包含">
 
     
     <link rel="alternative" href="/atom.xml" title="李略帅" type="application/atom+xml">
@@ -122,40 +113,26 @@ pragma comment(lib, “zlibstat.lib”) // for static libpragma comment(lib, “
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#pragma_comment(lib,_“zlibstat-lib”)_//_for_static_lib"><span class="toc-number">1.</span> <span class="toc-text">pragma comment(lib, “zlibstat.lib”) // for static lib</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#pragma_comment(lib,_“zdll-lib”)_//_for_dll_lib"><span class="toc-number">2.</span> <span class="toc-text">pragma comment(lib, “zdll.lib”) // for dll lib</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#pragma_comment(linker,_“/NODEFAULTLIB:libcmt-lib”)"><span class="toc-number">3.</span> <span class="toc-text">pragma comment(linker, “/NODEFAULTLIB:libcmt.lib”)</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#错误1"><span class="toc-number">1.</span> <span class="toc-text">错误1</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#原因1:_未使用zlib的链接库"><span class="toc-number">1.1.</span> <span class="toc-text">原因1: 未使用zlib的链接库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#原因2：在使用静态库时即使包含了zlibstat-lib没有定义宏“ZLIB_WINAPI”"><span class="toc-number">1.2.</span> <span class="toc-text">原因2：在使用静态库时即使包含了zlibstat.lib没有定义宏“ZLIB_WINAPI”</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#错误2"><span class="toc-number">2.</span> <span class="toc-text">错误2</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#原因：两个项目SAFESEH设置不同"><span class="toc-number">2.1.</span> <span class="toc-text">原因：两个项目SAFESEH设置不同</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#错误3"><span class="toc-number">3.</span> <span class="toc-text">错误3</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#原因：与libcmt库冲突了"><span class="toc-number">3.1.</span> <span class="toc-text">原因：与libcmt库冲突了</span></a></li></ol></li></ol>
 		
 		</div>
 		
-		<hr>
-<blockquote>
-<p>error LNK2019: unresolved external symbol _deflateEnd@4</p>
-</blockquote>
-<ul>
-<li>原因1: 未使用zlib的链接库</li>
-<li><p>解决：</p>
-<h1 id="pragma_comment(lib,_“zlibstat-lib”)_//_for_static_lib">pragma comment(lib, “zlibstat.lib”) // for static lib</h1><h1 id="pragma_comment(lib,_“zdll-lib”)_//_for_dll_lib">pragma comment(lib, “zdll.lib”) // for dll lib</h1></li>
+		<h1 id="错误1">错误1</h1><p><strong>error LNK2019: unresolved external symbol _deflateEnd@4</strong></p>
+<h2 id="原因1:_未使用zlib的链接库">原因1: 未使用zlib的链接库</h2><ul>
+<li>解决：<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">pragma</span> comment(lib, "zlibstat.lib") <span class="comment">// for static lib</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">pragma</span> comment(lib, "zdll.lib") <span class="comment">// for dll lib</span></span></span><br></pre></td></tr></table></figure>
+</li>
 </ul>
-<ul>
-<li>原因2：在使用静态库时即使包含了zlibstat.lib没有定义宏“ZLIB_WINAPI”</li>
-<li><p>解决：在项目属性中 C/C++ -&gt; Preprocessor -&gt; Preprocessor Definitions 添加“ZLIB_WINAPI”<br>注意：这个必须在项目中添加，使用#define来添加是无效的。</p>
-<hr>
-<blockquote>
-<p>error LNK2026: module unsafe for SAFESEH image</p>
-</blockquote>
+<h2 id="原因2：在使用静态库时即使包含了zlibstat-lib没有定义宏“ZLIB_WINAPI”">原因2：在使用静态库时即使包含了zlibstat.lib没有定义宏“ZLIB_WINAPI”</h2><ul>
+<li>解决：<br>在项目属性中 C/C++ -&gt; Preprocessor -&gt; Preprocessor Definitions 添加“ZLIB_WINAPI”<br>注意：这个必须在项目中添加，使用#define来添加是无效的。</li>
+</ul>
+<h1 id="错误2">错误2</h1><p><strong>error LNK2026: module unsafe for SAFESEH image</strong></p>
+<h2 id="原因：两个项目SAFESEH设置不同">原因：两个项目SAFESEH设置不同</h2><ul>
+<li>解决：<br>设置项目属性: Linker -&gt; Advanced -&gt; [Image Has Safe Exception Handlers] = “No”<br><em>注意：这个必须在项目中添加，使用#pragma来添加是无效的。</em></li>
+</ul>
+<h1 id="错误3">错误3</h1><p><strong>error LNK2005: __call_reportfault already defined in LIBCMTD.lib(invarg.obj)或类似其他的error LNK2005:</strong></p>
+<h2 id="原因：与libcmt库冲突了">原因：与libcmt库冲突了</h2><ul>
+<li>解决：<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">pragma</span> comment(linker, "/NODEFAULTLIB:libcmt.lib")</span></span><br></pre></td></tr></table></figure>
 </li>
-<li><p>原因：两个项目SAFESEH设置不同</p>
-</li>
-<li><p>解决：设置项目属性: Linker -&gt; Advanced -&gt; [Image Has Safe Exception Handlers] = “No”</p>
-<pre><code>注意：这个必须在项目中添加，使用<span class="preprocessor">#<span class="keyword">pragma</span>来添加是无效的。</span>
-</code></pre><hr>
-<blockquote>
-<p>error LNK2005: __call_reportfault already defined in LIBCMTD.lib(invarg.obj)或类似其他的error LNK2005:</p>
-</blockquote>
-</li>
-<li><p>原因：与libcmt库冲突了</p>
-</li>
-<li><p>解决：</p>
-<h1 id="pragma_comment(linker,_“/NODEFAULTLIB:libcmt-lib”)">pragma comment(linker, “/NODEFAULTLIB:libcmt.lib”)</h1></li>
 </ul>
   
 	</div>
@@ -164,7 +141,7 @@ pragma comment(lib, “zlibstat.lib”) // for static libpragma comment(lib, “
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/C-C/">C/C++</a>►<a class="article-category-link" href="/categories/C-C/经验总结/">经验总结</a>
+  <a class="article-category-link" href="/categories/programing/">programing</a>
 </div>
 
 
@@ -219,7 +196,7 @@ pragma comment(lib, “zlibstat.lib”) // for static libpragma comment(lib, “
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#pragma_comment(lib,_“zlibstat-lib”)_//_for_static_lib"><span class="toc-number">1.</span> <span class="toc-text">pragma comment(lib, “zlibstat.lib”) // for static lib</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#pragma_comment(lib,_“zdll-lib”)_//_for_dll_lib"><span class="toc-number">2.</span> <span class="toc-text">pragma comment(lib, “zdll.lib”) // for dll lib</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#pragma_comment(linker,_“/NODEFAULTLIB:libcmt-lib”)"><span class="toc-number">3.</span> <span class="toc-text">pragma comment(linker, “/NODEFAULTLIB:libcmt.lib”)</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#错误1"><span class="toc-number">1.</span> <span class="toc-text">错误1</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#原因1:_未使用zlib的链接库"><span class="toc-number">1.1.</span> <span class="toc-text">原因1: 未使用zlib的链接库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#原因2：在使用静态库时即使包含了zlibstat-lib没有定义宏“ZLIB_WINAPI”"><span class="toc-number">1.2.</span> <span class="toc-text">原因2：在使用静态库时即使包含了zlibstat.lib没有定义宏“ZLIB_WINAPI”</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#错误2"><span class="toc-number">2.</span> <span class="toc-text">错误2</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#原因：两个项目SAFESEH设置不同"><span class="toc-number">2.1.</span> <span class="toc-text">原因：两个项目SAFESEH设置不同</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#错误3"><span class="toc-number">3.</span> <span class="toc-text">错误3</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#原因：与libcmt库冲突了"><span class="toc-number">3.1.</span> <span class="toc-text">原因：与libcmt库冲突了</span></a></li></ol></li></ol>
  
   </div>
 
@@ -235,137 +212,39 @@ pragma comment(lib, “zlibstat.lib”) // for static libpragma comment(lib, “
 		  
 		
 		  
-			<li><a href="/categories/C-C/" title="C/C++">C/C++<sup>22</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/" title="CentOS">CentOS<sup>13</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/CentOS/" title="CentOS">CentOS<sup>8</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/Python/" title="Python">Python<sup>3</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/Python/" title="Python">Python<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/Python/" title="Python">Python<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/CentOS/RedHat/" title="RedHat">RedHat<sup>6</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/RedHat/" title="RedHat">RedHat<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/Python/RedHat/" title="RedHat">RedHat<sup>2</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/RedHat/" title="RedHat">RedHat<sup>7</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/CentOS/RedHat/Ubuntu/" title="Ubuntu">Ubuntu<sup>5</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/RedHat/Ubuntu/" title="Ubuntu">Ubuntu<sup>6</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/Ubuntu/" title="Ubuntu">Ubuntu<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/Ubuntu/" title="Ubuntu">Ubuntu<sup>5</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/CentOS/Ubuntu/" title="Ubuntu">Ubuntu<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/Python/RedHat/Ubuntu/" title="Ubuntu">Ubuntu<sup>2</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/Uncategorized/" title="Uncategorized">Uncategorized<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/好站收集/" title="好站收集">好站收集<sup>1</sup></a></li>
-		  
 		
 		  
 		
 		  
-			<li><a href="/categories/我的作品/" title="我的作品">我的作品<sup>1</sup></a></li>
+			<li><a href="/categories/interesting/" title="interesting">interesting<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/C-C/CentOS/RedHat/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
+			<li><a href="/categories/linux/" title="linux">linux<sup>25</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/C-C/Python/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
+			<li><a href="/categories/notices/" title="notices">notices<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/Ubuntu/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
+			<li><a href="/categories/programing/" title="programing">programing<sup>21</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/CentOS/RedHat/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
+			<li><a href="/categories/sites/" title="sites">sites<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/C-C/经验总结/" title="经验总结">经验总结<sup>9</sup></a></li>
+			<li><a href="/categories/summarys/" title="summarys">summarys<sup>8</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/CentOS/Python/RedHat/Ubuntu/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
+			<li><a href="/categories/works/" title="works">works<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/C-C/CentOS/RedHat/Ubuntu/经验总结/" title="经验总结">经验总结<sup>3</sup></a></li>
-		  
 		
-		  
-			<li><a href="/categories/RedHat/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/经验总结/" title="经验总结">经验总结<sup>7</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/RedHat/Ubuntu/经验总结/" title="经验总结">经验总结<sup>3</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/Ubuntu/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/CentOS/Ubuntu/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/闲言碎语/" title="闲言碎语">闲言碎语<sup>4</sup></a></li>
 		  
 		
 		</ul>
@@ -390,7 +269,15 @@ pragma comment(lib, “zlibstat.lib”) // for static libpragma comment(lib, “
 			
 		
 			
+				<li><a href="/tags/install/" title="install">install<sup>4</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/zlib/" title="zlib">zlib<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/yum/" title="yum">yum<sup>4</sup></a></li>
 			
 		
 			
@@ -398,11 +285,7 @@ pragma comment(lib, “zlibstat.lib”) // for static libpragma comment(lib, “
 			
 		
 			
-				<li><a href="/tags/install/" title="install">install<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/python/" title="python">python<sup>3</sup></a></li>
+				<li><a href="/tags/make/" title="make">make<sup>3</sup></a></li>
 			
 		
 			
@@ -410,23 +293,11 @@ pragma comment(lib, “zlibstat.lib”) // for static libpragma comment(lib, “
 			
 		
 			
-				<li><a href="/tags/yum/" title="yum">yum<sup>3</sup></a></li>
+				<li><a href="/tags/python/" title="python">python<sup>3</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/libc/" title="libc">libc<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/git/" title="git">git<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/sudo/" title="sudo">sudo<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/make/" title="make">make<sup>2</sup></a></li>
+				<li><a href="/tags/boost/" title="boost">boost<sup>2</sup></a></li>
 			
 		
 			
@@ -434,19 +305,7 @@ pragma comment(lib, “zlibstat.lib”) // for static libpragma comment(lib, “
 			
 		
 			
-				<li><a href="/tags/kernel-devel/" title="kernel-devel">kernel-devel<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/ln/" title="ln">ln<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/https/" title="https">https<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/gcc/" title="gcc">gcc<sup>2</sup></a></li>
+				<li><a href="/tags/编译/" title="编译">编译<sup>2</sup></a></li>
 			
 		
 			
@@ -454,7 +313,27 @@ pragma comment(lib, “zlibstat.lib”) // for static libpragma comment(lib, “
 			
 		
 			
-				<li><a href="/tags/编译/" title="编译">编译<sup>2</sup></a></li>
+				<li><a href="/tags/gcc/" title="gcc">gcc<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/ln/" title="ln">ln<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/git/" title="git">git<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/https/" title="https">https<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/kernel-devel/" title="kernel-devel">kernel-devel<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/kernel/" title="kernel">kernel<sup>2</sup></a></li>
 			
 		
 		</ul>

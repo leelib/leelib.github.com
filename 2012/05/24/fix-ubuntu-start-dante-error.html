@@ -11,37 +11,19 @@
     
 
     
-    <meta name="description" content="首先查看日志文件
-cat /var/log/danted.log
-
-
-发现里面有这样的记录
-
-May 24 13:57:52 (1337839072) danted[13596]: socks_seteuid(): old: 0, new: 65534
-May 24 13:57:52 (1337839072) danted[13596]: socks_reseteuid(): current: 6">
+    <meta name="description" content="首先查看日志文件1[root@ubuntu]# cat /var/log/danted.log
+发现里面有这样的记录1May 24 13:57:52 (1337839072) danted[13596]: socks_seteuid(): old: 0, new: 65534&amp;#10;May 24 13:57:52 (1337839072) danted[13596]: socks_reseteu">
 <meta property="og:type" content="article">
 <meta property="og:title" content="解决ubuntu下dante不能正常启动的问题">
 <meta property="og:url" content="http://www.leelib.com/2012/05/24/fix-ubuntu-start-dante-error.html">
 <meta property="og:site_name" content="李略帅">
-<meta property="og:description" content="首先查看日志文件
-cat /var/log/danted.log
-
-
-发现里面有这样的记录
-
-May 24 13:57:52 (1337839072) danted[13596]: socks_seteuid(): old: 0, new: 65534
-May 24 13:57:52 (1337839072) danted[13596]: socks_reseteuid(): current: 6">
-<meta property="og:updated_time" content="2015-09-17T09:03:43.936Z">
+<meta property="og:description" content="首先查看日志文件1[root@ubuntu]# cat /var/log/danted.log
+发现里面有这样的记录1May 24 13:57:52 (1337839072) danted[13596]: socks_seteuid(): old: 0, new: 65534&amp;#10;May 24 13:57:52 (1337839072) danted[13596]: socks_reseteu">
+<meta property="og:updated_time" content="2015-09-18T07:07:50.013Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="解决ubuntu下dante不能正常启动的问题">
-<meta name="twitter:description" content="首先查看日志文件
-cat /var/log/danted.log
-
-
-发现里面有这样的记录
-
-May 24 13:57:52 (1337839072) danted[13596]: socks_seteuid(): old: 0, new: 65534
-May 24 13:57:52 (1337839072) danted[13596]: socks_reseteuid(): current: 6">
+<meta name="twitter:description" content="首先查看日志文件1[root@ubuntu]# cat /var/log/danted.log
+发现里面有这样的记录1May 24 13:57:52 (1337839072) danted[13596]: socks_seteuid(): old: 0, new: 65534&amp;#10;May 24 13:57:52 (1337839072) danted[13596]: socks_reseteu">
 
     
     <link rel="alternative" href="/atom.xml" title="李略帅" type="application/atom+xml">
@@ -123,27 +105,11 @@ May 24 13:57:52 (1337839072) danted[13596]: socks_reseteuid(): current: 6">
 		
 		</div>
 		
-		<p>首先查看日志文件</p>
-<pre><code>cat <span class="regexp">/var/</span>log/danted.log
-
-
-发现里面有这样的记录
-
-May <span class="number">24</span> <span class="number">13</span>:<span class="number">57</span>:<span class="number">52</span> (<span class="number">1337839072</span>) danted[<span class="number">13596</span>]: socks_seteuid(): <span class="string">old:</span> <span class="number">0</span>, <span class="string">new:</span> <span class="number">65534</span>
-May <span class="number">24</span> <span class="number">13</span>:<span class="number">57</span>:<span class="number">52</span> (<span class="number">1337839072</span>) danted[<span class="number">13596</span>]: socks_reseteuid(): <span class="string">current:</span> <span class="number">65534</span>, <span class="string">new:</span> <span class="number">0</span>
-May <span class="number">24</span> <span class="number">13</span>:<span class="number">57</span>:<span class="number">52</span> (<span class="number">1337839072</span>) danted[<span class="number">13596</span>]: fixsettings(): setting the libwrap uid to <span class="number">0</span> is not recommended
-May <span class="number">24</span> <span class="number">13</span>:<span class="number">57</span>:<span class="number">52</span> (<span class="number">1337839072</span>) danted[<span class="number">13596</span>]: symbolfunction(): compiletime configuration error? Failed to open "libc.so": <span class="regexp">/usr/</span>lib<span class="regexp">/i386-linux-gnu/</span>libc.<span class="string">so:</span> invalid ELF header
-
-
-说明程序在找<span class="regexp">/usr/</span>lib<span class="regexp">/i386-linux-gnu/</span>libc.so位置的libc.so没找到，所以解决办法就是创建一个链接命令如下：
-
-ln -sf <span class="regexp">/lib/</span>i386-linux-gnu<span class="regexp">/libc.so.6 /</span>usr<span class="regexp">/lib/</span>i386-linux-gnu/libc.so
-
-
-再启动下服务
-
-service danted start
-</code></pre><p>看看是不是启动成功啦！^^</p>
+		<p>首先查看日志文件<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@ubuntu]<span class="comment"># cat /var/log/danted.log</span></span><br></pre></td></tr></table></figure></p>
+<p>发现里面有这样的记录<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">May 24 13:57:52 (1337839072) danted[13596]: socks_seteuid(): old: 0, new: 65534&#10;May 24 13:57:52 (1337839072) danted[13596]: socks_reseteuid(): current: 65534, new: 0&#10;May 24 13:57:52 (1337839072) danted[13596]: fixsettings(): setting the libwrap uid to 0 is not recommended&#10;May 24 13:57:52 (1337839072) danted[13596]: symbolfunction(): compiletime configuration error? Failed to open &#34;libc.so&#34;: /usr/lib/i386-linux-gnu/libc.so: invalid ELF header</span><br></pre></td></tr></table></figure></p>
+<p>说明程序在找/usr/lib/i386-linux-gnu/libc.so位置的libc.so没找到，所以解决办法就是创建一个链接命令如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ln -sf /lib/i386-linux-gnu/libc.so.<span class="number">6</span> /usr/lib/i386-linux-gnu/libc.so</span><br></pre></td></tr></table></figure></p>
+<p>再启动下服务<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service danted start</span><br></pre></td></tr></table></figure></p>
+<p>看看是不是启动成功啦！<br>(o≖◡≖)</p>
 <p>因为到现在位置在国内没有搜索到这个问题的解决办法，所以记录在这里。或许能帮到有需要的人。</p>
 <p>另外，这里有dante socks server的安装说明：<br><a href="http://wiki.kartbuilding.net/index.php/Dante_Socks_Server" target="_blank" rel="external">http://wiki.kartbuilding.net/index.php/Dante_Socks_Server</a></p>
   
@@ -153,7 +119,7 @@ service danted start
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/Ubuntu/">Ubuntu</a>
+  <a class="article-category-link" href="/categories/linux/">linux</a>
 </div>
 
 
@@ -224,137 +190,39 @@ service danted start
 		  
 		
 		  
-			<li><a href="/categories/C-C/" title="C/C++">C/C++<sup>22</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/" title="CentOS">CentOS<sup>13</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/CentOS/" title="CentOS">CentOS<sup>8</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/Python/" title="Python">Python<sup>3</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/Python/" title="Python">Python<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/Python/" title="Python">Python<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/CentOS/RedHat/" title="RedHat">RedHat<sup>6</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/RedHat/" title="RedHat">RedHat<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/Python/RedHat/" title="RedHat">RedHat<sup>2</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/RedHat/" title="RedHat">RedHat<sup>7</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/CentOS/RedHat/Ubuntu/" title="Ubuntu">Ubuntu<sup>5</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/RedHat/Ubuntu/" title="Ubuntu">Ubuntu<sup>6</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/Ubuntu/" title="Ubuntu">Ubuntu<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/Ubuntu/" title="Ubuntu">Ubuntu<sup>5</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/CentOS/Ubuntu/" title="Ubuntu">Ubuntu<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/Python/RedHat/Ubuntu/" title="Ubuntu">Ubuntu<sup>2</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/Uncategorized/" title="Uncategorized">Uncategorized<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/好站收集/" title="好站收集">好站收集<sup>1</sup></a></li>
-		  
 		
 		  
 		
 		  
-			<li><a href="/categories/我的作品/" title="我的作品">我的作品<sup>1</sup></a></li>
+			<li><a href="/categories/interesting/" title="interesting">interesting<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/C-C/CentOS/RedHat/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
+			<li><a href="/categories/linux/" title="linux">linux<sup>25</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/C-C/Python/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
+			<li><a href="/categories/notices/" title="notices">notices<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/Ubuntu/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
+			<li><a href="/categories/programing/" title="programing">programing<sup>21</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/CentOS/RedHat/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
+			<li><a href="/categories/sites/" title="sites">sites<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/C-C/经验总结/" title="经验总结">经验总结<sup>9</sup></a></li>
+			<li><a href="/categories/summarys/" title="summarys">summarys<sup>8</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/CentOS/Python/RedHat/Ubuntu/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
+			<li><a href="/categories/works/" title="works">works<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/C-C/CentOS/RedHat/Ubuntu/经验总结/" title="经验总结">经验总结<sup>3</sup></a></li>
-		  
 		
-		  
-			<li><a href="/categories/RedHat/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/经验总结/" title="经验总结">经验总结<sup>7</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/RedHat/Ubuntu/经验总结/" title="经验总结">经验总结<sup>3</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/Ubuntu/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/CentOS/Ubuntu/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/闲言碎语/" title="闲言碎语">闲言碎语<sup>4</sup></a></li>
 		  
 		
 		</ul>
@@ -379,7 +247,15 @@ service danted start
 			
 		
 			
+				<li><a href="/tags/install/" title="install">install<sup>4</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/zlib/" title="zlib">zlib<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/yum/" title="yum">yum<sup>4</sup></a></li>
 			
 		
 			
@@ -387,11 +263,7 @@ service danted start
 			
 		
 			
-				<li><a href="/tags/install/" title="install">install<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/python/" title="python">python<sup>3</sup></a></li>
+				<li><a href="/tags/make/" title="make">make<sup>3</sup></a></li>
 			
 		
 			
@@ -399,23 +271,11 @@ service danted start
 			
 		
 			
-				<li><a href="/tags/yum/" title="yum">yum<sup>3</sup></a></li>
+				<li><a href="/tags/python/" title="python">python<sup>3</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/libc/" title="libc">libc<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/git/" title="git">git<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/sudo/" title="sudo">sudo<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/make/" title="make">make<sup>2</sup></a></li>
+				<li><a href="/tags/boost/" title="boost">boost<sup>2</sup></a></li>
 			
 		
 			
@@ -423,19 +283,7 @@ service danted start
 			
 		
 			
-				<li><a href="/tags/kernel-devel/" title="kernel-devel">kernel-devel<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/ln/" title="ln">ln<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/https/" title="https">https<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/gcc/" title="gcc">gcc<sup>2</sup></a></li>
+				<li><a href="/tags/编译/" title="编译">编译<sup>2</sup></a></li>
 			
 		
 			
@@ -443,7 +291,27 @@ service danted start
 			
 		
 			
-				<li><a href="/tags/编译/" title="编译">编译<sup>2</sup></a></li>
+				<li><a href="/tags/gcc/" title="gcc">gcc<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/ln/" title="ln">ln<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/git/" title="git">git<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/https/" title="https">https<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/kernel-devel/" title="kernel-devel">kernel-devel<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/kernel/" title="kernel">kernel<sup>2</sup></a></li>
 			
 		
 		</ul>

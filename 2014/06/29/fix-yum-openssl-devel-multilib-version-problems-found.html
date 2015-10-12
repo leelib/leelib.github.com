@@ -11,25 +11,16 @@
     
 
     
-    <meta name="description" content="今天给一台CentOS系统安装openssl-devel时，出现了如下信息：
-Loaded plugins: fastestmirror, security
-Repository updates is listed more than once in the configuration
-Repository centosplus is listed more than once in the co">
+    <meta name="description" content="今天给一台CentOS系统安装openssl-devel时，出现了如下信息：12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273[root@centos]# yum instal">
 <meta property="og:type" content="article">
 <meta property="og:title" content="解决yum安装 openssl-devel时产生的Multilib version problems found错误">
 <meta property="og:url" content="http://www.leelib.com/2014/06/29/fix-yum-openssl-devel-multilib-version-problems-found.html">
 <meta property="og:site_name" content="李略帅">
-<meta property="og:description" content="今天给一台CentOS系统安装openssl-devel时，出现了如下信息：
-Loaded plugins: fastestmirror, security
-Repository updates is listed more than once in the configuration
-Repository centosplus is listed more than once in the co">
-<meta property="og:updated_time" content="2015-09-17T09:03:43.951Z">
+<meta property="og:description" content="今天给一台CentOS系统安装openssl-devel时，出现了如下信息：12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273[root@centos]# yum instal">
+<meta property="og:updated_time" content="2015-09-18T07:07:50.025Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="解决yum安装 openssl-devel时产生的Multilib version problems found错误">
-<meta name="twitter:description" content="今天给一台CentOS系统安装openssl-devel时，出现了如下信息：
-Loaded plugins: fastestmirror, security
-Repository updates is listed more than once in the configuration
-Repository centosplus is listed more than once in the co">
+<meta name="twitter:description" content="今天给一台CentOS系统安装openssl-devel时，出现了如下信息：12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273[root@centos]# yum instal">
 
     
     <link rel="alternative" href="/atom.xml" title="李略帅" type="application/atom+xml">
@@ -111,85 +102,9 @@ Repository centosplus is listed more than once in the co">
 		
 		</div>
 		
-		<p>今天给一台CentOS系统安装openssl-devel时，出现了如下信息：</p>
-<pre><code>Loaded plugins: fastestmirror, security
-Repository updates <span class="keyword">is</span> listed more than once <span class="keyword">in</span> <span class="keyword">the</span> configuration
-Repository centosplus <span class="keyword">is</span> listed more than once <span class="keyword">in</span> <span class="keyword">the</span> configuration
-Repository contrib <span class="keyword">is</span> listed more than once <span class="keyword">in</span> <span class="keyword">the</span> configuration
-Repository extras <span class="keyword">is</span> listed more than once <span class="keyword">in</span> <span class="keyword">the</span> configuration
-Loading mirror speeds <span class="keyword">from</span> cached hostfile
- * base: mirrors.tuna.tsinghua.edu.cn
- * extras: mirrors.tuna.tsinghua.edu.cn
- * updates: mirrors.tuna.tsinghua.edu.cn
-Setting up Install Process
-Resolving Dependencies
-<span class="comment">--&gt; Running transaction check</span>
-<span class="comment">---&gt; Package openssl-devel.x86_64 0:1.0.1e-16.el6_5.14 will be installed</span>
-<span class="comment">--&gt; Processing Dependency: krb5-devel for package: openssl-devel-1.0.1e-16.el6_5.14.x86_64</span>
-<span class="comment">--&gt; Running transaction check</span>
-<span class="comment">---&gt; Package krb5-devel.x86_64 0:1.10.3-15.el6_5.1 will be installed</span>
-<span class="comment">--&gt; Processing Dependency: libselinux-devel for package: krb5-devel-1.10.3-15.el6_5.1.x86_64</span>
-<span class="comment">--&gt; Processing Dependency: libcom_err-devel for package: krb5-devel-1.10.3-15.el6_5.1.x86_64</span>
-<span class="comment">--&gt; Processing Dependency: keyutils-libs-devel for package: krb5-devel-1.10.3-15.el6_5.1.x86_64</span>
-<span class="comment">--&gt; Running transaction check</span>
-<span class="comment">---&gt; Package keyutils-libs-devel.x86_64 0:1.4-4.el6 will be installed</span>
-<span class="comment">---&gt; Package libcom_err-devel.x86_64 0:1.41.12-18.el6 will be installed</span>
-<span class="comment">---&gt; Package libselinux-devel.x86_64 0:2.0.94-5.3.el6_4.1 will be installed</span>
-<span class="comment">--&gt; Processing Dependency: libselinux = 2.0.94-5.3.el6_4.1 for package: libselinux-devel-2.0.94-5.3.el6_4.1.x86_64</span>
-<span class="comment">--&gt; Processing Dependency: libsepol-devel &gt;= 2.0.32-1 for package: libselinux-devel-2.0.94-5.3.el6_4.1.x86_64</span>
-<span class="comment">--&gt; Processing Dependency: pkgconfig(libsepol) for package: libselinux-devel-2.0.94-5.3.el6_4.1.x86_64</span>
-<span class="comment">--&gt; Running transaction check</span>
-<span class="comment">---&gt; Package libselinux.i686 0:2.0.94-5.3.el6_4.1 will be installed</span>
-<span class="comment">--&gt; Processing Dependency: libdl.so.2(GLIBC_2.1) for package: libselinux-2.0.94-5.3.el6_4.1.i686</span>
-<span class="comment">--&gt; Processing Dependency: libdl.so.2(GLIBC_2.0) for package: libselinux-2.0.94-5.3.el6_4.1.i686</span>
-<span class="comment">--&gt; Processing Dependency: libdl.so.2 for package: libselinux-2.0.94-5.3.el6_4.1.i686</span>
-<span class="comment">--&gt; Processing Dependency: libc.so.6(GLIBC_2.8) for package: libselinux-2.0.94-5.3.el6_4.1.i686</span>
-<span class="comment">--&gt; Processing Dependency: ld-linux.so.2(GLIBC_2.3) for package: libselinux-2.0.94-5.3.el6_4.1.i686</span>
-<span class="comment">--&gt; Processing Dependency: ld-linux.so.2 for package: libselinux-2.0.94-5.3.el6_4.1.i686</span>
-<span class="comment">---&gt; Package libsepol-devel.x86_64 0:2.0.41-4.el6 will be installed</span>
-<span class="comment">--&gt; Running transaction check</span>
-<span class="comment">---&gt; Package glibc.i686 0:2.12-1.132.el6_5.2 will be installed</span>
-<span class="comment">--&gt; Processing Dependency: libfreebl3.so(NSSRAWHASH_3.12.3) for package: glibc-2.12-1.132.el6_5.2.i686</span>
-<span class="comment">--&gt; Processing Dependency: libfreebl3.so for package: glibc-2.12-1.132.el6_5.2.i686</span>
-<span class="comment">--&gt; Running transaction check</span>
-<span class="comment">---&gt; Package nss-softokn-freebl.i686 0:3.14.3-10.el6_5 will be installed</span>
-<span class="comment">--&gt; Finished Dependency Resolution</span>
-Error:  Multilib <span class="property">version</span> problems found. This often means <span class="keyword">that</span> <span class="keyword">the</span> root
-       cause <span class="keyword">is</span> something <span class="keyword">else</span> <span class="keyword">and</span> multilib <span class="property">version</span> checking <span class="keyword">is</span> just
-       pointing out <span class="keyword">that</span> there <span class="keyword">is</span> a problem. Eg.:
-
-         <span class="number">1</span>\. You have an upgrade <span class="keyword">for</span> libselinux which <span class="keyword">is</span> missing <span class="keyword">some</span>
-            dependency <span class="keyword">that</span> another package requires. Yum <span class="keyword">is</span> trying <span class="keyword">to</span>
-            solve this <span class="keyword">by</span> installing an older <span class="property">version</span> <span class="keyword">of</span> libselinux <span class="keyword">of</span> <span class="keyword">the</span>
-            different architecture. If you exclude <span class="keyword">the</span> bad architecture
-            yum will <span class="keyword">tell</span> you what <span class="keyword">the</span> root cause <span class="keyword">is</span> (which package
-            requires what). You can <span class="keyword">try</span> redoing <span class="keyword">the</span> upgrade <span class="keyword">with</span>
-            <span class="comment">--exclude libselinux.otherarch ... this should give you an error</span>
-            message showing <span class="keyword">the</span> root cause <span class="keyword">of</span> <span class="keyword">the</span> problem.
-
-         <span class="number">2</span>\. You have multiple architectures <span class="keyword">of</span> libselinux installed, <span class="keyword">but</span>
-            yum can only see an upgrade <span class="keyword">for</span> one <span class="keyword">of</span> those arcitectures.
-            If you don't want/need both architectures anymore <span class="keyword">then</span> you
-            can remove <span class="keyword">the</span> one <span class="keyword">with</span> <span class="keyword">the</span> missing update <span class="keyword">and</span> everything
-            will work.
-
-         <span class="number">3</span>\. You have duplicate versions <span class="keyword">of</span> libselinux installed already.
-            You can use <span class="string">"yum check"</span> <span class="keyword">to</span> <span class="keyword">get</span> yum show these errors.
-
-       ...you can also use <span class="comment">--setopt=protected_multilib=false to remove</span>
-       this checking, however this <span class="keyword">is</span> almost never <span class="keyword">the</span> correct thing <span class="keyword">to</span>
-       do <span class="keyword">as</span> something <span class="keyword">else</span> <span class="keyword">is</span> very likely <span class="keyword">to</span> go wrong (often causing
-       much more problems).
-
-       Protected multilib versions: libselinux-<span class="number">2.0</span>.94-<span class="number">5.3</span>.el6_4.1.i686 != libselinux-<span class="number">2.0</span>.94-<span class="number">5.3</span>.0.1.el6.centos.plus.x86_64
- You could <span class="keyword">try</span> using <span class="comment">--skip-broken to work around the problem</span>
- You could <span class="keyword">try</span> <span class="property">running</span>: rpm -Va <span class="comment">--nofiles --nodigest</span>
-
-
-**最后在一个日文的网站上找到了解决办法：**
-
-yum install <span class="comment">--enablerepo=centosplus openssl-devel</span>
-</code></pre><p>引用：<a href="http://blog.urban-theory.net/2014/06/16/openssl-devel-install-fails-on-centos-with-docker" target="_blank" rel="external">http://blog.urban-theory.net/2014/06/16/openssl-devel-install-fails-on-centos-with-docker</a></p>
+		<p>今天给一台CentOS系统安装openssl-devel时，出现了如下信息：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line">[root@centos]<span class="comment"># yum install -y openssl-devel</span></span><br><span class="line">Loaded plugins: fastestmirror, security</span><br><span class="line">Repository updates is listed more than once <span class="keyword">in</span> the configuration</span><br><span class="line">Repository centosplus is listed more than once <span class="keyword">in</span> the configuration</span><br><span class="line">Repository contrib is listed more than once <span class="keyword">in</span> the configuration</span><br><span class="line">Repository extras is listed more than once <span class="keyword">in</span> the configuration</span><br><span class="line">Loading mirror speeds from cached hostfile</span><br><span class="line"> * base: mirrors.tuna.tsinghua.edu.cn</span><br><span class="line"> * extras: mirrors.tuna.tsinghua.edu.cn</span><br><span class="line"> * updates: mirrors.tuna.tsinghua.edu.cn</span><br><span class="line">Setting up Install Process</span><br><span class="line">Resolving Dependencies</span><br><span class="line">--&gt; Running transaction check</span><br><span class="line">---&gt; Package openssl-devel.x86_64 <span class="number">0</span>:<span class="number">1.0</span>.<span class="number">1</span>e-<span class="number">16</span>.el6_5.<span class="number">14</span> will be installed</span><br><span class="line">--&gt; Processing Dependency: krb5-devel <span class="keyword">for</span> package: openssl-devel-<span class="number">1.0</span>.<span class="number">1</span>e-<span class="number">16</span>.el6_5.<span class="number">14</span>.x86_64</span><br><span class="line">--&gt; Running transaction check</span><br><span class="line">---&gt; Package krb5-devel.x86_64 <span class="number">0</span>:<span class="number">1.10</span>.<span class="number">3</span>-<span class="number">15</span>.el6_5.<span class="number">1</span> will be installed</span><br><span class="line">--&gt; Processing Dependency: libselinux-devel <span class="keyword">for</span> package: krb5-devel-<span class="number">1.10</span>.<span class="number">3</span>-<span class="number">15</span>.el6_5.<span class="number">1</span>.x86_64</span><br><span class="line">--&gt; Processing Dependency: libcom_err-devel <span class="keyword">for</span> package: krb5-devel-<span class="number">1.10</span>.<span class="number">3</span>-<span class="number">15</span>.el6_5.<span class="number">1</span>.x86_64</span><br><span class="line">--&gt; Processing Dependency: keyutils-libs-devel <span class="keyword">for</span> package: krb5-devel-<span class="number">1.10</span>.<span class="number">3</span>-<span class="number">15</span>.el6_5.<span class="number">1</span>.x86_64</span><br><span class="line">--&gt; Running transaction check</span><br><span class="line">---&gt; Package keyutils-libs-devel.x86_64 <span class="number">0</span>:<span class="number">1.4</span>-<span class="number">4</span>.el6 will be installed</span><br><span class="line">---&gt; Package libcom_err-devel.x86_64 <span class="number">0</span>:<span class="number">1.41</span>.<span class="number">12</span>-<span class="number">18</span>.el6 will be installed</span><br><span class="line">---&gt; Package libselinux-devel.x86_64 <span class="number">0</span>:<span class="number">2.0</span>.<span class="number">94</span>-<span class="number">5.3</span>.el6_4.<span class="number">1</span> will be installed</span><br><span class="line">--&gt; Processing Dependency: libselinux = <span class="number">2.0</span>.<span class="number">94</span>-<span class="number">5.3</span>.el6_4.<span class="number">1</span> <span class="keyword">for</span> package: libselinux-devel-<span class="number">2.0</span>.<span class="number">94</span>-<span class="number">5.3</span>.el6_4.<span class="number">1</span>.x86_64</span><br><span class="line">--&gt; Processing Dependency: libsepol-devel &gt;= <span class="number">2.0</span>.<span class="number">32</span>-<span class="number">1</span> <span class="keyword">for</span> package: libselinux-devel-<span class="number">2.0</span>.<span class="number">94</span>-<span class="number">5.3</span>.el6_4.<span class="number">1</span>.x86_64</span><br><span class="line">--&gt; Processing Dependency: pkgconfig(libsepol) <span class="keyword">for</span> package: libselinux-devel-<span class="number">2.0</span>.<span class="number">94</span>-<span class="number">5.3</span>.el6_4.<span class="number">1</span>.x86_64</span><br><span class="line">--&gt; Running transaction check</span><br><span class="line">---&gt; Package libselinux.i686 <span class="number">0</span>:<span class="number">2.0</span>.<span class="number">94</span>-<span class="number">5.3</span>.el6_4.<span class="number">1</span> will be installed</span><br><span class="line">--&gt; Processing Dependency: libdl.so.<span class="number">2</span>(GLIBC_2.<span class="number">1</span>) <span class="keyword">for</span> package: libselinux-<span class="number">2.0</span>.<span class="number">94</span>-<span class="number">5.3</span>.el6_4.<span class="number">1</span>.i686</span><br><span class="line">--&gt; Processing Dependency: libdl.so.<span class="number">2</span>(GLIBC_2.<span class="number">0</span>) <span class="keyword">for</span> package: libselinux-<span class="number">2.0</span>.<span class="number">94</span>-<span class="number">5.3</span>.el6_4.<span class="number">1</span>.i686</span><br><span class="line">--&gt; Processing Dependency: libdl.so.<span class="number">2</span> <span class="keyword">for</span> package: libselinux-<span class="number">2.0</span>.<span class="number">94</span>-<span class="number">5.3</span>.el6_4.<span class="number">1</span>.i686</span><br><span class="line">--&gt; Processing Dependency: libc.so.<span class="number">6</span>(GLIBC_2.<span class="number">8</span>) <span class="keyword">for</span> package: libselinux-<span class="number">2.0</span>.<span class="number">94</span>-<span class="number">5.3</span>.el6_4.<span class="number">1</span>.i686</span><br><span class="line">--&gt; Processing Dependency: ld-linux.so.<span class="number">2</span>(GLIBC_2.<span class="number">3</span>) <span class="keyword">for</span> package: libselinux-<span class="number">2.0</span>.<span class="number">94</span>-<span class="number">5.3</span>.el6_4.<span class="number">1</span>.i686</span><br><span class="line">--&gt; Processing Dependency: ld-linux.so.<span class="number">2</span> <span class="keyword">for</span> package: libselinux-<span class="number">2.0</span>.<span class="number">94</span>-<span class="number">5.3</span>.el6_4.<span class="number">1</span>.i686</span><br><span class="line">---&gt; Package libsepol-devel.x86_64 <span class="number">0</span>:<span class="number">2.0</span>.<span class="number">41</span>-<span class="number">4</span>.el6 will be installed</span><br><span class="line">--&gt; Running transaction check</span><br><span class="line">---&gt; Package glibc.i686 <span class="number">0</span>:<span class="number">2.12</span>-<span class="number">1.132</span>.el6_5.<span class="number">2</span> will be installed</span><br><span class="line">--&gt; Processing Dependency: libfreebl3.so(NSSRAWHASH_3.<span class="number">12.3</span>) <span class="keyword">for</span> package: glibc-<span class="number">2.12</span>-<span class="number">1.132</span>.el6_5.<span class="number">2</span>.i686</span><br><span class="line">--&gt; Processing Dependency: libfreebl3.so <span class="keyword">for</span> package: glibc-<span class="number">2.12</span>-<span class="number">1.132</span>.el6_5.<span class="number">2</span>.i686</span><br><span class="line">--&gt; Running transaction check</span><br><span class="line">---&gt; Package nss-softokn-freebl.i686 <span class="number">0</span>:<span class="number">3.14</span>.<span class="number">3</span>-<span class="number">10</span>.el6_5 will be installed</span><br><span class="line">--&gt; Finished Dependency Resolution</span><br><span class="line">Error:  Multilib version problems found. This often means that the root</span><br><span class="line">       cause is something <span class="keyword">else</span> and multilib version checking is just</span><br><span class="line">       pointing out that there is a problem. Eg.:</span><br><span class="line"></span><br><span class="line">         <span class="number">1</span>\. You have an upgrade <span class="keyword">for</span> libselinux <span class="built_in">which</span> is missing some</span><br><span class="line">            dependency that another package requires. Yum is trying to</span><br><span class="line">            solve this by installing an older version of libselinux of the</span><br><span class="line">            different architecture. If you exclude the bad architecture</span><br><span class="line">            yum will tell you what the root cause is (<span class="built_in">which</span> package</span><br><span class="line">            requires what). You can try redoing the upgrade with</span><br><span class="line">            --exclude libselinux.otherarch ... this should give you an error</span><br><span class="line">            message showing the root cause of the problem.</span><br><span class="line"></span><br><span class="line">         <span class="number">2</span>\. You have multiple architectures of libselinux installed, but</span><br><span class="line">            yum can only see an upgrade <span class="keyword">for</span> one of those arcitectures.</span><br><span class="line">            If you don<span class="string">'t want/need both architectures anymore then you</span><br><span class="line">            can remove the one with the missing update and everything</span><br><span class="line">            will work.</span><br><span class="line"></span><br><span class="line">         3\. You have duplicate versions of libselinux installed already.</span><br><span class="line">            You can use "yum check" to get yum show these errors.</span><br><span class="line"></span><br><span class="line">       ...you can also use --setopt=protected_multilib=false to remove</span><br><span class="line">       this checking, however this is almost never the correct thing to</span><br><span class="line">       do as something else is very likely to go wrong (often causing</span><br><span class="line">       much more problems).</span><br><span class="line"></span><br><span class="line">       Protected multilib versions: libselinux-2.0.94-5.3.el6_4.1.i686 != libselinux-2.0.94-5.3.0.1.el6.centos.plus.x86_64</span><br><span class="line"> You could try using --skip-broken to work around the problem</span><br><span class="line"> You could try running: rpm -Va --nofiles --nodigest</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>最后在一个日文的网站上找到了解决办法：</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install --enablerepo=centosplus openssl-devel</span><br></pre></td></tr></table></figure></p>
+<p>参考：<a href="http://blog.urban-theory.net/2014/06/16/openssl-devel-install-fails-on-centos-with-docker" target="_blank" rel="external">http://blog.urban-theory.net/2014/06/16/openssl-devel-install-fails-on-centos-with-docker</a></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -197,7 +112,7 @@ yum install <span class="comment">--enablerepo=centosplus openssl-devel</span>
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/CentOS/">CentOS</a>►<a class="article-category-link" href="/categories/CentOS/RedHat/">RedHat</a>►<a class="article-category-link" href="/categories/CentOS/RedHat/经验总结/">经验总结</a>
+  <a class="article-category-link" href="/categories/linux/">linux</a>
 </div>
 
 
@@ -268,137 +183,39 @@ yum install <span class="comment">--enablerepo=centosplus openssl-devel</span>
 		  
 		
 		  
-			<li><a href="/categories/C-C/" title="C/C++">C/C++<sup>22</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/" title="CentOS">CentOS<sup>13</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/CentOS/" title="CentOS">CentOS<sup>8</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/Python/" title="Python">Python<sup>3</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/Python/" title="Python">Python<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/Python/" title="Python">Python<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/CentOS/RedHat/" title="RedHat">RedHat<sup>6</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/RedHat/" title="RedHat">RedHat<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/Python/RedHat/" title="RedHat">RedHat<sup>2</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/RedHat/" title="RedHat">RedHat<sup>7</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/CentOS/RedHat/Ubuntu/" title="Ubuntu">Ubuntu<sup>5</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/RedHat/Ubuntu/" title="Ubuntu">Ubuntu<sup>6</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/Ubuntu/" title="Ubuntu">Ubuntu<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/Ubuntu/" title="Ubuntu">Ubuntu<sup>5</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/CentOS/Ubuntu/" title="Ubuntu">Ubuntu<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/Python/RedHat/Ubuntu/" title="Ubuntu">Ubuntu<sup>2</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/Uncategorized/" title="Uncategorized">Uncategorized<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/好站收集/" title="好站收集">好站收集<sup>1</sup></a></li>
-		  
 		
 		  
 		
 		  
-			<li><a href="/categories/我的作品/" title="我的作品">我的作品<sup>1</sup></a></li>
+			<li><a href="/categories/interesting/" title="interesting">interesting<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/C-C/CentOS/RedHat/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
+			<li><a href="/categories/linux/" title="linux">linux<sup>25</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/C-C/Python/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
+			<li><a href="/categories/notices/" title="notices">notices<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/Ubuntu/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
+			<li><a href="/categories/programing/" title="programing">programing<sup>21</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/CentOS/RedHat/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
+			<li><a href="/categories/sites/" title="sites">sites<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/C-C/经验总结/" title="经验总结">经验总结<sup>9</sup></a></li>
+			<li><a href="/categories/summarys/" title="summarys">summarys<sup>8</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/CentOS/Python/RedHat/Ubuntu/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
+			<li><a href="/categories/works/" title="works">works<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/C-C/CentOS/RedHat/Ubuntu/经验总结/" title="经验总结">经验总结<sup>3</sup></a></li>
-		  
 		
-		  
-			<li><a href="/categories/RedHat/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/经验总结/" title="经验总结">经验总结<sup>7</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/RedHat/Ubuntu/经验总结/" title="经验总结">经验总结<sup>3</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/Ubuntu/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/CentOS/Ubuntu/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/闲言碎语/" title="闲言碎语">闲言碎语<sup>4</sup></a></li>
 		  
 		
 		</ul>
@@ -423,7 +240,15 @@ yum install <span class="comment">--enablerepo=centosplus openssl-devel</span>
 			
 		
 			
+				<li><a href="/tags/install/" title="install">install<sup>4</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/zlib/" title="zlib">zlib<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/yum/" title="yum">yum<sup>4</sup></a></li>
 			
 		
 			
@@ -431,11 +256,7 @@ yum install <span class="comment">--enablerepo=centosplus openssl-devel</span>
 			
 		
 			
-				<li><a href="/tags/install/" title="install">install<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/python/" title="python">python<sup>3</sup></a></li>
+				<li><a href="/tags/make/" title="make">make<sup>3</sup></a></li>
 			
 		
 			
@@ -443,23 +264,11 @@ yum install <span class="comment">--enablerepo=centosplus openssl-devel</span>
 			
 		
 			
-				<li><a href="/tags/yum/" title="yum">yum<sup>3</sup></a></li>
+				<li><a href="/tags/python/" title="python">python<sup>3</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/libc/" title="libc">libc<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/git/" title="git">git<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/sudo/" title="sudo">sudo<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/make/" title="make">make<sup>2</sup></a></li>
+				<li><a href="/tags/boost/" title="boost">boost<sup>2</sup></a></li>
 			
 		
 			
@@ -467,19 +276,7 @@ yum install <span class="comment">--enablerepo=centosplus openssl-devel</span>
 			
 		
 			
-				<li><a href="/tags/kernel-devel/" title="kernel-devel">kernel-devel<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/ln/" title="ln">ln<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/https/" title="https">https<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/gcc/" title="gcc">gcc<sup>2</sup></a></li>
+				<li><a href="/tags/编译/" title="编译">编译<sup>2</sup></a></li>
 			
 		
 			
@@ -487,7 +284,27 @@ yum install <span class="comment">--enablerepo=centosplus openssl-devel</span>
 			
 		
 			
-				<li><a href="/tags/编译/" title="编译">编译<sup>2</sup></a></li>
+				<li><a href="/tags/gcc/" title="gcc">gcc<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/ln/" title="ln">ln<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/git/" title="git">git<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/https/" title="https">https<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/kernel-devel/" title="kernel-devel">kernel-devel<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/kernel/" title="kernel">kernel<sup>2</sup></a></li>
 			
 		
 		</ul>

@@ -83,6 +83,84 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2013/05/12/centos-set-ip.html" title="CentOS系统IP设置" itemprop="url">CentOS系统IP设置</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="leaker" target="_blank" itemprop="author">leaker</a>
+		
+  <p class="article-time">
+    <time datetime="2013-05-11T21:54:24.000Z" itemprop="datePublished"> 发表于 2013-05-12</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <blockquote>
+<p>以最小化安装的CentOS系统默认是不自动设置IP信息的。<br>  我们想要正常访问网络，第一步就必须先把IP设置好。</p>
+</blockquote>
+<h1 id="设置IP为自动获取：">设置IP为自动获取：</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@centos ~]<span class="comment"># dhclient eth0</span></span><br></pre></td></tr></table></figure>
+<h1 id="设置IP为手动填写：">设置IP为手动填写：</h1><ol>
+<li>设置网关</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@centos ~]<span class="comment"># echo 'GATEWAY="192.168.1.1"' &gt;&gt; /etc/sysconfig/network</span></span><br></pre></td></tr></table></figure>
+<ol>
+<li><p>设置网卡信息</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[root@centos ~]<span class="comment"># echo 'DEVICE="eth0"</span></span><br><span class="line">HWADDR=<span class="string">"00:0C:29:28:F9:88"</span></span><br><span class="line">NM_CONTROLLED=<span class="string">"yes"</span></span><br><span class="line">ONBOOT=<span class="string">"yes"</span></span><br><span class="line">BOOTPROTO=<span class="string">"none"</span></span><br><span class="line">BROADCAST=<span class="string">"192.168.1.255"</span></span><br><span class="line">IPADDR=<span class="string">"192.168.1.120"</span></span><br><span class="line">NETMASK=<span class="string">"255.255.255.0"</span></span><br><span class="line">NETWORK=<span class="string">"192.168.1.0"</span></span><br><span class="line">IPV6INIT=<span class="string">"yes"</span></span><br><span class="line">IPV6_AUTOCONF=<span class="string">"yes"</span></span><br><span class="line">TYPE=<span class="string">"Ethernet"</span><span class="string">' &gt; /etc/sysconfig/network-scripts/ifcfg-eth0</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>设置DNS</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@centos ~]<span class="comment"># echo 'nameserver 8.8.8.8</span></span><br><span class="line">nameserver <span class="number">8.8</span>.<span class="number">4.4</span><span class="string">'&gt; /etc/resolv.conf</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>重启网络</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@centos ~]<span class="comment"># service network restart</span></span><br><span class="line">Shutting down loopback interface: [ OK ]</span><br><span class="line">Bringing up loopback interface: [ OK ]</span><br><span class="line">Bringing up interface eth0: [ OK ]</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/linux/">linux</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/centos/">centos</a><a href="/tags/dhclient/">dhclient</a><a href="/tags/dns/">dns</a><a href="/tags/eth0/">eth0</a><a href="/tags/ifcfg-eth0/">ifcfg-eth0</a><a href="/tags/network/">network</a><a href="/tags/resolv/">resolv</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2013/04/05/python-no-module-named-mysqldb.html" title="Python执行出现“No module named MySQLdb”解决方案" itemprop="url">Python执行出现“No module named MySQLdb”解决方案</a>
   </h1>
   <p class="article-author">By
@@ -97,12 +175,12 @@
     <div class="article-content">
         
         <p><center><img src="/wp-content/uploads/2013/04/mysqldb_error.jpg" alt=""></center><br>如果在python程序执行时遇到这个错误提示“<strong>No module named MySQLdb</strong>”</p>
-<h2 id="这个说明缺少对应的库，解决办法是：">这个说明缺少对应的库，解决办法是：</h2><pre><code>easy_install mysql-python <span class="list">(<span class="keyword">mix</span> os)</span>  
-pip install mysql-python <span class="list">(<span class="keyword">mix</span> os)</span>  
-apt-get install python-mysqldb <span class="list">(<span class="keyword">Linux</span> Ubuntu, ...)</span>  
-cd /usr/ports/databases/py-MySQLdb &amp;amp<span class="comment">;&amp;amp; make install clean (FreeBSD)  </span>
-yum install MySQL-python <span class="list">(<span class="keyword">Linux</span> Fedora, CentOS ...)</span>  
-</code></pre><p><strong>对应后面括号内系统执行相应的命令就可以进行安装</strong></p>
+<h1 id="这个说明缺少对应的库，解决办法是：">这个说明缺少对应的库，解决办法是：</h1><h2 id="mix_os_(easy_install)">mix os (easy_install)</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">easy_install mysql-python (mix os)</span><br></pre></td></tr></table></figure>
+<h2 id="mix_os_(pip)">mix os (pip)</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install mysql-python (mix os)</span><br></pre></td></tr></table></figure>
+<h2 id="Ubuntu">Ubuntu</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get install python-mysqldb (Linux Ubuntu, ...)</span><br></pre></td></tr></table></figure>
+<h2 id="FreeBSD">FreeBSD</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /usr/ports/databases/py-MySQLdb &amp;&amp; make install clean (FreeBSD)</span><br></pre></td></tr></table></figure>
+<h2 id="Fedora,_CentOS">Fedora, CentOS</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install MySQL-python (Linux Fedora, CentOS ...)</span><br></pre></td></tr></table></figure>
+<p><strong>对应后面括号内系统执行相应的命令就可以进行安装</strong></p>
 
         
         
@@ -115,7 +193,7 @@ yum install MySQL-python <span class="list">(<span class="keyword">Linux</span> 
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/CentOS/">CentOS</a>►<a class="article-category-link" href="/categories/CentOS/Python/">Python</a>►<a class="article-category-link" href="/categories/CentOS/Python/RedHat/">RedHat</a>►<a class="article-category-link" href="/categories/CentOS/Python/RedHat/Ubuntu/">Ubuntu</a>
+  <a class="article-category-link" href="/categories/linux/">linux</a>
 </div>
 
 
@@ -172,7 +250,7 @@ yum install MySQL-python <span class="list">(<span class="keyword">Linux</span> 
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/闲言碎语/">闲言碎语</a>
+  <a class="article-category-link" href="/categories/notices/">notices</a>
 </div>
 
 
@@ -220,12 +298,20 @@ yum install MySQL-python <span class="list">(<span class="keyword">Linux</span> 
     <div class="article-content">
         
         <p>由于ubuntu 12.04默认采用了Unity界面，对于我这种菜鸟来说用起来很是不顺手，所以搜了一下，发现有办法回归gnome界面。</p>
-<p>在此记录下供自己以及还不了解这个解决办法的人使用。<br>1.命令行的解决办法：<br><code>sudo apt-get install gnome-session-fallback</code></p>
-<p>2.去软件中心搜索“gnome-panel”并安装之</p>
-<p>下面就是设置了，登出当前用户后进行以下步骤：<br>1.在登录用户界面选用户名右边的配置按钮<br><a href="http://www.leelib.com/wp-content/uploads/2013/03/login1.png"><img src="http://www.leelib.com/wp-content/uploads/2013/03/login1.png" alt="gnome设置第一步"></a><br>2.选择“GNOME Classic”<br><a href="http://www.leelib.com/wp-content/uploads/2013/03/login2.png"><img src="http://www.leelib.com/wp-content/uploads/2013/03/login2.png" alt="gnome设置第二步"></a></p>
-<p>&nbsp;</p>
-<p>现在，输入密码登录看看，是不是已经是熟悉的gnome界面了呢。至此，打完收工。</p>
-<p>&nbsp;</p>
+<h1 id="安装">安装</h1><p>在此记录下供自己以及还不了解这个解决办法的人使用。</p>
+<ol>
+<li><p>命令行的解决办法：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install gnome-session-fallback</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>去软件中心搜索“gnome-panel”并安装之</p>
+</li>
+</ol>
+<h1 id="设置">设置</h1><p>下面就是设置了，登出当前用户后进行以下步骤：</p>
+<ol>
+<li>在登录用户界面选用户名右边的配置按钮<br><img src="/wp-content/uploads/2013/03/login1.png" alt="gnome设置第一步"></li>
+<li>选择“GNOME Classic”<br><img src="/wp-content/uploads/2013/03/login2.png" alt="gnome设置第二步"></li>
+</ol>
+<p>现在，输入密码登录看看，是不是已经是熟悉的gnome界面了呢。至此，打完收工。<br>(o≖◡≖)</p>
 
         
         
@@ -238,7 +324,7 @@ yum install MySQL-python <span class="list">(<span class="keyword">Linux</span> 
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/Ubuntu/">Ubuntu</a>
+  <a class="article-category-link" href="/categories/linux/">linux</a>
 </div>
 
 
@@ -285,14 +371,8 @@ yum install MySQL-python <span class="list">(<span class="keyword">Linux</span> 
 </header>
     <div class="article-content">
         
-        <h2 id="下面代码就可以生成1-100区间的随机数：">下面代码就可以生成1-100区间的随机数：</h2><pre><code><span class="preprocessor">#<span class="keyword">include</span> &lt;vector&gt;</span>
-<span class="preprocessor">#<span class="keyword">include</span> &lt;algorithms&gt;</span>
+        <h1 id="下面代码就可以生成1-100区间的随机数：">下面代码就可以生成1-100区间的随机数：</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;vector&gt;</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;algorithms&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; random_numbers;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">unsigned</span> <span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">100</span>; ++i)</span><br><span class="line">    random_numbers.push_back(i + <span class="number">1</span>);</span><br><span class="line"><span class="built_in">std</span>::random_shuffle(random_numbers.begin(), random_numbers.end());</span><br></pre></td></tr></table></figure>
 
-<span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; random_numbers;
-<span class="keyword">for</span> (<span class="keyword">unsigned</span> <span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">100</span>; ++i)
-    random_numbers.push_back(i+<span class="number">1</span>);
-<span class="built_in">std</span>::random_shuffle(random_numbers.begin(), random_numbers.end());
-</code></pre>
         
         
         <p class="article-more-link">
@@ -304,7 +384,7 @@ yum install MySQL-python <span class="list">(<span class="keyword">Linux</span> 
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/C-C/">C/C++</a>►<a class="article-category-link" href="/categories/C-C/经验总结/">经验总结</a>
+  <a class="article-category-link" href="/categories/programing/">programing</a>
 </div>
 
 
@@ -351,8 +431,14 @@ yum install MySQL-python <span class="list">(<span class="keyword">Linux</span> 
 </header>
     <div class="article-content">
         
-        <h1 id="用文本编辑器打开虚拟机的vmx文件_例如：Win7-vmx">用文本编辑器打开虚拟机的vmx文件 例如：Win7.vmx</h1><h2 id="解决方法是在文本最后加入如下信息：">解决方法是在文本最后加入如下信息：</h2><pre><code>ethernet0<span class="class">.virtualDev</span> = <span class="string">"e1000"</span>
-</code></pre><p><strong>记得要先关闭虚拟机哦！</strong></p>
+        <ol>
+<li><p>用文本编辑器打开虚拟机的vmx文件 例如：Win7.vmx</p>
+</li>
+<li><p>解决方法是在文本最后加入如下信息：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ethernet0.virtualDev&#160;=&#160;&#34;e1000&#34;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p><strong>记得要先关闭虚拟机哦！</strong></p>
 
         
         
@@ -365,7 +451,7 @@ yum install MySQL-python <span class="list">(<span class="keyword">Linux</span> 
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/经验总结/">经验总结</a>
+  <a class="article-category-link" href="/categories/summarys/">summarys</a>
 </div>
 
 
@@ -433,7 +519,7 @@ yum install MySQL-python <span class="list">(<span class="keyword">Linux</span> 
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/经验总结/">经验总结</a>
+  <a class="article-category-link" href="/categories/summarys/">summarys</a>
 </div>
 
 
@@ -480,27 +566,11 @@ yum install MySQL-python <span class="list">(<span class="keyword">Linux</span> 
 </header>
     <div class="article-content">
         
-        <p>首先查看日志文件</p>
-<pre><code>cat <span class="regexp">/var/</span>log/danted.log
-
-
-发现里面有这样的记录
-
-May <span class="number">24</span> <span class="number">13</span>:<span class="number">57</span>:<span class="number">52</span> (<span class="number">1337839072</span>) danted[<span class="number">13596</span>]: socks_seteuid(): <span class="string">old:</span> <span class="number">0</span>, <span class="string">new:</span> <span class="number">65534</span>
-May <span class="number">24</span> <span class="number">13</span>:<span class="number">57</span>:<span class="number">52</span> (<span class="number">1337839072</span>) danted[<span class="number">13596</span>]: socks_reseteuid(): <span class="string">current:</span> <span class="number">65534</span>, <span class="string">new:</span> <span class="number">0</span>
-May <span class="number">24</span> <span class="number">13</span>:<span class="number">57</span>:<span class="number">52</span> (<span class="number">1337839072</span>) danted[<span class="number">13596</span>]: fixsettings(): setting the libwrap uid to <span class="number">0</span> is not recommended
-May <span class="number">24</span> <span class="number">13</span>:<span class="number">57</span>:<span class="number">52</span> (<span class="number">1337839072</span>) danted[<span class="number">13596</span>]: symbolfunction(): compiletime configuration error? Failed to open "libc.so": <span class="regexp">/usr/</span>lib<span class="regexp">/i386-linux-gnu/</span>libc.<span class="string">so:</span> invalid ELF header
-
-
-说明程序在找<span class="regexp">/usr/</span>lib<span class="regexp">/i386-linux-gnu/</span>libc.so位置的libc.so没找到，所以解决办法就是创建一个链接命令如下：
-
-ln -sf <span class="regexp">/lib/</span>i386-linux-gnu<span class="regexp">/libc.so.6 /</span>usr<span class="regexp">/lib/</span>i386-linux-gnu/libc.so
-
-
-再启动下服务
-
-service danted start
-</code></pre><p>看看是不是启动成功啦！^^</p>
+        <p>首先查看日志文件<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@ubuntu]<span class="comment"># cat /var/log/danted.log</span></span><br></pre></td></tr></table></figure></p>
+<p>发现里面有这样的记录<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">May 24 13:57:52 (1337839072) danted[13596]: socks_seteuid(): old: 0, new: 65534&#10;May 24 13:57:52 (1337839072) danted[13596]: socks_reseteuid(): current: 65534, new: 0&#10;May 24 13:57:52 (1337839072) danted[13596]: fixsettings(): setting the libwrap uid to 0 is not recommended&#10;May 24 13:57:52 (1337839072) danted[13596]: symbolfunction(): compiletime configuration error? Failed to open &#34;libc.so&#34;: /usr/lib/i386-linux-gnu/libc.so: invalid ELF header</span><br></pre></td></tr></table></figure></p>
+<p>说明程序在找/usr/lib/i386-linux-gnu/libc.so位置的libc.so没找到，所以解决办法就是创建一个链接命令如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ln -sf /lib/i386-linux-gnu/libc.so.<span class="number">6</span> /usr/lib/i386-linux-gnu/libc.so</span><br></pre></td></tr></table></figure></p>
+<p>再启动下服务<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service danted start</span><br></pre></td></tr></table></figure></p>
+<p>看看是不是启动成功啦！<br>(o≖◡≖)</p>
 <p>因为到现在位置在国内没有搜索到这个问题的解决办法，所以记录在这里。或许能帮到有需要的人。</p>
 <p>另外，这里有dante socks server的安装说明：<br><a href="http://wiki.kartbuilding.net/index.php/Dante_Socks_Server" target="_blank" rel="external">http://wiki.kartbuilding.net/index.php/Dante_Socks_Server</a></p>
 
@@ -515,7 +585,7 @@ service danted start
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/Ubuntu/">Ubuntu</a>
+  <a class="article-category-link" href="/categories/linux/">linux</a>
 </div>
 
 
@@ -562,7 +632,9 @@ service danted start
 </header>
     <div class="article-content">
         
-        <p><center><img src="/wp-content/uploads/2012/05/cmake_ogre.png" alt="cmake_ogre"></center><br>解决办法就是在生成项目之前勾选上 <strong>CMAKE_USE_RELATIVE_PATHS</strong> 这个选项，效果如上图所示。</p>
+        <center><img src="/wp-content/uploads/2012/05/cmake_ogre.png" alt=""></center>
+
+<h1 id="解决方案">解决方案</h1><p>在生成项目之前勾选上 <strong>CMAKE_USE_RELATIVE_PATHS</strong> 这个选项，效果如上图所示。</p>
 
         
         
@@ -575,7 +647,7 @@ service danted start
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/闲言碎语/">闲言碎语</a>
+  <a class="article-category-link" href="/categories/programing/">programing</a>
 </div>
 
 
@@ -624,45 +696,12 @@ service danted start
         
         <center><img src="/wp-content/uploads/2012/04/redhat-300x225.jpg" alt=""></center>
 
-<h2 id="在使用未注册的_RedHat_Linux_企业版时。使用yum命令会出现如下提示：">在使用未注册的 RedHat Linux 企业版时。使用yum命令会出现如下提示：</h2><pre><code>[root<span class="variable">@localhost</span> ~]<span class="comment"># yum install httpd</span>
-<span class="constant">Loaded </span><span class="symbol">plugins:</span> rhnplugin, security  
-<span class="constant">This </span>system is <span class="keyword">not</span> registered with <span class="constant">RHN.</span>  
-<span class="constant">RHN </span>support will be disabled.  
-<span class="constant">Setting </span>up <span class="constant">Install Process </span> 
-<span class="constant">No </span>package httpd available.  
-<span class="constant">Nothing </span>to <span class="keyword">do</span>
-
-
-而这种情况可以使用<span class="constant">CentOS的</span>yum来代替掉系统本身的yum
-脚本如下：
-
-<span class="comment">#!/bin/sh  </span>
-rpm -qa | grep yum | xargs rpm -e --nodeps  
-wget  <span class="symbol">http:</span>/<span class="regexp">/centos.ustc.edu.cn/centos</span><span class="regexp">/5/os</span><span class="regexp">/i386/</span><span class="constant">CentOS/</span>yum-metadata-parser-<span class="number">1.1</span>.<span class="number">2</span>-<span class="number">3</span>.el5.centos.i386.rpm  
-wget  <span class="symbol">http:</span>/<span class="regexp">/mirrors.ustc.edu.cn/centos</span><span class="regexp">/5/os</span><span class="regexp">/i386/</span><span class="constant">CentOS/</span>yum-fastestmirror-<span class="number">1.1</span>.<span class="number">16</span>-<span class="number">21</span>.el5.centos.noarch.rpm  
-wget  <span class="symbol">http:</span>/<span class="regexp">/mirrors.ustc.edu.cn/centos</span><span class="regexp">/5/os</span><span class="regexp">/i386/</span><span class="constant">CentOS/</span>yum-<span class="number">3.2</span>.<span class="number">22</span>-<span class="number">39</span>.el5.centos.noarch.rpm  
-rpm -ivh yum-metadata-parser-<span class="number">1.1</span>.<span class="number">2</span>-<span class="number">3</span>.el5.centos.i386.rpm  
-rpm -ivh yum-fastestmirror-<span class="number">1.1</span>.<span class="number">16</span>-<span class="number">21</span>.el5.centos.noarch.rpm  
-rpm -ivh yum-<span class="number">3.2</span>.<span class="number">22</span>-<span class="number">39</span>.el5.centos.noarch.rpm  
-wget <span class="symbol">http:</span>/<span class="regexp">/docs.linuxtone.org/soft</span><span class="regexp">/lemp/</span><span class="constant">CentOS-Base.</span>repo  
-mv <span class="constant">CentOS-Base.</span>repo /etc/yum.repos.d/<span class="constant">CentOS-Base.</span>repo  
-rm -f yum-metadata-parser-<span class="number">1.1</span>.<span class="number">2</span>-<span class="number">3</span>.el5.centos.i386.rpm  
-rm -f yum-fastestmirror-<span class="number">1.1</span>.<span class="number">16</span>-<span class="number">21</span>.el5.centos.noarch.rpm  
-rm -f yum-<span class="number">3.2</span>.<span class="number">22</span>-<span class="number">39</span>.el5.centos.noarch.rpm  
-rm -f <span class="constant">CentOS-Base.</span>repo
-
-
-将上面的脚本保存为：**redhat_use_centos_yum.sh**
-
-点击这里直接下载 [redhat_use_centos_yum.sh](<span class="regexp">/wp-content/uploads</span><span class="regexp">/2012/</span><span class="number">04</span>/redhat_use_centos_yum.sh)
-然后直接运行这个脚本即可。
-
-<span class="comment">## 如果闲麻烦也可以依次输入下面几条指令来下载并执行我已经写好的脚本，同样可以达到目的：</span>
-
-wget <span class="symbol">http:</span>/<span class="regexp">/www.leelib.com/wp</span>-content/uploads/<span class="number">2012</span>/<span class="number">04</span>/redhat_use_centos_yum.sh
-chmod <span class="number">777</span> redhat_use_centos_yum.sh
-sudo ./redhat_use_centos_yum.sh
-</code></pre><p>现在再试试yum命令是否已经没有了 This system is not registered with RHN. 提示，并且可以正常使用了呢！ :)</p>
+<h1 id="错误原因">错误原因</h1><p>在使用未注册的 RedHat Linux 企业版时。使用yum命令会出现如下提示：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]<span class="comment"># yum install httpd</span></span><br><span class="line">Loaded plugins: rhnplugin, security  </span><br><span class="line">This system is not registered with RHN.  </span><br><span class="line">RHN support will be disabled.  </span><br><span class="line">Setting up Install Process  </span><br><span class="line">No package httpd available.  </span><br><span class="line">Nothing to <span class="keyword">do</span></span><br></pre></td></tr></table></figure></p>
+<h1 id="解决方案">解决方案</h1><p>而这种情况可以使用CentOS的yum来代替掉系统本身的yum<br>脚本如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!/bin/sh  </span></span><br><span class="line">rpm -qa | grep yum | xargs rpm <span class="operator">-e</span> --nodeps  </span><br><span class="line">wget  http://centos.ustc.edu.cn/centos/<span class="number">5</span>/os/i386/CentOS/yum-metadata-parser-<span class="number">1.1</span>.<span class="number">2</span>-<span class="number">3</span>.el5.centos.i386.rpm  </span><br><span class="line">wget  http://mirrors.ustc.edu.cn/centos/<span class="number">5</span>/os/i386/CentOS/yum-fastestmirror-<span class="number">1.1</span>.<span class="number">16</span>-<span class="number">21</span>.el5.centos.noarch.rpm  </span><br><span class="line">wget  http://mirrors.ustc.edu.cn/centos/<span class="number">5</span>/os/i386/CentOS/yum-<span class="number">3.2</span>.<span class="number">22</span>-<span class="number">39</span>.el5.centos.noarch.rpm  </span><br><span class="line">rpm -ivh yum-metadata-parser-<span class="number">1.1</span>.<span class="number">2</span>-<span class="number">3</span>.el5.centos.i386.rpm  </span><br><span class="line">rpm -ivh yum-fastestmirror-<span class="number">1.1</span>.<span class="number">16</span>-<span class="number">21</span>.el5.centos.noarch.rpm  </span><br><span class="line">rpm -ivh yum-<span class="number">3.2</span>.<span class="number">22</span>-<span class="number">39</span>.el5.centos.noarch.rpm  </span><br><span class="line">wget http://docs.linuxtone.org/soft/lemp/CentOS-Base.repo  </span><br><span class="line">mv CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo  </span><br><span class="line">rm <span class="operator">-f</span> yum-metadata-parser-<span class="number">1.1</span>.<span class="number">2</span>-<span class="number">3</span>.el5.centos.i386.rpm  </span><br><span class="line">rm <span class="operator">-f</span> yum-fastestmirror-<span class="number">1.1</span>.<span class="number">16</span>-<span class="number">21</span>.el5.centos.noarch.rpm  </span><br><span class="line">rm <span class="operator">-f</span> yum-<span class="number">3.2</span>.<span class="number">22</span>-<span class="number">39</span>.el5.centos.noarch.rpm  </span><br><span class="line">rm <span class="operator">-f</span> CentOS-Base.repo</span><br></pre></td></tr></table></figure></p>
+<p>将上面的脚本保存为：<strong>redhat_use_centos_yum.sh</strong></p>
+<p>点击这里直接下载 <a href="/wp-content/uploads/2012/04/redhat_use_centos_yum.sh">redhat_use_centos_yum.sh</a><br>然后直接运行这个脚本即可。</p>
+<h1 id="一键脚本">一键脚本</h1><p>如果闲麻烦也可以依次输入下面几条指令来下载并执行我已经写好的脚本，同样可以达到目的：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget http://www.leelib.com/wp-content/uploads/<span class="number">2012</span>/<span class="number">04</span>/redhat_use_centos_yum.sh</span><br><span class="line">chmod <span class="number">777</span> redhat_use_centos_yum.sh</span><br><span class="line">sudo ./redhat_use_centos_yum.sh</span><br></pre></td></tr></table></figure></p>
+<p>现在再试试yum命令是否已经没有了 This system is not registered with RHN. 提示，并且可以正常使用了呢！ :)</p>
 
         
         
@@ -675,93 +714,13 @@ sudo ./redhat_use_centos_yum.sh
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/RedHat/">RedHat</a>►<a class="article-category-link" href="/categories/RedHat/经验总结/">经验总结</a>
+  <a class="article-category-link" href="/categories/linux/">linux</a>
 </div>
 
 
   <div class="article-tags">
   
   <span></span> <a href="/tags/centos/">centos</a><a href="/tags/redhat/">redhat</a><a href="/tags/sh/">sh</a><a href="/tags/shell/">shell</a><a href="/tags/yum/">yum</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2012/04/24/asm-rol-to-c.html" title="汇编中ROL(循环左移)对应的C语言实现" itemprop="url">汇编中ROL(循环左移)对应的C语言实现</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="leaker" target="_blank" itemprop="author">leaker</a>
-		
-  <p class="article-time">
-    <time datetime="2012-04-24T02:48:29.000Z" itemprop="datePublished"> 发表于 2012-04-24</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>在汇编语言中，我们可以直接使用ROL ROR等指令进行循环左移和循环右移的操作。<br>但C语言中却没有对应的操作，没办法只能自己实现了。</p>
-<h2 id="下面是我最近项目中用到的一个针对WORD类型的循环左移(ROL)实现代码：">下面是我最近项目中用到的一个针对WORD类型的循环左移(ROL)实现代码：</h2><pre><code>uint16_t <span class="type">ROL</span>(int <span class="function"><span class="keyword">val</span>, <span class="title">int</span> <span class="title">n</span>)
-</span>{
-    <span class="keyword">return</span> (<span class="function"><span class="keyword">val</span> <span class="title">&lt;&lt;</span> <span class="title">n</span>) <span class="title">|</span> (</span><span class="function"><span class="keyword">val</span> <span class="title">&gt;&gt;</span> (</span><span class="number">16</span> - n));
-}
-
-
-以此类推，针对<span class="type">BYTE</span>类型的循环左移：
-
-uint8_t <span class="type">ROL</span>(int <span class="function"><span class="keyword">val</span>, <span class="title">int</span> <span class="title">n</span>)
-</span>{
-    <span class="keyword">return</span> (<span class="function"><span class="keyword">val</span> <span class="title">&lt;&lt;</span> <span class="title">n</span>) <span class="title">|</span> (</span><span class="function"><span class="keyword">val</span> <span class="title">&gt;&gt;</span> (</span><span class="number">8</span> - n));
-}
-
-
-以此类推，针对<span class="type">DWORD</span>类型的循环左移：
-
-uint32_t <span class="type">ROL</span>(int <span class="function"><span class="keyword">val</span>, <span class="title">int</span> <span class="title">n</span>)
-</span>{
-    <span class="keyword">return</span> (<span class="function"><span class="keyword">val</span> <span class="title">&lt;&lt;</span> <span class="title">n</span>) <span class="title">|</span> (</span><span class="function"><span class="keyword">val</span> <span class="title">&gt;&gt;</span> (</span><span class="number">32</span> - n));
-}
-</code></pre>
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/闲言碎语/">闲言碎语</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/ROL/">ROL</a><a href="/tags/ROR/">ROR</a><a href="/tags/ROL/">__ROL__</a><a href="/tags/ROR/">__ROR__</a><a href="/tags/循环右移/">循环右移</a><a href="/tags/循环左移/">循环左移</a>
   </div>
 
 </div>
@@ -803,137 +762,39 @@ uint32_t <span class="type">ROL</span>(int <span class="function"><span class="k
 		  
 		
 		  
-			<li><a href="/categories/C-C/" title="C/C++">C/C++<sup>22</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/" title="CentOS">CentOS<sup>13</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/CentOS/" title="CentOS">CentOS<sup>8</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/Python/" title="Python">Python<sup>3</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/Python/" title="Python">Python<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/Python/" title="Python">Python<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/CentOS/RedHat/" title="RedHat">RedHat<sup>6</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/RedHat/" title="RedHat">RedHat<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/Python/RedHat/" title="RedHat">RedHat<sup>2</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/RedHat/" title="RedHat">RedHat<sup>7</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/CentOS/RedHat/Ubuntu/" title="Ubuntu">Ubuntu<sup>5</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/RedHat/Ubuntu/" title="Ubuntu">Ubuntu<sup>6</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/Ubuntu/" title="Ubuntu">Ubuntu<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/Ubuntu/" title="Ubuntu">Ubuntu<sup>5</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/CentOS/Ubuntu/" title="Ubuntu">Ubuntu<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/Python/RedHat/Ubuntu/" title="Ubuntu">Ubuntu<sup>2</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/Uncategorized/" title="Uncategorized">Uncategorized<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/好站收集/" title="好站收集">好站收集<sup>1</sup></a></li>
-		  
 		
 		  
 		
 		  
-			<li><a href="/categories/我的作品/" title="我的作品">我的作品<sup>1</sup></a></li>
+			<li><a href="/categories/interesting/" title="interesting">interesting<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/C-C/CentOS/RedHat/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
+			<li><a href="/categories/linux/" title="linux">linux<sup>25</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/C-C/Python/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
+			<li><a href="/categories/notices/" title="notices">notices<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/Ubuntu/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
+			<li><a href="/categories/programing/" title="programing">programing<sup>21</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/CentOS/RedHat/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
+			<li><a href="/categories/sites/" title="sites">sites<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/C-C/经验总结/" title="经验总结">经验总结<sup>9</sup></a></li>
+			<li><a href="/categories/summarys/" title="summarys">summarys<sup>8</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/CentOS/Python/RedHat/Ubuntu/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
+			<li><a href="/categories/works/" title="works">works<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/C-C/CentOS/RedHat/Ubuntu/经验总结/" title="经验总结">经验总结<sup>3</sup></a></li>
-		  
 		
-		  
-			<li><a href="/categories/RedHat/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/经验总结/" title="经验总结">经验总结<sup>7</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/RedHat/Ubuntu/经验总结/" title="经验总结">经验总结<sup>3</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/Ubuntu/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/CentOS/Ubuntu/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/闲言碎语/" title="闲言碎语">闲言碎语<sup>4</sup></a></li>
 		  
 		
 		</ul>
@@ -958,7 +819,15 @@ uint32_t <span class="type">ROL</span>(int <span class="function"><span class="k
 			
 		
 			
+				<li><a href="/tags/install/" title="install">install<sup>4</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/zlib/" title="zlib">zlib<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/yum/" title="yum">yum<sup>4</sup></a></li>
 			
 		
 			
@@ -966,11 +835,7 @@ uint32_t <span class="type">ROL</span>(int <span class="function"><span class="k
 			
 		
 			
-				<li><a href="/tags/install/" title="install">install<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/python/" title="python">python<sup>3</sup></a></li>
+				<li><a href="/tags/make/" title="make">make<sup>3</sup></a></li>
 			
 		
 			
@@ -978,23 +843,11 @@ uint32_t <span class="type">ROL</span>(int <span class="function"><span class="k
 			
 		
 			
-				<li><a href="/tags/yum/" title="yum">yum<sup>3</sup></a></li>
+				<li><a href="/tags/python/" title="python">python<sup>3</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/libc/" title="libc">libc<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/git/" title="git">git<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/sudo/" title="sudo">sudo<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/make/" title="make">make<sup>2</sup></a></li>
+				<li><a href="/tags/boost/" title="boost">boost<sup>2</sup></a></li>
 			
 		
 			
@@ -1002,19 +855,7 @@ uint32_t <span class="type">ROL</span>(int <span class="function"><span class="k
 			
 		
 			
-				<li><a href="/tags/kernel-devel/" title="kernel-devel">kernel-devel<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/ln/" title="ln">ln<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/https/" title="https">https<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/gcc/" title="gcc">gcc<sup>2</sup></a></li>
+				<li><a href="/tags/编译/" title="编译">编译<sup>2</sup></a></li>
 			
 		
 			
@@ -1022,7 +863,27 @@ uint32_t <span class="type">ROL</span>(int <span class="function"><span class="k
 			
 		
 			
-				<li><a href="/tags/编译/" title="编译">编译<sup>2</sup></a></li>
+				<li><a href="/tags/gcc/" title="gcc">gcc<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/ln/" title="ln">ln<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/git/" title="git">git<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/https/" title="https">https<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/kernel-devel/" title="kernel-devel">kernel-devel<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/kernel/" title="kernel">kernel<sup>2</sup></a></li>
 			
 		
 		</ul>

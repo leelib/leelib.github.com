@@ -11,37 +11,16 @@
     
 
     
-    <meta name="description" content="#!/usr/env python
-&quot;&quot;&quot;
-:license: MIT
-
-Copyright (C) 2012 HustMoon
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of
-this software and associated documentation files (the">
+    <meta name="description" content="12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394959697989910010110210">
 <meta property="og:type" content="article">
 <meta property="og:title" content="python代码简单加密解密工具">
 <meta property="og:url" content="http://www.leelib.com/2014/11/21/python-simple-crypt-code.html">
 <meta property="og:site_name" content="李略帅">
-<meta property="og:description" content="#!/usr/env python
-&quot;&quot;&quot;
-:license: MIT
-
-Copyright (C) 2012 HustMoon
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of
-this software and associated documentation files (the">
-<meta property="og:updated_time" content="2015-09-17T09:03:43.982Z">
+<meta property="og:description" content="12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394959697989910010110210">
+<meta property="og:updated_time" content="2015-09-18T07:07:50.063Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="python代码简单加密解密工具">
-<meta name="twitter:description" content="#!/usr/env python
-&quot;&quot;&quot;
-:license: MIT
-
-Copyright (C) 2012 HustMoon
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of
-this software and associated documentation files (the">
+<meta name="twitter:description" content="12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394959697989910010110210">
 
     
     <link rel="alternative" href="/atom.xml" title="李略帅" type="application/atom+xml">
@@ -123,122 +102,15 @@ this software and associated documentation files (the">
 		
 		</div>
 		
-		<pre><code><span class="built_in">#</span><span class="built_in">!</span>/usr/env python
-<span class="string">""</span><span class="string">"
-:license: MIT
-
-Copyright (C) 2012 HustMoon
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of
-this software and associated documentation files (the "</span>Software<span class="string">"), to deal in
-the Software without restriction, including without limitation the rights to
-use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
-of the Software, and to permit persons to whom the Software is furnished to do
-so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "</span>AS IS<span class="string">", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-"</span><span class="string">""</span>
-from __future__ <span class="built_in">import</span> with_statement
-
-<span class="built_in">import</span> zlib, sys
-
-def b128encode<span class="params">(buf, escape=False)</span>:
-    <span class="keyword">if</span> not buf: return ''
-    buf = bytearray<span class="params">(buf)</span>
-    res = bytearray<span class="params">(<span class="params">(len<span class="params">(buf)</span> * <span class="number">8</span> + <span class="number">6</span>)</span> / <span class="number">7</span>)</span>
-    p, s, i = <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>
-    <span class="keyword">for</span> n in buf:
-        res[i] = <span class="params">(<span class="params">(p &lt;&lt; <span class="params">(<span class="number">8</span> - s)</span> | <span class="params">(n &gt;&gt; s)</span>)</span> &amp;amp; <span class="number">0</span>x7F)</span> | <span class="number">0</span>x80; i += <span class="number">1</span>
-        <span class="keyword">if</span> s == <span class="number">7</span>:
-            res[i] = n | <span class="number">0</span>x80; i += <span class="number">1</span>
-            p, s = <span class="number">0</span>, <span class="number">1</span>
-        <span class="keyword">else</span>:
-            p, s = n, <span class="params">(s + <span class="number">1</span>)</span> <span class="built_in">%</span> <span class="number">8</span>
-    <span class="keyword">if</span> s <span class="built_in">!</span>= <span class="number">1</span>:
-        <span class="keyword">if</span> s == <span class="number">2</span> and p &lt; <span class="number">0</span>x80:
-            i -= <span class="number">1</span>
-        <span class="keyword">else</span>:
-            p = <span class="params">(p &lt;&lt; <span class="params">(<span class="number">8</span> - s)</span>)</span> &amp;amp; <span class="number">0</span>x7F
-        p = <span class="built_in">chr</span><span class="params">(p)</span>
-        <span class="keyword">if</span> escape:
-            p = p.encode<span class="params">('string-escape')</span>
-        res[i:] = p
-    return <span class="built_in">str</span><span class="params">(res)</span>
-
-def dcode<span class="params">()</span>:
-    code = r'''def code<span class="params">(__=code)</span>:
- <span class="params">(_______)</span>=<span class="params">(globals)</span><span class="params">()</span>;del<span class="params">(<span class="params">(_______)</span>['code'])</span>
- <span class="keyword">if</span><span class="params">(<span class="params">(<span class="params">(_______)</span>.get<span class="params">('__doc__')</span>)</span>is<span class="params">(<span class="params">(None)</span>)</span>)</span>:
-  <span class="params">(__)</span>=<span class="params">(map)</span><span class="params">(<span class="params">(ord)</span>,<span class="params">(__)</span>[<span class="params">(<span class="number">339</span>)</span>:])</span>;<span class="params">(______)</span>=[<span class="number">0</span>]<span class="built_in">*</span><span class="params">(<span class="params">(<span class="params">(<span class="params">(<span class="params">(len)</span><span class="params">(<span class="params">(__)</span>)</span>+<span class="params">(<span class="number">1</span>)</span>)</span>*<span class="params">(<span class="number">7</span>)</span>)</span>/<span class="params">(<span class="number">8</span>)</span>)</span>)</span>;<span class="params">(<span class="params">(___)</span>,<span class="params">(____)</span>,<span class="params">(_____)</span>)</span>=<span class="params">(<span class="params">(<span class="number">0</span>)</span>,<span class="params">(<span class="number">0</span>)</span>,<span class="params">(<span class="number">0</span>)</span>)</span>
-  <span class="keyword">for</span><span class="params">(<span class="params">(__)</span>)</span>in<span class="params">(<span class="params">(__)</span>)</span>:
-   <span class="keyword">if</span><span class="params">(<span class="params">(__)</span>&lt;<span class="params">(<span class="number">128</span>)</span>)</span>:break
-   <span class="keyword">if</span><span class="params">(<span class="params">(____)</span>==<span class="params">(<span class="number">0</span>)</span>)</span>:<span class="params">(<span class="params">(___)</span>,<span class="params">(____)</span>)</span>=<span class="params">(<span class="params">(__)</span>,<span class="params">(<span class="number">1</span>)</span>)</span>
-   <span class="keyword">else</span>:
-    <span class="params">(______)</span>[<span class="params">(_____)</span>]=<span class="params">(<span class="params">(<span class="params">(<span class="params">(___)</span>&lt;&lt;<span class="params">(____)</span>)</span>|<span class="params">(<span class="params">(<span class="params">(__)</span>&amp;amp;<span class="params">(<span class="number">127</span>)</span>)</span>&gt;&gt;<span class="params">(<span class="params">(<span class="number">7</span>)</span>-<span class="params">(____)</span>)</span>)</span>)</span>&amp;amp;<span class="params">(<span class="number">255</span>)</span>)</span>;<span class="params">(_____)</span>+=<span class="params">(<span class="number">1</span>)</span>;<span class="params">(<span class="params">(___)</span>,<span class="params">(____)</span>)</span>=<span class="params">(<span class="params">(__)</span>,<span class="params">(<span class="params">(<span class="params">(____)</span>+<span class="params">(<span class="number">1</span>)</span>)</span>%<span class="params">(<span class="number">8</span>)</span>)</span>)</span>
-  <span class="keyword">if</span><span class="params">(<span class="params">(__)</span>&lt;<span class="params">(<span class="number">128</span>)</span>)</span>:
-   <span class="keyword">if</span><span class="params">(<span class="params">(____)</span>!=<span class="params">(<span class="number">0</span>)</span>)</span>:
-    <span class="params">(__)</span>=<span class="params">(<span class="params">(<span class="params">(<span class="params">(___)</span>&lt;&lt;<span class="params">(____)</span>)</span>|<span class="params">(<span class="params">(__)</span>&gt;&gt;<span class="params">(<span class="params">(<span class="number">7</span>)</span>-<span class="params">(____)</span>)</span>)</span>)</span>&amp;amp;<span class="params">(<span class="number">255</span>)</span>)</span>
-   <span class="params">(______)</span>[<span class="params">(_____)</span>:]=[<span class="params">(<span class="params">(__)</span>)</span>]
-  elif<span class="params">(<span class="params">(____)</span>!=<span class="params">(<span class="number">0</span>)</span>)</span>:del<span class="params">(<span class="params">(______)</span>[<span class="params">(_____)</span>:])</span>
-  exec<span class="params">(<span class="params">(''.join<span class="params">(<span class="params">(map)</span><span class="params">(<span class="params">(chr)</span>,<span class="params">(______)</span>)</span>)</span>.decode<span class="params">('zlib')</span>)</span>)</span>in<span class="params">(<span class="params">(_______)</span>)</span>
-  <span class="keyword">if</span><span class="params">(<span class="params">(<span class="params">(_______)</span>.get<span class="params">('__doc__')</span>)</span>is<span class="params">(<span class="params">(None)</span>)</span>)</span>:<span class="params">(_______)</span>['__doc__']=''
-code<span class="params">()</span>
-'''
-    return ''.join<span class="params">([c.encode<span class="params">('string-escape')</span> if ord<span class="params">(c)</span> &lt; <span class="number">128</span> else c
-                    for c in zlib.compress<span class="params">(code, <span class="number">9</span>)</span>])</span>
-dcode = dcode<span class="params">()</span>
-
-def encode<span class="params">(infile, outfile)</span>:
-    with open<span class="params">(infile, 'rU')</span> as fp:
-        code = fp.read<span class="params">()</span>.rstrip<span class="params">('n')</span> + 'n'
-    code = b128encode<span class="params">(zlib.compress<span class="params">(code, <span class="number">9</span>)</span>, True)</span>
-    code = r'''<span class="built_in">#</span> -<span class="built_in">*</span>- coding: latin-<span class="number">1</span> -<span class="built_in">*</span>-
-code = '<span class="built_in">%</span>s'
-exec<span class="params">(code.decode<span class="params">('zlib')</span>)</span>
-''' <span class="built_in">%</span> <span class="params">(dcode + code)</span>
-    with open<span class="params">(outfile, 'wb')</span> as fp:
-        fp.write<span class="params">(code)</span>
-
-def decode<span class="params">(infile, outfile)</span>:
-    with open<span class="params">(infile, 'rU')</span> as fp:
-        code = fp.read<span class="params">()</span>.rstrip<span class="params">('n')</span> + 'n'
-    code = code.replace<span class="params">(<span class="string">"exec(code.decode('zlib'))"</span>, <span class="string">"exec(code.decode('zlib')"</span>
-        <span class="string">".replace('exec','fp.write').replace('in((_______))',''))"</span>)</span>
-    with open<span class="params">(outfile, 'wb')</span> as fp:
-        eval<span class="params">(compile<span class="params">(code, 's', 'exec')</span>, {'fp':fp})</span>
-
-def main<span class="params">()</span>:
-    try:
-        <span class="keyword">if</span> sys.argv[<span class="number">1</span>] == '-d':
-            func = decode
-            infile, outfile = sys.argv[<span class="number">2</span>:<span class="number">4</span>]
-        <span class="keyword">else</span>:
-            func = encode
-            infile, outfile = sys.argv[<span class="number">1</span>:<span class="number">3</span>]
-    except ValueError:
-        print &gt;&gt;sys.stderr, 'Usage: zipcode.py [-d] infile.py outfile.py'
-        raise SystemExit<span class="params">(-<span class="number">1</span>)</span>
-    func<span class="params">(infile, outfile)</span>
-
-<span class="keyword">if</span> __name__ == '__main__':
-    main<span class="params">()</span>
-</code></pre>  
+		<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/env python</span></span><br><span class="line"><span class="string">"""</span><br><span class="line">:license: MIT</span><br><span class="line"></span><br><span class="line">Copyright (C) 2012 HustMoon</span><br><span class="line"></span><br><span class="line">Permission is hereby granted, free of charge, to any person obtaining a copy of</span><br><span class="line">this software and associated documentation files (the "Software"), to deal in</span><br><span class="line">the Software without restriction, including without limitation the rights to</span><br><span class="line">use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies</span><br><span class="line">of the Software, and to permit persons to whom the Software is furnished to do</span><br><span class="line">so, subject to the following conditions:</span><br><span class="line"></span><br><span class="line">The above copyright notice and this permission notice shall be included in all</span><br><span class="line">copies or substantial portions of the Software.</span><br><span class="line"></span><br><span class="line">THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR</span><br><span class="line">IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,</span><br><span class="line">FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE</span><br><span class="line">AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER</span><br><span class="line">LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,</span><br><span class="line">OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE</span><br><span class="line">SOFTWARE.</span><br><span class="line">"""</span></span><br><span class="line"><span class="keyword">from</span> __future__ <span class="keyword">import</span> with_statement</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> zlib, sys</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">b128encode</span><span class="params">(buf, escape=False)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> buf: <span class="keyword">return</span> <span class="string">''</span></span><br><span class="line">    buf = bytearray(buf)</span><br><span class="line">    res = bytearray((len(buf) * <span class="number">8</span> + <span class="number">6</span>) / <span class="number">7</span>)</span><br><span class="line">    p, s, i = <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> n <span class="keyword">in</span> buf:</span><br><span class="line">        res[i] = ((p &lt;&lt; (<span class="number">8</span> - s) | (n &gt;&gt; s)) &amp;amp; <span class="number">0x7F</span>) | <span class="number">0x80</span>; i += <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> s == <span class="number">7</span>:</span><br><span class="line">            res[i] = n | <span class="number">0x80</span>; i += <span class="number">1</span></span><br><span class="line">            p, s = <span class="number">0</span>, <span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            p, s = n, (s + <span class="number">1</span>) % <span class="number">8</span></span><br><span class="line">    <span class="keyword">if</span> s != <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">if</span> s == <span class="number">2</span> <span class="keyword">and</span> p &lt; <span class="number">0x80</span>:</span><br><span class="line">            i -= <span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            p = (p &lt;&lt; (<span class="number">8</span> - s)) &amp;amp; <span class="number">0x7F</span></span><br><span class="line">        p = chr(p)</span><br><span class="line">        <span class="keyword">if</span> escape:</span><br><span class="line">            p = p.encode(<span class="string">'string-escape'</span>)</span><br><span class="line">        res[i:] = p</span><br><span class="line">    <span class="keyword">return</span> str(res)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dcode</span><span class="params">()</span>:</span></span><br><span class="line">    code = <span class="string">r'''def code(__=code):</span><br><span class="line"> (_______)=(globals)();del((_______)['code'])</span><br><span class="line"> if(((_______).get('__doc__'))is((None))):</span><br><span class="line">  (__)=(map)((ord),(__)[(339):]);(______)=[0]*(((((len)((__))+(1))*(7))/(8)));((___),(____),(_____))=((0),(0),(0))</span><br><span class="line">  for((__))in((__)):</span><br><span class="line">   if((__)&lt;(128)):break</span><br><span class="line">   if((____)==(0)):((___),(____))=((__),(1))</span><br><span class="line">   else:</span><br><span class="line">    (______)[(_____)]=((((___)&lt;&lt;(____))|(((__)&amp;amp;(127))&gt;&gt;((7)-(____))))&amp;amp;(255));(_____)+=(1);((___),(____))=((__),(((____)+(1))%(8)))</span><br><span class="line">  if((__)&lt;(128)):</span><br><span class="line">   if((____)!=(0)):</span><br><span class="line">    (__)=((((___)&lt;&lt;(____))|((__)&gt;&gt;((7)-(____))))&amp;amp;(255))</span><br><span class="line">   (______)[(_____):]=[((__))]</span><br><span class="line">  elif((____)!=(0)):del((______)[(_____):])</span><br><span class="line">  exec((''.join((map)((chr),(______))).decode('zlib')))in((_______))</span><br><span class="line">  if(((_______).get('__doc__'))is((None))):(_______)['__doc__']=''</span><br><span class="line">code()</span><br><span class="line">'''</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">''</span>.join([c.encode(<span class="string">'string-escape'</span>) <span class="keyword">if</span> ord(c) &lt; <span class="number">128</span> <span class="keyword">else</span> c</span><br><span class="line">                    <span class="keyword">for</span> c <span class="keyword">in</span> zlib.compress(code, <span class="number">9</span>)])</span><br><span class="line">dcode = dcode()</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">encode</span><span class="params">(infile, outfile)</span>:</span></span><br><span class="line">    <span class="keyword">with</span> open(infile, <span class="string">'rU'</span>) <span class="keyword">as</span> fp:</span><br><span class="line">        code = fp.read().rstrip(<span class="string">'n'</span>) + <span class="string">'n'</span></span><br><span class="line">    code = b128encode(zlib.compress(code, <span class="number">9</span>), <span class="keyword">True</span>)</span><br><span class="line">    code = <span class="string">r'''# -*- coding: latin-1 -*-</span><br><span class="line">code = '%s'</span><br><span class="line">exec(code.decode('zlib'))</span><br><span class="line">'''</span> % (dcode + code)</span><br><span class="line">    <span class="keyword">with</span> open(outfile, <span class="string">'wb'</span>) <span class="keyword">as</span> fp:</span><br><span class="line">        fp.write(code)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">decode</span><span class="params">(infile, outfile)</span>:</span></span><br><span class="line">    <span class="keyword">with</span> open(infile, <span class="string">'rU'</span>) <span class="keyword">as</span> fp:</span><br><span class="line">        code = fp.read().rstrip(<span class="string">'n'</span>) + <span class="string">'n'</span></span><br><span class="line">    code = code.replace(<span class="string">"exec(code.decode('zlib'))"</span>, <span class="string">"exec(code.decode('zlib')"</span></span><br><span class="line">        <span class="string">".replace('exec','fp.write').replace('in((_______))',''))"</span>)</span><br><span class="line">    <span class="keyword">with</span> open(outfile, <span class="string">'wb'</span>) <span class="keyword">as</span> fp:</span><br><span class="line">        eval(compile(code, <span class="string">'s'</span>, <span class="string">'exec'</span>), &#123;<span class="string">'fp'</span>:fp&#125;)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">if</span> sys.argv[<span class="number">1</span>] == <span class="string">'-d'</span>:</span><br><span class="line">            func = decode</span><br><span class="line">            infile, outfile = sys.argv[<span class="number">2</span>:<span class="number">4</span>]</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            func = encode</span><br><span class="line">            infile, outfile = sys.argv[<span class="number">1</span>:<span class="number">3</span>]</span><br><span class="line">    <span class="keyword">except</span> ValueError:</span><br><span class="line">        <span class="keyword">print</span> &gt;&gt;sys.stderr, <span class="string">'Usage: zipcode.py [-d] infile.py outfile.py'</span></span><br><span class="line">        <span class="keyword">raise</span> SystemExit(-<span class="number">1</span>)</span><br><span class="line">    func(infile, outfile)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+  
 	</div>
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/Uncategorized/">Uncategorized</a>
+  <a class="article-category-link" href="/categories/programing/">programing</a>
 </div>
 
 
@@ -304,137 +176,39 @@ def main<span class="params">()</span>:
 		  
 		
 		  
-			<li><a href="/categories/C-C/" title="C/C++">C/C++<sup>22</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/" title="CentOS">CentOS<sup>13</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/CentOS/" title="CentOS">CentOS<sup>8</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/Python/" title="Python">Python<sup>3</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/Python/" title="Python">Python<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/Python/" title="Python">Python<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/CentOS/RedHat/" title="RedHat">RedHat<sup>6</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/RedHat/" title="RedHat">RedHat<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/Python/RedHat/" title="RedHat">RedHat<sup>2</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/RedHat/" title="RedHat">RedHat<sup>7</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/CentOS/RedHat/Ubuntu/" title="Ubuntu">Ubuntu<sup>5</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/RedHat/Ubuntu/" title="Ubuntu">Ubuntu<sup>6</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/Ubuntu/" title="Ubuntu">Ubuntu<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/Ubuntu/" title="Ubuntu">Ubuntu<sup>5</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/CentOS/Ubuntu/" title="Ubuntu">Ubuntu<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/Python/RedHat/Ubuntu/" title="Ubuntu">Ubuntu<sup>2</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/Uncategorized/" title="Uncategorized">Uncategorized<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/好站收集/" title="好站收集">好站收集<sup>1</sup></a></li>
-		  
 		
 		  
 		
 		  
-			<li><a href="/categories/我的作品/" title="我的作品">我的作品<sup>1</sup></a></li>
+			<li><a href="/categories/interesting/" title="interesting">interesting<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/C-C/CentOS/RedHat/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
+			<li><a href="/categories/linux/" title="linux">linux<sup>25</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/C-C/Python/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
+			<li><a href="/categories/notices/" title="notices">notices<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/Ubuntu/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
+			<li><a href="/categories/programing/" title="programing">programing<sup>21</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/CentOS/RedHat/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
+			<li><a href="/categories/sites/" title="sites">sites<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/C-C/经验总结/" title="经验总结">经验总结<sup>9</sup></a></li>
+			<li><a href="/categories/summarys/" title="summarys">summarys<sup>8</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/CentOS/Python/RedHat/Ubuntu/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
+			<li><a href="/categories/works/" title="works">works<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/C-C/CentOS/RedHat/Ubuntu/经验总结/" title="经验总结">经验总结<sup>3</sup></a></li>
-		  
 		
-		  
-			<li><a href="/categories/RedHat/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/经验总结/" title="经验总结">经验总结<sup>7</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/RedHat/Ubuntu/经验总结/" title="经验总结">经验总结<sup>3</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/Ubuntu/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/CentOS/Ubuntu/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/闲言碎语/" title="闲言碎语">闲言碎语<sup>4</sup></a></li>
 		  
 		
 		</ul>
@@ -459,7 +233,15 @@ def main<span class="params">()</span>:
 			
 		
 			
+				<li><a href="/tags/install/" title="install">install<sup>4</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/zlib/" title="zlib">zlib<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/yum/" title="yum">yum<sup>4</sup></a></li>
 			
 		
 			
@@ -467,11 +249,7 @@ def main<span class="params">()</span>:
 			
 		
 			
-				<li><a href="/tags/install/" title="install">install<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/python/" title="python">python<sup>3</sup></a></li>
+				<li><a href="/tags/make/" title="make">make<sup>3</sup></a></li>
 			
 		
 			
@@ -479,23 +257,11 @@ def main<span class="params">()</span>:
 			
 		
 			
-				<li><a href="/tags/yum/" title="yum">yum<sup>3</sup></a></li>
+				<li><a href="/tags/python/" title="python">python<sup>3</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/libc/" title="libc">libc<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/git/" title="git">git<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/sudo/" title="sudo">sudo<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/make/" title="make">make<sup>2</sup></a></li>
+				<li><a href="/tags/boost/" title="boost">boost<sup>2</sup></a></li>
 			
 		
 			
@@ -503,19 +269,7 @@ def main<span class="params">()</span>:
 			
 		
 			
-				<li><a href="/tags/kernel-devel/" title="kernel-devel">kernel-devel<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/ln/" title="ln">ln<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/https/" title="https">https<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/gcc/" title="gcc">gcc<sup>2</sup></a></li>
+				<li><a href="/tags/编译/" title="编译">编译<sup>2</sup></a></li>
 			
 		
 			
@@ -523,7 +277,27 @@ def main<span class="params">()</span>:
 			
 		
 			
-				<li><a href="/tags/编译/" title="编译">编译<sup>2</sup></a></li>
+				<li><a href="/tags/gcc/" title="gcc">gcc<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/ln/" title="ln">ln<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/git/" title="git">git<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/https/" title="https">https<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/kernel-devel/" title="kernel-devel">kernel-devel<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/kernel/" title="kernel">kernel<sup>2</sup></a></li>
 			
 		
 		</ul>

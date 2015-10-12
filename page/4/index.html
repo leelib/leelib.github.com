@@ -83,6 +83,70 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2013/07/10/fix-python-deff-version.html" title="如何安装新版本python，以及解决安装了新版python后，默认python依然调用旧版本的问题" itemprop="url">如何安装新版本python，以及解决安装了新版python后，默认python依然调用旧版本的问题</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="leaker" target="_blank" itemprop="author">leaker</a>
+		
+  <p class="article-time">
+    <time datetime="2013-07-09T22:27:35.000Z" itemprop="datePublished"> 发表于 2013-07-10</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h1 id="安装新版本python">安装新版本python</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">wget http://python.org/ftp/python/<span class="number">2.7</span>.<span class="number">3</span>/Python-<span class="number">2.7</span>.<span class="number">3</span>.tar.bz2</span><br><span class="line">tar xjf Python-<span class="number">2.7</span>.<span class="number">3</span>.tar.bz2</span><br><span class="line"><span class="built_in">cd</span> Python-<span class="number">2.7</span>.<span class="number">3</span></span><br><span class="line">./configure</span><br><span class="line">make</span><br><span class="line">make atlinstall</span><br></pre></td></tr></table></figure>
+<p>这时 python2.7.3 版本已经安装成功了。<br>但调用 <strong>python —version</strong> 依然会显示并使用旧版本</p>
+<h1 id="解决办法就是重新建立一个链接并覆盖掉旧的">解决办法就是重新建立一个链接并覆盖掉旧的</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ln <span class="operator">-s</span> /usr/<span class="built_in">local</span>/bin/python2.<span class="number">7</span> /usr/bin/python <span class="operator">-f</span></span><br></pre></td></tr></table></figure>
+<p>再调用 <strong>python —version</strong> 显示结果<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@centos]<span class="comment"># python --version</span></span><br><span class="line">Python <span class="number">2.7</span>.<span class="number">3</span></span><br></pre></td></tr></table></figure></p>
+<p>至此，问题解决 :)</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/linux/">linux</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/atlinstall/">atlinstall</a><a href="/tags/configure/">configure</a><a href="/tags/install/">install</a><a href="/tags/ln/">ln</a><a href="/tags/make/">make</a><a href="/tags/python/">python</a><a href="/tags/wget/">wget</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2013/07/02/python-zlib-trans-c.html" title="python的zlib压缩解压缩对应的C语言方式" itemprop="url">python的zlib压缩解压缩对应的C语言方式</a>
   </h1>
   <p class="article-author">By
@@ -96,87 +160,11 @@
 </header>
     <div class="article-content">
         
-        <h1 id="压缩">压缩</h1><pre><code>enData = zlib.compress(data)[<span class="number">2</span>:-<span class="number">4</span>]
+        <h1 id="压缩">压缩</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">enData = zlib.compress(data)[<span class="number">2</span>:-<span class="number">4</span>]</span><br></pre></td></tr></table></figure>
+<p>对应：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">compress2(dstbuf, &amp;dstLen, strSrc, srcLen, <span class="number">6</span>);</span><br></pre></td></tr></table></figure></p>
+<h1 id="解压">解压</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">deData = zlib.decompress(enData, -zlib.MAX_WBITS)</span><br></pre></td></tr></table></figure>
+<p>对应：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">gzipInflate</span><span class="params">( <span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">string</span>&amp; compressedBytes, <span class="built_in">std</span>::<span class="built_in">string</span>&amp; uncompressedBytes )</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> ( compressedBytes.size() == <span class="number">0</span> ) &#123;</span><br><span class="line">        uncompressedBytes = compressedBytes ;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span> ;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    uncompressedBytes.clear() ;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">unsigned</span> full_length = compressedBytes.size() ;</span><br><span class="line">    <span class="keyword">unsigned</span> half_length = compressedBytes.size() / <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">unsigned</span> uncompLength = full_length ;</span><br><span class="line">    <span class="keyword">char</span>* uncomp = (<span class="keyword">char</span>*) <span class="built_in">calloc</span>( <span class="keyword">sizeof</span>(<span class="keyword">char</span>), uncompLength );</span><br><span class="line"></span><br><span class="line">    z_stream strm;</span><br><span class="line">    strm.next_in = (Bytef *) compressedBytes.c_str();</span><br><span class="line">    strm.avail_in = compressedBytes.size() ;</span><br><span class="line">    strm.total_out = <span class="number">0</span>;</span><br><span class="line">    strm.zalloc = Z_NULL;</span><br><span class="line">    strm.zfree = Z_NULL;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">bool</span> done = <span class="keyword">false</span> ;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//if (inflateInit2(&amp;strm, (16+MAX_WBITS)) != Z_OK)</span></span><br><span class="line">    <span class="keyword">if</span> (inflateInit2(&amp;strm, -MAX_WBITS) != Z_OK)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">free</span>( uncomp );</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (!done) &#123;</span><br><span class="line">        <span class="comment">// If our output buffer is too small</span></span><br><span class="line">        <span class="keyword">if</span> (strm.total_out &gt;= uncompLength ) &#123;</span><br><span class="line">            <span class="comment">// Increase size of output buffer</span></span><br><span class="line">            <span class="keyword">char</span>* uncomp2 = (<span class="keyword">char</span>*) <span class="built_in">calloc</span>( <span class="keyword">sizeof</span>(<span class="keyword">char</span>), uncompLength + half_length );</span><br><span class="line">            <span class="built_in">memcpy</span>( uncomp2, uncomp, uncompLength );</span><br><span class="line">            uncompLength += half_length ;</span><br><span class="line">            <span class="built_in">free</span>( uncomp );</span><br><span class="line">            uncomp = uncomp2 ;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        strm.next_out = (Bytef *) (uncomp + strm.total_out);</span><br><span class="line">        strm.avail_out = uncompLength - strm.total_out;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Inflate another chunk.</span></span><br><span class="line">        <span class="keyword">int</span> err = inflate (&amp;strm, Z_SYNC_FLUSH);</span><br><span class="line">        <span class="keyword">if</span> (err == Z_STREAM_END) done = <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (err != Z_OK)  &#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (inflateEnd (&amp;strm) != Z_OK) &#123;</span><br><span class="line">        <span class="built_in">free</span>( uncomp );</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> ( <span class="keyword">size_t</span> i=<span class="number">0</span>; i&lt;strm.total_out; ++i ) &#123;</span><br><span class="line">        uncompressedBytes += uncomp[ i ];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">free</span>( uncomp );</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">true</span> ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
-
-&gt; 对应：
-
-compress2(dstbuf, &amp;amp;dstLen, strSrc, srcLen, <span class="number">6</span>);
-
-
-* * *
-
-<span class="preprocessor"># 解压</span>
-
-deData = zlib.decompress(enData, -zlib.MAX_WBITS)
-
-
-&gt; 对应：
-
-<span class="function"><span class="keyword">bool</span> <span class="title">gzipInflate</span><span class="params">( <span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">string</span>&amp;amp; compressedBytes, <span class="built_in">std</span>::<span class="built_in">string</span>&amp;amp; uncompressedBytes )</span> </span>{
-    <span class="keyword">if</span> ( compressedBytes.size() == <span class="number">0</span> ) {
-        uncompressedBytes = compressedBytes ;
-        <span class="keyword">return</span> <span class="keyword">true</span> ;
-    }
-
-    uncompressedBytes.clear() ;
-
-    <span class="keyword">unsigned</span> full_length = compressedBytes.size() ;
-    <span class="keyword">unsigned</span> half_length = compressedBytes.size() / <span class="number">2</span>;
-
-    <span class="keyword">unsigned</span> uncompLength = full_length ;
-    <span class="keyword">char</span>* uncomp = (<span class="keyword">char</span>*) <span class="built_in">calloc</span>( <span class="keyword">sizeof</span>(<span class="keyword">char</span>), uncompLength );
-
-    z_stream strm;
-    strm.next_in = (Bytef *) compressedBytes.c_str();
-    strm.avail_in = compressedBytes.size() ;
-    strm.total_out = <span class="number">0</span>;
-    strm.zalloc = Z_NULL;
-    strm.zfree = Z_NULL;
-
-    <span class="keyword">bool</span> done = <span class="keyword">false</span> ;
-
-    <span class="comment">//if (inflateInit2(&amp;amp;strm, (16+MAX_WBITS)) != Z_OK)</span>
-    <span class="keyword">if</span> (inflateInit2(&amp;amp;strm, -MAX_WBITS) != Z_OK)
-    {
-        <span class="built_in">free</span>( uncomp );
-        <span class="keyword">return</span> <span class="keyword">false</span>;
-    }
-
-    <span class="keyword">while</span> (!done) {
-        <span class="comment">// If our output buffer is too small</span>
-        <span class="keyword">if</span> (strm.total_out &gt;= uncompLength ) {
-            <span class="comment">// Increase size of output buffer</span>
-            <span class="keyword">char</span>* uncomp2 = (<span class="keyword">char</span>*) <span class="built_in">calloc</span>( <span class="keyword">sizeof</span>(<span class="keyword">char</span>), uncompLength + half_length );
-            <span class="built_in">memcpy</span>( uncomp2, uncomp, uncompLength );
-            uncompLength += half_length ;
-            <span class="built_in">free</span>( uncomp );
-            uncomp = uncomp2 ;
-        }
-
-        strm.next_out = (Bytef *) (uncomp + strm.total_out);
-        strm.avail_out = uncompLength - strm.total_out;
-
-        <span class="comment">// Inflate another chunk.</span>
-        <span class="keyword">int</span> err = inflate (&amp;amp;strm, Z_SYNC_FLUSH);
-        <span class="keyword">if</span> (err == Z_STREAM_END) done = <span class="keyword">true</span>;
-        <span class="keyword">else</span> <span class="keyword">if</span> (err != Z_OK)  {
-            <span class="keyword">break</span>;
-        }
-    }
-
-    <span class="keyword">if</span> (inflateEnd (&amp;amp;strm) != Z_OK) {
-        <span class="built_in">free</span>( uncomp );
-        <span class="keyword">return</span> <span class="keyword">false</span>;
-    }
-
-    <span class="keyword">for</span> ( <span class="keyword">size_t</span> i=<span class="number">0</span>; i&lt;strm.total_out; ++i ) {
-        uncompressedBytes += uncomp[ i ];
-    }
-    <span class="built_in">free</span>( uncomp );
-    <span class="keyword">return</span> <span class="keyword">true</span> ;
-}
-</code></pre>
         
         
         <p class="article-more-link">
@@ -188,7 +176,7 @@ deData = zlib.decompress(enData, -zlib.MAX_WBITS)
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/C-C/">C/C++</a>►<a class="article-category-link" href="/categories/C-C/Python/">Python</a>►<a class="article-category-link" href="/categories/C-C/Python/经验总结/">经验总结</a>
+  <a class="article-category-link" href="/categories/programing/">programing</a>
 </div>
 
 
@@ -235,10 +223,9 @@ deData = zlib.decompress(enData, -zlib.MAX_WBITS)
 </header>
     <div class="article-content">
         
-        <h2 id="解决办法很简单：">解决办法很简单：</h2><p>在 <strong>#include <zlib.h></zlib.h></strong> 之前加上 <strong>#define ZLIB_WINAPI</strong></p>
-<pre><code><span class="hexcolor">#def</span>ine ZLIB_WINAPI
-<span class="id">#include</span> &lt;zlib.h&gt;
-</code></pre>
+        <h1 id="错误描述">错误描述</h1><p><strong>error LNK2019: unresolved external symbol _compress referenced</strong></p>
+<h1 id="解决方案">解决方案</h1><p>在 <strong>#include <zlib.h></zlib.h></strong> 之前加上 <strong>#define ZLIB_WINAPI</strong><br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">define</span> ZLIB_WINAPI</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;zlib.h&gt;</span></span><br></pre></td></tr></table></figure></p>
+
         
         
         <p class="article-more-link">
@@ -250,7 +237,7 @@ deData = zlib.decompress(enData, -zlib.MAX_WBITS)
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/C-C/">C/C++</a>►<a class="article-category-link" href="/categories/C-C/经验总结/">经验总结</a>
+  <a class="article-category-link" href="/categories/programing/">programing</a>
 </div>
 
 
@@ -311,7 +298,7 @@ deData = zlib.decompress(enData, -zlib.MAX_WBITS)
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/C-C/">C/C++</a>►<a class="article-category-link" href="/categories/C-C/CentOS/">CentOS</a>►<a class="article-category-link" href="/categories/C-C/CentOS/RedHat/">RedHat</a>►<a class="article-category-link" href="/categories/C-C/CentOS/RedHat/Ubuntu/">Ubuntu</a>►<a class="article-category-link" href="/categories/C-C/CentOS/RedHat/Ubuntu/经验总结/">经验总结</a>
+  <a class="article-category-link" href="/categories/programing/">programing</a>
 </div>
 
 
@@ -358,13 +345,10 @@ deData = zlib.decompress(enData, -zlib.MAX_WBITS)
 </header>
     <div class="article-content">
         
-        <h2 id="当调用tcpdump时，出现如下错误：">当调用tcpdump时，出现如下错误：</h2><p><strong>tcpdump: USB link-layer type filtering not implemented</strong></p>
-<h2 id="原因：">原因：</h2><p>说明系统可能有多块网卡共存。</p>
-<h2 id="需要指定工作网卡才能开始截包，使用参数举例：">需要指定工作网卡才能开始截包，使用参数举例：</h2><pre><code>tcpdump -<span class="tag">i</span> eth0 udp port <span class="number">53</span>
-</code></pre><blockquote>
-<p>在实际使用中例子中“eth0”“udp”“53”等参数，要根据实际需要来进行修改。</p>
-<p>  虽然一般单网卡默认名称应该是eth0，但也有其他情况。实际中要使用ifconfig查看自己需要使用的网卡。</p>
-</blockquote>
+        <p>当调用tcpdump时，出现错误：<strong>tcpdump: USB link-layer type filtering not implemented</strong></p>
+<h1 id="原因">原因</h1><p>说明系统可能有多块网卡共存。</p>
+<h1 id="需要指定工作网卡才能开始截包，使用参数举例">需要指定工作网卡才能开始截包，使用参数举例</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@centos]<span class="comment"># tcpdump -i eth0 udp port 53</span></span><br></pre></td></tr></table></figure>
+<p><em>在实际使用中例子中“eth0”“udp”“53”等参数，要根据实际需要来进行修改。</em><br><em>虽然一般单网卡默认名称应该是eth0，但也有其他情况。实际中要使用ifconfig查看自己需要使用的网卡。</em></p>
 
         
         
@@ -377,7 +361,7 @@ deData = zlib.decompress(enData, -zlib.MAX_WBITS)
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/CentOS/">CentOS</a>►<a class="article-category-link" href="/categories/CentOS/RedHat/">RedHat</a>►<a class="article-category-link" href="/categories/CentOS/RedHat/Ubuntu/">Ubuntu</a>►<a class="article-category-link" href="/categories/CentOS/RedHat/Ubuntu/经验总结/">经验总结</a>
+  <a class="article-category-link" href="/categories/linux/">linux</a>
 </div>
 
 
@@ -424,15 +408,13 @@ deData = zlib.decompress(enData, -zlib.MAX_WBITS)
 </header>
     <div class="article-content">
         
-        <h1 id="我手上一个项目本身采用gcc编译。后来因为代码功能需要移植到g++中时，出现了_“inet_addr”_was_not_declared_in_this_scope_这个错误。">我手上一个项目本身采用gcc编译。后来因为代码功能需要移植到g++中时，出现了 <strong>“inet_addr” was not declared in this scope</strong> 这个错误。</h1><h2 id="其实解决方法很简单：">其实解决方法很简单：</h2><pre><code><span class="comment">// 添加该头文件</span>
-#<span class="keyword">include</span> &lt;arpa/inet.<span class="keyword">h</span>&gt;
+        <h1 id="错误原因">错误原因</h1><p>我手上一个项目本身采用gcc编译。后来因为代码功能需要移植到g++中时，出现了 <strong>“inet_addr” was not declared in this scope</strong> 这个错误。</p>
+<h1 id="解决方案">解决方案</h1><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 添加该头文件</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;arpa/inet.h&gt;</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>如果出现下面错误：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">error: string: No such file or directory&#10;error: vector: No such file or directory</span><br></pre></td></tr></table></figure></p>
+<p>说明在将g++项目用gcc编译</p>
+</blockquote>
 
-
-## 另外，当<span class="keyword">g</span>++项目用gcc编译的时候容易产生类似这样的错误：
-
-<span class="keyword">error</span>: string: <span class="keyword">No</span> such <span class="keyword">file</span> or directory  
-<span class="keyword">error</span>: vector: <span class="keyword">No</span> such <span class="keyword">file</span> or directory
-</code></pre>
         
         
         <p class="article-more-link">
@@ -444,7 +426,7 @@ deData = zlib.decompress(enData, -zlib.MAX_WBITS)
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/C-C/">C/C++</a>►<a class="article-category-link" href="/categories/C-C/CentOS/">CentOS</a>►<a class="article-category-link" href="/categories/C-C/CentOS/RedHat/">RedHat</a>►<a class="article-category-link" href="/categories/C-C/CentOS/RedHat/Ubuntu/">Ubuntu</a>►<a class="article-category-link" href="/categories/C-C/CentOS/RedHat/Ubuntu/经验总结/">经验总结</a>
+  <a class="article-category-link" href="/categories/programing/">programing</a>
 </div>
 
 
@@ -491,13 +473,9 @@ deData = zlib.decompress(enData, -zlib.MAX_WBITS)
 </header>
     <div class="article-content">
         
-        <h2 id="针对CentOS系统">针对CentOS系统</h2><pre><code>yum <span class="keyword">install</span> -y kernel-devel
-
-
-<span class="comment">## 针对Ubuntu系统</span>
-
-apt-get <span class="keyword">install</span> linux-source
-</code></pre><p>以上～！</p>
+        <h2 id="CentOS系统">CentOS系统</h2><p>yum install -y kernel-devel</p>
+<h2 id="Ubuntu系统">Ubuntu系统</h2><p>apt-get install linux-source</p>
+<p>以上～！</p>
 <blockquote>
 <p>参考：《或许你不需要整个内核的源代码》 - <a href="http://wiki.centos.org/zh/HowTos/I_need_the_Kernel_Source" target="_blank" rel="external">http://wiki.centos.org/zh/HowTos/I_need_the_Kernel_Source</a></p>
 </blockquote>
@@ -513,7 +491,7 @@ apt-get <span class="keyword">install</span> linux-source
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/C-C/">C/C++</a>►<a class="article-category-link" href="/categories/C-C/CentOS/">CentOS</a>►<a class="article-category-link" href="/categories/C-C/CentOS/Ubuntu/">Ubuntu</a>►<a class="article-category-link" href="/categories/C-C/CentOS/Ubuntu/经验总结/">经验总结</a>
+  <a class="article-category-link" href="/categories/linux/">linux</a>
 </div>
 
 
@@ -561,13 +539,9 @@ apt-get <span class="keyword">install</span> linux-source
     <div class="article-content">
         
         <p><center><img src="/wp-content/uploads/2013/06/linux_kernel.jpg" alt=""></center><br>项目中有个驱动代码之前在老版本linux系统中编写的<br>在移植到<strong>linux-kernel-3.2.0</strong> 后，编译时出现一处错误 <strong>fatal error: linux/smp_lock.h: No such file or directory</strong></p>
-<h2 id="解决办法是将：">解决办法是将：</h2><pre><code><span class="preprocessor">#<span class="keyword">include</span> &lt;linux/smp_lock.h&gt;</span>
+<h2 id="解决办法是将：">解决办法是将：</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;linux/smp_lock.h&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="替换成：">替换成：</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;linux/hardirq.h&gt;</span></span><br></pre></td></tr></table></figure>
 
-
-<span class="preprocessor">## 替换成：</span>
-
-<span class="preprocessor">#<span class="keyword">include</span> &lt;linux/hardirq.h&gt;</span>
-</code></pre>
         
         
         <p class="article-more-link">
@@ -579,7 +553,7 @@ apt-get <span class="keyword">install</span> linux-source
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/C-C/">C/C++</a>►<a class="article-category-link" href="/categories/C-C/CentOS/">CentOS</a>►<a class="article-category-link" href="/categories/C-C/CentOS/RedHat/">RedHat</a>►<a class="article-category-link" href="/categories/C-C/CentOS/RedHat/Ubuntu/">Ubuntu</a>►<a class="article-category-link" href="/categories/C-C/CentOS/RedHat/Ubuntu/经验总结/">经验总结</a>
+  <a class="article-category-link" href="/categories/linux/">linux</a>
 </div>
 
 
@@ -628,13 +602,61 @@ apt-get <span class="keyword">install</span> linux-source
         
         <p>在写代码的过程中,我发现使用VS2012编译出来的程序默认支持的系统版本略高</p>
 <p>刚发现在 Win7+VS2012 编译出来的程序默认PE信息(Optional Header):</p>
-<pre><code><span class="label">Major</span> <span class="keyword">SubSystem </span>Version = <span class="number">6</span>
-<span class="label">Minor</span> <span class="keyword">SubSystem </span>Version = <span class="number">0</span>
-</code></pre><p>导致的结果就是：在WinXP中运行便会提示 <strong>不是有效的Win32应用程序</strong></p>
+<ul>
+<li>Major SubSystem Version = 6</li>
+<li>Minor SubSystem Version = 0</li>
+</ul>
+<p>导致的结果就是：在WinXP中运行便会提示 <strong>不是有效的Win32应用程序</strong></p>
 <p>当时还以为是自己搞错编译选项，将程序编译成x64的了。<br>结果后来使用PE工具才发现的这个问题。</p>
-<h2 id="修正方案：">修正方案：</h2><p>右击项目 -&gt; 属性 -&gt; 配置属性 -&gt; 链接器 -&gt; 系统 -&gt; 所需最低版本 填入”<strong>5.01</strong>“</p>
-<h2 id="参考内容：">参考内容：</h2><p><a href="http://msdn.microsoft.com/en-us/library/fcc1zstk(v=vs.110" target="_blank" rel="external">http://msdn.microsoft.com/en-us/library/fcc1zstk(v=vs.110).aspx</a>.aspx)</p>
-<font size="-12px"><br><br><table><br><thead><br><tr><br>  <th>Subsystem</th><br>  <th>Minimum</th><br>  <th>Default</th><br></tr><br></thead><br><tbody><br><tr><br>  <td>BOOT_APPLICATION</td><br>  <td>1.0</td><br>  <td>1.0</td><br></tr><br><tr><br>  <td>CONSOLE</td><br>  <td>5.01 (x86) 5.02 (x64) 6.02 (ARM)</td><br>  <td>6.00 (x86, x64) 6.02 (ARM)</td><br></tr><br><tr><br>  <td>WINDOWS</td><br>  <td>5.01 (x86) 5.02 (x64) 6.02 (ARM)</td><br>  <td>6.00 (x86, x64) 6.02 (ARM)</td><br></tr><br><tr><br>  <td>NATIVE (with DRIVER:WDM)</td><br>  <td>1.00 (x86) 1.10 (x64, ARM)</td><br>  <td>1.00 (x86) 1.10 (x64, ARM)</td><br></tr><br><tr><br>  <td>NATIVE (without /DRIVER:WDM)</td><br>  <td>4.00 (x86) 5.02 (x64) 6.02 (ARM)</td><br>  <td>4.00 (x86) 5.02 (x64) 6.02 (ARM)</td><br></tr><br><tr><br>  <td>POSIX</td><br>  <td>1.0</td><br>  <td>19.90</td><br></tr><br><tr><br>  <td>EFI_APPLICATION, EFI_BOOT_SERVICE_DRIVER, EFI_ROM, EFI_RUNTIME_DRIVER</td><br>  <td>1.0</td><br>  <td>1.0</td><br></tr><br></tbody><br></table><br><br></font>
+<h2 id="解决方案">解决方案</h2><p>右击项目 -&gt; 属性 -&gt; 配置属性 -&gt; 链接器 -&gt; 系统 -&gt; 所需最低版本 填入”<strong>5.01</strong>“</p>
+<h2 id="参考内容">参考内容</h2><p><strong><a href="http://msdn.microsoft.com/en-us/library/fcc1zstk(v=vs.110).aspx" target="_blank" rel="external">http://msdn.microsoft.com/en-us/library/fcc1zstk(v=vs.110).aspx</a></strong></p>
+<table>
+<thead>
+<tr>
+<th>Subsystem</th>
+<th>Minimum</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BOOT_APPLICATION</td>
+<td>1.0</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>CONSOLE</td>
+<td>5.01 (x86) 5.02 (x64) 6.02 (ARM)</td>
+<td>6.00 (x86, x64) 6.02 (ARM)</td>
+</tr>
+<tr>
+<td>WINDOWS</td>
+<td>5.01 (x86) 5.02 (x64) 6.02 (ARM)</td>
+<td>6.00 (x86, x64) 6.02 (ARM)</td>
+</tr>
+<tr>
+<td>NATIVE (with DRIVER:WDM)</td>
+<td>1.00 (x86) 1.10 (x64, ARM)</td>
+<td>1.00 (x86) 1.10 (x64, ARM)</td>
+</tr>
+<tr>
+<td>NATIVE (without /DRIVER:WDM)</td>
+<td>4.00 (x86) 5.02 (x64) 6.02 (ARM)</td>
+<td>4.00 (x86) 5.02 (x64) 6.02 (ARM)</td>
+</tr>
+<tr>
+<td>POSIX</td>
+<td>1.0</td>
+<td>19.90</td>
+</tr>
+<tr>
+<td>EFI_APPLICATION, EFI_BOOT_SERVICE_DRIVER, EFI_ROM, EFI_RUNTIME_DRIVER</td>
+<td>1.0</td>
+<td>1.0</td>
+</tr>
+</tbody>
+</table>
+
         
         
         <p class="article-more-link">
@@ -646,7 +668,7 @@ apt-get <span class="keyword">install</span> linux-source
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/C-C/">C/C++</a>►<a class="article-category-link" href="/categories/C-C/经验总结/">经验总结</a>
+  <a class="article-category-link" href="/categories/programing/">programing</a>
 </div>
 
 
@@ -693,28 +715,11 @@ apt-get <span class="keyword">install</span> linux-source
 </header>
     <div class="article-content">
         
-        <h1 id="Windows下编译安装：">Windows下编译安装：</h1><blockquote>
-<p>生成bjam</p>
-</blockquote>
-<pre><code><span class="keyword">bootstrap.bat
-</span>
+        <h1 id="Windows下编译安装">Windows下编译安装</h1><h2 id="生成bjam">生成bjam</h2><figure class="highlight bat"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bootstrap.bat</span><br></pre></td></tr></table></figure>
+<h2 id="编译">编译</h2><figure class="highlight bat"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bjam --toolset=msvc-<span class="number">11</span>.<span class="number">0</span> --build-<span class="built_in">type</span>=complete</span><br></pre></td></tr></table></figure>
+<h2 id="安装">安装</h2><figure class="highlight bat"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bjam --prefix=D:\third_party\boost install</span><br></pre></td></tr></table></figure>
+<h1 id="Ubuntu仅安装开发包">Ubuntu仅安装开发包</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install -y libboost-dev libboost-system-dev</span><br></pre></td></tr></table></figure>
 
-&gt; 编译
-
-<span class="keyword">bjam </span>--toolset<span class="label">=msvc</span>-<span class="number">11</span>.<span class="number">0</span> --<span class="keyword">build-type=complete
-</span>
-
-&gt; 安装
-
-<span class="keyword">bjam </span>--prefix<span class="label">=D</span>:\third_party\<span class="keyword">boost </span>install
-
-
-* * *
-
-# Ubuntu仅安装开发包：
-
-<span class="label">sudo</span> apt-<span class="preprocessor">get</span> install -y libboost-dev libboost-system-dev
-</code></pre>
         
         
         <p class="article-more-link">
@@ -726,115 +731,9 @@ apt-get <span class="keyword">install</span> linux-source
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/C-C/">C/C++</a>►<a class="article-category-link" href="/categories/C-C/Ubuntu/">Ubuntu</a>►<a class="article-category-link" href="/categories/C-C/Ubuntu/经验总结/">经验总结</a>
+  <a class="article-category-link" href="/categories/programing/">programing</a>
 </div>
 
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2013/05/12/centos-set-ip.html" title="CentOS系统IP设置" itemprop="url">CentOS系统IP设置</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="leaker" target="_blank" itemprop="author">leaker</a>
-		
-  <p class="article-time">
-    <time datetime="2013-05-11T21:54:24.000Z" itemprop="datePublished"> 发表于 2013-05-12</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <blockquote>
-<p>以最小化安装的CentOS系统默认是不自动设置IP信息的。<br>  我们想要正常访问网络，第一步就必须先把IP设置好。</p>
-</blockquote>
-<h2 id="设置IP为自动获取就一条命令：">设置IP为自动获取就一条命令：</h2><pre><code>[root@centos ~]<span class="comment"># dhclient eth0</span>
-
-
-<span class="comment">## 以下是设置IP为手动：</span>
-
-&gt; 设置网关
-
-[root@centos ~]<span class="comment"># cat &gt;&gt;/etc/sysconfig/network&lt;&lt;EOF</span>
-<span class="variable">GATEWAY=</span><span class="string">"192.168.1.1"</span>
-EOF
-
-
-&gt; 设置网卡信息
-
-[root@centos ~]<span class="comment"># cat &gt;/etc/sysconfig/network-scripts/ifcfg-eth0&lt;&lt;EOF</span>
-<span class="variable">DEVICE=</span><span class="string">"eth0"</span>
-<span class="variable">HWADDR=</span><span class="string">"00:0C:29:28:F9:88"</span>
-<span class="variable">NM_CONTROLLED=</span><span class="string">"yes"</span>
-<span class="variable">ONBOOT=</span><span class="string">"yes"</span>
-<span class="variable">BOOTPROTO=</span><span class="string">"none"</span>
-<span class="variable">BROADCAST=</span><span class="string">"192.168.1.255"</span>
-<span class="variable">IPADDR=</span><span class="string">"192.168.1.120"</span>
-<span class="variable">NETMASK=</span><span class="string">"255.255.255.0"</span>
-<span class="variable">NETWORK=</span><span class="string">"192.168.1.0"</span>
-<span class="variable">IPV6INIT=</span><span class="string">"yes"</span>
-<span class="variable">IPV6_AUTOCONF=</span><span class="string">"yes"</span>
-<span class="variable">TYPE=</span><span class="string">"Ethernet"</span>
-EOF
-
-
-&gt; 设置DNS
-
-[root@centos ~]<span class="comment"># cat &gt;/etc/resolv.conf&lt;&lt;EOF</span>
-nameserver <span class="number">8.8</span>.<span class="number">8.8</span>
-nameserver <span class="number">8.8</span>.<span class="number">4.4</span>
-EOF
-
-
-&gt; 重启网络
-
-[root@centos ~]<span class="comment"># service network restart</span>
-Shutting down loopback interface: [ OK ]
-Bringing up loopback interface: [ OK ]
-Bringing up interface eth0: [ OK ]
-</code></pre>
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/CentOS/">CentOS</a>►<a class="article-category-link" href="/categories/CentOS/经验总结/">经验总结</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/centos/">centos</a><a href="/tags/dhclient/">dhclient</a><a href="/tags/dns/">dns</a><a href="/tags/eth0/">eth0</a><a href="/tags/ifcfg-eth0/">ifcfg-eth0</a><a href="/tags/network/">network</a><a href="/tags/resolv/">resolv</a>
-  </div>
 
 </div>
 
@@ -875,137 +774,39 @@ Bringing up interface eth0: [ OK ]
 		  
 		
 		  
-			<li><a href="/categories/C-C/" title="C/C++">C/C++<sup>22</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/" title="CentOS">CentOS<sup>13</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/CentOS/" title="CentOS">CentOS<sup>8</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/Python/" title="Python">Python<sup>3</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/Python/" title="Python">Python<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/Python/" title="Python">Python<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/CentOS/RedHat/" title="RedHat">RedHat<sup>6</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/RedHat/" title="RedHat">RedHat<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/Python/RedHat/" title="RedHat">RedHat<sup>2</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/RedHat/" title="RedHat">RedHat<sup>7</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/CentOS/RedHat/Ubuntu/" title="Ubuntu">Ubuntu<sup>5</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/RedHat/Ubuntu/" title="Ubuntu">Ubuntu<sup>6</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/Ubuntu/" title="Ubuntu">Ubuntu<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/Ubuntu/" title="Ubuntu">Ubuntu<sup>5</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/CentOS/Ubuntu/" title="Ubuntu">Ubuntu<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/Python/RedHat/Ubuntu/" title="Ubuntu">Ubuntu<sup>2</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/Uncategorized/" title="Uncategorized">Uncategorized<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/好站收集/" title="好站收集">好站收集<sup>1</sup></a></li>
-		  
 		
 		  
 		
 		  
-			<li><a href="/categories/我的作品/" title="我的作品">我的作品<sup>1</sup></a></li>
+			<li><a href="/categories/interesting/" title="interesting">interesting<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/C-C/CentOS/RedHat/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
+			<li><a href="/categories/linux/" title="linux">linux<sup>25</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/C-C/Python/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
+			<li><a href="/categories/notices/" title="notices">notices<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/Ubuntu/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
+			<li><a href="/categories/programing/" title="programing">programing<sup>21</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/CentOS/RedHat/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
+			<li><a href="/categories/sites/" title="sites">sites<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/C-C/经验总结/" title="经验总结">经验总结<sup>9</sup></a></li>
+			<li><a href="/categories/summarys/" title="summarys">summarys<sup>8</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/CentOS/Python/RedHat/Ubuntu/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
+			<li><a href="/categories/works/" title="works">works<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/C-C/CentOS/RedHat/Ubuntu/经验总结/" title="经验总结">经验总结<sup>3</sup></a></li>
-		  
 		
-		  
-			<li><a href="/categories/RedHat/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/经验总结/" title="经验总结">经验总结<sup>7</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/RedHat/Ubuntu/经验总结/" title="经验总结">经验总结<sup>3</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/Ubuntu/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/CentOS/Ubuntu/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/闲言碎语/" title="闲言碎语">闲言碎语<sup>4</sup></a></li>
 		  
 		
 		</ul>
@@ -1030,7 +831,15 @@ Bringing up interface eth0: [ OK ]
 			
 		
 			
+				<li><a href="/tags/install/" title="install">install<sup>4</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/zlib/" title="zlib">zlib<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/yum/" title="yum">yum<sup>4</sup></a></li>
 			
 		
 			
@@ -1038,11 +847,7 @@ Bringing up interface eth0: [ OK ]
 			
 		
 			
-				<li><a href="/tags/install/" title="install">install<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/python/" title="python">python<sup>3</sup></a></li>
+				<li><a href="/tags/make/" title="make">make<sup>3</sup></a></li>
 			
 		
 			
@@ -1050,23 +855,11 @@ Bringing up interface eth0: [ OK ]
 			
 		
 			
-				<li><a href="/tags/yum/" title="yum">yum<sup>3</sup></a></li>
+				<li><a href="/tags/python/" title="python">python<sup>3</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/libc/" title="libc">libc<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/git/" title="git">git<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/sudo/" title="sudo">sudo<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/make/" title="make">make<sup>2</sup></a></li>
+				<li><a href="/tags/boost/" title="boost">boost<sup>2</sup></a></li>
 			
 		
 			
@@ -1074,19 +867,7 @@ Bringing up interface eth0: [ OK ]
 			
 		
 			
-				<li><a href="/tags/kernel-devel/" title="kernel-devel">kernel-devel<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/ln/" title="ln">ln<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/https/" title="https">https<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/gcc/" title="gcc">gcc<sup>2</sup></a></li>
+				<li><a href="/tags/编译/" title="编译">编译<sup>2</sup></a></li>
 			
 		
 			
@@ -1094,7 +875,27 @@ Bringing up interface eth0: [ OK ]
 			
 		
 			
-				<li><a href="/tags/编译/" title="编译">编译<sup>2</sup></a></li>
+				<li><a href="/tags/gcc/" title="gcc">gcc<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/ln/" title="ln">ln<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/git/" title="git">git<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/https/" title="https">https<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/kernel-devel/" title="kernel-devel">kernel-devel<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/kernel/" title="kernel">kernel<sup>2</sup></a></li>
 			
 		
 		</ul>

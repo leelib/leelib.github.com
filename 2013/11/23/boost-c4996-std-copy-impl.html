@@ -11,49 +11,25 @@
     
 
     
-    <meta name="description" content="原本的程序是控制台的。但最近需要移植到windows下使用。所以以MFC来做UI，代码照搬。一面的一处代码使用了如下语句：
-boost::split(v, data, boost::is_any_of(_T(&quot;n&quot;)));
-
-
-结果编译时出现了如下错误：
-
-error C4996: &apos;std::_Copy_impl&apos;
-
-
+    <meta name="description" content="原本的程序是控制台的。但最近需要移植到windows下使用。所以以MFC来做UI，代码照搬。一面的一处代码使用了如下语句：1boost::split(v, data, boost::is_any_of(_T(&quot;n&quot;)));
+结果编译时出现了如下错误：1error C4996: &amp;#39;std::_Copy_impl&amp;#39;
 而且是无论怎么修改都不认，差点打算重写了。
-
-在网络中搜索了半天未果，只能自">
+在网络中搜索了半天未果，只">
 <meta property="og:type" content="article">
 <meta property="og:title" content="在使用boost库时发生 error C4996: 'std::_Copy_impl' 的解决方案">
 <meta property="og:url" content="http://www.leelib.com/2013/11/23/boost-c4996-std-copy-impl.html">
 <meta property="og:site_name" content="李略帅">
-<meta property="og:description" content="原本的程序是控制台的。但最近需要移植到windows下使用。所以以MFC来做UI，代码照搬。一面的一处代码使用了如下语句：
-boost::split(v, data, boost::is_any_of(_T(&quot;n&quot;)));
-
-
-结果编译时出现了如下错误：
-
-error C4996: &apos;std::_Copy_impl&apos;
-
-
+<meta property="og:description" content="原本的程序是控制台的。但最近需要移植到windows下使用。所以以MFC来做UI，代码照搬。一面的一处代码使用了如下语句：1boost::split(v, data, boost::is_any_of(_T(&quot;n&quot;)));
+结果编译时出现了如下错误：1error C4996: &amp;#39;std::_Copy_impl&amp;#39;
 而且是无论怎么修改都不认，差点打算重写了。
-
-在网络中搜索了半天未果，只能自">
-<meta property="og:updated_time" content="2015-09-17T09:03:43.920Z">
+在网络中搜索了半天未果，只">
+<meta property="og:updated_time" content="2015-09-18T07:07:49.978Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="在使用boost库时发生 error C4996: 'std::_Copy_impl' 的解决方案">
-<meta name="twitter:description" content="原本的程序是控制台的。但最近需要移植到windows下使用。所以以MFC来做UI，代码照搬。一面的一处代码使用了如下语句：
-boost::split(v, data, boost::is_any_of(_T(&quot;n&quot;)));
-
-
-结果编译时出现了如下错误：
-
-error C4996: &apos;std::_Copy_impl&apos;
-
-
+<meta name="twitter:description" content="原本的程序是控制台的。但最近需要移植到windows下使用。所以以MFC来做UI，代码照搬。一面的一处代码使用了如下语句：1boost::split(v, data, boost::is_any_of(_T(&quot;n&quot;)));
+结果编译时出现了如下错误：1error C4996: &amp;#39;std::_Copy_impl&amp;#39;
 而且是无论怎么修改都不认，差点打算重写了。
-
-在网络中搜索了半天未果，只能自">
+在网络中搜索了半天未果，只">
 
     
     <link rel="alternative" href="/atom.xml" title="李略帅" type="application/atom+xml">
@@ -135,24 +111,12 @@ error C4996: &apos;std::_Copy_impl&apos;
 		
 		</div>
 		
-		<p>原本的程序是控制台的。<br>但最近需要移植到windows下使用。<br>所以以MFC来做UI，代码照搬。<br>一面的一处代码使用了如下语句：</p>
-<pre><code>boost<span class="tag">::split</span>(v, <span class="built_in">data</span>, boost<span class="tag">::is_any_of</span>(_T(<span class="string">"n"</span>)));
-
-
-结果编译时出现了如下错误：
-
-error C4996: <span class="string">'std::_Copy_impl'</span>
-
-
-而且是无论怎么修改都不认，差点打算重写了。
-
-在网络中搜索了半天未果，只能自己分析。好在被我乱猜给猜对了。
-
-我猜是因为boost的<span class="built_in">string</span>和std的<span class="built_in">string</span>产生了冲突而导致的。
-所以添加上boost的<span class="built_in">string</span>引用后，问题得以解决。
-
-<span class="variable">#include</span> <span class="subst">&lt;</span>boost/algorithm/<span class="built_in">string</span><span class="built_in">.</span>hpp<span class="subst">&gt;</span>
-</code></pre><p>在此留字，希望能帮到遇到同样问题的人。</p>
+		<p>原本的程序是控制台的。<br>但最近需要移植到windows下使用。<br>所以以MFC来做UI，代码照搬。<br>一面的一处代码使用了如下语句：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">boost::split(v, data, boost::is_any_of(_T(<span class="string">"n"</span>)));</span><br></pre></td></tr></table></figure></p>
+<p>结果编译时出现了如下错误：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">error C4996: &#39;std::_Copy_impl&#39;</span><br></pre></td></tr></table></figure></p>
+<p>而且是无论怎么修改都不认，差点打算重写了。</p>
+<p>在网络中搜索了半天未果，只能自己分析。好在被我乱猜给猜对了。</p>
+<p>我猜是因为boost的string和std的string产生了冲突而导致的。<br>所以添加上boost的string引用后，问题得以解决。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;boost/algorithm/string.hpp&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>在此留字，希望能帮到遇到同样问题的人。</p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -160,7 +124,7 @@ error C4996: <span class="string">'std::_Copy_impl'</span>
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/C-C/">C/C++</a>►<a class="article-category-link" href="/categories/C-C/经验总结/">经验总结</a>
+  <a class="article-category-link" href="/categories/programing/">programing</a>
 </div>
 
 
@@ -231,137 +195,39 @@ error C4996: <span class="string">'std::_Copy_impl'</span>
 		  
 		
 		  
-			<li><a href="/categories/C-C/" title="C/C++">C/C++<sup>22</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/" title="CentOS">CentOS<sup>13</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/CentOS/" title="CentOS">CentOS<sup>8</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/Python/" title="Python">Python<sup>3</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/Python/" title="Python">Python<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/Python/" title="Python">Python<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/CentOS/RedHat/" title="RedHat">RedHat<sup>6</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/RedHat/" title="RedHat">RedHat<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/Python/RedHat/" title="RedHat">RedHat<sup>2</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/RedHat/" title="RedHat">RedHat<sup>7</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/CentOS/RedHat/Ubuntu/" title="Ubuntu">Ubuntu<sup>5</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/RedHat/Ubuntu/" title="Ubuntu">Ubuntu<sup>6</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/Ubuntu/" title="Ubuntu">Ubuntu<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/Ubuntu/" title="Ubuntu">Ubuntu<sup>5</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/CentOS/Ubuntu/" title="Ubuntu">Ubuntu<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/Python/RedHat/Ubuntu/" title="Ubuntu">Ubuntu<sup>2</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/Uncategorized/" title="Uncategorized">Uncategorized<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/好站收集/" title="好站收集">好站收集<sup>1</sup></a></li>
-		  
 		
 		  
 		
 		  
-			<li><a href="/categories/我的作品/" title="我的作品">我的作品<sup>1</sup></a></li>
+			<li><a href="/categories/interesting/" title="interesting">interesting<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/C-C/CentOS/RedHat/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
+			<li><a href="/categories/linux/" title="linux">linux<sup>25</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/C-C/Python/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
+			<li><a href="/categories/notices/" title="notices">notices<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/Ubuntu/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
+			<li><a href="/categories/programing/" title="programing">programing<sup>21</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/CentOS/RedHat/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
+			<li><a href="/categories/sites/" title="sites">sites<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/C-C/经验总结/" title="经验总结">经验总结<sup>9</sup></a></li>
+			<li><a href="/categories/summarys/" title="summarys">summarys<sup>8</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/CentOS/Python/RedHat/Ubuntu/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
+			<li><a href="/categories/works/" title="works">works<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/C-C/CentOS/RedHat/Ubuntu/经验总结/" title="经验总结">经验总结<sup>3</sup></a></li>
-		  
 		
-		  
-			<li><a href="/categories/RedHat/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/经验总结/" title="经验总结">经验总结<sup>7</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/RedHat/Ubuntu/经验总结/" title="经验总结">经验总结<sup>3</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/Ubuntu/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/CentOS/Ubuntu/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/闲言碎语/" title="闲言碎语">闲言碎语<sup>4</sup></a></li>
 		  
 		
 		</ul>
@@ -386,7 +252,15 @@ error C4996: <span class="string">'std::_Copy_impl'</span>
 			
 		
 			
+				<li><a href="/tags/install/" title="install">install<sup>4</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/zlib/" title="zlib">zlib<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/yum/" title="yum">yum<sup>4</sup></a></li>
 			
 		
 			
@@ -394,11 +268,7 @@ error C4996: <span class="string">'std::_Copy_impl'</span>
 			
 		
 			
-				<li><a href="/tags/install/" title="install">install<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/python/" title="python">python<sup>3</sup></a></li>
+				<li><a href="/tags/make/" title="make">make<sup>3</sup></a></li>
 			
 		
 			
@@ -406,23 +276,11 @@ error C4996: <span class="string">'std::_Copy_impl'</span>
 			
 		
 			
-				<li><a href="/tags/yum/" title="yum">yum<sup>3</sup></a></li>
+				<li><a href="/tags/python/" title="python">python<sup>3</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/libc/" title="libc">libc<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/git/" title="git">git<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/sudo/" title="sudo">sudo<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/make/" title="make">make<sup>2</sup></a></li>
+				<li><a href="/tags/boost/" title="boost">boost<sup>2</sup></a></li>
 			
 		
 			
@@ -430,19 +288,7 @@ error C4996: <span class="string">'std::_Copy_impl'</span>
 			
 		
 			
-				<li><a href="/tags/kernel-devel/" title="kernel-devel">kernel-devel<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/ln/" title="ln">ln<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/https/" title="https">https<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/gcc/" title="gcc">gcc<sup>2</sup></a></li>
+				<li><a href="/tags/编译/" title="编译">编译<sup>2</sup></a></li>
 			
 		
 			
@@ -450,7 +296,27 @@ error C4996: <span class="string">'std::_Copy_impl'</span>
 			
 		
 			
-				<li><a href="/tags/编译/" title="编译">编译<sup>2</sup></a></li>
+				<li><a href="/tags/gcc/" title="gcc">gcc<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/ln/" title="ln">ln<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/git/" title="git">git<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/https/" title="https">https<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/kernel-devel/" title="kernel-devel">kernel-devel<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/kernel/" title="kernel">kernel<sup>2</sup></a></li>
 			
 		
 		</ul>

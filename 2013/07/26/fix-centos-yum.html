@@ -11,22 +11,25 @@
     
 
     
-    <meta name="description" content="CentOS 上安装新版本 python：请看： 安装python以及解决版本问题
+    <meta name="description" content="CentOS 上安装新版本 python请看： 安装python以及解决版本问题
 但在安装新版本后，yum不能正常使用了。原因是yum是基于默认的python版本运行的，例如CentOS6.2基于python2.6。但我们安装版本后建立了链接，覆盖掉了默认python调用，导致yum脚本无法正常调用到自己想要的版本。
-解决方案：vim /usr/bin/yum将第一行 #!/usr/bin/py">
+解决方案1vim /usr/bin/yum
+将第一行 #!/usr/bin/py">
 <meta property="og:type" content="article">
 <meta property="og:title" content="解决CentOS安装新版本python后，yum不能使用的问题">
 <meta property="og:url" content="http://www.leelib.com/2013/07/26/fix-centos-yum.html">
 <meta property="og:site_name" content="李略帅">
-<meta property="og:description" content="CentOS 上安装新版本 python：请看： 安装python以及解决版本问题
+<meta property="og:description" content="CentOS 上安装新版本 python请看： 安装python以及解决版本问题
 但在安装新版本后，yum不能正常使用了。原因是yum是基于默认的python版本运行的，例如CentOS6.2基于python2.6。但我们安装版本后建立了链接，覆盖掉了默认python调用，导致yum脚本无法正常调用到自己想要的版本。
-解决方案：vim /usr/bin/yum将第一行 #!/usr/bin/py">
-<meta property="og:updated_time" content="2015-09-17T09:03:43.936Z">
+解决方案1vim /usr/bin/yum
+将第一行 #!/usr/bin/py">
+<meta property="og:updated_time" content="2015-09-18T07:07:50.004Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="解决CentOS安装新版本python后，yum不能使用的问题">
-<meta name="twitter:description" content="CentOS 上安装新版本 python：请看： 安装python以及解决版本问题
+<meta name="twitter:description" content="CentOS 上安装新版本 python请看： 安装python以及解决版本问题
 但在安装新版本后，yum不能正常使用了。原因是yum是基于默认的python版本运行的，例如CentOS6.2基于python2.6。但我们安装版本后建立了链接，覆盖掉了默认python调用，导致yum脚本无法正常调用到自己想要的版本。
-解决方案：vim /usr/bin/yum将第一行 #!/usr/bin/py">
+解决方案1vim /usr/bin/yum
+将第一行 #!/usr/bin/py">
 
     
     <link rel="alternative" href="/atom.xml" title="李略帅" type="application/atom+xml">
@@ -104,13 +107,14 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#CentOS_上安装新版本_python："><span class="toc-number">1.</span> <span class="toc-text">CentOS 上安装新版本 python：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解决方案："><span class="toc-number">2.</span> <span class="toc-text">解决方案：</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#CentOS_上安装新版本_python"><span class="toc-number">1.</span> <span class="toc-text">CentOS 上安装新版本 python</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#解决方案"><span class="toc-number">2.</span> <span class="toc-text">解决方案</span></a></li></ol>
 		
 		</div>
 		
-		<h2 id="CentOS_上安装新版本_python：">CentOS 上安装新版本 python：</h2><p>请看： <a href="/2013/07/10/fix-python-deff-version.html">安装python以及解决版本问题</a></p>
+		<h1 id="CentOS_上安装新版本_python">CentOS 上安装新版本 python</h1><p>请看： <a href="/2013/07/10/fix-python-deff-version.html">安装python以及解决版本问题</a></p>
 <p>但在安装新版本后，yum不能正常使用了。原因是yum是基于默认的python版本运行的，例如CentOS6.2基于python2.6。但我们安装版本后建立了链接，覆盖掉了默认python调用，导致yum脚本无法正常调用到自己想要的版本。</p>
-<h2 id="解决方案：">解决方案：</h2><p>vim /usr/bin/yum<br>将第一行 <strong>#!/usr/bin/python</strong> 修改成 <strong>#!/usr/bin/python2.6</strong></p>
+<h1 id="解决方案">解决方案</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /usr/bin/yum</span><br></pre></td></tr></table></figure>
+<p>将第一行 <strong>#!/usr/bin/python</strong> 修改成 <strong>#!/usr/bin/python2.6</strong></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -118,7 +122,7 @@
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/CentOS/">CentOS</a>►<a class="article-category-link" href="/categories/CentOS/Python/">Python</a>
+  <a class="article-category-link" href="/categories/linux/">linux</a>
 </div>
 
 
@@ -168,7 +172,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#CentOS_上安装新版本_python："><span class="toc-number">1.</span> <span class="toc-text">CentOS 上安装新版本 python：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解决方案："><span class="toc-number">2.</span> <span class="toc-text">解决方案：</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#CentOS_上安装新版本_python"><span class="toc-number">1.</span> <span class="toc-text">CentOS 上安装新版本 python</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#解决方案"><span class="toc-number">2.</span> <span class="toc-text">解决方案</span></a></li></ol>
  
   </div>
 
@@ -184,137 +188,39 @@
 		  
 		
 		  
-			<li><a href="/categories/C-C/" title="C/C++">C/C++<sup>22</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/" title="CentOS">CentOS<sup>13</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/CentOS/" title="CentOS">CentOS<sup>8</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/Python/" title="Python">Python<sup>3</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/Python/" title="Python">Python<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/Python/" title="Python">Python<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/CentOS/RedHat/" title="RedHat">RedHat<sup>6</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/RedHat/" title="RedHat">RedHat<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/Python/RedHat/" title="RedHat">RedHat<sup>2</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/RedHat/" title="RedHat">RedHat<sup>7</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/CentOS/RedHat/Ubuntu/" title="Ubuntu">Ubuntu<sup>5</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/RedHat/Ubuntu/" title="Ubuntu">Ubuntu<sup>6</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/Ubuntu/" title="Ubuntu">Ubuntu<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/Ubuntu/" title="Ubuntu">Ubuntu<sup>5</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/CentOS/Ubuntu/" title="Ubuntu">Ubuntu<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/Python/RedHat/Ubuntu/" title="Ubuntu">Ubuntu<sup>2</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/Uncategorized/" title="Uncategorized">Uncategorized<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/好站收集/" title="好站收集">好站收集<sup>1</sup></a></li>
-		  
 		
 		  
 		
 		  
-			<li><a href="/categories/我的作品/" title="我的作品">我的作品<sup>1</sup></a></li>
+			<li><a href="/categories/interesting/" title="interesting">interesting<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/C-C/CentOS/RedHat/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
+			<li><a href="/categories/linux/" title="linux">linux<sup>25</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/C-C/Python/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
+			<li><a href="/categories/notices/" title="notices">notices<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/Ubuntu/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
+			<li><a href="/categories/programing/" title="programing">programing<sup>21</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/CentOS/RedHat/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
+			<li><a href="/categories/sites/" title="sites">sites<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/C-C/经验总结/" title="经验总结">经验总结<sup>9</sup></a></li>
+			<li><a href="/categories/summarys/" title="summarys">summarys<sup>8</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/CentOS/Python/RedHat/Ubuntu/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
+			<li><a href="/categories/works/" title="works">works<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/C-C/CentOS/RedHat/Ubuntu/经验总结/" title="经验总结">经验总结<sup>3</sup></a></li>
-		  
 		
-		  
-			<li><a href="/categories/RedHat/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/经验总结/" title="经验总结">经验总结<sup>7</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/RedHat/Ubuntu/经验总结/" title="经验总结">经验总结<sup>3</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/Ubuntu/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/CentOS/Ubuntu/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/闲言碎语/" title="闲言碎语">闲言碎语<sup>4</sup></a></li>
 		  
 		
 		</ul>
@@ -339,7 +245,15 @@
 			
 		
 			
+				<li><a href="/tags/install/" title="install">install<sup>4</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/zlib/" title="zlib">zlib<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/yum/" title="yum">yum<sup>4</sup></a></li>
 			
 		
 			
@@ -347,11 +261,7 @@
 			
 		
 			
-				<li><a href="/tags/install/" title="install">install<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/python/" title="python">python<sup>3</sup></a></li>
+				<li><a href="/tags/make/" title="make">make<sup>3</sup></a></li>
 			
 		
 			
@@ -359,23 +269,11 @@
 			
 		
 			
-				<li><a href="/tags/yum/" title="yum">yum<sup>3</sup></a></li>
+				<li><a href="/tags/python/" title="python">python<sup>3</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/libc/" title="libc">libc<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/git/" title="git">git<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/sudo/" title="sudo">sudo<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/make/" title="make">make<sup>2</sup></a></li>
+				<li><a href="/tags/boost/" title="boost">boost<sup>2</sup></a></li>
 			
 		
 			
@@ -383,19 +281,7 @@
 			
 		
 			
-				<li><a href="/tags/kernel-devel/" title="kernel-devel">kernel-devel<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/ln/" title="ln">ln<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/https/" title="https">https<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/gcc/" title="gcc">gcc<sup>2</sup></a></li>
+				<li><a href="/tags/编译/" title="编译">编译<sup>2</sup></a></li>
 			
 		
 			
@@ -403,7 +289,27 @@
 			
 		
 			
-				<li><a href="/tags/编译/" title="编译">编译<sup>2</sup></a></li>
+				<li><a href="/tags/gcc/" title="gcc">gcc<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/ln/" title="ln">ln<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/git/" title="git">git<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/https/" title="https">https<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/kernel-devel/" title="kernel-devel">kernel-devel<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/kernel/" title="kernel">kernel<sup>2</sup></a></li>
 			
 		
 		</ul>

@@ -11,46 +11,19 @@
     
 
     
-    <meta name="description" content="不再需要导入atl.lib库了，直接包含以下头文件就可以了
-
-#include &amp;lt;atlbase.h&amp;gt;
-#include &amp;lt;atlcom.h&amp;gt;
-#include &amp;lt;atlctl.h&amp;gt;
-
-
-&amp;gt; 要使用 AtlAxAttachControl 等函数的话，则必须初始化ATL模块
-
-CComModule _Module;
-_pAtlModule = &amp;amp;am">
+    <meta name="description" content="不再需要导入atl.lib库了，直接包含以下头文件就可以了123#include &amp;lt;atlbase.h&amp;gt;#include &amp;lt;atlcom.h&amp;gt;#include &amp;lt;atlctl.h&amp;gt;
+要使用 AtlAxAttachControl 等函数的话，则必须初始化ATL模块12CComModule _Module;_pAtlModule = &amp;amp;amp;_Module">
 <meta property="og:type" content="article">
 <meta property="og:title" content="VS2013上直接使用ATL的注意事项">
 <meta property="og:url" content="http://www.leelib.com/2014/11/21/vs2013-use-atl.html">
 <meta property="og:site_name" content="李略帅">
-<meta property="og:description" content="不再需要导入atl.lib库了，直接包含以下头文件就可以了
-
-#include &amp;lt;atlbase.h&amp;gt;
-#include &amp;lt;atlcom.h&amp;gt;
-#include &amp;lt;atlctl.h&amp;gt;
-
-
-&amp;gt; 要使用 AtlAxAttachControl 等函数的话，则必须初始化ATL模块
-
-CComModule _Module;
-_pAtlModule = &amp;amp;am">
-<meta property="og:updated_time" content="2015-09-17T09:03:43.998Z">
+<meta property="og:description" content="不再需要导入atl.lib库了，直接包含以下头文件就可以了123#include &amp;lt;atlbase.h&amp;gt;#include &amp;lt;atlcom.h&amp;gt;#include &amp;lt;atlctl.h&amp;gt;
+要使用 AtlAxAttachControl 等函数的话，则必须初始化ATL模块12CComModule _Module;_pAtlModule = &amp;amp;amp;_Module">
+<meta property="og:updated_time" content="2015-09-18T07:07:50.093Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="VS2013上直接使用ATL的注意事项">
-<meta name="twitter:description" content="不再需要导入atl.lib库了，直接包含以下头文件就可以了
-
-#include &amp;lt;atlbase.h&amp;gt;
-#include &amp;lt;atlcom.h&amp;gt;
-#include &amp;lt;atlctl.h&amp;gt;
-
-
-&amp;gt; 要使用 AtlAxAttachControl 等函数的话，则必须初始化ATL模块
-
-CComModule _Module;
-_pAtlModule = &amp;amp;am">
+<meta name="twitter:description" content="不再需要导入atl.lib库了，直接包含以下头文件就可以了123#include &amp;lt;atlbase.h&amp;gt;#include &amp;lt;atlcom.h&amp;gt;#include &amp;lt;atlctl.h&amp;gt;
+要使用 AtlAxAttachControl 等函数的话，则必须初始化ATL模块12CComModule _Module;_pAtlModule = &amp;amp;amp;_Module">
 
     
     <link rel="alternative" href="/atom.xml" title="李略帅" type="application/atom+xml">
@@ -128,30 +101,20 @@ _pAtlModule = &amp;amp;am">
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#不再需要导入atl-lib库了，直接包含以下头文件就可以了"><span class="toc-number">1.</span> <span class="toc-text">不再需要导入atl.lib库了，直接包含以下头文件就可以了</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#要使用_AtlAxAttachControl_等函数的话，则必须初始化ATL模块"><span class="toc-number">2.</span> <span class="toc-text">要使用 AtlAxAttachControl 等函数的话，则必须初始化ATL模块</span></a></li></ol>
 		
 		</div>
 		
-		<blockquote>
-<p>不再需要导入atl.lib库了，直接包含以下头文件就可以了</p>
-</blockquote>
-<pre><code><span class="preprocessor">#<span class="keyword">include</span> &lt;atlbase.h&gt;</span>
-<span class="preprocessor">#<span class="keyword">include</span> &lt;atlcom.h&gt;</span>
-<span class="preprocessor">#<span class="keyword">include</span> &lt;atlctl.h&gt;</span>
-
-
-&gt; 要使用 AtlAxAttachControl 等函数的话，则必须初始化ATL模块
-
-CComModule _Module;
-_pAtlModule = &amp;amp;_Module;
-</code></pre>  
+		<h3 id="不再需要导入atl-lib库了，直接包含以下头文件就可以了">不再需要导入atl.lib库了，直接包含以下头文件就可以了</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;atlbase.h&gt;</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;atlcom.h&gt;</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;atlctl.h&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="要使用_AtlAxAttachControl_等函数的话，则必须初始化ATL模块">要使用 AtlAxAttachControl 等函数的话，则必须初始化ATL模块</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">CComModule _Module;</span><br><span class="line">_pAtlModule = &amp;amp;_Module;</span><br></pre></td></tr></table></figure>
+  
 	</div>
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/C-C/">C/C++</a>►<a class="article-category-link" href="/categories/C-C/经验总结/">经验总结</a>
+  <a class="article-category-link" href="/categories/programing/">programing</a>
 </div>
 
 
@@ -206,7 +169,7 @@ _pAtlModule = &amp;amp;_Module;
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- 
+ <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#不再需要导入atl-lib库了，直接包含以下头文件就可以了"><span class="toc-number">1.</span> <span class="toc-text">不再需要导入atl.lib库了，直接包含以下头文件就可以了</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#要使用_AtlAxAttachControl_等函数的话，则必须初始化ATL模块"><span class="toc-number">2.</span> <span class="toc-text">要使用 AtlAxAttachControl 等函数的话，则必须初始化ATL模块</span></a></li></ol>
  
   </div>
 
@@ -222,137 +185,39 @@ _pAtlModule = &amp;amp;_Module;
 		  
 		
 		  
-			<li><a href="/categories/C-C/" title="C/C++">C/C++<sup>22</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/" title="CentOS">CentOS<sup>13</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/CentOS/" title="CentOS">CentOS<sup>8</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/Python/" title="Python">Python<sup>3</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/Python/" title="Python">Python<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/Python/" title="Python">Python<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/CentOS/RedHat/" title="RedHat">RedHat<sup>6</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/RedHat/" title="RedHat">RedHat<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/Python/RedHat/" title="RedHat">RedHat<sup>2</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/RedHat/" title="RedHat">RedHat<sup>7</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/CentOS/RedHat/Ubuntu/" title="Ubuntu">Ubuntu<sup>5</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/RedHat/Ubuntu/" title="Ubuntu">Ubuntu<sup>6</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/Ubuntu/" title="Ubuntu">Ubuntu<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/Ubuntu/" title="Ubuntu">Ubuntu<sup>5</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/CentOS/Ubuntu/" title="Ubuntu">Ubuntu<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/Python/RedHat/Ubuntu/" title="Ubuntu">Ubuntu<sup>2</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/Uncategorized/" title="Uncategorized">Uncategorized<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/好站收集/" title="好站收集">好站收集<sup>1</sup></a></li>
-		  
 		
 		  
 		
 		  
-			<li><a href="/categories/我的作品/" title="我的作品">我的作品<sup>1</sup></a></li>
+			<li><a href="/categories/interesting/" title="interesting">interesting<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/C-C/CentOS/RedHat/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
+			<li><a href="/categories/linux/" title="linux">linux<sup>25</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/C-C/Python/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
+			<li><a href="/categories/notices/" title="notices">notices<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/Ubuntu/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
+			<li><a href="/categories/programing/" title="programing">programing<sup>21</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/CentOS/RedHat/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
+			<li><a href="/categories/sites/" title="sites">sites<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/C-C/经验总结/" title="经验总结">经验总结<sup>9</sup></a></li>
+			<li><a href="/categories/summarys/" title="summarys">summarys<sup>8</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/CentOS/Python/RedHat/Ubuntu/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
+			<li><a href="/categories/works/" title="works">works<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/C-C/CentOS/RedHat/Ubuntu/经验总结/" title="经验总结">经验总结<sup>3</sup></a></li>
-		  
 		
-		  
-			<li><a href="/categories/RedHat/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/经验总结/" title="经验总结">经验总结<sup>7</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/RedHat/Ubuntu/经验总结/" title="经验总结">经验总结<sup>3</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/Ubuntu/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/CentOS/Ubuntu/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/闲言碎语/" title="闲言碎语">闲言碎语<sup>4</sup></a></li>
 		  
 		
 		</ul>
@@ -377,7 +242,15 @@ _pAtlModule = &amp;amp;_Module;
 			
 		
 			
+				<li><a href="/tags/install/" title="install">install<sup>4</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/zlib/" title="zlib">zlib<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/yum/" title="yum">yum<sup>4</sup></a></li>
 			
 		
 			
@@ -385,11 +258,7 @@ _pAtlModule = &amp;amp;_Module;
 			
 		
 			
-				<li><a href="/tags/install/" title="install">install<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/python/" title="python">python<sup>3</sup></a></li>
+				<li><a href="/tags/make/" title="make">make<sup>3</sup></a></li>
 			
 		
 			
@@ -397,23 +266,11 @@ _pAtlModule = &amp;amp;_Module;
 			
 		
 			
-				<li><a href="/tags/yum/" title="yum">yum<sup>3</sup></a></li>
+				<li><a href="/tags/python/" title="python">python<sup>3</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/libc/" title="libc">libc<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/git/" title="git">git<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/sudo/" title="sudo">sudo<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/make/" title="make">make<sup>2</sup></a></li>
+				<li><a href="/tags/boost/" title="boost">boost<sup>2</sup></a></li>
 			
 		
 			
@@ -421,19 +278,7 @@ _pAtlModule = &amp;amp;_Module;
 			
 		
 			
-				<li><a href="/tags/kernel-devel/" title="kernel-devel">kernel-devel<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/ln/" title="ln">ln<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/https/" title="https">https<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/gcc/" title="gcc">gcc<sup>2</sup></a></li>
+				<li><a href="/tags/编译/" title="编译">编译<sup>2</sup></a></li>
 			
 		
 			
@@ -441,7 +286,27 @@ _pAtlModule = &amp;amp;_Module;
 			
 		
 			
-				<li><a href="/tags/编译/" title="编译">编译<sup>2</sup></a></li>
+				<li><a href="/tags/gcc/" title="gcc">gcc<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/ln/" title="ln">ln<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/git/" title="git">git<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/https/" title="https">https<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/kernel-devel/" title="kernel-devel">kernel-devel<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/kernel/" title="kernel">kernel<sup>2</sup></a></li>
 			
 		
 		</ul>

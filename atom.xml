@@ -5,7 +5,7 @@
   <subtitle><![CDATA[少壮不努力，一生在内地]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://www.leelib.com//"/>
-  <updated>2015-09-17T09:03:43.998Z</updated>
+  <updated>2015-10-10T08:49:13.011Z</updated>
   <id>http://www.leelib.com//</id>
   
   <author>
@@ -16,11 +16,63 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title><![CDATA[Windows10 下 boost::asio::serial_port 的 BUG]]></title>
+    <link href="http://www.leelib.com/2015/10/10/win10-boost-asio-serial-port-bug.html"/>
+    <id>http://www.leelib.com/2015/10/10/win10-boost-asio-serial-port-bug.html</id>
+    <published>2015-10-10T07:49:44.000Z</published>
+    <updated>2015-10-10T08:49:13.011Z</updated>
+    <content type="html"><![CDATA[<p>在最近写一些串口操作的程序时使用了 <strong>boost::asio::serial_port</strong> 来操作串口<br>但当尝试打开串口的时候出现了错误。下面是我的测试代码：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">boost::asio::io_service _io_service;</span><br><span class="line"><span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">string</span> devname = <span class="string">"COM3"</span>;</span><br><span class="line"><span class="keyword">try</span></span><br><span class="line">&#123;</span><br><span class="line">	boost::asio::<span class="function">serial_port <span class="title">serial</span><span class="params">(_io_service)</span></span>;</span><br><span class="line">	serial.open(devname);<span class="comment">// throw error every times.</span></span><br><span class="line">	<span class="keyword">if</span> (serial.is_open()) &#123;</span><br><span class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; devname &lt;&lt; <span class="string">" serial open successed."</span> &lt;&lt; <span class="built_in">std</span>::endl;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; devname &lt;&lt; <span class="string">" serial open failed!"</span> &lt;&lt; <span class="built_in">std</span>::endl;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">catch</span> (<span class="keyword">const</span> <span class="built_in">std</span>::exception&amp; ex)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; ex.what() &lt;&lt; <span class="built_in">std</span>::endl;<span class="comment">// GetLastError() == 87</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>每次都会出现错误87。即 GetLastError() 的结果为 87<br>于是跟进代码里面调试追到了 <em>win_iocp_serial_port_service::open</em> 函数里</p>
+<p><strong>win_iocp_serial_port_service::open</strong> 函数的实现如下：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line">boost::system::error_code win_iocp_serial_port_service::open(</span><br><span class="line">	win_iocp_serial_port_service::<span class="keyword">implementation_t</span>ype&amp; impl,</span><br><span class="line">	<span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">string</span>&amp; device, boost::system::error_code&amp; ec)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">if</span> (is_open(impl))</span><br><span class="line">	&#123;</span><br><span class="line">		ec = boost::asio::error::already_open;</span><br><span class="line">		<span class="keyword">return</span> ec;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">string</span> name = (device[<span class="number">0</span>] == <span class="string">'\\'</span>) ? device : <span class="string">"\\\\.\\"</span> + device;</span><br><span class="line"></span><br><span class="line">	::HANDLE handle = ::CreateFileA(name.c_str(),</span><br><span class="line">		GENERIC_READ | GENERIC_WRITE, <span class="number">0</span>, <span class="number">0</span>,</span><br><span class="line">		OPEN_EXISTING, FILE_FLAG_OVERLAPPED, <span class="number">0</span>);</span><br><span class="line">	<span class="keyword">if</span> (handle == INVALID_HANDLE_VALUE)</span><br><span class="line">	&#123;</span><br><span class="line">		DWORD last_error = ::GetLastError();</span><br><span class="line">		ec = boost::system::error_code(last_error,</span><br><span class="line">			boost::asio::error::get_system_category());</span><br><span class="line">		<span class="keyword">return</span> ec;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line">	::DCB dcb;</span><br><span class="line">	<span class="built_in">memset</span>(&amp;dcb, <span class="number">0</span>, <span class="keyword">sizeof</span>(DCB));</span><br><span class="line">	dcb.DCBlength = <span class="keyword">sizeof</span>(DCB);</span><br><span class="line">	<span class="keyword">if</span> (!::GetCommState(handle, &amp;dcb))</span><br><span class="line">	&#123;</span><br><span class="line">		DWORD last_error = ::GetLastError();</span><br><span class="line">		::CloseHandle(handle);</span><br><span class="line">		ec = boost::system::error_code(last_error,</span><br><span class="line">			boost::asio::error::get_system_category());</span><br><span class="line">		<span class="keyword">return</span> ec;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	dcb.fBinary = TRUE;</span><br><span class="line">	dcb.fDsrSensitivity = FALSE;</span><br><span class="line">	dcb.fNull = FALSE;</span><br><span class="line">	dcb.fAbortOnError = FALSE;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (!::SetCommState(handle, &amp;dcb))</span><br><span class="line">	&#123;</span><br><span class="line">		DWORD last_error = ::GetLastError();<span class="comment">// lee: error is here!!!</span></span><br><span class="line">		::CloseHandle(handle);</span><br><span class="line">		ec = boost::system::error_code(last_error,</span><br><span class="line">			boost::asio::error::get_system_category());</span><br><span class="line">		<span class="keyword">return</span> ec;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	::COMMTIMEOUTS timeouts;</span><br><span class="line">	timeouts.ReadIntervalTimeout = <span class="number">1</span>;</span><br><span class="line">	timeouts.ReadTotalTimeoutMultiplier = <span class="number">0</span>;</span><br><span class="line">	timeouts.ReadTotalTimeoutConstant = <span class="number">0</span>;</span><br><span class="line">	timeouts.WriteTotalTimeoutMultiplier = <span class="number">0</span>;</span><br><span class="line">	timeouts.WriteTotalTimeoutConstant = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">if</span> (!::SetCommTimeouts(handle, &amp;timeouts))</span><br><span class="line">	&#123;</span><br><span class="line">		DWORD last_error = ::GetLastError();</span><br><span class="line">		::CloseHandle(handle);</span><br><span class="line">		ec = boost::system::error_code(last_error,</span><br><span class="line">			boost::asio::error::get_system_category());</span><br><span class="line">		<span class="keyword">return</span> ec;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (handle_service_.assign(impl, handle, ec))</span><br><span class="line">		::CloseHandle(handle);</span><br><span class="line">	<span class="keyword">return</span> ec;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>发现每次在第一次 SetCommState 的时候总是会报错并离开。<br>于是查看了前面通过 GetCommState 获取到的 dcb 的值。<br>发现 dcb.BaudRate == 0 时无法 SetCommState 成功<br>也就是说在有些设备中获取不到 dcb.BaudRate 这个值。</p>
+<h1 id="下面是我自己的解决办法">下面是我自己的解决办法</h1><p>在 win_iocp_serial_port_service.ipp 文件的88行左右添加<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (dcb.BaudRate == <span class="number">0</span>) dcb.BaudRate = <span class="number">115200</span>;</span><br></pre></td></tr></table></figure></p>
+<p>修改后的 win_iocp_serial_port_service::open 函数完整代码如下：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line">boost::system::error_code win_iocp_serial_port_service::open(</span><br><span class="line">	win_iocp_serial_port_service::<span class="keyword">implementation_t</span>ype&amp; impl,</span><br><span class="line">	<span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">string</span>&amp; device, boost::system::error_code&amp; ec)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">if</span> (is_open(impl))</span><br><span class="line">	&#123;</span><br><span class="line">		ec = boost::asio::error::already_open;</span><br><span class="line">		<span class="keyword">return</span> ec;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">string</span> name = (device[<span class="number">0</span>] == <span class="string">'\\'</span>) ? device : <span class="string">"\\\\.\\"</span> + device;</span><br><span class="line"></span><br><span class="line">	::HANDLE handle = ::CreateFileA(name.c_str(),</span><br><span class="line">		GENERIC_READ | GENERIC_WRITE, <span class="number">0</span>, <span class="number">0</span>,</span><br><span class="line">		OPEN_EXISTING, FILE_FLAG_OVERLAPPED, <span class="number">0</span>);</span><br><span class="line">	<span class="keyword">if</span> (handle == INVALID_HANDLE_VALUE)</span><br><span class="line">	&#123;</span><br><span class="line">		DWORD last_error = ::GetLastError();</span><br><span class="line">		ec = boost::system::error_code(last_error,</span><br><span class="line">			boost::asio::error::get_system_category());</span><br><span class="line">		<span class="keyword">return</span> ec;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line">	::DCB dcb;</span><br><span class="line">	<span class="built_in">memset</span>(&amp;dcb, <span class="number">0</span>, <span class="keyword">sizeof</span>(DCB));</span><br><span class="line">	dcb.DCBlength = <span class="keyword">sizeof</span>(DCB);</span><br><span class="line">	<span class="keyword">if</span> (!::GetCommState(handle, &amp;dcb))</span><br><span class="line">	&#123;</span><br><span class="line">		DWORD last_error = ::GetLastError();</span><br><span class="line">		::CloseHandle(handle);</span><br><span class="line">		ec = boost::system::error_code(last_error,</span><br><span class="line">			boost::asio::error::get_system_category());</span><br><span class="line">		<span class="keyword">return</span> ec;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	dcb.fBinary = TRUE;</span><br><span class="line">	dcb.fDsrSensitivity = FALSE;</span><br><span class="line">	dcb.fNull = FALSE;</span><br><span class="line">	dcb.fAbortOnError = FALSE;</span><br><span class="line">	<span class="keyword">if</span> (dcb.BaudRate == <span class="number">0</span>) dcb.BaudRate = <span class="number">115200</span>; <span class="comment">// add lee 2015.10.10. 解决dcb.BaudRate为0时无法成功SetCommState的<span class="doctag"><span class="keyword">BUG</span></span></span></span><br><span class="line">	<span class="keyword">if</span> (!::SetCommState(handle, &amp;dcb))</span><br><span class="line">	&#123;</span><br><span class="line">		DWORD last_error = ::GetLastError();</span><br><span class="line">		::CloseHandle(handle);</span><br><span class="line">		ec = boost::system::error_code(last_error,</span><br><span class="line">			boost::asio::error::get_system_category());</span><br><span class="line">		<span class="keyword">return</span> ec;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	::COMMTIMEOUTS timeouts;</span><br><span class="line">	timeouts.ReadIntervalTimeout = <span class="number">1</span>;</span><br><span class="line">	timeouts.ReadTotalTimeoutMultiplier = <span class="number">0</span>;</span><br><span class="line">	timeouts.ReadTotalTimeoutConstant = <span class="number">0</span>;</span><br><span class="line">	timeouts.WriteTotalTimeoutMultiplier = <span class="number">0</span>;</span><br><span class="line">	timeouts.WriteTotalTimeoutConstant = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">if</span> (!::SetCommTimeouts(handle, &amp;timeouts))</span><br><span class="line">	&#123;</span><br><span class="line">		DWORD last_error = ::GetLastError();</span><br><span class="line">		::CloseHandle(handle);</span><br><span class="line">		ec = boost::system::error_code(last_error,</span><br><span class="line">			boost::asio::error::get_system_category());</span><br><span class="line">		<span class="keyword">return</span> ec;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (handle_service_.assign(impl, handle, ec))</span><br><span class="line">		::CloseHandle(handle);</span><br><span class="line">	<span class="keyword">return</span> ec;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="测试环境">测试环境</h1><table>
+<thead>
+<tr>
+<th style="text-align:left">说明</th>
+<th style="text-align:left">参数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">操作系统</td>
+<td style="text-align:left">Windows10 专业版 x64</td>
+</tr>
+<tr>
+<td style="text-align:left">开发环境</td>
+<td style="text-align:left">Microsoft Visual Studio Community 2013 Version 12.0.40629.00 Update 5</td>
+</tr>
+<tr>
+<td style="text-align:left">Boost版本</td>
+<td style="text-align:left">boost_1.59.0</td>
+</tr>
+</tbody>
+</table>
+<h1 id="结束语">结束语</h1><p>以上只是自己的猜测，并不一定是完全正确的。如有任何错误，请联系并告诉我。我将尽快修改，不胜感激。</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>在最近写一些串口操作的程序时使用了 <strong>boost::asio::serial_port</strong> 来操作串口<br>但当尝试打开串口的时候出现了错误。下面是我的测试代码：<br><figure class="highlight cpp"><table>]]>
+    </summary>
+    
+      <category term="asio" scheme="http://www.leelib.com/tags/asio/"/>
+    
+      <category term="boost" scheme="http://www.leelib.com/tags/boost/"/>
+    
+      <category term="serial_port" scheme="http://www.leelib.com/tags/serial-port/"/>
+    
+      <category term="win10" scheme="http://www.leelib.com/tags/win10/"/>
+    
+      <category term="programing" scheme="http://www.leelib.com/categories/programing/"/>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[Win10里添加目录右键菜单 VS2013 Command Prompt Here]]></title>
     <link href="http://www.leelib.com/2015/09/16/vs2013-command-prompt-here.html"/>
     <id>http://www.leelib.com/2015/09/16/vs2013-command-prompt-here.html</id>
     <published>2015-09-15T20:08:21.000Z</published>
-    <updated>2015-09-17T09:03:43.998Z</updated>
+    <updated>2015-09-18T07:07:50.091Z</updated>
     <content type="html"><![CDATA[<h1 id="需求">需求</h1><p>我有时需要在命令行里对某个VS项目目录进行编译或部署等操作，总是需要以下步骤：</p>
 <ol>
 <li>打开VS的Command Prompt</li>
@@ -47,7 +99,7 @@
     
       <category term="Windows10" scheme="http://www.leelib.com/tags/Windows10/"/>
     
-      <category term="经验总结" scheme="http://www.leelib.com/categories/%E7%BB%8F%E9%AA%8C%E6%80%BB%E7%BB%93/"/>
+      <category term="summarys" scheme="http://www.leelib.com/categories/summarys/"/>
     
   </entry>
   
@@ -56,7 +108,7 @@
     <link href="http://www.leelib.com/2015/09/14/vs2013-build-openssl-static.html"/>
     <id>http://www.leelib.com/2015/09/14/vs2013-build-openssl-static.html</id>
     <published>2015-09-14T04:26:46.000Z</published>
-    <updated>2015-09-17T09:03:43.998Z</updated>
+    <updated>2015-09-18T07:07:50.088Z</updated>
     <content type="html"><![CDATA[<h1 id="打开_Visual_Studio_2013_Command_Prompt">打开 Visual Studio 2013 Command Prompt</h1><figure class="highlight bat"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">wget http://www.nasm.us/pub/nasm/releasebuilds/<span class="number">2</span>.<span class="number">11</span>.<span class="number">08</span>/win32/nasm-<span class="number">2</span>.<span class="number">11</span>.<span class="number">08</span>-win32.zip</span><br><span class="line">unzip nasm-<span class="number">2</span>.<span class="number">11</span>.<span class="number">08</span>-win32.zip -d C:/nasm</span><br><span class="line"><span class="keyword">set</span> <span class="built_in">PATH</span>=<span class="envvar">%PATH%</span>;C:/nasm/</span><br><span class="line">wget https://www.openssl.org/source/openssl-<span class="number">1</span>.<span class="number">0</span>.<span class="number">2</span>d.tar.gz</span><br><span class="line">tar xzf openssl-<span class="number">1</span>.<span class="number">0</span>.<span class="number">2</span>d.tar.gz</span><br><span class="line"><span class="built_in">cd</span> openssl-<span class="number">1</span>.<span class="number">0</span>.<span class="number">2</span>d</span><br><span class="line">perl configure VC-WIN32 --prefix=C:/openssl</span><br><span class="line">ms\do_nasm</span><br><span class="line">nmake -f ms\nt.mak</span><br><span class="line">nmake -f ms\nt.mak install</span><br><span class="line"><span class="keyword">echo</span> "build successed."</span><br></pre></td></tr></table></figure>
 <p>这样编译不会产生 <strong>error A2070:invalid instruction operands</strong> 这个错误</p>
 ]]></content>
@@ -74,7 +126,7 @@
     
       <category term="perl" scheme="http://www.leelib.com/tags/perl/"/>
     
-      <category term="C/C++" scheme="http://www.leelib.com/categories/C-C/"/>
+      <category term="programing" scheme="http://www.leelib.com/categories/programing/"/>
     
   </entry>
   
@@ -83,7 +135,7 @@
     <link href="http://www.leelib.com/2015/08/05/fun-battle-net-client-error.html"/>
     <id>http://www.leelib.com/2015/08/05/fun-battle-net-client-error.html</id>
     <published>2015-08-05T14:08:24.000Z</published>
-    <updated>2015-09-17T09:03:43.951Z</updated>
+    <updated>2015-09-18T07:07:50.031Z</updated>
     <content type="html"><![CDATA[<p><img src="/images/20150805/battle-net-error.jpg" alt=""></p>
 <p>可能是网络或者其他原因引起的。但没想到暴雪竟然会萌萌的掀桌子 0.0///</p>
 ]]></content>
@@ -95,6 +147,8 @@
     
       <category term="闲言碎语" scheme="http://www.leelib.com/tags/%E9%97%B2%E8%A8%80%E7%A2%8E%E8%AF%AD/"/>
     
+      <category term="interesting" scheme="http://www.leelib.com/categories/interesting/"/>
+    
   </entry>
   
   <entry>
@@ -102,19 +156,22 @@
     <link href="http://www.leelib.com/2015/02/09/fix-std-max-error.html"/>
     <id>http://www.leelib.com/2015/02/09/fix-std-max-error.html</id>
     <published>2015-02-09T03:27:16.000Z</published>
-    <updated>2015-09-17T09:03:43.936Z</updated>
-    <content type="html"><![CDATA[<p>有时,把旧项目转换成新版本项目时,旧版本项目里使用的 max 和 min 宏无法在新版本中正常编译.</p>
-<p>原因是: 新版本内有了新的函数 std::max 和 std::min 函数来实现这一功能</p>
+    <updated>2015-09-18T07:07:50.011Z</updated>
+    <content type="html"><![CDATA[<p>有时,把旧项目转换成新版本项目时,旧版本项目里使用的 <strong>max</strong> 和 <strong>min</strong> 宏无法在新版本中正常编译.</p>
+<p>原因是: 新版本内有了新的函数 <strong>std::max</strong> 和 <strong>std::min</strong> 函数来实现这一功能</p>
 <h4 id="这时可以尝试使用如下方案解决:">这时可以尝试使用如下方案解决:</h4><ol>
-<li>包含algorithm文件（#include <algorithm>）</algorithm></li>
-<li>明确使用 std::max(a,b) 而非 max(a,b)</li>
-<li>定义宏 NOMINMAX</li>
+<li><p>包含algorithm文件</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;algorithm&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>明确使用 <strong>std::max(a,b)</strong> 而非 <strong>max(a,b)</strong></p>
+</li>
+<li>定义宏 NOMINMAX<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">define</span> NOMINMAX</span></span><br></pre></td></tr></table></figure>
+</li>
 </ol>
 ]]></content>
     <summary type="html">
-    <![CDATA[<p>有时,把旧项目转换成新版本项目时,旧版本项目里使用的 max 和 min 宏无法在新版本中正常编译.</p>
-<p>原因是: 新版本内有了新的函数 std::max 和 std::min 函数来实现这一功能</p>
-<h4 id="这时可以尝试使用如下方案解决:">这时可以]]>
+    <![CDATA[<p>有时,把旧项目转换成新版本项目时,旧版本项目里使用的 <strong>max</strong> 和 <strong>min</strong> 宏无法在新版本中正常编译.</p>
+<p>原因是: 新版本内有了新的函数 <strong>std::max</strong> 和 <]]>
     </summary>
     
       <category term="algorithm" scheme="http://www.leelib.com/tags/algorithm/"/>
@@ -125,9 +182,7 @@
     
       <category term="std" scheme="http://www.leelib.com/tags/std/"/>
     
-      <category term="C/C++" scheme="http://www.leelib.com/categories/C-C/"/>
-    
-      <category term="经验总结" scheme="http://www.leelib.com/categories/C-C/%E7%BB%8F%E9%AA%8C%E6%80%BB%E7%BB%93/"/>
+      <category term="programing" scheme="http://www.leelib.com/categories/programing/"/>
     
   </entry>
   
@@ -136,7 +191,7 @@
     <link href="http://www.leelib.com/2015/01/16/windows-dll-freelibrary-self.html"/>
     <id>http://www.leelib.com/2015/01/16/windows-dll-freelibrary-self.html</id>
     <published>2015-01-15T17:35:37.000Z</published>
-    <updated>2015-09-17T09:03:43.998Z</updated>
+    <updated>2015-09-18T07:07:50.097Z</updated>
     <content type="html"><![CDATA[<p>在 Windows 里 DLL 卸载自身模块是无法通过字节调用 FreeLibrary 自己来实现的。</p>
 <h2 id="原因分析">原因分析</h2><blockquote>
 <p>在当前线程中调用 FreeLibrary 后，当前模块就会立即被释放掉，而当前线程还没有运行结束。所以程序就运行到了一块不可访问的内存里，产生异常从而导致程序崩溃。</p>
@@ -161,7 +216,7 @@
     
       <category term="windows" scheme="http://www.leelib.com/tags/windows/"/>
     
-      <category term="C/C++" scheme="http://www.leelib.com/categories/C-C/"/>
+      <category term="programing" scheme="http://www.leelib.com/categories/programing/"/>
     
   </entry>
   
@@ -170,43 +225,13 @@
     <link href="http://www.leelib.com/2015/01/06/linux-auth-log.html"/>
     <id>http://www.leelib.com/2015/01/06/linux-auth-log.html</id>
     <published>2015-01-06T05:42:53.000Z</published>
-    <updated>2015-09-17T09:03:43.967Z</updated>
-    <content type="html"><![CDATA[<p>仅需一条命令</p>
-<pre><code><span class="title">grep</span> <span class="string">"Failed password for root"</span> /var/log/secure | awk <span class="string">'{print <span class="variable">$11</span>}'</span> | sort | uniq -c | sort -nr | more
-
-
-结果类似下面这样：
-
-   <span class="number">4377</span> <span class="number">103.41.124.18</span>
-   <span class="number">4368</span> <span class="number">103.41.124.65</span>
-   <span class="number">3900</span> <span class="number">62.210.178.226</span>
-   <span class="number">2214</span> <span class="number">103.41.124.33</span>
-    <span class="number">409</span> <span class="number">62.210.142.105</span>
-    <span class="number">404</span> <span class="number">115.231.222.45</span>
-    <span class="number">152</span> <span class="number">122.225.97.91</span>
-     <span class="number">95</span> <span class="number">122.225.109.205</span>
-     <span class="number">81</span> <span class="number">109.195.69.233</span>
-     <span class="number">42</span> <span class="number">74.52.105.154</span>
-     <span class="number">21</span> <span class="number">87.106.184.62</span>
-     <span class="number">21</span> <span class="number">87.106.1.211</span>
-     <span class="number">21</span> <span class="number">82.165.154.23</span>
-     <span class="number">21</span> <span class="number">69.64.64.62</span>
-     <span class="number">21</span> <span class="number">67.226.156.239</span>
-     <span class="number">21</span> <span class="number">61.40.192.52</span>
-     <span class="number">21</span> <span class="number">60.213.190.98</span>
-     <span class="number">21</span> <span class="number">27.251.179.130</span>
-     <span class="number">21</span> <span class="number">222.77.190.33</span>
-     <span class="number">21</span> <span class="number">211.172.219.251</span>
-     <span class="number">21</span> <span class="number">210.249.105.10</span>
-     <span class="number">15</span> <span class="number">220.194.46.36</span>
-     <span class="number">12</span> <span class="number">203.184.128.106</span>
-      <span class="number">1</span> <span class="number">60.190.71.52</span>
-      <span class="number">1</span> <span class="number">193.104.41.58</span>
-</code></pre><p>这样我们就可以很清楚的了解有谁在尝试破解我们的密码了，之后做个相关安全策略就可以简单防治了</p>
+    <updated>2015-09-18T07:07:50.049Z</updated>
+    <content type="html"><![CDATA[<p>仅需一条命令<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep <span class="string">"Failed password for root"</span> /var/<span class="built_in">log</span>/secure | awk <span class="string">'&#123;print $11&#125;'</span> | sort | uniq -c | sort -nr | more</span><br></pre></td></tr></table></figure></p>
+<p>结果类似下面这样：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">4377 103.41.124.18&#10;4368 103.41.124.65&#10;3900 62.210.178.226&#10;2214 103.41.124.33&#10; 409 62.210.142.105&#10; 404 115.231.222.45&#10; 152 122.225.97.91&#10;  95 122.225.109.205&#10;  81 109.195.69.233&#10;  42 74.52.105.154&#10;  21 87.106.184.62&#10;  21 87.106.1.211&#10;  21 82.165.154.23&#10;  21 69.64.64.62&#10;  21 67.226.156.239&#10;  21 61.40.192.52&#10;  21 60.213.190.98&#10;  21 27.251.179.130&#10;  21 222.77.190.33&#10;  21 211.172.219.251&#10;  21 210.249.105.10&#10;  15 220.194.46.36&#10;  12 203.184.128.106&#10;   1 60.190.71.52&#10;   1 193.104.41.58</span><br></pre></td></tr></table></figure></p>
+<p>这样我们就可以很清楚的了解有谁在尝试破解我们的密码了，之后做个相关安全策略就可以简单防治了</p>
 ]]></content>
     <summary type="html">
-    <![CDATA[<p>仅需一条命令</p>
-<pre><code><span class="title">grep</span> <span class="string">"Failed password for root"</span> /var/log/secure | awk <span ]]>
+    <![CDATA[<p>仅需一条命令<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><p]]>
     </summary>
     
       <category term="awk" scheme="http://www.leelib.com/tags/awk/"/>
@@ -221,13 +246,7 @@
     
       <category term="uniq" scheme="http://www.leelib.com/tags/uniq/"/>
     
-      <category term="CentOS" scheme="http://www.leelib.com/categories/CentOS/"/>
-    
-      <category term="RedHat" scheme="http://www.leelib.com/categories/CentOS/RedHat/"/>
-    
-      <category term="Ubuntu" scheme="http://www.leelib.com/categories/CentOS/RedHat/Ubuntu/"/>
-    
-      <category term="经验总结" scheme="http://www.leelib.com/categories/CentOS/RedHat/Ubuntu/%E7%BB%8F%E9%AA%8C%E6%80%BB%E7%BB%93/"/>
+      <category term="linux" scheme="http://www.leelib.com/categories/linux/"/>
     
   </entry>
   
@@ -236,14 +255,14 @@
     <link href="http://www.leelib.com/2014/12/30/linux-git-remote-helper-for-https.html"/>
     <id>http://www.leelib.com/2014/12/30/linux-git-remote-helper-for-https.html</id>
     <published>2014-12-30T15:42:43.000Z</published>
-    <updated>2015-09-17T09:03:43.967Z</updated>
-    <content type="html"><![CDATA[<p>在Linux内源码编译安装的Git如果出现了 “<strong>Unable to find remote helper for ‘https’</strong>” 错误，则说明<strong>编译没有完全</strong>。</p>
-<p>解决办法就是在编译之前安装相关的开发包就可以了。<br>在CentOS系统中使用下面命令来安装：</p>
-<pre><code>yum <span class="keyword">install</span> curl-devel expat-devel gettext-devel openssl-devel zlib-devel
-</code></pre>]]></content>
+    <updated>2015-09-18T07:07:50.051Z</updated>
+    <content type="html"><![CDATA[<p>在Linux内源码编译安装的Git如果出现了 “<strong>Unable to find remote helper for ‘https’</strong>” 错误，则说明<strong>编译的时候没有发现系统有openssl开发包</strong>。</p>
+<p>解决办法就是在编译之前安装相关的开发包就可以了。</p>
+<h1 id="在CentOS系统中使用下面命令来安装">在CentOS系统中使用下面命令来安装</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install curl-devel expat-devel gettext-devel openssl-devel zlib-devel</span><br></pre></td></tr></table></figure>
+]]></content>
     <summary type="html">
-    <![CDATA[<p>在Linux内源码编译安装的Git如果出现了 “<strong>Unable to find remote helper for ‘https’</strong>” 错误，则说明<strong>编译没有完全</strong>。</p>
-<p>解决办法就是在编译之前安装相关的]]>
+    <![CDATA[<p>在Linux内源码编译安装的Git如果出现了 “<strong>Unable to find remote helper for ‘https’</strong>” 错误，则说明<strong>编译的时候没有发现系统有openssl开发包</strong>。</p>
+<p>]]>
     </summary>
     
       <category term="fatal" scheme="http://www.leelib.com/tags/fatal/"/>
@@ -254,9 +273,7 @@
     
       <category term="linux" scheme="http://www.leelib.com/tags/linux/"/>
     
-      <category term="C/C++" scheme="http://www.leelib.com/categories/C-C/"/>
-    
-      <category term="CentOS" scheme="http://www.leelib.com/categories/C-C/CentOS/"/>
+      <category term="linux" scheme="http://www.leelib.com/categories/linux/"/>
     
   </entry>
   
@@ -265,7 +282,7 @@
     <link href="http://www.leelib.com/2014/12/25/git-remote-helper-for-https.html"/>
     <id>http://www.leelib.com/2014/12/25/git-remote-helper-for-https.html</id>
     <published>2014-12-25T08:10:02.000Z</published>
-    <updated>2015-09-17T09:03:43.951Z</updated>
+    <updated>2015-09-18T07:07:50.038Z</updated>
     <content type="html"><![CDATA[<p>在升级win8.1之后，重新安装的Git虽然可以正常使用<br>但遇到https时会报“<strong>Unable to find remote helper for ‘https’</strong>”的错误</p>
 <p>网络搜索了许久未果，于是自己研究</p>
 <blockquote>
@@ -296,7 +313,7 @@
     
       <category term="windows" scheme="http://www.leelib.com/tags/windows/"/>
     
-      <category term="经验总结" scheme="http://www.leelib.com/categories/%E7%BB%8F%E9%AA%8C%E6%80%BB%E7%BB%93/"/>
+      <category term="summarys" scheme="http://www.leelib.com/categories/summarys/"/>
     
   </entry>
   
@@ -305,122 +322,14 @@
     <link href="http://www.leelib.com/2014/11/21/python-simple-crypt-code.html"/>
     <id>http://www.leelib.com/2014/11/21/python-simple-crypt-code.html</id>
     <published>2014-11-21T11:13:45.000Z</published>
-    <updated>2015-09-17T09:03:43.982Z</updated>
-    <content type="html"><![CDATA[<pre><code><span class="built_in">#</span><span class="built_in">!</span>/usr/env python
-<span class="string">""</span><span class="string">"
-:license: MIT
-
-Copyright (C) 2012 HustMoon
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of
-this software and associated documentation files (the "</span>Software<span class="string">"), to deal in
-the Software without restriction, including without limitation the rights to
-use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
-of the Software, and to permit persons to whom the Software is furnished to do
-so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "</span>AS IS<span class="string">", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-"</span><span class="string">""</span>
-from __future__ <span class="built_in">import</span> with_statement
-
-<span class="built_in">import</span> zlib, sys
-
-def b128encode<span class="params">(buf, escape=False)</span>:
-    <span class="keyword">if</span> not buf: return ''
-    buf = bytearray<span class="params">(buf)</span>
-    res = bytearray<span class="params">(<span class="params">(len<span class="params">(buf)</span> * <span class="number">8</span> + <span class="number">6</span>)</span> / <span class="number">7</span>)</span>
-    p, s, i = <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>
-    <span class="keyword">for</span> n in buf:
-        res[i] = <span class="params">(<span class="params">(p &lt;&lt; <span class="params">(<span class="number">8</span> - s)</span> | <span class="params">(n &gt;&gt; s)</span>)</span> &amp;amp; <span class="number">0</span>x7F)</span> | <span class="number">0</span>x80; i += <span class="number">1</span>
-        <span class="keyword">if</span> s == <span class="number">7</span>:
-            res[i] = n | <span class="number">0</span>x80; i += <span class="number">1</span>
-            p, s = <span class="number">0</span>, <span class="number">1</span>
-        <span class="keyword">else</span>:
-            p, s = n, <span class="params">(s + <span class="number">1</span>)</span> <span class="built_in">%</span> <span class="number">8</span>
-    <span class="keyword">if</span> s <span class="built_in">!</span>= <span class="number">1</span>:
-        <span class="keyword">if</span> s == <span class="number">2</span> and p &lt; <span class="number">0</span>x80:
-            i -= <span class="number">1</span>
-        <span class="keyword">else</span>:
-            p = <span class="params">(p &lt;&lt; <span class="params">(<span class="number">8</span> - s)</span>)</span> &amp;amp; <span class="number">0</span>x7F
-        p = <span class="built_in">chr</span><span class="params">(p)</span>
-        <span class="keyword">if</span> escape:
-            p = p.encode<span class="params">('string-escape')</span>
-        res[i:] = p
-    return <span class="built_in">str</span><span class="params">(res)</span>
-
-def dcode<span class="params">()</span>:
-    code = r'''def code<span class="params">(__=code)</span>:
- <span class="params">(_______)</span>=<span class="params">(globals)</span><span class="params">()</span>;del<span class="params">(<span class="params">(_______)</span>['code'])</span>
- <span class="keyword">if</span><span class="params">(<span class="params">(<span class="params">(_______)</span>.get<span class="params">('__doc__')</span>)</span>is<span class="params">(<span class="params">(None)</span>)</span>)</span>:
-  <span class="params">(__)</span>=<span class="params">(map)</span><span class="params">(<span class="params">(ord)</span>,<span class="params">(__)</span>[<span class="params">(<span class="number">339</span>)</span>:])</span>;<span class="params">(______)</span>=[<span class="number">0</span>]<span class="built_in">*</span><span class="params">(<span class="params">(<span class="params">(<span class="params">(<span class="params">(len)</span><span class="params">(<span class="params">(__)</span>)</span>+<span class="params">(<span class="number">1</span>)</span>)</span>*<span class="params">(<span class="number">7</span>)</span>)</span>/<span class="params">(<span class="number">8</span>)</span>)</span>)</span>;<span class="params">(<span class="params">(___)</span>,<span class="params">(____)</span>,<span class="params">(_____)</span>)</span>=<span class="params">(<span class="params">(<span class="number">0</span>)</span>,<span class="params">(<span class="number">0</span>)</span>,<span class="params">(<span class="number">0</span>)</span>)</span>
-  <span class="keyword">for</span><span class="params">(<span class="params">(__)</span>)</span>in<span class="params">(<span class="params">(__)</span>)</span>:
-   <span class="keyword">if</span><span class="params">(<span class="params">(__)</span>&lt;<span class="params">(<span class="number">128</span>)</span>)</span>:break
-   <span class="keyword">if</span><span class="params">(<span class="params">(____)</span>==<span class="params">(<span class="number">0</span>)</span>)</span>:<span class="params">(<span class="params">(___)</span>,<span class="params">(____)</span>)</span>=<span class="params">(<span class="params">(__)</span>,<span class="params">(<span class="number">1</span>)</span>)</span>
-   <span class="keyword">else</span>:
-    <span class="params">(______)</span>[<span class="params">(_____)</span>]=<span class="params">(<span class="params">(<span class="params">(<span class="params">(___)</span>&lt;&lt;<span class="params">(____)</span>)</span>|<span class="params">(<span class="params">(<span class="params">(__)</span>&amp;amp;<span class="params">(<span class="number">127</span>)</span>)</span>&gt;&gt;<span class="params">(<span class="params">(<span class="number">7</span>)</span>-<span class="params">(____)</span>)</span>)</span>)</span>&amp;amp;<span class="params">(<span class="number">255</span>)</span>)</span>;<span class="params">(_____)</span>+=<span class="params">(<span class="number">1</span>)</span>;<span class="params">(<span class="params">(___)</span>,<span class="params">(____)</span>)</span>=<span class="params">(<span class="params">(__)</span>,<span class="params">(<span class="params">(<span class="params">(____)</span>+<span class="params">(<span class="number">1</span>)</span>)</span>%<span class="params">(<span class="number">8</span>)</span>)</span>)</span>
-  <span class="keyword">if</span><span class="params">(<span class="params">(__)</span>&lt;<span class="params">(<span class="number">128</span>)</span>)</span>:
-   <span class="keyword">if</span><span class="params">(<span class="params">(____)</span>!=<span class="params">(<span class="number">0</span>)</span>)</span>:
-    <span class="params">(__)</span>=<span class="params">(<span class="params">(<span class="params">(<span class="params">(___)</span>&lt;&lt;<span class="params">(____)</span>)</span>|<span class="params">(<span class="params">(__)</span>&gt;&gt;<span class="params">(<span class="params">(<span class="number">7</span>)</span>-<span class="params">(____)</span>)</span>)</span>)</span>&amp;amp;<span class="params">(<span class="number">255</span>)</span>)</span>
-   <span class="params">(______)</span>[<span class="params">(_____)</span>:]=[<span class="params">(<span class="params">(__)</span>)</span>]
-  elif<span class="params">(<span class="params">(____)</span>!=<span class="params">(<span class="number">0</span>)</span>)</span>:del<span class="params">(<span class="params">(______)</span>[<span class="params">(_____)</span>:])</span>
-  exec<span class="params">(<span class="params">(''.join<span class="params">(<span class="params">(map)</span><span class="params">(<span class="params">(chr)</span>,<span class="params">(______)</span>)</span>)</span>.decode<span class="params">('zlib')</span>)</span>)</span>in<span class="params">(<span class="params">(_______)</span>)</span>
-  <span class="keyword">if</span><span class="params">(<span class="params">(<span class="params">(_______)</span>.get<span class="params">('__doc__')</span>)</span>is<span class="params">(<span class="params">(None)</span>)</span>)</span>:<span class="params">(_______)</span>['__doc__']=''
-code<span class="params">()</span>
-'''
-    return ''.join<span class="params">([c.encode<span class="params">('string-escape')</span> if ord<span class="params">(c)</span> &lt; <span class="number">128</span> else c
-                    for c in zlib.compress<span class="params">(code, <span class="number">9</span>)</span>])</span>
-dcode = dcode<span class="params">()</span>
-
-def encode<span class="params">(infile, outfile)</span>:
-    with open<span class="params">(infile, 'rU')</span> as fp:
-        code = fp.read<span class="params">()</span>.rstrip<span class="params">('n')</span> + 'n'
-    code = b128encode<span class="params">(zlib.compress<span class="params">(code, <span class="number">9</span>)</span>, True)</span>
-    code = r'''<span class="built_in">#</span> -<span class="built_in">*</span>- coding: latin-<span class="number">1</span> -<span class="built_in">*</span>-
-code = '<span class="built_in">%</span>s'
-exec<span class="params">(code.decode<span class="params">('zlib')</span>)</span>
-''' <span class="built_in">%</span> <span class="params">(dcode + code)</span>
-    with open<span class="params">(outfile, 'wb')</span> as fp:
-        fp.write<span class="params">(code)</span>
-
-def decode<span class="params">(infile, outfile)</span>:
-    with open<span class="params">(infile, 'rU')</span> as fp:
-        code = fp.read<span class="params">()</span>.rstrip<span class="params">('n')</span> + 'n'
-    code = code.replace<span class="params">(<span class="string">"exec(code.decode('zlib'))"</span>, <span class="string">"exec(code.decode('zlib')"</span>
-        <span class="string">".replace('exec','fp.write').replace('in((_______))',''))"</span>)</span>
-    with open<span class="params">(outfile, 'wb')</span> as fp:
-        eval<span class="params">(compile<span class="params">(code, 's', 'exec')</span>, {'fp':fp})</span>
-
-def main<span class="params">()</span>:
-    try:
-        <span class="keyword">if</span> sys.argv[<span class="number">1</span>] == '-d':
-            func = decode
-            infile, outfile = sys.argv[<span class="number">2</span>:<span class="number">4</span>]
-        <span class="keyword">else</span>:
-            func = encode
-            infile, outfile = sys.argv[<span class="number">1</span>:<span class="number">3</span>]
-    except ValueError:
-        print &gt;&gt;sys.stderr, 'Usage: zipcode.py [-d] infile.py outfile.py'
-        raise SystemExit<span class="params">(-<span class="number">1</span>)</span>
-    func<span class="params">(infile, outfile)</span>
-
-<span class="keyword">if</span> __name__ == '__main__':
-    main<span class="params">()</span>
-</code></pre>]]></content>
+    <updated>2015-09-18T07:07:50.063Z</updated>
+    <content type="html"><![CDATA[<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/env python</span></span><br><span class="line"><span class="string">"""</span><br><span class="line">:license: MIT</span><br><span class="line"></span><br><span class="line">Copyright (C) 2012 HustMoon</span><br><span class="line"></span><br><span class="line">Permission is hereby granted, free of charge, to any person obtaining a copy of</span><br><span class="line">this software and associated documentation files (the "Software"), to deal in</span><br><span class="line">the Software without restriction, including without limitation the rights to</span><br><span class="line">use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies</span><br><span class="line">of the Software, and to permit persons to whom the Software is furnished to do</span><br><span class="line">so, subject to the following conditions:</span><br><span class="line"></span><br><span class="line">The above copyright notice and this permission notice shall be included in all</span><br><span class="line">copies or substantial portions of the Software.</span><br><span class="line"></span><br><span class="line">THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR</span><br><span class="line">IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,</span><br><span class="line">FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE</span><br><span class="line">AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER</span><br><span class="line">LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,</span><br><span class="line">OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE</span><br><span class="line">SOFTWARE.</span><br><span class="line">"""</span></span><br><span class="line"><span class="keyword">from</span> __future__ <span class="keyword">import</span> with_statement</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> zlib, sys</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">b128encode</span><span class="params">(buf, escape=False)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> buf: <span class="keyword">return</span> <span class="string">''</span></span><br><span class="line">    buf = bytearray(buf)</span><br><span class="line">    res = bytearray((len(buf) * <span class="number">8</span> + <span class="number">6</span>) / <span class="number">7</span>)</span><br><span class="line">    p, s, i = <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> n <span class="keyword">in</span> buf:</span><br><span class="line">        res[i] = ((p &lt;&lt; (<span class="number">8</span> - s) | (n &gt;&gt; s)) &amp;amp; <span class="number">0x7F</span>) | <span class="number">0x80</span>; i += <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> s == <span class="number">7</span>:</span><br><span class="line">            res[i] = n | <span class="number">0x80</span>; i += <span class="number">1</span></span><br><span class="line">            p, s = <span class="number">0</span>, <span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            p, s = n, (s + <span class="number">1</span>) % <span class="number">8</span></span><br><span class="line">    <span class="keyword">if</span> s != <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">if</span> s == <span class="number">2</span> <span class="keyword">and</span> p &lt; <span class="number">0x80</span>:</span><br><span class="line">            i -= <span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            p = (p &lt;&lt; (<span class="number">8</span> - s)) &amp;amp; <span class="number">0x7F</span></span><br><span class="line">        p = chr(p)</span><br><span class="line">        <span class="keyword">if</span> escape:</span><br><span class="line">            p = p.encode(<span class="string">'string-escape'</span>)</span><br><span class="line">        res[i:] = p</span><br><span class="line">    <span class="keyword">return</span> str(res)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dcode</span><span class="params">()</span>:</span></span><br><span class="line">    code = <span class="string">r'''def code(__=code):</span><br><span class="line"> (_______)=(globals)();del((_______)['code'])</span><br><span class="line"> if(((_______).get('__doc__'))is((None))):</span><br><span class="line">  (__)=(map)((ord),(__)[(339):]);(______)=[0]*(((((len)((__))+(1))*(7))/(8)));((___),(____),(_____))=((0),(0),(0))</span><br><span class="line">  for((__))in((__)):</span><br><span class="line">   if((__)&lt;(128)):break</span><br><span class="line">   if((____)==(0)):((___),(____))=((__),(1))</span><br><span class="line">   else:</span><br><span class="line">    (______)[(_____)]=((((___)&lt;&lt;(____))|(((__)&amp;amp;(127))&gt;&gt;((7)-(____))))&amp;amp;(255));(_____)+=(1);((___),(____))=((__),(((____)+(1))%(8)))</span><br><span class="line">  if((__)&lt;(128)):</span><br><span class="line">   if((____)!=(0)):</span><br><span class="line">    (__)=((((___)&lt;&lt;(____))|((__)&gt;&gt;((7)-(____))))&amp;amp;(255))</span><br><span class="line">   (______)[(_____):]=[((__))]</span><br><span class="line">  elif((____)!=(0)):del((______)[(_____):])</span><br><span class="line">  exec((''.join((map)((chr),(______))).decode('zlib')))in((_______))</span><br><span class="line">  if(((_______).get('__doc__'))is((None))):(_______)['__doc__']=''</span><br><span class="line">code()</span><br><span class="line">'''</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">''</span>.join([c.encode(<span class="string">'string-escape'</span>) <span class="keyword">if</span> ord(c) &lt; <span class="number">128</span> <span class="keyword">else</span> c</span><br><span class="line">                    <span class="keyword">for</span> c <span class="keyword">in</span> zlib.compress(code, <span class="number">9</span>)])</span><br><span class="line">dcode = dcode()</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">encode</span><span class="params">(infile, outfile)</span>:</span></span><br><span class="line">    <span class="keyword">with</span> open(infile, <span class="string">'rU'</span>) <span class="keyword">as</span> fp:</span><br><span class="line">        code = fp.read().rstrip(<span class="string">'n'</span>) + <span class="string">'n'</span></span><br><span class="line">    code = b128encode(zlib.compress(code, <span class="number">9</span>), <span class="keyword">True</span>)</span><br><span class="line">    code = <span class="string">r'''# -*- coding: latin-1 -*-</span><br><span class="line">code = '%s'</span><br><span class="line">exec(code.decode('zlib'))</span><br><span class="line">'''</span> % (dcode + code)</span><br><span class="line">    <span class="keyword">with</span> open(outfile, <span class="string">'wb'</span>) <span class="keyword">as</span> fp:</span><br><span class="line">        fp.write(code)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">decode</span><span class="params">(infile, outfile)</span>:</span></span><br><span class="line">    <span class="keyword">with</span> open(infile, <span class="string">'rU'</span>) <span class="keyword">as</span> fp:</span><br><span class="line">        code = fp.read().rstrip(<span class="string">'n'</span>) + <span class="string">'n'</span></span><br><span class="line">    code = code.replace(<span class="string">"exec(code.decode('zlib'))"</span>, <span class="string">"exec(code.decode('zlib')"</span></span><br><span class="line">        <span class="string">".replace('exec','fp.write').replace('in((_______))',''))"</span>)</span><br><span class="line">    <span class="keyword">with</span> open(outfile, <span class="string">'wb'</span>) <span class="keyword">as</span> fp:</span><br><span class="line">        eval(compile(code, <span class="string">'s'</span>, <span class="string">'exec'</span>), &#123;<span class="string">'fp'</span>:fp&#125;)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">if</span> sys.argv[<span class="number">1</span>] == <span class="string">'-d'</span>:</span><br><span class="line">            func = decode</span><br><span class="line">            infile, outfile = sys.argv[<span class="number">2</span>:<span class="number">4</span>]</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            func = encode</span><br><span class="line">            infile, outfile = sys.argv[<span class="number">1</span>:<span class="number">3</span>]</span><br><span class="line">    <span class="keyword">except</span> ValueError:</span><br><span class="line">        <span class="keyword">print</span> &gt;&gt;sys.stderr, <span class="string">'Usage: zipcode.py [-d] infile.py outfile.py'</span></span><br><span class="line">        <span class="keyword">raise</span> SystemExit(-<span class="number">1</span>)</span><br><span class="line">    func(infile, outfile)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+]]></content>
     <summary type="html">
-    <![CDATA[<pre><code><span class="built_in">#</span><span class="built_in">!</span>/usr/env python
-<span class="string">""</span><span class="string">]]>
+    <![CDATA[<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span clas]]>
     </summary>
     
-      <category term="Uncategorized" scheme="http://www.leelib.com/categories/Uncategorized/"/>
+      <category term="programing" scheme="http://www.leelib.com/categories/programing/"/>
     
   </entry>
   
@@ -429,34 +338,19 @@ def main<span class="params">()</span>:
     <link href="http://www.leelib.com/2014/11/21/vs2013-use-atl.html"/>
     <id>http://www.leelib.com/2014/11/21/vs2013-use-atl.html</id>
     <published>2014-11-21T04:15:21.000Z</published>
-    <updated>2015-09-17T09:03:43.998Z</updated>
-    <content type="html"><![CDATA[<blockquote>
-<p>不再需要导入atl.lib库了，直接包含以下头文件就可以了</p>
-</blockquote>
-<pre><code><span class="preprocessor">#<span class="keyword">include</span> &lt;atlbase.h&gt;</span>
-<span class="preprocessor">#<span class="keyword">include</span> &lt;atlcom.h&gt;</span>
-<span class="preprocessor">#<span class="keyword">include</span> &lt;atlctl.h&gt;</span>
-
-
-&gt; 要使用 AtlAxAttachControl 等函数的话，则必须初始化ATL模块
-
-CComModule _Module;
-_pAtlModule = &amp;amp;_Module;
-</code></pre>]]></content>
+    <updated>2015-09-18T07:07:50.093Z</updated>
+    <content type="html"><![CDATA[<h3 id="不再需要导入atl-lib库了，直接包含以下头文件就可以了">不再需要导入atl.lib库了，直接包含以下头文件就可以了</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;atlbase.h&gt;</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;atlcom.h&gt;</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;atlctl.h&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="要使用_AtlAxAttachControl_等函数的话，则必须初始化ATL模块">要使用 AtlAxAttachControl 等函数的话，则必须初始化ATL模块</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">CComModule _Module;</span><br><span class="line">_pAtlModule = &amp;amp;_Module;</span><br></pre></td></tr></table></figure>
+]]></content>
     <summary type="html">
-    <![CDATA[<blockquote>
-<p>不再需要导入atl.lib库了，直接包含以下头文件就可以了</p>
-</blockquote>
-<pre><code><span class="preprocessor">#<span class="keyword">include</span> ]]>
+    <![CDATA[<h3 id="不再需要导入atl-lib库了，直接包含以下头文件就可以了">不再需要导入atl.lib库了，直接包含以下头文件就可以了</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><s]]>
     </summary>
     
       <category term="atl" scheme="http://www.leelib.com/tags/atl/"/>
     
       <category term="com" scheme="http://www.leelib.com/tags/com/"/>
     
-      <category term="C/C++" scheme="http://www.leelib.com/categories/C-C/"/>
-    
-      <category term="经验总结" scheme="http://www.leelib.com/categories/C-C/%E7%BB%8F%E9%AA%8C%E6%80%BB%E7%BB%93/"/>
+      <category term="programing" scheme="http://www.leelib.com/categories/programing/"/>
     
   </entry>
   
@@ -465,43 +359,17 @@ _pAtlModule = &amp;amp;_Module;
     <link href="http://www.leelib.com/2014/11/01/centos-install-go.html"/>
     <id>http://www.leelib.com/2014/11/01/centos-install-go.html</id>
     <published>2014-11-01T00:42:17.000Z</published>
-    <updated>2015-09-17T09:03:43.920Z</updated>
+    <updated>2015-09-18T07:07:49.980Z</updated>
     <content type="html"><![CDATA[<p>我们这里使用源码编译安装，直接按顺序执行下列命令就可以成功(我都是假设已经有root权限的情况下，所以执行之前请确认自己已有root权限)：</p>
-<pre><code>yum <span class="operator"><span class="keyword">install</span> -y mercurial gcc-c++ gcc
-mkdir /usr/<span class="keyword">local</span>
-cd /usr/<span class="keyword">local</span>
-hg clone -r <span class="keyword">release</span> https://<span class="keyword">go</span>.googlecode.com/hg/ <span class="keyword">go</span>
-cd /usr/<span class="keyword">local</span>/<span class="keyword">go</span>/src
-chmox +x <span class="keyword">all</span>.bash
-./<span class="keyword">all</span>.bash
-mkdir /root/<span class="keyword">go</span>
-export GOROOT=/usr/<span class="keyword">local</span>/<span class="keyword">go</span>
-export GOPATH=/root/<span class="keyword">go</span>
-export GOBIN=/usr/<span class="keyword">local</span>/<span class="keyword">go</span>/<span class="keyword">bin</span>
-export GOOS=linux
-export PATH=.:$PATH:/usr/<span class="keyword">local</span>/<span class="keyword">go</span>/<span class="keyword">bin</span>
-
-
-现在应该已经可以执行<span class="keyword">go</span>命令测试了：
-
-[root@root]# <span class="keyword">go</span> <span class="keyword">version</span>
-<span class="keyword">go</span> <span class="keyword">version</span> go1.3.3 linux/amd64
-
-
-如果想要每次进入bash时都拥有<span class="keyword">go</span>环境，则需要新建一个文件：**/etc/<span class="keyword">profile</span>.d/<span class="keyword">go</span>.sh**
-并写入以下内容
-
-export GOROOT=/usr/<span class="keyword">local</span>/<span class="keyword">go</span>
-export GOPATH=/root/<span class="keyword">go</span>
-export GOBIN=/usr/<span class="keyword">local</span>/<span class="keyword">go</span>/<span class="keyword">bin</span>
-export GOOS=linux
-export PATH=.:$PATH:/usr/<span class="keyword">local</span>/<span class="keyword">go</span>/<span class="keyword">bin</span></span>
-</code></pre><p>现在随时都可以执行go命令了。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">yum install -y mercurial gcc-c++ gcc</span><br><span class="line">mkdir /usr/<span class="built_in">local</span></span><br><span class="line"><span class="built_in">cd</span> /usr/<span class="built_in">local</span></span><br><span class="line">hg <span class="built_in">clone</span> -r release https://go.googlecode.com/hg/ go</span><br><span class="line"><span class="built_in">cd</span> /usr/<span class="built_in">local</span>/go/src</span><br><span class="line">chmox +x all.bash</span><br><span class="line">./all.bash</span><br><span class="line">mkdir /root/go</span><br><span class="line"><span class="built_in">export</span> GOROOT=/usr/<span class="built_in">local</span>/go</span><br><span class="line"><span class="built_in">export</span> GOPATH=/root/go</span><br><span class="line"><span class="built_in">export</span> GOBIN=/usr/<span class="built_in">local</span>/go/bin</span><br><span class="line"><span class="built_in">export</span> GOOS=linux</span><br><span class="line"><span class="built_in">export</span> PATH=.:<span class="variable">$PATH</span>:/usr/<span class="built_in">local</span>/go/bin</span><br></pre></td></tr></table></figure>
+<p>现在应该已经可以执行go命令测试了：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@root]<span class="comment"># go version</span></span><br><span class="line">go version go1.<span class="number">3.3</span> linux/amd64</span><br></pre></td></tr></table></figure></p>
+<p>如果想要每次进入bash时都拥有go环境，则需要新建一个文件：<strong>/etc/profile.d/go.sh</strong> 并写入以下内容<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> GOROOT=/usr/<span class="built_in">local</span>/go</span><br><span class="line"><span class="built_in">export</span> GOPATH=/root/go</span><br><span class="line"><span class="built_in">export</span> GOBIN=/usr/<span class="built_in">local</span>/go/bin</span><br><span class="line"><span class="built_in">export</span> GOOS=linux</span><br><span class="line"><span class="built_in">export</span> PATH=.:<span class="variable">$PATH</span>:/usr/<span class="built_in">local</span>/go/bin</span><br></pre></td></tr></table></figure></p>
+<p>现在随时都可以执行go命令了。</p>
 <p>:)</p>
 ]]></content>
     <summary type="html">
     <![CDATA[<p>我们这里使用源码编译安装，直接按顺序执行下列命令就可以成功(我都是假设已经有root权限的情况下，所以执行之前请确认自己已有root权限)：</p>
-<pre><code>yum <span class="operator"><span class="keyword">in]]>
+<figure class="highlight bash"><table><tr><td class="gutter"><]]>
     </summary>
     
       <category term="bash" scheme="http://www.leelib.com/tags/bash/"/>
@@ -512,7 +380,7 @@ export PATH=.:$PATH:/usr/<span class="keyword">local</span>/<span class="keyword
     
       <category term="go" scheme="http://www.leelib.com/tags/go/"/>
     
-      <category term="CentOS" scheme="http://www.leelib.com/categories/CentOS/"/>
+      <category term="linux" scheme="http://www.leelib.com/categories/linux/"/>
     
   </entry>
   
@@ -521,29 +389,22 @@ export PATH=.:$PATH:/usr/<span class="keyword">local</span>/<span class="keyword
     <link href="http://www.leelib.com/2014/10/31/yum-install-last-nginx.html"/>
     <id>http://www.leelib.com/2014/10/31/yum-install-last-nginx.html</id>
     <published>2014-10-31T14:46:53.000Z</published>
-    <updated>2015-09-17T09:03:44.014Z</updated>
-    <content type="html"><![CDATA[<p>先执行下面这个bash：</p>
-<pre><code>cat &gt; /etc/yum<span class="class">.repos</span><span class="class">.d</span>/nginx<span class="class">.repo</span> &lt;&lt; EOF
-[nginx]
-name=nginx repo
-baseurl=http:<span class="comment">//nginx.org/packages/centos/6/x86_64</span>
-gpgcheck=<span class="number">0</span>
-enabled=<span class="number">1</span>
-EOF
-
-
-然后现在试试：
-
-yum update
-yum install nginx
-</code></pre><p>是不是直接安装了最新版的nginx呢？</p>
+    <updated>2015-09-18T07:07:50.101Z</updated>
+    <content type="html"><![CDATA[<h1 id="添加nginx的repo">添加nginx的repo</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">'[nginx]</span><br><span class="line">name=nginx repo</span><br><span class="line">baseurl=http://nginx.org/packages/centos/6/x86_64</span><br><span class="line">gpgcheck=0</span><br><span class="line">enabled=1'</span> &gt; /etc/yum.repos.d/nginx.repo</span><br></pre></td></tr></table></figure>
+<h1 id="安装">安装</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum update</span><br><span class="line">yum install nginx</span><br></pre></td></tr></table></figure>
+<p>是不是直接安装了最新版的nginx呢<br> ( ͡° ͜ʖ ͡°) </p>
 ]]></content>
     <summary type="html">
-    <![CDATA[<p>先执行下面这个bash：</p>
-<pre><code>cat &gt; /etc/yum<span class="class">.repos</span><span class="class">.d</span>/nginx<span class="class">.rep]]>
+    <![CDATA[<h1 id="添加nginx的repo">添加nginx的repo</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><spa]]>
     </summary>
     
-      <category term="CentOS" scheme="http://www.leelib.com/categories/CentOS/"/>
+      <category term="nginx" scheme="http://www.leelib.com/tags/nginx/"/>
+    
+      <category term="repos" scheme="http://www.leelib.com/tags/repos/"/>
+    
+      <category term="yum" scheme="http://www.leelib.com/tags/yum/"/>
+    
+      <category term="linux" scheme="http://www.leelib.com/categories/linux/"/>
     
   </entry>
   
@@ -552,91 +413,13 @@ yum install nginx
     <link href="http://www.leelib.com/2014/06/29/fix-yum-openssl-devel-multilib-version-problems-found.html"/>
     <id>http://www.leelib.com/2014/06/29/fix-yum-openssl-devel-multilib-version-problems-found.html</id>
     <published>2014-06-28T22:56:31.000Z</published>
-    <updated>2015-09-17T09:03:43.951Z</updated>
-    <content type="html"><![CDATA[<p>今天给一台CentOS系统安装openssl-devel时，出现了如下信息：</p>
-<pre><code>Loaded plugins: fastestmirror, security
-Repository updates <span class="keyword">is</span> listed more than once <span class="keyword">in</span> <span class="keyword">the</span> configuration
-Repository centosplus <span class="keyword">is</span> listed more than once <span class="keyword">in</span> <span class="keyword">the</span> configuration
-Repository contrib <span class="keyword">is</span> listed more than once <span class="keyword">in</span> <span class="keyword">the</span> configuration
-Repository extras <span class="keyword">is</span> listed more than once <span class="keyword">in</span> <span class="keyword">the</span> configuration
-Loading mirror speeds <span class="keyword">from</span> cached hostfile
- * base: mirrors.tuna.tsinghua.edu.cn
- * extras: mirrors.tuna.tsinghua.edu.cn
- * updates: mirrors.tuna.tsinghua.edu.cn
-Setting up Install Process
-Resolving Dependencies
-<span class="comment">--&gt; Running transaction check</span>
-<span class="comment">---&gt; Package openssl-devel.x86_64 0:1.0.1e-16.el6_5.14 will be installed</span>
-<span class="comment">--&gt; Processing Dependency: krb5-devel for package: openssl-devel-1.0.1e-16.el6_5.14.x86_64</span>
-<span class="comment">--&gt; Running transaction check</span>
-<span class="comment">---&gt; Package krb5-devel.x86_64 0:1.10.3-15.el6_5.1 will be installed</span>
-<span class="comment">--&gt; Processing Dependency: libselinux-devel for package: krb5-devel-1.10.3-15.el6_5.1.x86_64</span>
-<span class="comment">--&gt; Processing Dependency: libcom_err-devel for package: krb5-devel-1.10.3-15.el6_5.1.x86_64</span>
-<span class="comment">--&gt; Processing Dependency: keyutils-libs-devel for package: krb5-devel-1.10.3-15.el6_5.1.x86_64</span>
-<span class="comment">--&gt; Running transaction check</span>
-<span class="comment">---&gt; Package keyutils-libs-devel.x86_64 0:1.4-4.el6 will be installed</span>
-<span class="comment">---&gt; Package libcom_err-devel.x86_64 0:1.41.12-18.el6 will be installed</span>
-<span class="comment">---&gt; Package libselinux-devel.x86_64 0:2.0.94-5.3.el6_4.1 will be installed</span>
-<span class="comment">--&gt; Processing Dependency: libselinux = 2.0.94-5.3.el6_4.1 for package: libselinux-devel-2.0.94-5.3.el6_4.1.x86_64</span>
-<span class="comment">--&gt; Processing Dependency: libsepol-devel &gt;= 2.0.32-1 for package: libselinux-devel-2.0.94-5.3.el6_4.1.x86_64</span>
-<span class="comment">--&gt; Processing Dependency: pkgconfig(libsepol) for package: libselinux-devel-2.0.94-5.3.el6_4.1.x86_64</span>
-<span class="comment">--&gt; Running transaction check</span>
-<span class="comment">---&gt; Package libselinux.i686 0:2.0.94-5.3.el6_4.1 will be installed</span>
-<span class="comment">--&gt; Processing Dependency: libdl.so.2(GLIBC_2.1) for package: libselinux-2.0.94-5.3.el6_4.1.i686</span>
-<span class="comment">--&gt; Processing Dependency: libdl.so.2(GLIBC_2.0) for package: libselinux-2.0.94-5.3.el6_4.1.i686</span>
-<span class="comment">--&gt; Processing Dependency: libdl.so.2 for package: libselinux-2.0.94-5.3.el6_4.1.i686</span>
-<span class="comment">--&gt; Processing Dependency: libc.so.6(GLIBC_2.8) for package: libselinux-2.0.94-5.3.el6_4.1.i686</span>
-<span class="comment">--&gt; Processing Dependency: ld-linux.so.2(GLIBC_2.3) for package: libselinux-2.0.94-5.3.el6_4.1.i686</span>
-<span class="comment">--&gt; Processing Dependency: ld-linux.so.2 for package: libselinux-2.0.94-5.3.el6_4.1.i686</span>
-<span class="comment">---&gt; Package libsepol-devel.x86_64 0:2.0.41-4.el6 will be installed</span>
-<span class="comment">--&gt; Running transaction check</span>
-<span class="comment">---&gt; Package glibc.i686 0:2.12-1.132.el6_5.2 will be installed</span>
-<span class="comment">--&gt; Processing Dependency: libfreebl3.so(NSSRAWHASH_3.12.3) for package: glibc-2.12-1.132.el6_5.2.i686</span>
-<span class="comment">--&gt; Processing Dependency: libfreebl3.so for package: glibc-2.12-1.132.el6_5.2.i686</span>
-<span class="comment">--&gt; Running transaction check</span>
-<span class="comment">---&gt; Package nss-softokn-freebl.i686 0:3.14.3-10.el6_5 will be installed</span>
-<span class="comment">--&gt; Finished Dependency Resolution</span>
-Error:  Multilib <span class="property">version</span> problems found. This often means <span class="keyword">that</span> <span class="keyword">the</span> root
-       cause <span class="keyword">is</span> something <span class="keyword">else</span> <span class="keyword">and</span> multilib <span class="property">version</span> checking <span class="keyword">is</span> just
-       pointing out <span class="keyword">that</span> there <span class="keyword">is</span> a problem. Eg.:
-
-         <span class="number">1</span>\. You have an upgrade <span class="keyword">for</span> libselinux which <span class="keyword">is</span> missing <span class="keyword">some</span>
-            dependency <span class="keyword">that</span> another package requires. Yum <span class="keyword">is</span> trying <span class="keyword">to</span>
-            solve this <span class="keyword">by</span> installing an older <span class="property">version</span> <span class="keyword">of</span> libselinux <span class="keyword">of</span> <span class="keyword">the</span>
-            different architecture. If you exclude <span class="keyword">the</span> bad architecture
-            yum will <span class="keyword">tell</span> you what <span class="keyword">the</span> root cause <span class="keyword">is</span> (which package
-            requires what). You can <span class="keyword">try</span> redoing <span class="keyword">the</span> upgrade <span class="keyword">with</span>
-            <span class="comment">--exclude libselinux.otherarch ... this should give you an error</span>
-            message showing <span class="keyword">the</span> root cause <span class="keyword">of</span> <span class="keyword">the</span> problem.
-
-         <span class="number">2</span>\. You have multiple architectures <span class="keyword">of</span> libselinux installed, <span class="keyword">but</span>
-            yum can only see an upgrade <span class="keyword">for</span> one <span class="keyword">of</span> those arcitectures.
-            If you don't want/need both architectures anymore <span class="keyword">then</span> you
-            can remove <span class="keyword">the</span> one <span class="keyword">with</span> <span class="keyword">the</span> missing update <span class="keyword">and</span> everything
-            will work.
-
-         <span class="number">3</span>\. You have duplicate versions <span class="keyword">of</span> libselinux installed already.
-            You can use <span class="string">"yum check"</span> <span class="keyword">to</span> <span class="keyword">get</span> yum show these errors.
-
-       ...you can also use <span class="comment">--setopt=protected_multilib=false to remove</span>
-       this checking, however this <span class="keyword">is</span> almost never <span class="keyword">the</span> correct thing <span class="keyword">to</span>
-       do <span class="keyword">as</span> something <span class="keyword">else</span> <span class="keyword">is</span> very likely <span class="keyword">to</span> go wrong (often causing
-       much more problems).
-
-       Protected multilib versions: libselinux-<span class="number">2.0</span>.94-<span class="number">5.3</span>.el6_4.1.i686 != libselinux-<span class="number">2.0</span>.94-<span class="number">5.3</span>.0.1.el6.centos.plus.x86_64
- You could <span class="keyword">try</span> using <span class="comment">--skip-broken to work around the problem</span>
- You could <span class="keyword">try</span> <span class="property">running</span>: rpm -Va <span class="comment">--nofiles --nodigest</span>
-
-
-**最后在一个日文的网站上找到了解决办法：**
-
-yum install <span class="comment">--enablerepo=centosplus openssl-devel</span>
-</code></pre><p>引用：<a href="http://blog.urban-theory.net/2014/06/16/openssl-devel-install-fails-on-centos-with-docker" target="_blank" rel="external">http://blog.urban-theory.net/2014/06/16/openssl-devel-install-fails-on-centos-with-docker</a></p>
+    <updated>2015-09-18T07:07:50.025Z</updated>
+    <content type="html"><![CDATA[<p>今天给一台CentOS系统安装openssl-devel时，出现了如下信息：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line">[root@centos]<span class="comment"># yum install -y openssl-devel</span></span><br><span class="line">Loaded plugins: fastestmirror, security</span><br><span class="line">Repository updates is listed more than once <span class="keyword">in</span> the configuration</span><br><span class="line">Repository centosplus is listed more than once <span class="keyword">in</span> the configuration</span><br><span class="line">Repository contrib is listed more than once <span class="keyword">in</span> the configuration</span><br><span class="line">Repository extras is listed more than once <span class="keyword">in</span> the configuration</span><br><span class="line">Loading mirror speeds from cached hostfile</span><br><span class="line"> * base: mirrors.tuna.tsinghua.edu.cn</span><br><span class="line"> * extras: mirrors.tuna.tsinghua.edu.cn</span><br><span class="line"> * updates: mirrors.tuna.tsinghua.edu.cn</span><br><span class="line">Setting up Install Process</span><br><span class="line">Resolving Dependencies</span><br><span class="line">--&gt; Running transaction check</span><br><span class="line">---&gt; Package openssl-devel.x86_64 <span class="number">0</span>:<span class="number">1.0</span>.<span class="number">1</span>e-<span class="number">16</span>.el6_5.<span class="number">14</span> will be installed</span><br><span class="line">--&gt; Processing Dependency: krb5-devel <span class="keyword">for</span> package: openssl-devel-<span class="number">1.0</span>.<span class="number">1</span>e-<span class="number">16</span>.el6_5.<span class="number">14</span>.x86_64</span><br><span class="line">--&gt; Running transaction check</span><br><span class="line">---&gt; Package krb5-devel.x86_64 <span class="number">0</span>:<span class="number">1.10</span>.<span class="number">3</span>-<span class="number">15</span>.el6_5.<span class="number">1</span> will be installed</span><br><span class="line">--&gt; Processing Dependency: libselinux-devel <span class="keyword">for</span> package: krb5-devel-<span class="number">1.10</span>.<span class="number">3</span>-<span class="number">15</span>.el6_5.<span class="number">1</span>.x86_64</span><br><span class="line">--&gt; Processing Dependency: libcom_err-devel <span class="keyword">for</span> package: krb5-devel-<span class="number">1.10</span>.<span class="number">3</span>-<span class="number">15</span>.el6_5.<span class="number">1</span>.x86_64</span><br><span class="line">--&gt; Processing Dependency: keyutils-libs-devel <span class="keyword">for</span> package: krb5-devel-<span class="number">1.10</span>.<span class="number">3</span>-<span class="number">15</span>.el6_5.<span class="number">1</span>.x86_64</span><br><span class="line">--&gt; Running transaction check</span><br><span class="line">---&gt; Package keyutils-libs-devel.x86_64 <span class="number">0</span>:<span class="number">1.4</span>-<span class="number">4</span>.el6 will be installed</span><br><span class="line">---&gt; Package libcom_err-devel.x86_64 <span class="number">0</span>:<span class="number">1.41</span>.<span class="number">12</span>-<span class="number">18</span>.el6 will be installed</span><br><span class="line">---&gt; Package libselinux-devel.x86_64 <span class="number">0</span>:<span class="number">2.0</span>.<span class="number">94</span>-<span class="number">5.3</span>.el6_4.<span class="number">1</span> will be installed</span><br><span class="line">--&gt; Processing Dependency: libselinux = <span class="number">2.0</span>.<span class="number">94</span>-<span class="number">5.3</span>.el6_4.<span class="number">1</span> <span class="keyword">for</span> package: libselinux-devel-<span class="number">2.0</span>.<span class="number">94</span>-<span class="number">5.3</span>.el6_4.<span class="number">1</span>.x86_64</span><br><span class="line">--&gt; Processing Dependency: libsepol-devel &gt;= <span class="number">2.0</span>.<span class="number">32</span>-<span class="number">1</span> <span class="keyword">for</span> package: libselinux-devel-<span class="number">2.0</span>.<span class="number">94</span>-<span class="number">5.3</span>.el6_4.<span class="number">1</span>.x86_64</span><br><span class="line">--&gt; Processing Dependency: pkgconfig(libsepol) <span class="keyword">for</span> package: libselinux-devel-<span class="number">2.0</span>.<span class="number">94</span>-<span class="number">5.3</span>.el6_4.<span class="number">1</span>.x86_64</span><br><span class="line">--&gt; Running transaction check</span><br><span class="line">---&gt; Package libselinux.i686 <span class="number">0</span>:<span class="number">2.0</span>.<span class="number">94</span>-<span class="number">5.3</span>.el6_4.<span class="number">1</span> will be installed</span><br><span class="line">--&gt; Processing Dependency: libdl.so.<span class="number">2</span>(GLIBC_2.<span class="number">1</span>) <span class="keyword">for</span> package: libselinux-<span class="number">2.0</span>.<span class="number">94</span>-<span class="number">5.3</span>.el6_4.<span class="number">1</span>.i686</span><br><span class="line">--&gt; Processing Dependency: libdl.so.<span class="number">2</span>(GLIBC_2.<span class="number">0</span>) <span class="keyword">for</span> package: libselinux-<span class="number">2.0</span>.<span class="number">94</span>-<span class="number">5.3</span>.el6_4.<span class="number">1</span>.i686</span><br><span class="line">--&gt; Processing Dependency: libdl.so.<span class="number">2</span> <span class="keyword">for</span> package: libselinux-<span class="number">2.0</span>.<span class="number">94</span>-<span class="number">5.3</span>.el6_4.<span class="number">1</span>.i686</span><br><span class="line">--&gt; Processing Dependency: libc.so.<span class="number">6</span>(GLIBC_2.<span class="number">8</span>) <span class="keyword">for</span> package: libselinux-<span class="number">2.0</span>.<span class="number">94</span>-<span class="number">5.3</span>.el6_4.<span class="number">1</span>.i686</span><br><span class="line">--&gt; Processing Dependency: ld-linux.so.<span class="number">2</span>(GLIBC_2.<span class="number">3</span>) <span class="keyword">for</span> package: libselinux-<span class="number">2.0</span>.<span class="number">94</span>-<span class="number">5.3</span>.el6_4.<span class="number">1</span>.i686</span><br><span class="line">--&gt; Processing Dependency: ld-linux.so.<span class="number">2</span> <span class="keyword">for</span> package: libselinux-<span class="number">2.0</span>.<span class="number">94</span>-<span class="number">5.3</span>.el6_4.<span class="number">1</span>.i686</span><br><span class="line">---&gt; Package libsepol-devel.x86_64 <span class="number">0</span>:<span class="number">2.0</span>.<span class="number">41</span>-<span class="number">4</span>.el6 will be installed</span><br><span class="line">--&gt; Running transaction check</span><br><span class="line">---&gt; Package glibc.i686 <span class="number">0</span>:<span class="number">2.12</span>-<span class="number">1.132</span>.el6_5.<span class="number">2</span> will be installed</span><br><span class="line">--&gt; Processing Dependency: libfreebl3.so(NSSRAWHASH_3.<span class="number">12.3</span>) <span class="keyword">for</span> package: glibc-<span class="number">2.12</span>-<span class="number">1.132</span>.el6_5.<span class="number">2</span>.i686</span><br><span class="line">--&gt; Processing Dependency: libfreebl3.so <span class="keyword">for</span> package: glibc-<span class="number">2.12</span>-<span class="number">1.132</span>.el6_5.<span class="number">2</span>.i686</span><br><span class="line">--&gt; Running transaction check</span><br><span class="line">---&gt; Package nss-softokn-freebl.i686 <span class="number">0</span>:<span class="number">3.14</span>.<span class="number">3</span>-<span class="number">10</span>.el6_5 will be installed</span><br><span class="line">--&gt; Finished Dependency Resolution</span><br><span class="line">Error:  Multilib version problems found. This often means that the root</span><br><span class="line">       cause is something <span class="keyword">else</span> and multilib version checking is just</span><br><span class="line">       pointing out that there is a problem. Eg.:</span><br><span class="line"></span><br><span class="line">         <span class="number">1</span>\. You have an upgrade <span class="keyword">for</span> libselinux <span class="built_in">which</span> is missing some</span><br><span class="line">            dependency that another package requires. Yum is trying to</span><br><span class="line">            solve this by installing an older version of libselinux of the</span><br><span class="line">            different architecture. If you exclude the bad architecture</span><br><span class="line">            yum will tell you what the root cause is (<span class="built_in">which</span> package</span><br><span class="line">            requires what). You can try redoing the upgrade with</span><br><span class="line">            --exclude libselinux.otherarch ... this should give you an error</span><br><span class="line">            message showing the root cause of the problem.</span><br><span class="line"></span><br><span class="line">         <span class="number">2</span>\. You have multiple architectures of libselinux installed, but</span><br><span class="line">            yum can only see an upgrade <span class="keyword">for</span> one of those arcitectures.</span><br><span class="line">            If you don<span class="string">'t want/need both architectures anymore then you</span><br><span class="line">            can remove the one with the missing update and everything</span><br><span class="line">            will work.</span><br><span class="line"></span><br><span class="line">         3\. You have duplicate versions of libselinux installed already.</span><br><span class="line">            You can use "yum check" to get yum show these errors.</span><br><span class="line"></span><br><span class="line">       ...you can also use --setopt=protected_multilib=false to remove</span><br><span class="line">       this checking, however this is almost never the correct thing to</span><br><span class="line">       do as something else is very likely to go wrong (often causing</span><br><span class="line">       much more problems).</span><br><span class="line"></span><br><span class="line">       Protected multilib versions: libselinux-2.0.94-5.3.el6_4.1.i686 != libselinux-2.0.94-5.3.0.1.el6.centos.plus.x86_64</span><br><span class="line"> You could try using --skip-broken to work around the problem</span><br><span class="line"> You could try running: rpm -Va --nofiles --nodigest</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>最后在一个日文的网站上找到了解决办法：</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install --enablerepo=centosplus openssl-devel</span><br></pre></td></tr></table></figure></p>
+<p>参考：<a href="http://blog.urban-theory.net/2014/06/16/openssl-devel-install-fails-on-centos-with-docker" target="_blank" rel="external">http://blog.urban-theory.net/2014/06/16/openssl-devel-install-fails-on-centos-with-docker</a></p>
 ]]></content>
     <summary type="html">
-    <![CDATA[<p>今天给一台CentOS系统安装openssl-devel时，出现了如下信息：</p>
-<pre><code>Loaded plugins: fastestmirror, security
-Repository updates <span class="keyword">is]]>
+    <![CDATA[<p>今天给一台CentOS系统安装openssl-devel时，出现了如下信息：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><b]]>
     </summary>
     
       <category term="centos" scheme="http://www.leelib.com/tags/centos/"/>
@@ -647,11 +430,7 @@ Repository updates <span class="keyword">is]]>
     
       <category term="yum" scheme="http://www.leelib.com/tags/yum/"/>
     
-      <category term="CentOS" scheme="http://www.leelib.com/categories/CentOS/"/>
-    
-      <category term="RedHat" scheme="http://www.leelib.com/categories/CentOS/RedHat/"/>
-    
-      <category term="经验总结" scheme="http://www.leelib.com/categories/CentOS/RedHat/%E7%BB%8F%E9%AA%8C%E6%80%BB%E7%BB%93/"/>
+      <category term="linux" scheme="http://www.leelib.com/categories/linux/"/>
     
   </entry>
   
@@ -660,25 +439,18 @@ Repository updates <span class="keyword">is]]>
     <link href="http://www.leelib.com/2014/04/08/dmesg-tail.html"/>
     <id>http://www.leelib.com/2014/04/08/dmesg-tail.html</id>
     <published>2014-04-07T16:37:23.000Z</published>
-    <updated>2015-09-17T09:03:43.920Z</updated>
-    <content type="html"><![CDATA[<p>当内核加载失败时，使用以下命令查看出错记录，可以帮助找到问题所在：</p>
-<pre><code>dmesg <span class="string">| tail -n 30</span>
-</code></pre>]]></content>
+    <updated>2015-09-18T07:07:49.995Z</updated>
+    <content type="html"><![CDATA[<p>当内核加载失败时，使用以下命令查看出错记录，可以帮助找到问题所在：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dmesg | tail -n <span class="number">30</span></span><br></pre></td></tr></table></figure></p>
+]]></content>
     <summary type="html">
-    <![CDATA[<p>当内核加载失败时，使用以下命令查看出错记录，可以帮助找到问题所在：</p>
-<pre><code>dmesg <span class="string">| tail -n 30</span>
-</code></pre>]]>
+    <![CDATA[<p>当内核加载失败时，使用以下命令查看出错记录，可以帮助找到问题所在：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></p]]>
     </summary>
     
       <category term="dmesg" scheme="http://www.leelib.com/tags/dmesg/"/>
     
       <category term="tail" scheme="http://www.leelib.com/tags/tail/"/>
     
-      <category term="CentOS" scheme="http://www.leelib.com/categories/CentOS/"/>
-    
-      <category term="RedHat" scheme="http://www.leelib.com/categories/CentOS/RedHat/"/>
-    
-      <category term="Ubuntu" scheme="http://www.leelib.com/categories/CentOS/RedHat/Ubuntu/"/>
+      <category term="linux" scheme="http://www.leelib.com/categories/linux/"/>
     
   </entry>
   
@@ -687,28 +459,26 @@ Repository updates <span class="keyword">is]]>
     <link href="http://www.leelib.com/2014/04/08/upgrade-linux-kernel-to-3-8-10.html"/>
     <id>http://www.leelib.com/2014/04/08/upgrade-linux-kernel-to-3-8-10.html</id>
     <published>2014-04-07T16:10:19.000Z</published>
-    <updated>2015-09-17T09:03:43.982Z</updated>
-    <content type="html"><![CDATA[<pre><code>yum install rpmdevtools yum-utils ncurses-devel make rpm-build rpm-devel
-wget https://www.kernel.org/pub/linux/kernel/<span class="variable">v3</span>.x/linux-3.8.10.tar.gz
-tar xvf linux-3.8.10.tar.gz
-cd linux-3.8.10
-make mrproper <span class="comment"># 第一次可忽略</span>
-make menuconfig <span class="comment"># 记得保存</span>
-make
-make modules_install
-make install<span class="instruction">
-new-kernel-pkg </span>--mkinitrd --depmod --install 3.8.10
-</code></pre>]]></content>
+    <updated>2015-09-18T07:07:50.078Z</updated>
+    <content type="html"><![CDATA[<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">yum install rpmdevtools yum-utils ncurses-devel make rpm-build rpm-devel</span><br><span class="line">wget https://www.kernel.org/pub/linux/kernel/v3.x/linux-<span class="number">3.8</span>.<span class="number">10</span>.tar.gz</span><br><span class="line">tar xvf linux-<span class="number">3.8</span>.<span class="number">10</span>.tar.gz</span><br><span class="line"><span class="built_in">cd</span> linux-<span class="number">3.8</span>.<span class="number">10</span></span><br><span class="line">make mrproper <span class="comment"># 第一次可忽略</span></span><br><span class="line">make menuconfig <span class="comment"># 记得保存</span></span><br><span class="line">make</span><br><span class="line">make modules_install</span><br><span class="line">make install</span><br><span class="line">new-kernel-pkg --mkinitrd --depmod --install <span class="number">3.8</span>.<span class="number">10</span></span><br></pre></td></tr></table></figure>
+]]></content>
     <summary type="html">
-    <![CDATA[<pre><code>yum install rpmdevtools yum-utils ncurses-devel make rpm-build rpm-devel
-wget https://www.kernel.org/pub/linux/kernel/<span class]]>
+    <![CDATA[<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class=]]>
     </summary>
     
-      <category term="CentOS" scheme="http://www.leelib.com/categories/CentOS/"/>
+      <category term="install" scheme="http://www.leelib.com/tags/install/"/>
     
-      <category term="RedHat" scheme="http://www.leelib.com/categories/CentOS/RedHat/"/>
+      <category term="kernel" scheme="http://www.leelib.com/tags/kernel/"/>
     
-      <category term="Ubuntu" scheme="http://www.leelib.com/categories/CentOS/RedHat/Ubuntu/"/>
+      <category term="make" scheme="http://www.leelib.com/tags/make/"/>
+    
+      <category term="menuconfig" scheme="http://www.leelib.com/tags/menuconfig/"/>
+    
+      <category term="mrproper" scheme="http://www.leelib.com/tags/mrproper/"/>
+    
+      <category term="upgrade" scheme="http://www.leelib.com/tags/upgrade/"/>
+    
+      <category term="linux" scheme="http://www.leelib.com/categories/linux/"/>
     
   </entry>
   
@@ -717,7 +487,7 @@ wget https://www.kernel.org/pub/linux/kernel/<span class]]>
     <link href="http://www.leelib.com/2014/03/30/fix-alienware-compal-embedded-system-control.html"/>
     <id>http://www.leelib.com/2014/03/30/fix-alienware-compal-embedded-system-control.html</id>
     <published>2014-03-29T21:05:56.000Z</published>
-    <updated>2015-09-17T09:03:43.936Z</updated>
+    <updated>2015-09-18T07:07:50.002Z</updated>
     <content type="html"><![CDATA[<p>每次重装系统后，装驱动很容易有一个名为“COMPAL Embedded System Control”的驱动未安装。<br>而使用驱动精灵等驱动智能安装类的软件安装后很容易出现驱动显示是装好了，但会提示个感叹号说明该设备无法正常工作。</p>
 <p>网上搜了半天终于找到一个说法：<br>这个驱动是热量控制，64位win7/win8无法完全安装设备管理器里更新驱动然后手动定位到C盘ProgramData里的Vista64安装即可</p>
 <p>尝试后问题解决。<br>记录此文章，留给跟我出现同样问题的朋友。希望能有所帮助。</p>
@@ -727,7 +497,7 @@ wget https://www.kernel.org/pub/linux/kernel/<span class]]>
 <p>网上搜了半天终于找到一个]]>
     </summary>
     
-      <category term="经验总结" scheme="http://www.leelib.com/categories/%E7%BB%8F%E9%AA%8C%E6%80%BB%E7%BB%93/"/>
+      <category term="summarys" scheme="http://www.leelib.com/categories/summarys/"/>
     
   </entry>
   
@@ -736,29 +506,16 @@ wget https://www.kernel.org/pub/linux/kernel/<span class]]>
     <link href="http://www.leelib.com/2013/11/23/boost-c4996-std-copy-impl.html"/>
     <id>http://www.leelib.com/2013/11/23/boost-c4996-std-copy-impl.html</id>
     <published>2013-11-23T05:21:44.000Z</published>
-    <updated>2015-09-17T09:03:43.920Z</updated>
-    <content type="html"><![CDATA[<p>原本的程序是控制台的。<br>但最近需要移植到windows下使用。<br>所以以MFC来做UI，代码照搬。<br>一面的一处代码使用了如下语句：</p>
-<pre><code>boost<span class="tag">::split</span>(v, <span class="built_in">data</span>, boost<span class="tag">::is_any_of</span>(_T(<span class="string">"n"</span>)));
-
-
-结果编译时出现了如下错误：
-
-error C4996: <span class="string">'std::_Copy_impl'</span>
-
-
-而且是无论怎么修改都不认，差点打算重写了。
-
-在网络中搜索了半天未果，只能自己分析。好在被我乱猜给猜对了。
-
-我猜是因为boost的<span class="built_in">string</span>和std的<span class="built_in">string</span>产生了冲突而导致的。
-所以添加上boost的<span class="built_in">string</span>引用后，问题得以解决。
-
-<span class="variable">#include</span> <span class="subst">&lt;</span>boost/algorithm/<span class="built_in">string</span><span class="built_in">.</span>hpp<span class="subst">&gt;</span>
-</code></pre><p>在此留字，希望能帮到遇到同样问题的人。</p>
+    <updated>2015-09-18T07:07:49.978Z</updated>
+    <content type="html"><![CDATA[<p>原本的程序是控制台的。<br>但最近需要移植到windows下使用。<br>所以以MFC来做UI，代码照搬。<br>一面的一处代码使用了如下语句：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">boost::split(v, data, boost::is_any_of(_T(<span class="string">"n"</span>)));</span><br></pre></td></tr></table></figure></p>
+<p>结果编译时出现了如下错误：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">error C4996: &#39;std::_Copy_impl&#39;</span><br></pre></td></tr></table></figure></p>
+<p>而且是无论怎么修改都不认，差点打算重写了。</p>
+<p>在网络中搜索了半天未果，只能自己分析。好在被我乱猜给猜对了。</p>
+<p>我猜是因为boost的string和std的string产生了冲突而导致的。<br>所以添加上boost的string引用后，问题得以解决。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;boost/algorithm/string.hpp&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>在此留字，希望能帮到遇到同样问题的人。</p>
 ]]></content>
     <summary type="html">
-    <![CDATA[<p>原本的程序是控制台的。<br>但最近需要移植到windows下使用。<br>所以以MFC来做UI，代码照搬。<br>一面的一处代码使用了如下语句：</p>
-<pre><code>boost<span class="tag">::split</span>(v, <span c]]>
+    <![CDATA[<p>原本的程序是控制台的。<br>但最近需要移植到windows下使用。<br>所以以MFC来做UI，代码照搬。<br>一面的一处代码使用了如下语句：<br><figure class="highlight cpp"><table><tr><td class="gutter">]]>
     </summary>
     
       <category term="C4996" scheme="http://www.leelib.com/tags/C4996/"/>
@@ -773,9 +530,7 @@ error C4996: <span class="string">'std::_Copy_impl'</span>
     
       <category term="string" scheme="http://www.leelib.com/tags/string/"/>
     
-      <category term="C/C++" scheme="http://www.leelib.com/categories/C-C/"/>
-    
-      <category term="经验总结" scheme="http://www.leelib.com/categories/C-C/%E7%BB%8F%E9%AA%8C%E6%80%BB%E7%BB%93/"/>
+      <category term="programing" scheme="http://www.leelib.com/categories/programing/"/>
     
   </entry>
   
@@ -784,15 +539,19 @@ error C4996: <span class="string">'std::_Copy_impl'</span>
     <link href="http://www.leelib.com/2013/11/01/httpd-permission-denied-make-sock-could-not-bind-to-address.html"/>
     <id>http://www.leelib.com/2013/11/01/httpd-permission-denied-make-sock-could-not-bind-to-address.html</id>
     <published>2013-11-01T00:36:55.000Z</published>
-    <updated>2015-09-17T09:03:43.967Z</updated>
-    <content type="html"><![CDATA[<p>原因：修改了conf里面的Listen端口</p>
-<p>解决：<br>1. 修改成SELinux安全机制里面默认允许的端口（80, 443, 488, 8008, 8009, 8443）等等。<br>2. 修改SELinux安全设置<br>如：</p>
-<pre><code>semanage port -<span class="tag">a</span> -t http_port_t -<span class="tag">p</span> tcp &lt;listen port&gt;
-</code></pre>]]></content>
+    <updated>2015-09-18T07:07:50.044Z</updated>
+    <content type="html"><![CDATA[<h1 id="原因">原因</h1><p>修改了conf里面的Listen端口</p>
+<h1 id="解决">解决</h1><ol>
+<li>修改成SELinux安全机制里面默认允许的端口（80, 443, 488, 8008, 8009, 8443）等等。</li>
+<li>修改SELinux安全设置<br>如：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">semanage port <span class="operator">-a</span> -t http_port_t -p tcp &lt;listen port&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+]]></content>
     <summary type="html">
-    <![CDATA[<p>原因：修改了conf里面的Listen端口</p>
-<p>解决：<br>1. 修改成SELinux安全机制里面默认允许的端口（80, 443, 488, 8008, 8009, 8443）等等。<br>2. 修改SELinux安全设置<br>如：</p>
-<pre><cod]]>
+    <![CDATA[<h1 id="原因">原因</h1><p>修改了conf里面的Listen端口</p>
+<h1 id="解决">解决</h1><ol>
+<li>修改成SELinux安全机制里面默认允许的端口（80, 443, 488, 8008, 8009, 8443）等等。</li>
+<li]]>
     </summary>
     
       <category term="SELinux" scheme="http://www.leelib.com/tags/SELinux/"/>
@@ -815,11 +574,7 @@ error C4996: <span class="string">'std::_Copy_impl'</span>
     
       <category term="semanage" scheme="http://www.leelib.com/tags/semanage/"/>
     
-      <category term="CentOS" scheme="http://www.leelib.com/categories/CentOS/"/>
-    
-      <category term="RedHat" scheme="http://www.leelib.com/categories/CentOS/RedHat/"/>
-    
-      <category term="Ubuntu" scheme="http://www.leelib.com/categories/CentOS/RedHat/Ubuntu/"/>
+      <category term="linux" scheme="http://www.leelib.com/categories/linux/"/>
     
   </entry>
   
@@ -828,16 +583,17 @@ error C4996: <span class="string">'std::_Copy_impl'</span>
     <link href="http://www.leelib.com/2013/10/30/fix-winrar-order.html"/>
     <id>http://www.leelib.com/2013/10/30/fix-winrar-order.html</id>
     <published>2013-10-29T16:24:38.000Z</published>
-    <updated>2015-09-17T09:03:43.951Z</updated>
-    <content type="html"><![CDATA[<p>下载游戏：《古墓丽影9》中文免安装绿色豪华硬盘版[1.1.732.1升级档][解压即玩]<br>光压缩包所有分卷加起来就有快10个G<br>结果用QQ旋风下载下来后成乱序的了<br>然后到网站上一看发现QQ旋风本身就把链接那些顺序没搞对。<br>参考下载地址：<a href="http://fenxiang.qq.com/x/3SSKsVNycfRNc3CJcuCA0~NHIcT5rX133GN0qnvKZltI" title="http://fenxiang.qq.com/x/3SSKsVNycfRNc3CJcuCA0~NHIcT5rX133GN0qnvKZltI" target="_blank" rel="external">http://fenxiang.qq.com/x/3SSKsVNycfRNc3CJcuCA0~NHIcT5rX133GN0qnvKZltI</a></p>
+    <updated>2015-09-18T07:07:50.022Z</updated>
+    <content type="html"><![CDATA[<p>下载游戏：<strong>《古墓丽影9》中文免安装绿色豪华硬盘版[1.1.732.1升级档][解压即玩]</strong><br>光压缩包所有分卷加起来就有快10个G<br>结果用QQ旋风下载下来后成乱序的了<br>然后到网站上一看发现QQ旋风本身就把链接那些顺序没搞对。<br>参考下载地址：<a href="http://fenxiang.qq.com/x/3SSKsVNycfRNc3CJcuCA0~NHIcT5rX133GN0qnvKZltI" title="http://fenxiang.qq.com/x/3SSKsVNycfRNc3CJcuCA0~NHIcT5rX133GN0qnvKZltI" target="_blank" rel="external">Tomb.Raider.9.v1.1.732.1.CHS.Green.Edition</a></p>
 <p>自己根据使用7-zip打开压缩包的“之前分割”和“之后分割”信息拼凑了半天，结果还是有一个文件“bigfile.001.tiger”不能成功解压。最终放弃。</p>
 <p>结果在网上搜索了半天，竟然发现“360压缩”竟然宣称自己可以修复。</p>
-<p>原文在：<a href="http://yasuo.360.cn/update.html" title="http://yasuo.360.cn/update.html" target="_blank" rel="external">http://yasuo.360.cn/update.html</a><br>1.6正式版（2011-5-26） 下<br><strong>5. 分卷压缩智能解压，智能判断解压rar分卷包时的文件夹名乱序问题。</strong></p>
+<p>原文在：<a href="http://yasuo.360.cn/update.html" title="http://yasuo.360.cn/update.html" target="_blank" rel="external">http://yasuo.360.cn/update.html</a></p>
+  <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1.6&#27491;&#24335;&#29256;&#65288;2011-5-26&#65289;&#10;  1.&#26234;&#33021;&#21387;&#32553;&#26041;&#24335;&#65292;360&#21387;&#32553;&#25903;&#25345;&#26234;&#33021;&#26497;&#36895;&#12289;&#24378;&#21147;&#21387;&#32553;&#12289;&#26631;&#20934;&#21387;&#32553;&#31561;&#21387;&#32553;&#26041;&#24335;&#12290;&#26234;&#33021;&#21387;&#32553;&#26681;&#25454;&#25991;&#20214;&#26234;&#33021;&#36873;&#25321;&#21387;&#32553;&#31639;&#27861;&#65292;&#22823;&#24133;&#25552;&#21319;&#21387;&#32553;&#36895;&#24230;&#12290;&#10;  2.&#22810;&#31181;&#26684;&#24335;&#25903;&#25345;&#65292;&#25903;&#25345;&#35299;&#21387;rar&#12289;zip&#12289;7z&#12289;iso&#31561;39&#31181;&#26684;&#24335;&#30340;&#21387;&#32553;&#25991;&#20214;&#12290;&#10;  3.&#35299;&#21387;&#36895;&#24230;&#26356;&#24555;&#65292;&#37319;&#29992;&#22810;&#32447;&#31243;&#35299;&#21387;&#22788;&#29702;&#65292;&#20248;&#21270;&#20102;&#35299;&#21387;&#36923;&#36753;&#65292;&#36895;&#24230;&#26356;&#24555;&#12290;&#10;  4.&#25439;&#22351;&#26684;&#24335;&#20860;&#23481;&#65292;&#23545;&#26684;&#24335;&#22836;&#26377;&#25439;&#22351;&#30340;&#21387;&#32553;&#21253;&#19968;&#26679;&#20462;&#22797;&#35299;&#21387;&#12290;&#10;* 5.&#20998;&#21367;&#21387;&#32553;&#26234;&#33021;&#35299;&#21387;&#65292;&#26234;&#33021;&#21028;&#26029;&#35299;&#21387;rar&#20998;&#21367;&#21253;&#26102;&#30340;&#25991;&#20214;&#22841;&#21517;&#20081;&#24207;&#38382;&#39064;&#12290;&#10;  6.&#26356;&#23433;&#20840;&#30340;&#21387;&#32553;&#36719;&#20214;&#65292;&#20869;&#21547;360&#20113;&#23433;&#20840;&#24341;&#25806;&#65292;&#23545;&#21387;&#32553;&#21253;&#20869;&#26408;&#39532;&#36827;&#34892;&#26816;&#27979;&#65292;&#26356;&#23433;&#20840;&#12290;&#10;  7.&#19981;&#26029;&#23436;&#21892;&#30340;&#32454;&#33410;&#20307;&#39564;&#65292;&#25903;&#25345;&#36339;&#36716;&#21040;&#26700;&#38754;&#12289;&#33258;&#21160;&#28040;&#37325;&#25991;&#20214;&#22841;&#31561;20&#22810;&#22788;&#30456;&#23545;&#20256;&#32479;&#21387;&#32553;&#36719;&#20214;&#30340;&#32454;&#33410;&#21151;&#33021;&#25913;&#36827;&#12290;</span><br></pre></td></tr></table></figure>
 <p>抱着尝试的心态，下载了一个最新版的安装上尝试后。发现真的正常解压了所有压缩包。<br>总算是解决了目前的尴尬问题，所以在此留文提醒有遇到跟我同样问题的朋友。</p>
 <p>成功解压版本：<a href="http://dl.360safe.com/360zip_beta_3.1.0.1071.exe" title="360zip_beta_3.1.0.1071" target="_blank" rel="external">360zip_beta_3.1.0.1071</a></p>
 ]]></content>
     <summary type="html">
-    <![CDATA[<p>下载游戏：《古墓丽影9》中文免安装绿色豪华硬盘版[1.1.732.1升级档][解压即玩]<br>光压缩包所有分卷加起来就有快10个G<br>结果用QQ旋风下载下来后成乱序的了<br>然后到网站上一看发现QQ旋风本身就把链接那些顺序没搞对。<br>参考下载地址：<a href]]>
+    <![CDATA[<p>下载游戏：<strong>《古墓丽影9》中文免安装绿色豪华硬盘版[1.1.732.1升级档][解压即玩]</strong><br>光压缩包所有分卷加起来就有快10个G<br>结果用QQ旋风下载下来后成乱序的了<br>然后到网站上一看发现QQ旋风本身就把链接那些顺序没搞对。<]]>
     </summary>
     
       <category term="360" scheme="http://www.leelib.com/tags/360/"/>
@@ -850,42 +606,7 @@ error C4996: <span class="string">'std::_Copy_impl'</span>
     
       <category term="winrar" scheme="http://www.leelib.com/tags/winrar/"/>
     
-      <category term="经验总结" scheme="http://www.leelib.com/categories/%E7%BB%8F%E9%AA%8C%E6%80%BB%E7%BB%93/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[让Socket通过HTTP代理通讯]]></title>
-    <link href="http://www.leelib.com/2013/10/29/make-socket-proxy.html"/>
-    <id>http://www.leelib.com/2013/10/29/make-socket-proxy.html</id>
-    <published>2013-10-29T08:06:54.000Z</published>
-    <updated>2015-09-17T09:03:43.967Z</updated>
-    <content type="html"><![CDATA[<h2 id="如果socket想使用HTTP代理，需要进行下面步骤：">如果socket想使用HTTP代理，需要进行下面步骤：</h2><ol>
-<li>connect到代理服务器</li>
-<li>send(Format(“CONNECT %s:%s HTTP/1.1rnUser-Agent: MyApp/0.1rnrn”, &lt;真正目标IP&gt;, &lt;真正目标端口&gt;)</li>
-<li>recv 数据，并且根据数据内容判断CONNECT协议是否成功（是否有返回”HTTP/1.1 200”）</li>
-<li>如果第3步成功了，那么这个socket就已经是通过HTTP代理来连接的了，剩下的该怎么发包收包都照旧了</li>
-</ol>
-]]></content>
-    <summary type="html">
-    <![CDATA[<h2 id="如果socket想使用HTTP代理，需要进行下面步骤：">如果socket想使用HTTP代理，需要进行下面步骤：</h2><ol>
-<li>connect到代理服务器</li>
-<li>send(Format(“CONNECT %s:%s HTTP/1.1rnUs]]>
-    </summary>
-    
-      <category term="connect" scheme="http://www.leelib.com/tags/connect/"/>
-    
-      <category term="http" scheme="http://www.leelib.com/tags/http/"/>
-    
-      <category term="proxy" scheme="http://www.leelib.com/tags/proxy/"/>
-    
-      <category term="recv" scheme="http://www.leelib.com/tags/recv/"/>
-    
-      <category term="socket" scheme="http://www.leelib.com/tags/socket/"/>
-    
-      <category term="C/C++" scheme="http://www.leelib.com/categories/C-C/"/>
-    
-      <category term="经验总结" scheme="http://www.leelib.com/categories/C-C/%E7%BB%8F%E9%AA%8C%E6%80%BB%E7%BB%93/"/>
+      <category term="summarys" scheme="http://www.leelib.com/categories/summarys/"/>
     
   </entry>
   

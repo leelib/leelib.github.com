@@ -83,6 +83,67 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2014/11/21/vs2013-use-atl.html" title="VS2013上直接使用ATL的注意事项" itemprop="url">VS2013上直接使用ATL的注意事项</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="leaker" target="_blank" itemprop="author">leaker</a>
+		
+  <p class="article-time">
+    <time datetime="2014-11-21T04:15:21.000Z" itemprop="datePublished"> 发表于 2014-11-21</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h3 id="不再需要导入atl-lib库了，直接包含以下头文件就可以了">不再需要导入atl.lib库了，直接包含以下头文件就可以了</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;atlbase.h&gt;</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;atlcom.h&gt;</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;atlctl.h&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="要使用_AtlAxAttachControl_等函数的话，则必须初始化ATL模块">要使用 AtlAxAttachControl 等函数的话，则必须初始化ATL模块</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">CComModule _Module;</span><br><span class="line">_pAtlModule = &amp;amp;_Module;</span><br></pre></td></tr></table></figure>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/programing/">programing</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/atl/">atl</a><a href="/tags/com/">com</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2014/11/01/centos-install-go.html" title="CentOS安装GO编译环境" itemprop="url">CentOS安装GO编译环境</a>
   </h1>
   <p class="article-author">By
@@ -97,36 +158,10 @@
     <div class="article-content">
         
         <p>我们这里使用源码编译安装，直接按顺序执行下列命令就可以成功(我都是假设已经有root权限的情况下，所以执行之前请确认自己已有root权限)：</p>
-<pre><code>yum <span class="operator"><span class="keyword">install</span> -y mercurial gcc-c++ gcc
-mkdir /usr/<span class="keyword">local</span>
-cd /usr/<span class="keyword">local</span>
-hg clone -r <span class="keyword">release</span> https://<span class="keyword">go</span>.googlecode.com/hg/ <span class="keyword">go</span>
-cd /usr/<span class="keyword">local</span>/<span class="keyword">go</span>/src
-chmox +x <span class="keyword">all</span>.bash
-./<span class="keyword">all</span>.bash
-mkdir /root/<span class="keyword">go</span>
-export GOROOT=/usr/<span class="keyword">local</span>/<span class="keyword">go</span>
-export GOPATH=/root/<span class="keyword">go</span>
-export GOBIN=/usr/<span class="keyword">local</span>/<span class="keyword">go</span>/<span class="keyword">bin</span>
-export GOOS=linux
-export PATH=.:$PATH:/usr/<span class="keyword">local</span>/<span class="keyword">go</span>/<span class="keyword">bin</span>
-
-
-现在应该已经可以执行<span class="keyword">go</span>命令测试了：
-
-[root@root]# <span class="keyword">go</span> <span class="keyword">version</span>
-<span class="keyword">go</span> <span class="keyword">version</span> go1.3.3 linux/amd64
-
-
-如果想要每次进入bash时都拥有<span class="keyword">go</span>环境，则需要新建一个文件：**/etc/<span class="keyword">profile</span>.d/<span class="keyword">go</span>.sh**
-并写入以下内容
-
-export GOROOT=/usr/<span class="keyword">local</span>/<span class="keyword">go</span>
-export GOPATH=/root/<span class="keyword">go</span>
-export GOBIN=/usr/<span class="keyword">local</span>/<span class="keyword">go</span>/<span class="keyword">bin</span>
-export GOOS=linux
-export PATH=.:$PATH:/usr/<span class="keyword">local</span>/<span class="keyword">go</span>/<span class="keyword">bin</span></span>
-</code></pre><p>现在随时都可以执行go命令了。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">yum install -y mercurial gcc-c++ gcc</span><br><span class="line">mkdir /usr/<span class="built_in">local</span></span><br><span class="line"><span class="built_in">cd</span> /usr/<span class="built_in">local</span></span><br><span class="line">hg <span class="built_in">clone</span> -r release https://go.googlecode.com/hg/ go</span><br><span class="line"><span class="built_in">cd</span> /usr/<span class="built_in">local</span>/go/src</span><br><span class="line">chmox +x all.bash</span><br><span class="line">./all.bash</span><br><span class="line">mkdir /root/go</span><br><span class="line"><span class="built_in">export</span> GOROOT=/usr/<span class="built_in">local</span>/go</span><br><span class="line"><span class="built_in">export</span> GOPATH=/root/go</span><br><span class="line"><span class="built_in">export</span> GOBIN=/usr/<span class="built_in">local</span>/go/bin</span><br><span class="line"><span class="built_in">export</span> GOOS=linux</span><br><span class="line"><span class="built_in">export</span> PATH=.:<span class="variable">$PATH</span>:/usr/<span class="built_in">local</span>/go/bin</span><br></pre></td></tr></table></figure>
+<p>现在应该已经可以执行go命令测试了：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@root]<span class="comment"># go version</span></span><br><span class="line">go version go1.<span class="number">3.3</span> linux/amd64</span><br></pre></td></tr></table></figure></p>
+<p>如果想要每次进入bash时都拥有go环境，则需要新建一个文件：<strong>/etc/profile.d/go.sh</strong> 并写入以下内容<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> GOROOT=/usr/<span class="built_in">local</span>/go</span><br><span class="line"><span class="built_in">export</span> GOPATH=/root/go</span><br><span class="line"><span class="built_in">export</span> GOBIN=/usr/<span class="built_in">local</span>/go/bin</span><br><span class="line"><span class="built_in">export</span> GOOS=linux</span><br><span class="line"><span class="built_in">export</span> PATH=.:<span class="variable">$PATH</span>:/usr/<span class="built_in">local</span>/go/bin</span><br></pre></td></tr></table></figure></p>
+<p>现在随时都可以执行go命令了。</p>
 <p>:)</p>
 
         
@@ -140,7 +175,7 @@ export PATH=.:$PATH:/usr/<span class="keyword">local</span>/<span class="keyword
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/CentOS/">CentOS</a>
+  <a class="article-category-link" href="/categories/linux/">linux</a>
 </div>
 
 
@@ -187,21 +222,9 @@ export PATH=.:$PATH:/usr/<span class="keyword">local</span>/<span class="keyword
 </header>
     <div class="article-content">
         
-        <p>先执行下面这个bash：</p>
-<pre><code>cat &gt; /etc/yum<span class="class">.repos</span><span class="class">.d</span>/nginx<span class="class">.repo</span> &lt;&lt; EOF
-[nginx]
-name=nginx repo
-baseurl=http:<span class="comment">//nginx.org/packages/centos/6/x86_64</span>
-gpgcheck=<span class="number">0</span>
-enabled=<span class="number">1</span>
-EOF
-
-
-然后现在试试：
-
-yum update
-yum install nginx
-</code></pre><p>是不是直接安装了最新版的nginx呢？</p>
+        <h1 id="添加nginx的repo">添加nginx的repo</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">'[nginx]</span><br><span class="line">name=nginx repo</span><br><span class="line">baseurl=http://nginx.org/packages/centos/6/x86_64</span><br><span class="line">gpgcheck=0</span><br><span class="line">enabled=1'</span> &gt; /etc/yum.repos.d/nginx.repo</span><br></pre></td></tr></table></figure>
+<h1 id="安装">安装</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum update</span><br><span class="line">yum install nginx</span><br></pre></td></tr></table></figure>
+<p>是不是直接安装了最新版的nginx呢<br> ( ͡° ͜ʖ ͡°) </p>
 
         
         
@@ -214,9 +237,14 @@ yum install nginx
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/CentOS/">CentOS</a>
+  <a class="article-category-link" href="/categories/linux/">linux</a>
 </div>
 
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/nginx/">nginx</a><a href="/tags/repos/">repos</a><a href="/tags/yum/">yum</a>
+  </div>
 
 </div>
 
@@ -256,85 +284,9 @@ yum install nginx
 </header>
     <div class="article-content">
         
-        <p>今天给一台CentOS系统安装openssl-devel时，出现了如下信息：</p>
-<pre><code>Loaded plugins: fastestmirror, security
-Repository updates <span class="keyword">is</span> listed more than once <span class="keyword">in</span> <span class="keyword">the</span> configuration
-Repository centosplus <span class="keyword">is</span> listed more than once <span class="keyword">in</span> <span class="keyword">the</span> configuration
-Repository contrib <span class="keyword">is</span> listed more than once <span class="keyword">in</span> <span class="keyword">the</span> configuration
-Repository extras <span class="keyword">is</span> listed more than once <span class="keyword">in</span> <span class="keyword">the</span> configuration
-Loading mirror speeds <span class="keyword">from</span> cached hostfile
- * base: mirrors.tuna.tsinghua.edu.cn
- * extras: mirrors.tuna.tsinghua.edu.cn
- * updates: mirrors.tuna.tsinghua.edu.cn
-Setting up Install Process
-Resolving Dependencies
-<span class="comment">--&gt; Running transaction check</span>
-<span class="comment">---&gt; Package openssl-devel.x86_64 0:1.0.1e-16.el6_5.14 will be installed</span>
-<span class="comment">--&gt; Processing Dependency: krb5-devel for package: openssl-devel-1.0.1e-16.el6_5.14.x86_64</span>
-<span class="comment">--&gt; Running transaction check</span>
-<span class="comment">---&gt; Package krb5-devel.x86_64 0:1.10.3-15.el6_5.1 will be installed</span>
-<span class="comment">--&gt; Processing Dependency: libselinux-devel for package: krb5-devel-1.10.3-15.el6_5.1.x86_64</span>
-<span class="comment">--&gt; Processing Dependency: libcom_err-devel for package: krb5-devel-1.10.3-15.el6_5.1.x86_64</span>
-<span class="comment">--&gt; Processing Dependency: keyutils-libs-devel for package: krb5-devel-1.10.3-15.el6_5.1.x86_64</span>
-<span class="comment">--&gt; Running transaction check</span>
-<span class="comment">---&gt; Package keyutils-libs-devel.x86_64 0:1.4-4.el6 will be installed</span>
-<span class="comment">---&gt; Package libcom_err-devel.x86_64 0:1.41.12-18.el6 will be installed</span>
-<span class="comment">---&gt; Package libselinux-devel.x86_64 0:2.0.94-5.3.el6_4.1 will be installed</span>
-<span class="comment">--&gt; Processing Dependency: libselinux = 2.0.94-5.3.el6_4.1 for package: libselinux-devel-2.0.94-5.3.el6_4.1.x86_64</span>
-<span class="comment">--&gt; Processing Dependency: libsepol-devel &gt;= 2.0.32-1 for package: libselinux-devel-2.0.94-5.3.el6_4.1.x86_64</span>
-<span class="comment">--&gt; Processing Dependency: pkgconfig(libsepol) for package: libselinux-devel-2.0.94-5.3.el6_4.1.x86_64</span>
-<span class="comment">--&gt; Running transaction check</span>
-<span class="comment">---&gt; Package libselinux.i686 0:2.0.94-5.3.el6_4.1 will be installed</span>
-<span class="comment">--&gt; Processing Dependency: libdl.so.2(GLIBC_2.1) for package: libselinux-2.0.94-5.3.el6_4.1.i686</span>
-<span class="comment">--&gt; Processing Dependency: libdl.so.2(GLIBC_2.0) for package: libselinux-2.0.94-5.3.el6_4.1.i686</span>
-<span class="comment">--&gt; Processing Dependency: libdl.so.2 for package: libselinux-2.0.94-5.3.el6_4.1.i686</span>
-<span class="comment">--&gt; Processing Dependency: libc.so.6(GLIBC_2.8) for package: libselinux-2.0.94-5.3.el6_4.1.i686</span>
-<span class="comment">--&gt; Processing Dependency: ld-linux.so.2(GLIBC_2.3) for package: libselinux-2.0.94-5.3.el6_4.1.i686</span>
-<span class="comment">--&gt; Processing Dependency: ld-linux.so.2 for package: libselinux-2.0.94-5.3.el6_4.1.i686</span>
-<span class="comment">---&gt; Package libsepol-devel.x86_64 0:2.0.41-4.el6 will be installed</span>
-<span class="comment">--&gt; Running transaction check</span>
-<span class="comment">---&gt; Package glibc.i686 0:2.12-1.132.el6_5.2 will be installed</span>
-<span class="comment">--&gt; Processing Dependency: libfreebl3.so(NSSRAWHASH_3.12.3) for package: glibc-2.12-1.132.el6_5.2.i686</span>
-<span class="comment">--&gt; Processing Dependency: libfreebl3.so for package: glibc-2.12-1.132.el6_5.2.i686</span>
-<span class="comment">--&gt; Running transaction check</span>
-<span class="comment">---&gt; Package nss-softokn-freebl.i686 0:3.14.3-10.el6_5 will be installed</span>
-<span class="comment">--&gt; Finished Dependency Resolution</span>
-Error:  Multilib <span class="property">version</span> problems found. This often means <span class="keyword">that</span> <span class="keyword">the</span> root
-       cause <span class="keyword">is</span> something <span class="keyword">else</span> <span class="keyword">and</span> multilib <span class="property">version</span> checking <span class="keyword">is</span> just
-       pointing out <span class="keyword">that</span> there <span class="keyword">is</span> a problem. Eg.:
-
-         <span class="number">1</span>\. You have an upgrade <span class="keyword">for</span> libselinux which <span class="keyword">is</span> missing <span class="keyword">some</span>
-            dependency <span class="keyword">that</span> another package requires. Yum <span class="keyword">is</span> trying <span class="keyword">to</span>
-            solve this <span class="keyword">by</span> installing an older <span class="property">version</span> <span class="keyword">of</span> libselinux <span class="keyword">of</span> <span class="keyword">the</span>
-            different architecture. If you exclude <span class="keyword">the</span> bad architecture
-            yum will <span class="keyword">tell</span> you what <span class="keyword">the</span> root cause <span class="keyword">is</span> (which package
-            requires what). You can <span class="keyword">try</span> redoing <span class="keyword">the</span> upgrade <span class="keyword">with</span>
-            <span class="comment">--exclude libselinux.otherarch ... this should give you an error</span>
-            message showing <span class="keyword">the</span> root cause <span class="keyword">of</span> <span class="keyword">the</span> problem.
-
-         <span class="number">2</span>\. You have multiple architectures <span class="keyword">of</span> libselinux installed, <span class="keyword">but</span>
-            yum can only see an upgrade <span class="keyword">for</span> one <span class="keyword">of</span> those arcitectures.
-            If you don't want/need both architectures anymore <span class="keyword">then</span> you
-            can remove <span class="keyword">the</span> one <span class="keyword">with</span> <span class="keyword">the</span> missing update <span class="keyword">and</span> everything
-            will work.
-
-         <span class="number">3</span>\. You have duplicate versions <span class="keyword">of</span> libselinux installed already.
-            You can use <span class="string">"yum check"</span> <span class="keyword">to</span> <span class="keyword">get</span> yum show these errors.
-
-       ...you can also use <span class="comment">--setopt=protected_multilib=false to remove</span>
-       this checking, however this <span class="keyword">is</span> almost never <span class="keyword">the</span> correct thing <span class="keyword">to</span>
-       do <span class="keyword">as</span> something <span class="keyword">else</span> <span class="keyword">is</span> very likely <span class="keyword">to</span> go wrong (often causing
-       much more problems).
-
-       Protected multilib versions: libselinux-<span class="number">2.0</span>.94-<span class="number">5.3</span>.el6_4.1.i686 != libselinux-<span class="number">2.0</span>.94-<span class="number">5.3</span>.0.1.el6.centos.plus.x86_64
- You could <span class="keyword">try</span> using <span class="comment">--skip-broken to work around the problem</span>
- You could <span class="keyword">try</span> <span class="property">running</span>: rpm -Va <span class="comment">--nofiles --nodigest</span>
-
-
-**最后在一个日文的网站上找到了解决办法：**
-
-yum install <span class="comment">--enablerepo=centosplus openssl-devel</span>
-</code></pre><p>引用：<a href="http://blog.urban-theory.net/2014/06/16/openssl-devel-install-fails-on-centos-with-docker" target="_blank" rel="external">http://blog.urban-theory.net/2014/06/16/openssl-devel-install-fails-on-centos-with-docker</a></p>
+        <p>今天给一台CentOS系统安装openssl-devel时，出现了如下信息：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line">[root@centos]<span class="comment"># yum install -y openssl-devel</span></span><br><span class="line">Loaded plugins: fastestmirror, security</span><br><span class="line">Repository updates is listed more than once <span class="keyword">in</span> the configuration</span><br><span class="line">Repository centosplus is listed more than once <span class="keyword">in</span> the configuration</span><br><span class="line">Repository contrib is listed more than once <span class="keyword">in</span> the configuration</span><br><span class="line">Repository extras is listed more than once <span class="keyword">in</span> the configuration</span><br><span class="line">Loading mirror speeds from cached hostfile</span><br><span class="line"> * base: mirrors.tuna.tsinghua.edu.cn</span><br><span class="line"> * extras: mirrors.tuna.tsinghua.edu.cn</span><br><span class="line"> * updates: mirrors.tuna.tsinghua.edu.cn</span><br><span class="line">Setting up Install Process</span><br><span class="line">Resolving Dependencies</span><br><span class="line">--&gt; Running transaction check</span><br><span class="line">---&gt; Package openssl-devel.x86_64 <span class="number">0</span>:<span class="number">1.0</span>.<span class="number">1</span>e-<span class="number">16</span>.el6_5.<span class="number">14</span> will be installed</span><br><span class="line">--&gt; Processing Dependency: krb5-devel <span class="keyword">for</span> package: openssl-devel-<span class="number">1.0</span>.<span class="number">1</span>e-<span class="number">16</span>.el6_5.<span class="number">14</span>.x86_64</span><br><span class="line">--&gt; Running transaction check</span><br><span class="line">---&gt; Package krb5-devel.x86_64 <span class="number">0</span>:<span class="number">1.10</span>.<span class="number">3</span>-<span class="number">15</span>.el6_5.<span class="number">1</span> will be installed</span><br><span class="line">--&gt; Processing Dependency: libselinux-devel <span class="keyword">for</span> package: krb5-devel-<span class="number">1.10</span>.<span class="number">3</span>-<span class="number">15</span>.el6_5.<span class="number">1</span>.x86_64</span><br><span class="line">--&gt; Processing Dependency: libcom_err-devel <span class="keyword">for</span> package: krb5-devel-<span class="number">1.10</span>.<span class="number">3</span>-<span class="number">15</span>.el6_5.<span class="number">1</span>.x86_64</span><br><span class="line">--&gt; Processing Dependency: keyutils-libs-devel <span class="keyword">for</span> package: krb5-devel-<span class="number">1.10</span>.<span class="number">3</span>-<span class="number">15</span>.el6_5.<span class="number">1</span>.x86_64</span><br><span class="line">--&gt; Running transaction check</span><br><span class="line">---&gt; Package keyutils-libs-devel.x86_64 <span class="number">0</span>:<span class="number">1.4</span>-<span class="number">4</span>.el6 will be installed</span><br><span class="line">---&gt; Package libcom_err-devel.x86_64 <span class="number">0</span>:<span class="number">1.41</span>.<span class="number">12</span>-<span class="number">18</span>.el6 will be installed</span><br><span class="line">---&gt; Package libselinux-devel.x86_64 <span class="number">0</span>:<span class="number">2.0</span>.<span class="number">94</span>-<span class="number">5.3</span>.el6_4.<span class="number">1</span> will be installed</span><br><span class="line">--&gt; Processing Dependency: libselinux = <span class="number">2.0</span>.<span class="number">94</span>-<span class="number">5.3</span>.el6_4.<span class="number">1</span> <span class="keyword">for</span> package: libselinux-devel-<span class="number">2.0</span>.<span class="number">94</span>-<span class="number">5.3</span>.el6_4.<span class="number">1</span>.x86_64</span><br><span class="line">--&gt; Processing Dependency: libsepol-devel &gt;= <span class="number">2.0</span>.<span class="number">32</span>-<span class="number">1</span> <span class="keyword">for</span> package: libselinux-devel-<span class="number">2.0</span>.<span class="number">94</span>-<span class="number">5.3</span>.el6_4.<span class="number">1</span>.x86_64</span><br><span class="line">--&gt; Processing Dependency: pkgconfig(libsepol) <span class="keyword">for</span> package: libselinux-devel-<span class="number">2.0</span>.<span class="number">94</span>-<span class="number">5.3</span>.el6_4.<span class="number">1</span>.x86_64</span><br><span class="line">--&gt; Running transaction check</span><br><span class="line">---&gt; Package libselinux.i686 <span class="number">0</span>:<span class="number">2.0</span>.<span class="number">94</span>-<span class="number">5.3</span>.el6_4.<span class="number">1</span> will be installed</span><br><span class="line">--&gt; Processing Dependency: libdl.so.<span class="number">2</span>(GLIBC_2.<span class="number">1</span>) <span class="keyword">for</span> package: libselinux-<span class="number">2.0</span>.<span class="number">94</span>-<span class="number">5.3</span>.el6_4.<span class="number">1</span>.i686</span><br><span class="line">--&gt; Processing Dependency: libdl.so.<span class="number">2</span>(GLIBC_2.<span class="number">0</span>) <span class="keyword">for</span> package: libselinux-<span class="number">2.0</span>.<span class="number">94</span>-<span class="number">5.3</span>.el6_4.<span class="number">1</span>.i686</span><br><span class="line">--&gt; Processing Dependency: libdl.so.<span class="number">2</span> <span class="keyword">for</span> package: libselinux-<span class="number">2.0</span>.<span class="number">94</span>-<span class="number">5.3</span>.el6_4.<span class="number">1</span>.i686</span><br><span class="line">--&gt; Processing Dependency: libc.so.<span class="number">6</span>(GLIBC_2.<span class="number">8</span>) <span class="keyword">for</span> package: libselinux-<span class="number">2.0</span>.<span class="number">94</span>-<span class="number">5.3</span>.el6_4.<span class="number">1</span>.i686</span><br><span class="line">--&gt; Processing Dependency: ld-linux.so.<span class="number">2</span>(GLIBC_2.<span class="number">3</span>) <span class="keyword">for</span> package: libselinux-<span class="number">2.0</span>.<span class="number">94</span>-<span class="number">5.3</span>.el6_4.<span class="number">1</span>.i686</span><br><span class="line">--&gt; Processing Dependency: ld-linux.so.<span class="number">2</span> <span class="keyword">for</span> package: libselinux-<span class="number">2.0</span>.<span class="number">94</span>-<span class="number">5.3</span>.el6_4.<span class="number">1</span>.i686</span><br><span class="line">---&gt; Package libsepol-devel.x86_64 <span class="number">0</span>:<span class="number">2.0</span>.<span class="number">41</span>-<span class="number">4</span>.el6 will be installed</span><br><span class="line">--&gt; Running transaction check</span><br><span class="line">---&gt; Package glibc.i686 <span class="number">0</span>:<span class="number">2.12</span>-<span class="number">1.132</span>.el6_5.<span class="number">2</span> will be installed</span><br><span class="line">--&gt; Processing Dependency: libfreebl3.so(NSSRAWHASH_3.<span class="number">12.3</span>) <span class="keyword">for</span> package: glibc-<span class="number">2.12</span>-<span class="number">1.132</span>.el6_5.<span class="number">2</span>.i686</span><br><span class="line">--&gt; Processing Dependency: libfreebl3.so <span class="keyword">for</span> package: glibc-<span class="number">2.12</span>-<span class="number">1.132</span>.el6_5.<span class="number">2</span>.i686</span><br><span class="line">--&gt; Running transaction check</span><br><span class="line">---&gt; Package nss-softokn-freebl.i686 <span class="number">0</span>:<span class="number">3.14</span>.<span class="number">3</span>-<span class="number">10</span>.el6_5 will be installed</span><br><span class="line">--&gt; Finished Dependency Resolution</span><br><span class="line">Error:  Multilib version problems found. This often means that the root</span><br><span class="line">       cause is something <span class="keyword">else</span> and multilib version checking is just</span><br><span class="line">       pointing out that there is a problem. Eg.:</span><br><span class="line"></span><br><span class="line">         <span class="number">1</span>\. You have an upgrade <span class="keyword">for</span> libselinux <span class="built_in">which</span> is missing some</span><br><span class="line">            dependency that another package requires. Yum is trying to</span><br><span class="line">            solve this by installing an older version of libselinux of the</span><br><span class="line">            different architecture. If you exclude the bad architecture</span><br><span class="line">            yum will tell you what the root cause is (<span class="built_in">which</span> package</span><br><span class="line">            requires what). You can try redoing the upgrade with</span><br><span class="line">            --exclude libselinux.otherarch ... this should give you an error</span><br><span class="line">            message showing the root cause of the problem.</span><br><span class="line"></span><br><span class="line">         <span class="number">2</span>\. You have multiple architectures of libselinux installed, but</span><br><span class="line">            yum can only see an upgrade <span class="keyword">for</span> one of those arcitectures.</span><br><span class="line">            If you don<span class="string">'t want/need both architectures anymore then you</span><br><span class="line">            can remove the one with the missing update and everything</span><br><span class="line">            will work.</span><br><span class="line"></span><br><span class="line">         3\. You have duplicate versions of libselinux installed already.</span><br><span class="line">            You can use "yum check" to get yum show these errors.</span><br><span class="line"></span><br><span class="line">       ...you can also use --setopt=protected_multilib=false to remove</span><br><span class="line">       this checking, however this is almost never the correct thing to</span><br><span class="line">       do as something else is very likely to go wrong (often causing</span><br><span class="line">       much more problems).</span><br><span class="line"></span><br><span class="line">       Protected multilib versions: libselinux-2.0.94-5.3.el6_4.1.i686 != libselinux-2.0.94-5.3.0.1.el6.centos.plus.x86_64</span><br><span class="line"> You could try using --skip-broken to work around the problem</span><br><span class="line"> You could try running: rpm -Va --nofiles --nodigest</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>最后在一个日文的网站上找到了解决办法：</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install --enablerepo=centosplus openssl-devel</span><br></pre></td></tr></table></figure></p>
+<p>参考：<a href="http://blog.urban-theory.net/2014/06/16/openssl-devel-install-fails-on-centos-with-docker" target="_blank" rel="external">http://blog.urban-theory.net/2014/06/16/openssl-devel-install-fails-on-centos-with-docker</a></p>
 
         
         
@@ -347,7 +299,7 @@ yum install <span class="comment">--enablerepo=centosplus openssl-devel</span>
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/CentOS/">CentOS</a>►<a class="article-category-link" href="/categories/CentOS/RedHat/">RedHat</a>►<a class="article-category-link" href="/categories/CentOS/RedHat/经验总结/">经验总结</a>
+  <a class="article-category-link" href="/categories/linux/">linux</a>
 </div>
 
 
@@ -394,9 +346,8 @@ yum install <span class="comment">--enablerepo=centosplus openssl-devel</span>
 </header>
     <div class="article-content">
         
-        <p>当内核加载失败时，使用以下命令查看出错记录，可以帮助找到问题所在：</p>
-<pre><code>dmesg <span class="string">| tail -n 30</span>
-</code></pre>
+        <p>当内核加载失败时，使用以下命令查看出错记录，可以帮助找到问题所在：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dmesg | tail -n <span class="number">30</span></span><br></pre></td></tr></table></figure></p>
+
         
         
         <p class="article-more-link">
@@ -408,7 +359,7 @@ yum install <span class="comment">--enablerepo=centosplus openssl-devel</span>
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/CentOS/">CentOS</a>►<a class="article-category-link" href="/categories/CentOS/RedHat/">RedHat</a>►<a class="article-category-link" href="/categories/CentOS/RedHat/Ubuntu/">Ubuntu</a>
+  <a class="article-category-link" href="/categories/linux/">linux</a>
 </div>
 
 
@@ -455,17 +406,8 @@ yum install <span class="comment">--enablerepo=centosplus openssl-devel</span>
 </header>
     <div class="article-content">
         
-        <pre><code>yum install rpmdevtools yum-utils ncurses-devel make rpm-build rpm-devel
-wget https://www.kernel.org/pub/linux/kernel/<span class="variable">v3</span>.x/linux-3.8.10.tar.gz
-tar xvf linux-3.8.10.tar.gz
-cd linux-3.8.10
-make mrproper <span class="comment"># 第一次可忽略</span>
-make menuconfig <span class="comment"># 记得保存</span>
-make
-make modules_install
-make install<span class="instruction">
-new-kernel-pkg </span>--mkinitrd --depmod --install 3.8.10
-</code></pre>
+        <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">yum install rpmdevtools yum-utils ncurses-devel make rpm-build rpm-devel</span><br><span class="line">wget https://www.kernel.org/pub/linux/kernel/v3.x/linux-<span class="number">3.8</span>.<span class="number">10</span>.tar.gz</span><br><span class="line">tar xvf linux-<span class="number">3.8</span>.<span class="number">10</span>.tar.gz</span><br><span class="line"><span class="built_in">cd</span> linux-<span class="number">3.8</span>.<span class="number">10</span></span><br><span class="line">make mrproper <span class="comment"># 第一次可忽略</span></span><br><span class="line">make menuconfig <span class="comment"># 记得保存</span></span><br><span class="line">make</span><br><span class="line">make modules_install</span><br><span class="line">make install</span><br><span class="line">new-kernel-pkg --mkinitrd --depmod --install <span class="number">3.8</span>.<span class="number">10</span></span><br></pre></td></tr></table></figure>
+
         
         
         <p class="article-more-link">
@@ -477,9 +419,14 @@ new-kernel-pkg </span>--mkinitrd --depmod --install 3.8.10
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/CentOS/">CentOS</a>►<a class="article-category-link" href="/categories/CentOS/RedHat/">RedHat</a>►<a class="article-category-link" href="/categories/CentOS/RedHat/Ubuntu/">Ubuntu</a>
+  <a class="article-category-link" href="/categories/linux/">linux</a>
 </div>
 
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/install/">install</a><a href="/tags/kernel/">kernel</a><a href="/tags/make/">make</a><a href="/tags/menuconfig/">menuconfig</a><a href="/tags/mrproper/">mrproper</a><a href="/tags/upgrade/">upgrade</a>
+  </div>
 
 </div>
 
@@ -534,7 +481,7 @@ new-kernel-pkg </span>--mkinitrd --depmod --install 3.8.10
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/经验总结/">经验总结</a>
+  <a class="article-category-link" href="/categories/summarys/">summarys</a>
 </div>
 
 
@@ -576,24 +523,12 @@ new-kernel-pkg </span>--mkinitrd --depmod --install 3.8.10
 </header>
     <div class="article-content">
         
-        <p>原本的程序是控制台的。<br>但最近需要移植到windows下使用。<br>所以以MFC来做UI，代码照搬。<br>一面的一处代码使用了如下语句：</p>
-<pre><code>boost<span class="tag">::split</span>(v, <span class="built_in">data</span>, boost<span class="tag">::is_any_of</span>(_T(<span class="string">"n"</span>)));
-
-
-结果编译时出现了如下错误：
-
-error C4996: <span class="string">'std::_Copy_impl'</span>
-
-
-而且是无论怎么修改都不认，差点打算重写了。
-
-在网络中搜索了半天未果，只能自己分析。好在被我乱猜给猜对了。
-
-我猜是因为boost的<span class="built_in">string</span>和std的<span class="built_in">string</span>产生了冲突而导致的。
-所以添加上boost的<span class="built_in">string</span>引用后，问题得以解决。
-
-<span class="variable">#include</span> <span class="subst">&lt;</span>boost/algorithm/<span class="built_in">string</span><span class="built_in">.</span>hpp<span class="subst">&gt;</span>
-</code></pre><p>在此留字，希望能帮到遇到同样问题的人。</p>
+        <p>原本的程序是控制台的。<br>但最近需要移植到windows下使用。<br>所以以MFC来做UI，代码照搬。<br>一面的一处代码使用了如下语句：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">boost::split(v, data, boost::is_any_of(_T(<span class="string">"n"</span>)));</span><br></pre></td></tr></table></figure></p>
+<p>结果编译时出现了如下错误：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">error C4996: &#39;std::_Copy_impl&#39;</span><br></pre></td></tr></table></figure></p>
+<p>而且是无论怎么修改都不认，差点打算重写了。</p>
+<p>在网络中搜索了半天未果，只能自己分析。好在被我乱猜给猜对了。</p>
+<p>我猜是因为boost的string和std的string产生了冲突而导致的。<br>所以添加上boost的string引用后，问题得以解决。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;boost/algorithm/string.hpp&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>在此留字，希望能帮到遇到同样问题的人。</p>
 
         
         
@@ -606,7 +541,7 @@ error C4996: <span class="string">'std::_Copy_impl'</span>
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/C-C/">C/C++</a>►<a class="article-category-link" href="/categories/C-C/经验总结/">经验总结</a>
+  <a class="article-category-link" href="/categories/programing/">programing</a>
 </div>
 
 
@@ -653,10 +588,13 @@ error C4996: <span class="string">'std::_Copy_impl'</span>
 </header>
     <div class="article-content">
         
-        <p>原因：修改了conf里面的Listen端口</p>
-<p>解决：<br>1. 修改成SELinux安全机制里面默认允许的端口（80, 443, 488, 8008, 8009, 8443）等等。<br>2. 修改SELinux安全设置<br>如：</p>
-<pre><code>semanage port -<span class="tag">a</span> -t http_port_t -<span class="tag">p</span> tcp &lt;listen port&gt;
-</code></pre>
+        <h1 id="原因">原因</h1><p>修改了conf里面的Listen端口</p>
+<h1 id="解决">解决</h1><ol>
+<li>修改成SELinux安全机制里面默认允许的端口（80, 443, 488, 8008, 8009, 8443）等等。</li>
+<li>修改SELinux安全设置<br>如：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">semanage port <span class="operator">-a</span> -t http_port_t -p tcp &lt;listen port&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+
         
         
         <p class="article-more-link">
@@ -668,7 +606,7 @@ error C4996: <span class="string">'std::_Copy_impl'</span>
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/CentOS/">CentOS</a>►<a class="article-category-link" href="/categories/CentOS/RedHat/">RedHat</a>►<a class="article-category-link" href="/categories/CentOS/RedHat/Ubuntu/">Ubuntu</a>
+  <a class="article-category-link" href="/categories/linux/">linux</a>
 </div>
 
 
@@ -715,10 +653,11 @@ error C4996: <span class="string">'std::_Copy_impl'</span>
 </header>
     <div class="article-content">
         
-        <p>下载游戏：《古墓丽影9》中文免安装绿色豪华硬盘版[1.1.732.1升级档][解压即玩]<br>光压缩包所有分卷加起来就有快10个G<br>结果用QQ旋风下载下来后成乱序的了<br>然后到网站上一看发现QQ旋风本身就把链接那些顺序没搞对。<br>参考下载地址：<a href="http://fenxiang.qq.com/x/3SSKsVNycfRNc3CJcuCA0~NHIcT5rX133GN0qnvKZltI" title="http://fenxiang.qq.com/x/3SSKsVNycfRNc3CJcuCA0~NHIcT5rX133GN0qnvKZltI" target="_blank" rel="external">http://fenxiang.qq.com/x/3SSKsVNycfRNc3CJcuCA0~NHIcT5rX133GN0qnvKZltI</a></p>
+        <p>下载游戏：<strong>《古墓丽影9》中文免安装绿色豪华硬盘版[1.1.732.1升级档][解压即玩]</strong><br>光压缩包所有分卷加起来就有快10个G<br>结果用QQ旋风下载下来后成乱序的了<br>然后到网站上一看发现QQ旋风本身就把链接那些顺序没搞对。<br>参考下载地址：<a href="http://fenxiang.qq.com/x/3SSKsVNycfRNc3CJcuCA0~NHIcT5rX133GN0qnvKZltI" title="http://fenxiang.qq.com/x/3SSKsVNycfRNc3CJcuCA0~NHIcT5rX133GN0qnvKZltI" target="_blank" rel="external">Tomb.Raider.9.v1.1.732.1.CHS.Green.Edition</a></p>
 <p>自己根据使用7-zip打开压缩包的“之前分割”和“之后分割”信息拼凑了半天，结果还是有一个文件“bigfile.001.tiger”不能成功解压。最终放弃。</p>
 <p>结果在网上搜索了半天，竟然发现“360压缩”竟然宣称自己可以修复。</p>
-<p>原文在：<a href="http://yasuo.360.cn/update.html" title="http://yasuo.360.cn/update.html" target="_blank" rel="external">http://yasuo.360.cn/update.html</a><br>1.6正式版（2011-5-26） 下<br><strong>5. 分卷压缩智能解压，智能判断解压rar分卷包时的文件夹名乱序问题。</strong></p>
+<p>原文在：<a href="http://yasuo.360.cn/update.html" title="http://yasuo.360.cn/update.html" target="_blank" rel="external">http://yasuo.360.cn/update.html</a></p>
+  <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1.6&#27491;&#24335;&#29256;&#65288;2011-5-26&#65289;&#10;  1.&#26234;&#33021;&#21387;&#32553;&#26041;&#24335;&#65292;360&#21387;&#32553;&#25903;&#25345;&#26234;&#33021;&#26497;&#36895;&#12289;&#24378;&#21147;&#21387;&#32553;&#12289;&#26631;&#20934;&#21387;&#32553;&#31561;&#21387;&#32553;&#26041;&#24335;&#12290;&#26234;&#33021;&#21387;&#32553;&#26681;&#25454;&#25991;&#20214;&#26234;&#33021;&#36873;&#25321;&#21387;&#32553;&#31639;&#27861;&#65292;&#22823;&#24133;&#25552;&#21319;&#21387;&#32553;&#36895;&#24230;&#12290;&#10;  2.&#22810;&#31181;&#26684;&#24335;&#25903;&#25345;&#65292;&#25903;&#25345;&#35299;&#21387;rar&#12289;zip&#12289;7z&#12289;iso&#31561;39&#31181;&#26684;&#24335;&#30340;&#21387;&#32553;&#25991;&#20214;&#12290;&#10;  3.&#35299;&#21387;&#36895;&#24230;&#26356;&#24555;&#65292;&#37319;&#29992;&#22810;&#32447;&#31243;&#35299;&#21387;&#22788;&#29702;&#65292;&#20248;&#21270;&#20102;&#35299;&#21387;&#36923;&#36753;&#65292;&#36895;&#24230;&#26356;&#24555;&#12290;&#10;  4.&#25439;&#22351;&#26684;&#24335;&#20860;&#23481;&#65292;&#23545;&#26684;&#24335;&#22836;&#26377;&#25439;&#22351;&#30340;&#21387;&#32553;&#21253;&#19968;&#26679;&#20462;&#22797;&#35299;&#21387;&#12290;&#10;* 5.&#20998;&#21367;&#21387;&#32553;&#26234;&#33021;&#35299;&#21387;&#65292;&#26234;&#33021;&#21028;&#26029;&#35299;&#21387;rar&#20998;&#21367;&#21253;&#26102;&#30340;&#25991;&#20214;&#22841;&#21517;&#20081;&#24207;&#38382;&#39064;&#12290;&#10;  6.&#26356;&#23433;&#20840;&#30340;&#21387;&#32553;&#36719;&#20214;&#65292;&#20869;&#21547;360&#20113;&#23433;&#20840;&#24341;&#25806;&#65292;&#23545;&#21387;&#32553;&#21253;&#20869;&#26408;&#39532;&#36827;&#34892;&#26816;&#27979;&#65292;&#26356;&#23433;&#20840;&#12290;&#10;  7.&#19981;&#26029;&#23436;&#21892;&#30340;&#32454;&#33410;&#20307;&#39564;&#65292;&#25903;&#25345;&#36339;&#36716;&#21040;&#26700;&#38754;&#12289;&#33258;&#21160;&#28040;&#37325;&#25991;&#20214;&#22841;&#31561;20&#22810;&#22788;&#30456;&#23545;&#20256;&#32479;&#21387;&#32553;&#36719;&#20214;&#30340;&#32454;&#33410;&#21151;&#33021;&#25913;&#36827;&#12290;</span><br></pre></td></tr></table></figure>
 <p>抱着尝试的心态，下载了一个最新版的安装上尝试后。发现真的正常解压了所有压缩包。<br>总算是解决了目前的尴尬问题，所以在此留文提醒有遇到跟我同样问题的朋友。</p>
 <p>成功解压版本：<a href="http://dl.360safe.com/360zip_beta_3.1.0.1071.exe" title="360zip_beta_3.1.0.1071" target="_blank" rel="external">360zip_beta_3.1.0.1071</a></p>
 
@@ -733,78 +672,13 @@ error C4996: <span class="string">'std::_Copy_impl'</span>
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/经验总结/">经验总结</a>
+  <a class="article-category-link" href="/categories/summarys/">summarys</a>
 </div>
 
 
   <div class="article-tags">
   
   <span></span> <a href="/tags/360/">360</a><a href="/tags/360zip/">360zip</a><a href="/tags/Tomb-Raider/">Tomb Raider</a><a href="/tags/disorder/">disorder</a><a href="/tags/winrar/">winrar</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2013/10/29/make-socket-proxy.html" title="让Socket通过HTTP代理通讯" itemprop="url">让Socket通过HTTP代理通讯</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="leaker" target="_blank" itemprop="author">leaker</a>
-		
-  <p class="article-time">
-    <time datetime="2013-10-29T08:06:54.000Z" itemprop="datePublished"> 发表于 2013-10-29</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h2 id="如果socket想使用HTTP代理，需要进行下面步骤：">如果socket想使用HTTP代理，需要进行下面步骤：</h2><ol>
-<li>connect到代理服务器</li>
-<li>send(Format(“CONNECT %s:%s HTTP/1.1rnUser-Agent: MyApp/0.1rnrn”, &lt;真正目标IP&gt;, &lt;真正目标端口&gt;)</li>
-<li>recv 数据，并且根据数据内容判断CONNECT协议是否成功（是否有返回”HTTP/1.1 200”）</li>
-<li>如果第3步成功了，那么这个socket就已经是通过HTTP代理来连接的了，剩下的该怎么发包收包都照旧了</li>
-</ol>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/C-C/">C/C++</a>►<a class="article-category-link" href="/categories/C-C/经验总结/">经验总结</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/connect/">connect</a><a href="/tags/http/">http</a><a href="/tags/proxy/">proxy</a><a href="/tags/recv/">recv</a><a href="/tags/socket/">socket</a>
   </div>
 
 </div>
@@ -846,137 +720,39 @@ error C4996: <span class="string">'std::_Copy_impl'</span>
 		  
 		
 		  
-			<li><a href="/categories/C-C/" title="C/C++">C/C++<sup>22</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/" title="CentOS">CentOS<sup>13</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/CentOS/" title="CentOS">CentOS<sup>8</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/Python/" title="Python">Python<sup>3</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/Python/" title="Python">Python<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/Python/" title="Python">Python<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/CentOS/RedHat/" title="RedHat">RedHat<sup>6</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/RedHat/" title="RedHat">RedHat<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/Python/RedHat/" title="RedHat">RedHat<sup>2</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/RedHat/" title="RedHat">RedHat<sup>7</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/CentOS/RedHat/Ubuntu/" title="Ubuntu">Ubuntu<sup>5</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/RedHat/Ubuntu/" title="Ubuntu">Ubuntu<sup>6</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/Ubuntu/" title="Ubuntu">Ubuntu<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/Ubuntu/" title="Ubuntu">Ubuntu<sup>5</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/CentOS/Ubuntu/" title="Ubuntu">Ubuntu<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/Python/RedHat/Ubuntu/" title="Ubuntu">Ubuntu<sup>2</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/Uncategorized/" title="Uncategorized">Uncategorized<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/好站收集/" title="好站收集">好站收集<sup>1</sup></a></li>
-		  
 		
 		  
 		
 		  
-			<li><a href="/categories/我的作品/" title="我的作品">我的作品<sup>1</sup></a></li>
+			<li><a href="/categories/interesting/" title="interesting">interesting<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/C-C/CentOS/RedHat/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
+			<li><a href="/categories/linux/" title="linux">linux<sup>25</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/C-C/Python/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
+			<li><a href="/categories/notices/" title="notices">notices<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/Ubuntu/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
+			<li><a href="/categories/programing/" title="programing">programing<sup>21</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/CentOS/RedHat/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
+			<li><a href="/categories/sites/" title="sites">sites<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/C-C/经验总结/" title="经验总结">经验总结<sup>9</sup></a></li>
+			<li><a href="/categories/summarys/" title="summarys">summarys<sup>8</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/CentOS/Python/RedHat/Ubuntu/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
+			<li><a href="/categories/works/" title="works">works<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/C-C/CentOS/RedHat/Ubuntu/经验总结/" title="经验总结">经验总结<sup>3</sup></a></li>
-		  
 		
-		  
-			<li><a href="/categories/RedHat/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/经验总结/" title="经验总结">经验总结<sup>7</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/RedHat/Ubuntu/经验总结/" title="经验总结">经验总结<sup>3</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/Ubuntu/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/CentOS/Ubuntu/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/闲言碎语/" title="闲言碎语">闲言碎语<sup>4</sup></a></li>
 		  
 		
 		</ul>
@@ -1001,7 +777,15 @@ error C4996: <span class="string">'std::_Copy_impl'</span>
 			
 		
 			
+				<li><a href="/tags/install/" title="install">install<sup>4</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/zlib/" title="zlib">zlib<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/yum/" title="yum">yum<sup>4</sup></a></li>
 			
 		
 			
@@ -1009,11 +793,7 @@ error C4996: <span class="string">'std::_Copy_impl'</span>
 			
 		
 			
-				<li><a href="/tags/install/" title="install">install<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/python/" title="python">python<sup>3</sup></a></li>
+				<li><a href="/tags/make/" title="make">make<sup>3</sup></a></li>
 			
 		
 			
@@ -1021,23 +801,11 @@ error C4996: <span class="string">'std::_Copy_impl'</span>
 			
 		
 			
-				<li><a href="/tags/yum/" title="yum">yum<sup>3</sup></a></li>
+				<li><a href="/tags/python/" title="python">python<sup>3</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/libc/" title="libc">libc<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/git/" title="git">git<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/sudo/" title="sudo">sudo<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/make/" title="make">make<sup>2</sup></a></li>
+				<li><a href="/tags/boost/" title="boost">boost<sup>2</sup></a></li>
 			
 		
 			
@@ -1045,19 +813,7 @@ error C4996: <span class="string">'std::_Copy_impl'</span>
 			
 		
 			
-				<li><a href="/tags/kernel-devel/" title="kernel-devel">kernel-devel<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/ln/" title="ln">ln<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/https/" title="https">https<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/gcc/" title="gcc">gcc<sup>2</sup></a></li>
+				<li><a href="/tags/编译/" title="编译">编译<sup>2</sup></a></li>
 			
 		
 			
@@ -1065,7 +821,27 @@ error C4996: <span class="string">'std::_Copy_impl'</span>
 			
 		
 			
-				<li><a href="/tags/编译/" title="编译">编译<sup>2</sup></a></li>
+				<li><a href="/tags/gcc/" title="gcc">gcc<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/ln/" title="ln">ln<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/git/" title="git">git<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/https/" title="https">https<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/kernel-devel/" title="kernel-devel">kernel-devel<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/kernel/" title="kernel">kernel<sup>2</sup></a></li>
 			
 		
 		</ul>

@@ -11,28 +11,16 @@
     
 
     
-    <meta name="description" content="yum install rpmdevtools yum-utils ncurses-devel make rpm-build rpm-devel
-wget https://www.kernel.org/pub/linux/kernel/v3.x/linux-3.8.10.tar.gz
-tar xvf linux-3.8.10.tar.gz
-cd linux-3.8.10
-make mrproper">
+    <meta name="description" content="12345678910yum install rpmdevtools yum-utils ncurses-devel make rpm-build rpm-develwget https://www.kernel.org/pub/linux/kernel/v3.x/linux-3.8.10.tar.gztar xvf linux-3.8.10.tar.gzcd linux-3.8.10make m">
 <meta property="og:type" content="article">
 <meta property="og:title" content="升级Linux内核3.8.10记录">
 <meta property="og:url" content="http://www.leelib.com/2014/04/08/upgrade-linux-kernel-to-3-8-10.html">
 <meta property="og:site_name" content="李略帅">
-<meta property="og:description" content="yum install rpmdevtools yum-utils ncurses-devel make rpm-build rpm-devel
-wget https://www.kernel.org/pub/linux/kernel/v3.x/linux-3.8.10.tar.gz
-tar xvf linux-3.8.10.tar.gz
-cd linux-3.8.10
-make mrproper">
-<meta property="og:updated_time" content="2015-09-17T09:03:43.982Z">
+<meta property="og:description" content="12345678910yum install rpmdevtools yum-utils ncurses-devel make rpm-build rpm-develwget https://www.kernel.org/pub/linux/kernel/v3.x/linux-3.8.10.tar.gztar xvf linux-3.8.10.tar.gzcd linux-3.8.10make m">
+<meta property="og:updated_time" content="2015-09-18T07:07:50.078Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="升级Linux内核3.8.10记录">
-<meta name="twitter:description" content="yum install rpmdevtools yum-utils ncurses-devel make rpm-build rpm-devel
-wget https://www.kernel.org/pub/linux/kernel/v3.x/linux-3.8.10.tar.gz
-tar xvf linux-3.8.10.tar.gz
-cd linux-3.8.10
-make mrproper">
+<meta name="twitter:description" content="12345678910yum install rpmdevtools yum-utils ncurses-devel make rpm-build rpm-develwget https://www.kernel.org/pub/linux/kernel/v3.x/linux-3.8.10.tar.gztar xvf linux-3.8.10.tar.gzcd linux-3.8.10make m">
 
     
     <link rel="alternative" href="/atom.xml" title="李略帅" type="application/atom+xml">
@@ -114,26 +102,22 @@ make mrproper">
 		
 		</div>
 		
-		<pre><code>yum install rpmdevtools yum-utils ncurses-devel make rpm-build rpm-devel
-wget https://www.kernel.org/pub/linux/kernel/<span class="variable">v3</span>.x/linux-3.8.10.tar.gz
-tar xvf linux-3.8.10.tar.gz
-cd linux-3.8.10
-make mrproper <span class="comment"># 第一次可忽略</span>
-make menuconfig <span class="comment"># 记得保存</span>
-make
-make modules_install
-make install<span class="instruction">
-new-kernel-pkg </span>--mkinitrd --depmod --install 3.8.10
-</code></pre>  
+		<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">yum install rpmdevtools yum-utils ncurses-devel make rpm-build rpm-devel</span><br><span class="line">wget https://www.kernel.org/pub/linux/kernel/v3.x/linux-<span class="number">3.8</span>.<span class="number">10</span>.tar.gz</span><br><span class="line">tar xvf linux-<span class="number">3.8</span>.<span class="number">10</span>.tar.gz</span><br><span class="line"><span class="built_in">cd</span> linux-<span class="number">3.8</span>.<span class="number">10</span></span><br><span class="line">make mrproper <span class="comment"># 第一次可忽略</span></span><br><span class="line">make menuconfig <span class="comment"># 记得保存</span></span><br><span class="line">make</span><br><span class="line">make modules_install</span><br><span class="line">make install</span><br><span class="line">new-kernel-pkg --mkinitrd --depmod --install <span class="number">3.8</span>.<span class="number">10</span></span><br></pre></td></tr></table></figure>
+  
 	</div>
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/CentOS/">CentOS</a>►<a class="article-category-link" href="/categories/CentOS/RedHat/">RedHat</a>►<a class="article-category-link" href="/categories/CentOS/RedHat/Ubuntu/">Ubuntu</a>
+  <a class="article-category-link" href="/categories/linux/">linux</a>
 </div>
 
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/install/">install</a><a href="/tags/kernel/">kernel</a><a href="/tags/make/">make</a><a href="/tags/menuconfig/">menuconfig</a><a href="/tags/mrproper/">mrproper</a><a href="/tags/upgrade/">upgrade</a>
+  </div>
 
 </div>
 
@@ -197,137 +181,39 @@ new-kernel-pkg </span>--mkinitrd --depmod --install 3.8.10
 		  
 		
 		  
-			<li><a href="/categories/C-C/" title="C/C++">C/C++<sup>22</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/" title="CentOS">CentOS<sup>13</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/CentOS/" title="CentOS">CentOS<sup>8</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/Python/" title="Python">Python<sup>3</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/Python/" title="Python">Python<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/Python/" title="Python">Python<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/CentOS/RedHat/" title="RedHat">RedHat<sup>6</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/RedHat/" title="RedHat">RedHat<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/Python/RedHat/" title="RedHat">RedHat<sup>2</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/RedHat/" title="RedHat">RedHat<sup>7</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/CentOS/RedHat/Ubuntu/" title="Ubuntu">Ubuntu<sup>5</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/RedHat/Ubuntu/" title="Ubuntu">Ubuntu<sup>6</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/Ubuntu/" title="Ubuntu">Ubuntu<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/Ubuntu/" title="Ubuntu">Ubuntu<sup>5</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/CentOS/Ubuntu/" title="Ubuntu">Ubuntu<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/Python/RedHat/Ubuntu/" title="Ubuntu">Ubuntu<sup>2</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/Uncategorized/" title="Uncategorized">Uncategorized<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/好站收集/" title="好站收集">好站收集<sup>1</sup></a></li>
-		  
 		
 		  
 		
 		  
-			<li><a href="/categories/我的作品/" title="我的作品">我的作品<sup>1</sup></a></li>
+			<li><a href="/categories/interesting/" title="interesting">interesting<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/C-C/CentOS/RedHat/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
+			<li><a href="/categories/linux/" title="linux">linux<sup>25</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/C-C/Python/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
+			<li><a href="/categories/notices/" title="notices">notices<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/Ubuntu/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
+			<li><a href="/categories/programing/" title="programing">programing<sup>21</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/CentOS/RedHat/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
+			<li><a href="/categories/sites/" title="sites">sites<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/C-C/经验总结/" title="经验总结">经验总结<sup>9</sup></a></li>
+			<li><a href="/categories/summarys/" title="summarys">summarys<sup>8</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/CentOS/Python/RedHat/Ubuntu/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
+			<li><a href="/categories/works/" title="works">works<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/C-C/CentOS/RedHat/Ubuntu/经验总结/" title="经验总结">经验总结<sup>3</sup></a></li>
-		  
 		
-		  
-			<li><a href="/categories/RedHat/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/经验总结/" title="经验总结">经验总结<sup>7</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/RedHat/Ubuntu/经验总结/" title="经验总结">经验总结<sup>3</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/Ubuntu/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/CentOS/Ubuntu/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/闲言碎语/" title="闲言碎语">闲言碎语<sup>4</sup></a></li>
 		  
 		
 		</ul>
@@ -352,7 +238,15 @@ new-kernel-pkg </span>--mkinitrd --depmod --install 3.8.10
 			
 		
 			
+				<li><a href="/tags/install/" title="install">install<sup>4</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/zlib/" title="zlib">zlib<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/yum/" title="yum">yum<sup>4</sup></a></li>
 			
 		
 			
@@ -360,11 +254,7 @@ new-kernel-pkg </span>--mkinitrd --depmod --install 3.8.10
 			
 		
 			
-				<li><a href="/tags/install/" title="install">install<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/python/" title="python">python<sup>3</sup></a></li>
+				<li><a href="/tags/make/" title="make">make<sup>3</sup></a></li>
 			
 		
 			
@@ -372,23 +262,11 @@ new-kernel-pkg </span>--mkinitrd --depmod --install 3.8.10
 			
 		
 			
-				<li><a href="/tags/yum/" title="yum">yum<sup>3</sup></a></li>
+				<li><a href="/tags/python/" title="python">python<sup>3</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/libc/" title="libc">libc<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/git/" title="git">git<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/sudo/" title="sudo">sudo<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/make/" title="make">make<sup>2</sup></a></li>
+				<li><a href="/tags/boost/" title="boost">boost<sup>2</sup></a></li>
 			
 		
 			
@@ -396,19 +274,7 @@ new-kernel-pkg </span>--mkinitrd --depmod --install 3.8.10
 			
 		
 			
-				<li><a href="/tags/kernel-devel/" title="kernel-devel">kernel-devel<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/ln/" title="ln">ln<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/https/" title="https">https<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/gcc/" title="gcc">gcc<sup>2</sup></a></li>
+				<li><a href="/tags/编译/" title="编译">编译<sup>2</sup></a></li>
 			
 		
 			
@@ -416,7 +282,27 @@ new-kernel-pkg </span>--mkinitrd --depmod --install 3.8.10
 			
 		
 			
-				<li><a href="/tags/编译/" title="编译">编译<sup>2</sup></a></li>
+				<li><a href="/tags/gcc/" title="gcc">gcc<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/ln/" title="ln">ln<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/git/" title="git">git<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/https/" title="https">https<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/kernel-devel/" title="kernel-devel">kernel-devel<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/kernel/" title="kernel">kernel<sup>2</sup></a></li>
 			
 		
 		</ul>

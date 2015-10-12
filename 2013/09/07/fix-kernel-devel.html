@@ -12,29 +12,20 @@
 
     
     <meta name="description" content="如何安装kernel-devel，可以参考我之前的文章：《Linux下编译驱动发现没有内核源码的解决办法》
-下面是我写的一个自动脚本：
-cd /usr/src/kernels
-cd $(ls -d */ | head -n 1)
-ln -s -f $(pwd) /lib/modules/$(uname -r)/build
+下面是我写的一个自动脚本：123cd /usr/src/kernelscd $(ls -d */ | head -n 1)ln -s -f $(pwd) /lib/modules/$(uname -r)/build
 至于为什么要费劲去 cd $(ls -d */ | head -n 1) 的">
 <meta property="og:type" content="article">
 <meta property="og:title" content="解决在安装了kernel-devel后/lib/modules/$(uname -r)/build 链接失效的问题">
 <meta property="og:url" content="http://www.leelib.com/2013/09/07/fix-kernel-devel.html">
 <meta property="og:site_name" content="李略帅">
 <meta property="og:description" content="如何安装kernel-devel，可以参考我之前的文章：《Linux下编译驱动发现没有内核源码的解决办法》
-下面是我写的一个自动脚本：
-cd /usr/src/kernels
-cd $(ls -d */ | head -n 1)
-ln -s -f $(pwd) /lib/modules/$(uname -r)/build
+下面是我写的一个自动脚本：123cd /usr/src/kernelscd $(ls -d */ | head -n 1)ln -s -f $(pwd) /lib/modules/$(uname -r)/build
 至于为什么要费劲去 cd $(ls -d */ | head -n 1) 的">
-<meta property="og:updated_time" content="2015-09-17T09:03:43.936Z">
+<meta property="og:updated_time" content="2015-09-18T07:07:50.007Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="解决在安装了kernel-devel后/lib/modules/$(uname -r)/build 链接失效的问题">
 <meta name="twitter:description" content="如何安装kernel-devel，可以参考我之前的文章：《Linux下编译驱动发现没有内核源码的解决办法》
-下面是我写的一个自动脚本：
-cd /usr/src/kernels
-cd $(ls -d */ | head -n 1)
-ln -s -f $(pwd) /lib/modules/$(uname -r)/build
+下面是我写的一个自动脚本：123cd /usr/src/kernelscd $(ls -d */ | head -n 1)ln -s -f $(pwd) /lib/modules/$(uname -r)/build
 至于为什么要费劲去 cd $(ls -d */ | head -n 1) 的">
 
     
@@ -118,11 +109,8 @@ ln -s -f $(pwd) /lib/modules/$(uname -r)/build
 		</div>
 		
 		<p>如何安装kernel-devel，可以参考我之前的文章：<a href="/2013/06/02/install-kernel-devel.html">《Linux下编译驱动发现没有内核源码的解决办法》</a></p>
-<p>下面是我写的一个自动脚本：</p>
-<pre><code><span class="built_in">cd</span> /usr/src/kernels
-<span class="built_in">cd</span> $(ls <span class="operator">-d</span> */ | head -n <span class="number">1</span>)
-ln <span class="operator">-s</span> <span class="operator">-f</span> $(<span class="built_in">pwd</span>) /lib/modules/$(uname -r)/build
-</code></pre><p>至于为什么要费劲去 <strong>cd $(ls -d */ | head -n 1)</strong> 的原因是：很多系统装出来的 <strong>kernel-devel</strong> 目录名称跟 <strong>$(uname -r)</strong> 并不一致</p>
+<p>下面是我写的一个自动脚本：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /usr/src/kernels</span><br><span class="line"><span class="built_in">cd</span> $(ls <span class="operator">-d</span> */ | head -n <span class="number">1</span>)</span><br><span class="line">ln <span class="operator">-s</span> <span class="operator">-f</span> $(<span class="built_in">pwd</span>) /lib/modules/$(uname -r)/build</span><br></pre></td></tr></table></figure></p>
+<p>至于为什么要费劲去 <strong>cd $(ls -d */ | head -n 1)</strong> 的原因是：很多系统装出来的 <strong>kernel-devel</strong> 目录名称跟 <strong>$(uname -r)</strong> 并不一致</p>
 <p>至此这个问题修复完成。</p>
   
 	</div>
@@ -131,7 +119,7 @@ ln <span class="operator">-s</span> <span class="operator">-f</span> $(<span cla
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/C-C/">C/C++</a>►<a class="article-category-link" href="/categories/C-C/CentOS/">CentOS</a>►<a class="article-category-link" href="/categories/C-C/CentOS/RedHat/">RedHat</a>►<a class="article-category-link" href="/categories/C-C/CentOS/RedHat/经验总结/">经验总结</a>
+  <a class="article-category-link" href="/categories/linux/">linux</a>
 </div>
 
 
@@ -202,137 +190,39 @@ ln <span class="operator">-s</span> <span class="operator">-f</span> $(<span cla
 		  
 		
 		  
-			<li><a href="/categories/C-C/" title="C/C++">C/C++<sup>22</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/" title="CentOS">CentOS<sup>13</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/CentOS/" title="CentOS">CentOS<sup>8</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/Python/" title="Python">Python<sup>3</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/Python/" title="Python">Python<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/Python/" title="Python">Python<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/CentOS/RedHat/" title="RedHat">RedHat<sup>6</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/RedHat/" title="RedHat">RedHat<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/Python/RedHat/" title="RedHat">RedHat<sup>2</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/RedHat/" title="RedHat">RedHat<sup>7</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/CentOS/RedHat/Ubuntu/" title="Ubuntu">Ubuntu<sup>5</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/RedHat/Ubuntu/" title="Ubuntu">Ubuntu<sup>6</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/Ubuntu/" title="Ubuntu">Ubuntu<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/Ubuntu/" title="Ubuntu">Ubuntu<sup>5</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/CentOS/Ubuntu/" title="Ubuntu">Ubuntu<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/Python/RedHat/Ubuntu/" title="Ubuntu">Ubuntu<sup>2</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/Uncategorized/" title="Uncategorized">Uncategorized<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/好站收集/" title="好站收集">好站收集<sup>1</sup></a></li>
-		  
 		
 		  
 		
 		  
-			<li><a href="/categories/我的作品/" title="我的作品">我的作品<sup>1</sup></a></li>
+			<li><a href="/categories/interesting/" title="interesting">interesting<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/C-C/CentOS/RedHat/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
+			<li><a href="/categories/linux/" title="linux">linux<sup>25</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/C-C/Python/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
+			<li><a href="/categories/notices/" title="notices">notices<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/Ubuntu/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
+			<li><a href="/categories/programing/" title="programing">programing<sup>21</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/CentOS/RedHat/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
+			<li><a href="/categories/sites/" title="sites">sites<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/C-C/经验总结/" title="经验总结">经验总结<sup>9</sup></a></li>
+			<li><a href="/categories/summarys/" title="summarys">summarys<sup>8</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/CentOS/Python/RedHat/Ubuntu/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
+			<li><a href="/categories/works/" title="works">works<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/C-C/CentOS/RedHat/Ubuntu/经验总结/" title="经验总结">经验总结<sup>3</sup></a></li>
-		  
 		
-		  
-			<li><a href="/categories/RedHat/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/经验总结/" title="经验总结">经验总结<sup>7</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/RedHat/Ubuntu/经验总结/" title="经验总结">经验总结<sup>3</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/Ubuntu/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/CentOS/Ubuntu/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/闲言碎语/" title="闲言碎语">闲言碎语<sup>4</sup></a></li>
 		  
 		
 		</ul>
@@ -357,7 +247,15 @@ ln <span class="operator">-s</span> <span class="operator">-f</span> $(<span cla
 			
 		
 			
+				<li><a href="/tags/install/" title="install">install<sup>4</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/zlib/" title="zlib">zlib<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/yum/" title="yum">yum<sup>4</sup></a></li>
 			
 		
 			
@@ -365,11 +263,7 @@ ln <span class="operator">-s</span> <span class="operator">-f</span> $(<span cla
 			
 		
 			
-				<li><a href="/tags/install/" title="install">install<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/python/" title="python">python<sup>3</sup></a></li>
+				<li><a href="/tags/make/" title="make">make<sup>3</sup></a></li>
 			
 		
 			
@@ -377,23 +271,11 @@ ln <span class="operator">-s</span> <span class="operator">-f</span> $(<span cla
 			
 		
 			
-				<li><a href="/tags/yum/" title="yum">yum<sup>3</sup></a></li>
+				<li><a href="/tags/python/" title="python">python<sup>3</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/libc/" title="libc">libc<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/git/" title="git">git<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/sudo/" title="sudo">sudo<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/make/" title="make">make<sup>2</sup></a></li>
+				<li><a href="/tags/boost/" title="boost">boost<sup>2</sup></a></li>
 			
 		
 			
@@ -401,19 +283,7 @@ ln <span class="operator">-s</span> <span class="operator">-f</span> $(<span cla
 			
 		
 			
-				<li><a href="/tags/kernel-devel/" title="kernel-devel">kernel-devel<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/ln/" title="ln">ln<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/https/" title="https">https<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/gcc/" title="gcc">gcc<sup>2</sup></a></li>
+				<li><a href="/tags/编译/" title="编译">编译<sup>2</sup></a></li>
 			
 		
 			
@@ -421,7 +291,27 @@ ln <span class="operator">-s</span> <span class="operator">-f</span> $(<span cla
 			
 		
 			
-				<li><a href="/tags/编译/" title="编译">编译<sup>2</sup></a></li>
+				<li><a href="/tags/gcc/" title="gcc">gcc<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/ln/" title="ln">ln<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/git/" title="git">git<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/https/" title="https">https<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/kernel-devel/" title="kernel-devel">kernel-devel<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/kernel/" title="kernel">kernel<sup>2</sup></a></li>
 			
 		
 		</ul>

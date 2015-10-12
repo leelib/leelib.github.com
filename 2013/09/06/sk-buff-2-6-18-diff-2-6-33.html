@@ -12,24 +12,18 @@
 
     
     <meta name="description" content="在Linux 2.6.33.6中，源文件在：/usr/src/kernels/2.6.33.6/include/linux/skbuff.h
-struct sk_buff在2.6.18中的定义：struct sk_buff {
-        /* These two members must be first. */
-        struct sk_buff          *next;">
+struct sk_buff在2.6.18中的定义：1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556">
 <meta property="og:type" content="article">
 <meta property="og:title" content="结构体sk_buff在Linux内核2.6.18与2.6.33中的区别">
 <meta property="og:url" content="http://www.leelib.com/2013/09/06/sk-buff-2-6-18-diff-2-6-33.html">
 <meta property="og:site_name" content="李略帅">
 <meta property="og:description" content="在Linux 2.6.33.6中，源文件在：/usr/src/kernels/2.6.33.6/include/linux/skbuff.h
-struct sk_buff在2.6.18中的定义：struct sk_buff {
-        /* These two members must be first. */
-        struct sk_buff          *next;">
-<meta property="og:updated_time" content="2015-09-17T09:03:43.982Z">
+struct sk_buff在2.6.18中的定义：1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556">
+<meta property="og:updated_time" content="2015-09-18T07:07:50.070Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="结构体sk_buff在Linux内核2.6.18与2.6.33中的区别">
 <meta name="twitter:description" content="在Linux 2.6.33.6中，源文件在：/usr/src/kernels/2.6.33.6/include/linux/skbuff.h
-struct sk_buff在2.6.18中的定义：struct sk_buff {
-        /* These two members must be first. */
-        struct sk_buff          *next;">
+struct sk_buff在2.6.18中的定义：1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556">
 
     
     <link rel="alternative" href="/atom.xml" title="李略帅" type="application/atom+xml">
@@ -107,222 +101,15 @@ struct sk_buff在2.6.18中的定义：struct sk_buff {
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#struct_sk_buff在2-6-18中的定义："><span class="toc-number">1.</span> <span class="toc-text">struct sk_buff在2.6.18中的定义：</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#struct_sk_buff在2-6-18中的定义："><span class="toc-number">1.</span> <span class="toc-text">struct sk_buff在2.6.18中的定义：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#struct_sk_buff在2-6-33中的定义："><span class="toc-number">2.</span> <span class="toc-text">struct sk_buff在2.6.33中的定义：</span></a></li></ol>
 		
 		</div>
 		
 		<p>在Linux 2.6.33.6中，源文件在：/usr/src/kernels/2.6.33.6/include/linux/skbuff.h</p>
-<h2 id="struct_sk_buff在2-6-18中的定义：">struct sk_buff在2.6.18中的定义：</h2><pre><code><span class="keyword">struct</span> sk_buff {
-        <span class="comment">/* These two members must be first. */</span>
-        <span class="keyword">struct</span> sk_buff          *next;
-        <span class="keyword">struct</span> sk_buff          *prev;
-
-        <span class="keyword">struct</span> sock             *sk;
-        <span class="keyword">struct</span> <span class="keyword">skb_t</span>imeval      tstamp;
-        <span class="keyword">struct</span> net_device       *dev;
-        <span class="keyword">struct</span> net_device       *input_dev;
-
-        <span class="keyword">union</span> {
-                <span class="keyword">struct</span> tcphdr   *th;
-                <span class="keyword">struct</span> udphdr   *uh;
-                <span class="keyword">struct</span> icmphdr  *icmph;
-                <span class="keyword">struct</span> igmphdr  *igmph;
-                <span class="keyword">struct</span> iphdr    *ipiph;
-                <span class="keyword">struct</span> ipv6hdr  *ipv6h;
-                <span class="keyword">unsigned</span> <span class="keyword">char</span>   *raw;
-        } h;
-
-        <span class="keyword">union</span> {
-                <span class="keyword">struct</span> iphdr    *iph;
-                <span class="keyword">struct</span> ipv6hdr  *ipv6h;
-                <span class="keyword">struct</span> arphdr   *arph;
-                <span class="keyword">unsigned</span> <span class="keyword">char</span>   *raw;
-        } nh;
-
-        <span class="keyword">union</span> {
-                <span class="keyword">unsigned</span> <span class="keyword">char</span>   *raw;
-        } mac;
-
-        <span class="keyword">struct</span>  dst_entry       *dst;
-        <span class="keyword">struct</span>  sec_path        *sp;
-        <span class="comment">/*
-         * This is the control buffer. It is free to use for every
-         * layer. Please put your private variables there. If you
-         * want to keep them across layers you have to do a skb_clone()
-         * first. This is owned by whoever has the skb queued ATM.
-         */</span>
-        <span class="keyword">char</span>                    cb[<span class="number">48</span>];
-
-        <span class="keyword">unsigned</span> <span class="keyword">int</span>            len,
-                                data_len,
-                                mac_len,
-                                csum;
-        __u32                   priority;
-        __u8                    local_df:<span class="number">1</span>,
-                                cloned:<span class="number">1</span>,
-                                ip_summed:<span class="number">2</span>,
-                                nohdr:<span class="number">1</span>,
-                                nfctinfo:<span class="number">3</span>;
-        __u8                    <span class="keyword">pkt_t</span>ype:<span class="number">3</span>,
-                                fclone:<span class="number">2</span>,
-<span class="preprocessor">#ifndef CONFIG_XEN</span>
-                                ipvs_property:<span class="number">1</span>;
-<span class="preprocessor">#<span class="keyword">else</span></span>
-                                ipvs_property:<span class="number">1</span>,
-                                proto_data_valid:<span class="number">1</span>,
-                                proto_csum_blank:<span class="number">1</span>;
-<span class="preprocessor">#<span class="keyword">endif</span></span>
-        __be16                  protocol;
-
-        <span class="keyword">void</span>                    (*destructor)(<span class="keyword">struct</span> sk_buff *skb);
-<span class="preprocessor">#ifdef CONFIG_NETFILTER</span>
-        <span class="keyword">struct</span> nf_conntrack     *nfct;
-<span class="preprocessor">#<span class="keyword">if</span> defined(CONFIG_NF_CONNTRACK) || defined(CONFIG_NF_CONNTRACK_MODULE)</span>
-       <span class="keyword">struct</span> sk_buff          *nfct_reasm;
-<span class="preprocessor">#<span class="keyword">endif</span></span>
-<span class="preprocessor">#ifdef CONFIG_BRIDGE_NETFILTER</span>
-        <span class="keyword">struct</span> nf_bridge_info   *nf_bridge;
-<span class="preprocessor">#<span class="keyword">endif</span></span>
-        __u32                   nfmark;
-<span class="preprocessor">#<span class="keyword">endif</span> /* CONFIG_NETFILTER */</span>
-<span class="preprocessor">#ifdef CONFIG_NET_SCHED</span>
-        __u16                   tc_index;       <span class="comment">/* traffic control index */</span>
-<span class="preprocessor">#ifdef CONFIG_NET_CLS_ACT</span>
-        __u16                   tc_verd;        <span class="comment">/* traffic control verdict */</span>
-<span class="preprocessor">#<span class="keyword">endif</span></span>
-<span class="preprocessor">#<span class="keyword">endif</span></span>
-<span class="preprocessor">#ifdef CONFIG_NET_DMA</span>
-        <span class="keyword">dma_cookie_t</span>            dma_cookie;
-<span class="preprocessor">#<span class="keyword">endif</span></span>
-<span class="preprocessor">#ifdef CONFIG_NETWORK_SECMARK</span>
-        __u32                   secmark;
-<span class="preprocessor">#<span class="keyword">endif</span></span>
-
-        <span class="comment">/* These elements must be at the end, see alloc_skb() for details.  */</span>
-        <span class="keyword">unsigned</span> <span class="keyword">int</span>            truesize;
-        <span class="keyword">atomic_t</span>                users;
-        <span class="keyword">unsigned</span> <span class="keyword">char</span>           *head,
-                                *data,
-                                *tail,
-                                *end;
-        <span class="comment">/* Extra stuff at the end to avoid breaking abi */</span>
-<span class="preprocessor">#ifndef __GENKSYMS__</span>
-        <span class="keyword">int</span>                      peeked;
-<span class="preprocessor">#<span class="keyword">endif</span></span>
-};
-
-
-<span class="preprocessor">## struct sk_buff在2.6.33中的定义：</span>
-
-<span class="keyword">struct</span> sk_buff {
-        <span class="comment">/* These two members must be first. */</span>
-        <span class="keyword">struct</span> sk_buff          *next;
-        <span class="keyword">struct</span> sk_buff          *prev;
-
-        <span class="keyword">ktime_t</span>                 tstamp;
-
-        <span class="keyword">struct</span> sock             *sk;
-        <span class="keyword">struct</span> net_device       *dev;
-
-        <span class="comment">/*
-         * This is the control buffer. It is free to use for every
-         * layer. Please put your private variables there. If you
-         * want to keep them across layers you have to do a skb_clone()
-         * first. This is owned by whoever has the skb queued ATM.
-         */</span>
-        <span class="keyword">char</span>                    cb[<span class="number">48</span>] __aligned(<span class="number">8</span>);
-
-        <span class="keyword">unsigned</span> <span class="keyword">long</span>           _skb_dst;
-<span class="preprocessor">#ifdef CONFIG_XFRM</span>
-        <span class="keyword">struct</span>  sec_path        *sp;
-<span class="preprocessor">#<span class="keyword">endif</span></span>
-        <span class="keyword">unsigned</span> <span class="keyword">int</span>            len,
-                                data_len;
-        __u16                   mac_len,
-                                hdr_len;
-        <span class="keyword">union</span> {
-                __wsum          csum;
-                <span class="keyword">struct</span> {
-                        __u16   csum_start;
-                        __u16   csum_offset;
-                };
-        };
-        __u32                   priority;
-        kmemcheck_bitfield_begin(flags1);
-        __u8                    local_df:<span class="number">1</span>,
-                                cloned:<span class="number">1</span>,
-                                ip_summed:<span class="number">2</span>,
-                                nohdr:<span class="number">1</span>,
-                                nfctinfo:<span class="number">3</span>;
-        __u8                    <span class="keyword">pkt_t</span>ype:<span class="number">3</span>,
-                                fclone:<span class="number">2</span>,
-                                ipvs_property:<span class="number">1</span>,
-                                peeked:<span class="number">1</span>,
-                                <span class="keyword">nf_t</span>race:<span class="number">1</span>;
-        __be16                  protocol:<span class="number">16</span>;
-        kmemcheck_bitfield_end(flags1);
-
-        <span class="keyword">void</span>                    (*destructor)(<span class="keyword">struct</span> sk_buff *skb);
-<span class="preprocessor">#<span class="keyword">if</span> defined(CONFIG_NF_CONNTRACK) || defined(CONFIG_NF_CONNTRACK_MODULE)</span>
-        <span class="keyword">struct</span> nf_conntrack     *nfct;
-        <span class="keyword">struct</span> sk_buff          *nfct_reasm;
-<span class="preprocessor">#<span class="keyword">endif</span></span>
-<span class="preprocessor">#ifdef CONFIG_BRIDGE_NETFILTER</span>
-        <span class="keyword">struct</span> nf_bridge_info   *nf_bridge;
-<span class="preprocessor">#<span class="keyword">endif</span></span>
-
-        <span class="keyword">int</span>                     skb_iif;
-<span class="preprocessor">#ifdef CONFIG_NET_SCHED</span>
-        __u16                   tc_index;       <span class="comment">/* traffic control index */</span>
-<span class="preprocessor">#ifdef CONFIG_NET_CLS_ACT</span>
-        __u16                   tc_verd;        <span class="comment">/* traffic control verdict */</span>
-<span class="preprocessor">#<span class="keyword">endif</span></span>
-<span class="preprocessor">#<span class="keyword">endif</span></span>
-
-        kmemcheck_bitfield_begin(flags2);
-        __u16                   queue_mapping:<span class="number">16</span>;
-<span class="preprocessor">#ifdef CONFIG_IPV6_NDISC_NODETYPE</span>
-        __u8                    ndisc_nodetype:<span class="number">2</span>;
-<span class="preprocessor">#<span class="keyword">endif</span></span>
-        kmemcheck_bitfield_end(flags2);
-
-        <span class="comment">/* 0/14 bit hole */</span>
-
-<span class="preprocessor">#ifdef CONFIG_NET_DMA</span>
-        <span class="keyword">dma_cookie_t</span>            dma_cookie;
-<span class="preprocessor">#<span class="keyword">endif</span></span>
-<span class="preprocessor">#ifdef CONFIG_NETWORK_SECMARK</span>
-        __u32                   secmark;
-<span class="preprocessor">#<span class="keyword">endif</span></span>
-        <span class="keyword">union</span> {
-                __u32           mark;
-                __u32           dropcount;
-        };
-
-        __u16                   <span class="keyword">vlan_t</span>ci;
-
-        <span class="keyword">sk_buff_data_t</span>          transport_header;
-        <span class="keyword">sk_buff_data_t</span>          network_header;
-        <span class="keyword">sk_buff_data_t</span>          mac_header;
-        <span class="comment">/* These elements must be at the end, see alloc_skb() for details.  */</span>
-        <span class="keyword">sk_buff_data_t</span>          tail;
-        <span class="keyword">sk_buff_data_t</span>          end;
-        <span class="keyword">unsigned</span> <span class="keyword">char</span>           *head,
-                                *data;
-        <span class="keyword">unsigned</span> <span class="keyword">int</span>            truesize;
-        <span class="keyword">atomic_t</span>                users;
-};
-
-
-有了以上定义的话，我们就可以做类似如下定义来使我们的驱动支持多内核了：
-
-<span class="keyword">struct</span> sk_buff *new_skb;
-<span class="preprocessor">#<span class="keyword">if</span> LINUX_VERSION_CODE &lt;= KERNEL_VERSION(2,6,18)</span>
-new_skb-&gt;mac.raw = (<span class="keyword">unsigned</span> <span class="keyword">char</span> *)new_eth_p;
-<span class="preprocessor">#<span class="keyword">else</span></span>
-new_skb-&gt;mac_header = (<span class="keyword">unsigned</span> <span class="keyword">char</span> *)new_eth_p;
-<span class="preprocessor">#<span class="keyword">endif</span></span>
-</code></pre><p>文章来源：<a href="http://www.linuxquestions.org/questions/linux-kernel-70/struct-sk_buff-differs-in-2-6-18-and-2-6-33-kernel-882507/" target="_blank" rel="external">http://www.linuxquestions.org/questions/linux-kernel-70/struct-sk_buff-differs-in-2-6-18-and-2-6-33-kernel-882507/</a></p>
+<h1 id="struct_sk_buff在2-6-18中的定义：">struct sk_buff在2.6.18中的定义：</h1><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> sk_buff &#123;</span><br><span class="line">        <span class="comment">/* These two members must be first. */</span></span><br><span class="line">        <span class="keyword">struct</span> sk_buff          *next;</span><br><span class="line">        <span class="keyword">struct</span> sk_buff          *prev;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">struct</span> sock             *sk;</span><br><span class="line">        <span class="keyword">struct</span> <span class="keyword">skb_t</span>imeval      tstamp;</span><br><span class="line">        <span class="keyword">struct</span> net_device       *dev;</span><br><span class="line">        <span class="keyword">struct</span> net_device       *input_dev;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">union</span> &#123;</span><br><span class="line">                <span class="keyword">struct</span> tcphdr   *th;</span><br><span class="line">                <span class="keyword">struct</span> udphdr   *uh;</span><br><span class="line">                <span class="keyword">struct</span> icmphdr  *icmph;</span><br><span class="line">                <span class="keyword">struct</span> igmphdr  *igmph;</span><br><span class="line">                <span class="keyword">struct</span> iphdr    *ipiph;</span><br><span class="line">                <span class="keyword">struct</span> ipv6hdr  *ipv6h;</span><br><span class="line">                <span class="keyword">unsigned</span> <span class="keyword">char</span>   *raw;</span><br><span class="line">        &#125; h;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">union</span> &#123;</span><br><span class="line">                <span class="keyword">struct</span> iphdr    *iph;</span><br><span class="line">                <span class="keyword">struct</span> ipv6hdr  *ipv6h;</span><br><span class="line">                <span class="keyword">struct</span> arphdr   *arph;</span><br><span class="line">                <span class="keyword">unsigned</span> <span class="keyword">char</span>   *raw;</span><br><span class="line">        &#125; nh;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">union</span> &#123;</span><br><span class="line">                <span class="keyword">unsigned</span> <span class="keyword">char</span>   *raw;</span><br><span class="line">        &#125; mac;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">struct</span>  dst_entry       *dst;</span><br><span class="line">        <span class="keyword">struct</span>  sec_path        *sp;</span><br><span class="line">        <span class="comment">/*</span><br><span class="line">         * This is the control buffer. It is free to use for every</span><br><span class="line">         * layer. Please put your private variables there. If you</span><br><span class="line">         * want to keep them across layers you have to do a skb_clone()</span><br><span class="line">         * first. This is owned by whoever has the skb queued ATM.</span><br><span class="line">         */</span></span><br><span class="line">        <span class="keyword">char</span>                    cb[<span class="number">48</span>];</span><br><span class="line"></span><br><span class="line">        <span class="keyword">unsigned</span> <span class="keyword">int</span>            len,</span><br><span class="line">                                data_len,</span><br><span class="line">                                mac_len,</span><br><span class="line">                                csum;</span><br><span class="line">        __u32                   priority;</span><br><span class="line">        __u8                    local_df:<span class="number">1</span>,</span><br><span class="line">                                cloned:<span class="number">1</span>,</span><br><span class="line">                                ip_summed:<span class="number">2</span>,</span><br><span class="line">                                nohdr:<span class="number">1</span>,</span><br><span class="line">                                nfctinfo:<span class="number">3</span>;</span><br><span class="line">        __u8                    <span class="keyword">pkt_t</span>ype:<span class="number">3</span>,</span><br><span class="line">                                fclone:<span class="number">2</span>,</span><br><span class="line"><span class="preprocessor">#ifndef CONFIG_XEN</span></span><br><span class="line">                                ipvs_property:<span class="number">1</span>;</span><br><span class="line"><span class="preprocessor">#<span class="keyword">else</span></span></span><br><span class="line">                                ipvs_property:<span class="number">1</span>,</span><br><span class="line">                                proto_data_valid:<span class="number">1</span>,</span><br><span class="line">                                proto_csum_blank:<span class="number">1</span>;</span><br><span class="line"><span class="preprocessor">#<span class="keyword">endif</span></span></span><br><span class="line">        __be16                  protocol;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">void</span>                    (*destructor)(<span class="keyword">struct</span> sk_buff *skb);</span><br><span class="line"><span class="preprocessor">#ifdef CONFIG_NETFILTER</span></span><br><span class="line">        <span class="keyword">struct</span> nf_conntrack     *nfct;</span><br><span class="line"><span class="preprocessor">#<span class="keyword">if</span> defined(CONFIG_NF_CONNTRACK) || defined(CONFIG_NF_CONNTRACK_MODULE)</span></span><br><span class="line">       <span class="keyword">struct</span> sk_buff          *nfct_reasm;</span><br><span class="line"><span class="preprocessor">#<span class="keyword">endif</span></span></span><br><span class="line"><span class="preprocessor">#ifdef CONFIG_BRIDGE_NETFILTER</span></span><br><span class="line">        <span class="keyword">struct</span> nf_bridge_info   *nf_bridge;</span><br><span class="line"><span class="preprocessor">#<span class="keyword">endif</span></span></span><br><span class="line">        __u32                   nfmark;</span><br><span class="line"><span class="preprocessor">#<span class="keyword">endif</span> /* CONFIG_NETFILTER */</span></span><br><span class="line"><span class="preprocessor">#ifdef CONFIG_NET_SCHED</span></span><br><span class="line">        __u16                   tc_index;       <span class="comment">/* traffic control index */</span></span><br><span class="line"><span class="preprocessor">#ifdef CONFIG_NET_CLS_ACT</span></span><br><span class="line">        __u16                   tc_verd;        <span class="comment">/* traffic control verdict */</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">endif</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">endif</span></span></span><br><span class="line"><span class="preprocessor">#ifdef CONFIG_NET_DMA</span></span><br><span class="line">        <span class="keyword">dma_cookie_t</span>            dma_cookie;</span><br><span class="line"><span class="preprocessor">#<span class="keyword">endif</span></span></span><br><span class="line"><span class="preprocessor">#ifdef CONFIG_NETWORK_SECMARK</span></span><br><span class="line">        __u32                   secmark;</span><br><span class="line"><span class="preprocessor">#<span class="keyword">endif</span></span></span><br><span class="line"></span><br><span class="line">        <span class="comment">/* These elements must be at the end, see alloc_skb() for details.  */</span></span><br><span class="line">        <span class="keyword">unsigned</span> <span class="keyword">int</span>            truesize;</span><br><span class="line">        <span class="keyword">atomic_t</span>                users;</span><br><span class="line">        <span class="keyword">unsigned</span> <span class="keyword">char</span>           *head,</span><br><span class="line">                                *data,</span><br><span class="line">                                *tail,</span><br><span class="line">                                *end;</span><br><span class="line">        <span class="comment">/* Extra stuff at the end to avoid breaking abi */</span></span><br><span class="line"><span class="preprocessor">#ifndef __GENKSYMS__</span></span><br><span class="line">        <span class="keyword">int</span>                      peeked;</span><br><span class="line"><span class="preprocessor">#<span class="keyword">endif</span></span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h1 id="struct_sk_buff在2-6-33中的定义：">struct sk_buff在2.6.33中的定义：</h1><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> sk_buff &#123;</span><br><span class="line">        <span class="comment">/* These two members must be first. */</span></span><br><span class="line">        <span class="keyword">struct</span> sk_buff          *next;</span><br><span class="line">        <span class="keyword">struct</span> sk_buff          *prev;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">ktime_t</span>                 tstamp;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">struct</span> sock             *sk;</span><br><span class="line">        <span class="keyword">struct</span> net_device       *dev;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/*</span><br><span class="line">         * This is the control buffer. It is free to use for every</span><br><span class="line">         * layer. Please put your private variables there. If you</span><br><span class="line">         * want to keep them across layers you have to do a skb_clone()</span><br><span class="line">         * first. This is owned by whoever has the skb queued ATM.</span><br><span class="line">         */</span></span><br><span class="line">        <span class="keyword">char</span>                    cb[<span class="number">48</span>] __aligned(<span class="number">8</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">unsigned</span> <span class="keyword">long</span>           _skb_dst;</span><br><span class="line"><span class="preprocessor">#ifdef CONFIG_XFRM</span></span><br><span class="line">        <span class="keyword">struct</span>  sec_path        *sp;</span><br><span class="line"><span class="preprocessor">#<span class="keyword">endif</span></span></span><br><span class="line">        <span class="keyword">unsigned</span> <span class="keyword">int</span>            len,</span><br><span class="line">                                data_len;</span><br><span class="line">        __u16                   mac_len,</span><br><span class="line">                                hdr_len;</span><br><span class="line">        <span class="keyword">union</span> &#123;</span><br><span class="line">                __wsum          csum;</span><br><span class="line">                <span class="keyword">struct</span> &#123;</span><br><span class="line">                        __u16   csum_start;</span><br><span class="line">                        __u16   csum_offset;</span><br><span class="line">                &#125;;</span><br><span class="line">        &#125;;</span><br><span class="line">        __u32                   priority;</span><br><span class="line">        kmemcheck_bitfield_begin(flags1);</span><br><span class="line">        __u8                    local_df:<span class="number">1</span>,</span><br><span class="line">                                cloned:<span class="number">1</span>,</span><br><span class="line">                                ip_summed:<span class="number">2</span>,</span><br><span class="line">                                nohdr:<span class="number">1</span>,</span><br><span class="line">                                nfctinfo:<span class="number">3</span>;</span><br><span class="line">        __u8                    <span class="keyword">pkt_t</span>ype:<span class="number">3</span>,</span><br><span class="line">                                fclone:<span class="number">2</span>,</span><br><span class="line">                                ipvs_property:<span class="number">1</span>,</span><br><span class="line">                                peeked:<span class="number">1</span>,</span><br><span class="line">                                <span class="keyword">nf_t</span>race:<span class="number">1</span>;</span><br><span class="line">        __be16                  protocol:<span class="number">16</span>;</span><br><span class="line">        kmemcheck_bitfield_end(flags1);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">void</span>                    (*destructor)(<span class="keyword">struct</span> sk_buff *skb);</span><br><span class="line"><span class="preprocessor">#<span class="keyword">if</span> defined(CONFIG_NF_CONNTRACK) || defined(CONFIG_NF_CONNTRACK_MODULE)</span></span><br><span class="line">        <span class="keyword">struct</span> nf_conntrack     *nfct;</span><br><span class="line">        <span class="keyword">struct</span> sk_buff          *nfct_reasm;</span><br><span class="line"><span class="preprocessor">#<span class="keyword">endif</span></span></span><br><span class="line"><span class="preprocessor">#ifdef CONFIG_BRIDGE_NETFILTER</span></span><br><span class="line">        <span class="keyword">struct</span> nf_bridge_info   *nf_bridge;</span><br><span class="line"><span class="preprocessor">#<span class="keyword">endif</span></span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span>                     skb_iif;</span><br><span class="line"><span class="preprocessor">#ifdef CONFIG_NET_SCHED</span></span><br><span class="line">        __u16                   tc_index;       <span class="comment">/* traffic control index */</span></span><br><span class="line"><span class="preprocessor">#ifdef CONFIG_NET_CLS_ACT</span></span><br><span class="line">        __u16                   tc_verd;        <span class="comment">/* traffic control verdict */</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">endif</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">endif</span></span></span><br><span class="line"></span><br><span class="line">        kmemcheck_bitfield_begin(flags2);</span><br><span class="line">        __u16                   queue_mapping:<span class="number">16</span>;</span><br><span class="line"><span class="preprocessor">#ifdef CONFIG_IPV6_NDISC_NODETYPE</span></span><br><span class="line">        __u8                    ndisc_nodetype:<span class="number">2</span>;</span><br><span class="line"><span class="preprocessor">#<span class="keyword">endif</span></span></span><br><span class="line">        kmemcheck_bitfield_end(flags2);</span><br><span class="line"></span><br><span class="line">        <span class="comment">/* 0/14 bit hole */</span></span><br><span class="line"></span><br><span class="line"><span class="preprocessor">#ifdef CONFIG_NET_DMA</span></span><br><span class="line">        <span class="keyword">dma_cookie_t</span>            dma_cookie;</span><br><span class="line"><span class="preprocessor">#<span class="keyword">endif</span></span></span><br><span class="line"><span class="preprocessor">#ifdef CONFIG_NETWORK_SECMARK</span></span><br><span class="line">        __u32                   secmark;</span><br><span class="line"><span class="preprocessor">#<span class="keyword">endif</span></span></span><br><span class="line">        <span class="keyword">union</span> &#123;</span><br><span class="line">                __u32           mark;</span><br><span class="line">                __u32           dropcount;</span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">        __u16                   <span class="keyword">vlan_t</span>ci;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">sk_buff_data_t</span>          transport_header;</span><br><span class="line">        <span class="keyword">sk_buff_data_t</span>          network_header;</span><br><span class="line">        <span class="keyword">sk_buff_data_t</span>          mac_header;</span><br><span class="line">        <span class="comment">/* These elements must be at the end, see alloc_skb() for details.  */</span></span><br><span class="line">        <span class="keyword">sk_buff_data_t</span>          tail;</span><br><span class="line">        <span class="keyword">sk_buff_data_t</span>          end;</span><br><span class="line">        <span class="keyword">unsigned</span> <span class="keyword">char</span>           *head,</span><br><span class="line">                                *data;</span><br><span class="line">        <span class="keyword">unsigned</span> <span class="keyword">int</span>            truesize;</span><br><span class="line">        <span class="keyword">atomic_t</span>                users;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>有了以上定义的话，我们就可以做类似如下定义来使我们的驱动支持多内核了：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> sk_buff *new_skb;</span><br><span class="line"><span class="preprocessor">#<span class="keyword">if</span> LINUX_VERSION_CODE &lt;= KERNEL_VERSION(2,6,18)</span></span><br><span class="line">new_skb-&gt;mac.raw = (<span class="keyword">unsigned</span> <span class="keyword">char</span> *)new_eth_p;</span><br><span class="line"><span class="preprocessor">#<span class="keyword">else</span></span></span><br><span class="line">new_skb-&gt;mac_header = (<span class="keyword">unsigned</span> <span class="keyword">char</span> *)new_eth_p;</span><br><span class="line"><span class="preprocessor">#<span class="keyword">endif</span></span></span><br></pre></td></tr></table></figure></p>
+<p>参考：<a href="http://www.linuxquestions.org/questions/linux-kernel-70/struct-sk_buff-differs-in-2-6-18-and-2-6-33-kernel-882507/" target="_blank" rel="external">http://www.linuxquestions.org/questions/linux-kernel-70/struct-sk_buff-differs-in-2-6-18-and-2-6-33-kernel-882507/</a></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -330,7 +117,7 @@ new_skb-&gt;mac_header = (<span class="keyword">unsigned</span> <span class="key
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/C-C/">C/C++</a>►<a class="article-category-link" href="/categories/C-C/CentOS/">CentOS</a>►<a class="article-category-link" href="/categories/C-C/CentOS/RedHat/">RedHat</a>►<a class="article-category-link" href="/categories/C-C/CentOS/RedHat/Ubuntu/">Ubuntu</a>
+  <a class="article-category-link" href="/categories/linux/">linux</a>
 </div>
 
 
@@ -385,7 +172,7 @@ new_skb-&gt;mac_header = (<span class="keyword">unsigned</span> <span class="key
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#struct_sk_buff在2-6-18中的定义："><span class="toc-number">1.</span> <span class="toc-text">struct sk_buff在2.6.18中的定义：</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#struct_sk_buff在2-6-18中的定义："><span class="toc-number">1.</span> <span class="toc-text">struct sk_buff在2.6.18中的定义：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#struct_sk_buff在2-6-33中的定义："><span class="toc-number">2.</span> <span class="toc-text">struct sk_buff在2.6.33中的定义：</span></a></li></ol>
  
   </div>
 
@@ -401,137 +188,39 @@ new_skb-&gt;mac_header = (<span class="keyword">unsigned</span> <span class="key
 		  
 		
 		  
-			<li><a href="/categories/C-C/" title="C/C++">C/C++<sup>22</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/" title="CentOS">CentOS<sup>13</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/CentOS/" title="CentOS">CentOS<sup>8</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/Python/" title="Python">Python<sup>3</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/Python/" title="Python">Python<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/Python/" title="Python">Python<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/CentOS/RedHat/" title="RedHat">RedHat<sup>6</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/RedHat/" title="RedHat">RedHat<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/Python/RedHat/" title="RedHat">RedHat<sup>2</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/RedHat/" title="RedHat">RedHat<sup>7</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/CentOS/RedHat/Ubuntu/" title="Ubuntu">Ubuntu<sup>5</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/RedHat/Ubuntu/" title="Ubuntu">Ubuntu<sup>6</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/Ubuntu/" title="Ubuntu">Ubuntu<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/Ubuntu/" title="Ubuntu">Ubuntu<sup>5</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/CentOS/Ubuntu/" title="Ubuntu">Ubuntu<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/Python/RedHat/Ubuntu/" title="Ubuntu">Ubuntu<sup>2</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/Uncategorized/" title="Uncategorized">Uncategorized<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/好站收集/" title="好站收集">好站收集<sup>1</sup></a></li>
-		  
 		
 		  
 		
 		  
-			<li><a href="/categories/我的作品/" title="我的作品">我的作品<sup>1</sup></a></li>
+			<li><a href="/categories/interesting/" title="interesting">interesting<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/C-C/CentOS/RedHat/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
+			<li><a href="/categories/linux/" title="linux">linux<sup>25</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/C-C/Python/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
+			<li><a href="/categories/notices/" title="notices">notices<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/Ubuntu/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
+			<li><a href="/categories/programing/" title="programing">programing<sup>21</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/CentOS/RedHat/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
+			<li><a href="/categories/sites/" title="sites">sites<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/C-C/经验总结/" title="经验总结">经验总结<sup>9</sup></a></li>
+			<li><a href="/categories/summarys/" title="summarys">summarys<sup>8</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/CentOS/Python/RedHat/Ubuntu/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
+			<li><a href="/categories/works/" title="works">works<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/C-C/CentOS/RedHat/Ubuntu/经验总结/" title="经验总结">经验总结<sup>3</sup></a></li>
-		  
 		
-		  
-			<li><a href="/categories/RedHat/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/经验总结/" title="经验总结">经验总结<sup>7</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/RedHat/Ubuntu/经验总结/" title="经验总结">经验总结<sup>3</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/Ubuntu/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/CentOS/Ubuntu/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/闲言碎语/" title="闲言碎语">闲言碎语<sup>4</sup></a></li>
 		  
 		
 		</ul>
@@ -556,7 +245,15 @@ new_skb-&gt;mac_header = (<span class="keyword">unsigned</span> <span class="key
 			
 		
 			
+				<li><a href="/tags/install/" title="install">install<sup>4</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/zlib/" title="zlib">zlib<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/yum/" title="yum">yum<sup>4</sup></a></li>
 			
 		
 			
@@ -564,11 +261,7 @@ new_skb-&gt;mac_header = (<span class="keyword">unsigned</span> <span class="key
 			
 		
 			
-				<li><a href="/tags/install/" title="install">install<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/python/" title="python">python<sup>3</sup></a></li>
+				<li><a href="/tags/make/" title="make">make<sup>3</sup></a></li>
 			
 		
 			
@@ -576,23 +269,11 @@ new_skb-&gt;mac_header = (<span class="keyword">unsigned</span> <span class="key
 			
 		
 			
-				<li><a href="/tags/yum/" title="yum">yum<sup>3</sup></a></li>
+				<li><a href="/tags/python/" title="python">python<sup>3</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/libc/" title="libc">libc<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/git/" title="git">git<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/sudo/" title="sudo">sudo<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/make/" title="make">make<sup>2</sup></a></li>
+				<li><a href="/tags/boost/" title="boost">boost<sup>2</sup></a></li>
 			
 		
 			
@@ -600,19 +281,7 @@ new_skb-&gt;mac_header = (<span class="keyword">unsigned</span> <span class="key
 			
 		
 			
-				<li><a href="/tags/kernel-devel/" title="kernel-devel">kernel-devel<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/ln/" title="ln">ln<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/https/" title="https">https<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/gcc/" title="gcc">gcc<sup>2</sup></a></li>
+				<li><a href="/tags/编译/" title="编译">编译<sup>2</sup></a></li>
 			
 		
 			
@@ -620,7 +289,27 @@ new_skb-&gt;mac_header = (<span class="keyword">unsigned</span> <span class="key
 			
 		
 			
-				<li><a href="/tags/编译/" title="编译">编译<sup>2</sup></a></li>
+				<li><a href="/tags/gcc/" title="gcc">gcc<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/ln/" title="ln">ln<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/git/" title="git">git<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/https/" title="https">https<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/kernel-devel/" title="kernel-devel">kernel-devel<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/kernel/" title="kernel">kernel<sup>2</sup></a></li>
 			
 		
 		</ul>

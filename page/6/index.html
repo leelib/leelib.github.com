@@ -83,6 +83,69 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2012/04/24/asm-rol-to-c.html" title="汇编中ROL(循环左移)对应的C语言实现" itemprop="url">汇编中ROL(循环左移)对应的C语言实现</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="leaker" target="_blank" itemprop="author">leaker</a>
+		
+  <p class="article-time">
+    <time datetime="2012-04-24T02:48:29.000Z" itemprop="datePublished"> 发表于 2012-04-24</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>在汇编语言中，我们可以直接使用ROL ROR等指令进行循环左移和循环右移的操作。<br>但C语言中却没有对应的操作，没办法只能自己实现了。</p>
+<h2 id="下面是我最近项目中用到的一个针对WORD类型的循环左移(ROL)实现代码：">下面是我最近项目中用到的一个针对WORD类型的循环左移(ROL)实现代码：</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">uint16_t</span> ROL(<span class="keyword">int</span> val, <span class="keyword">int</span> n)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> (val &lt;&lt; n) | (val &gt;&gt; (<span class="number">16</span> - n));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>针对BYTE类型的循环左移：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">uint8_t</span> ROL(<span class="keyword">int</span> val, <span class="keyword">int</span> n)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> (val &lt;&lt; n) | (val &gt;&gt; (<span class="number">8</span> - n));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>针对DWORD类型的循环左移：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">uint32_t</span> ROL(<span class="keyword">int</span> val, <span class="keyword">int</span> n)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> (val &lt;&lt; n) | (val &gt;&gt; (<span class="number">32</span> - n));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/programing/">programing</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/ROL/">ROL</a><a href="/tags/ROR/">ROR</a><a href="/tags/循环右移/">循环右移</a><a href="/tags/循环左移/">循环左移</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2012/04/12/convert-m8-contacts-xml-to-andriod-vcf.html" title="将M8导出的联系人XML转化成Andriod可以导入的vcf文件" itemprop="url">将M8导出的联系人XML转化成Andriod可以导入的vcf文件</a>
   </h1>
   <p class="article-author">By
@@ -108,7 +171,7 @@
 <span class="comment"># 功能：将M8导出的联系人XML转化成Andriod可以导入的vcf文件</span>
 <span class="comment"># 版本：python 2.6 以上</span>
 <span class="comment"># 作者：leaker</span>
-<span class="comment"># 网站：www.leelib.com</span>
+<span class="comment"># 网站：http://www.leelib.com</span>
 <span class="built_in">from</span> xml.etree import ElementTree <span class="keyword">as</span> ET
 
 <span class="comment"># 输出到的mycontact.vcf</span>
@@ -117,8 +180,7 @@ root = ET.parse(<span class="built_in">file</span>(<span class="string">"myconta
 print root
 <span class="keyword">for</span> e <span class="operator">in</span> root.findall(<span class="string">'Person'</span>):
     out.<span class="built_in">write</span>(<span class="string">'BEGIN:VCARDrnVERSION:3.0rn'</span>)
-    out.<span class="built_in">write</span>(<span class="string">'N:%s;%s;;;rn'</span> %
-        (e.findtext(<span class="string">'LastName'</span>, <span class="string">''</span>).encode(<span class="string">'utf8'</span>), e.findtext(<span class="string">'FirstName'</span>, <span class="string">''</span>).encode(<span class="string">'utf8'</span>)))
+    out.<span class="built_in">write</span>(<span class="string">'N:%s;%s;;;rn'</span> % (e.findtext(<span class="string">'LastName'</span>, <span class="string">''</span>).encode(<span class="string">'utf8'</span>), e.findtext(<span class="string">'FirstName'</span>, <span class="string">''</span>).encode(<span class="string">'utf8'</span>)))
     out.<span class="built_in">write</span>(<span class="string">'FN:%srn'</span> % (e.findtext(<span class="string">'FileAs'</span>, <span class="string">''</span>).encode(<span class="string">'utf8'</span>)))
     <span class="comment"># print 'FN:%srn'% (e.findtext('FileAs', '').encode('gb2312'))</span>
     <span class="keyword">for</span> ee <span class="operator">in</span> root.findall(<span class="string">'Phone'</span>):
@@ -140,7 +202,7 @@ out.<span class="built_in">close</span>()
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/Python/">Python</a>
+  <a class="article-category-link" href="/categories/programing/">programing</a>
 </div>
 
 
@@ -208,7 +270,7 @@ out.<span class="built_in">close</span>()
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/闲言碎语/">闲言碎语</a>
+  <a class="article-category-link" href="/categories/summarys/">summarys</a>
 </div>
 
 
@@ -258,17 +320,10 @@ out.<span class="built_in">close</span>()
         <center><img src="/wp-content/uploads/2012/03/lperl.jpg" alt=""></center>
 
 <p>今天因为项目需要，需要编译freeradius来使用。</p>
-<p>结果在编译过程中出现如上错误 <strong>cannot find -lperl</strong> 。</p>
-<p>按有些遇到这种类似情况来说，应该运行一个类似</p>
-<pre><code>sudo yum -y <span class="operator"><span class="keyword">install</span> libtool-perl*
-
-
-这样的命令应该就可以解决了。
-
-但貌似perl的必须得使用下面这种方法来安装：
-
-sudo apt-<span class="keyword">get</span> <span class="keyword">install</span> libperl-dev</span>
-</code></pre><p>做个笔记，希望能够帮到遇到这个问题的人。</p>
+<h1 id="错误原因">错误原因</h1><p>结果在编译过程中出现如上错误 <code>cannot find -lperl</code>。</p>
+<h1 id="解决方案">解决方案</h1><h2 id="CentOS">CentOS</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum -y install libtool-perl*</span><br></pre></td></tr></table></figure>
+<h2 id="Ubuntu">Ubuntu</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install libperl-dev</span><br></pre></td></tr></table></figure>
+<p>做个笔记，希望能够帮到遇到这个问题的人。<br>(o≖◡≖)</p>
 
         
         
@@ -281,7 +336,7 @@ sudo apt-<span class="keyword">get</span> <span class="keyword">install</span> l
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/Ubuntu/">Ubuntu</a>
+  <a class="article-category-link" href="/categories/linux/">linux</a>
 </div>
 
 
@@ -381,7 +436,7 @@ sudo apt-<span class="keyword">get</span> <span class="keyword">install</span> l
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/我的作品/">我的作品</a>
+  <a class="article-category-link" href="/categories/works/">works</a>
 </div>
 
 
@@ -428,21 +483,16 @@ sudo apt-<span class="keyword">get</span> <span class="keyword">install</span> l
 </header>
     <div class="article-content">
         
-        <center><img src="http://www.leelib.com/wp-content/uploads/2012/03/gedit.jpg" alt="gedit"></center>
+        <center><img src="/wp-content/uploads/2012/03/gedit.jpg" alt=""></center>
 
-<h2 id="为了能让gedit能够直接编辑不属于当前用户的文件，我们需要做如下操作：">为了能让gedit能够直接编辑不属于当前用户的文件，我们需要做如下操作：</h2><blockquote>
+<h1 id="解决方案">解决方案</h1><p>为了能让gedit能够直接编辑不属于当前用户的文件，我们需要做如下操作：</p>
 <ol>
 <li>为gedit创建一个启动器。这个有很多方法，如果不清楚的同学可以跟我一起操作。<br>具体方法为：找到 <strong>应用程序-附件-文本编辑器</strong> 点右键选择 <strong>将此启动器添加到面板</strong></li>
-<li>右键点击刚才我们创建的启动器。选择 <strong>属性</strong> 将原命令</li>
+<li>右键点击刚才我们创建的启动器。选择 <strong>属性</strong> 将原命令 <strong>gedit %U</strong> 修改为 <strong>gksudo gedit %U</strong></li>
 </ol>
+<blockquote>
+<p><strong>gksudo</strong> 其实就是对应桌面环境下的 <strong>sudo</strong> 命令.</p>
 </blockquote>
-<pre><code><span class="function_or_atom">gedit</span> <span class="comment">%U</span>
-
-
-修改为
-
-<span class="function_or_atom">gksudo</span> <span class="function_or_atom">gedit</span> <span class="comment">%U</span>
-</code></pre><p><strong>gksudo</strong> 其实就是对应桌面环境下的 <strong>sudo</strong> 命令.</p>
 <p>我才学到的留以记录，希望能帮到需要的人。</p>
 
         
@@ -456,7 +506,7 @@ sudo apt-<span class="keyword">get</span> <span class="keyword">install</span> l
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/Ubuntu/">Ubuntu</a>►<a class="article-category-link" href="/categories/Ubuntu/经验总结/">经验总结</a>
+  <a class="article-category-link" href="/categories/linux/">linux</a>
 </div>
 
 
@@ -503,13 +553,12 @@ sudo apt-<span class="keyword">get</span> <span class="keyword">install</span> l
 </header>
     <div class="article-content">
         
-        <p><img src="/wp-content/uploads/2012/03/ubuntu_splash.jpg" alt=""></p>
-<h2 id="步骤：">步骤：</h2><blockquote>
-<ol>
+        <center><img src="/wp-content/uploads/2012/03/ubuntu_splash.jpg" alt=""></center>
+
+<h1 id="步骤">步骤</h1><ol>
 <li>sudo gedit /etc/apt/sources.list<br>编辑你的源列表，将原来的内容全部删除并复制下面列表到文件中，然后保存列表。</li>
 <li>sudo apt-get update</li>
 </ol>
-</blockquote>
 <p>等第2步完成之后你就可以打开更新管理器更新了<br>顺便一提 网易的更新速度真的很快，我这里下载600K/s</p>
 <p>以下是更新列表内容：</p>
 <pre><code>deb <span class="string">http:</span><span class="comment">//mirrors.163.com/ubuntu/ precise main restricted</span>
@@ -547,7 +596,7 @@ deb-src <span class="string">http:</span><span class="comment">//extras.ubuntu.c
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/Ubuntu/">Ubuntu</a>
+  <a class="article-category-link" href="/categories/linux/">linux</a>
 </div>
 
 
@@ -594,26 +643,23 @@ deb-src <span class="string">http:</span><span class="comment">//extras.ubuntu.c
 </header>
     <div class="article-content">
         
-        <p>[caption id=”attachment_32” align=”aligncenter” width=”514”]<a href="http://www.chami.com/html-kit/services/favicon/" target="_blank" rel="external"><img src="http://www.leelib.com/wp-content/uploads/2012/03/favicon.jpg" alt="FavIcon from Pics" title="FavIcon from Pics"></a> 一个可以在线生成网站favicon图标的网站[/caption]</p>
+        <p><center><img src="/wp-content/uploads/2012/03/favicon.jpg" alt="" title="FavIcon from Pics"></center><br>一个可以在线生成网站favicon图标的网站</p>
 <p>网站地址：<a href="http://www.chami.com/html-kit/services/favicon/" target="_blank" rel="external">http://www.chami.com/html-kit/services/favicon/</a></p>
 <p>可以同时生成静态（<strong>favicon.ico</strong>）和动态（<strong>animated_favicon1.gif</strong>）两种图标</p>
 <p>以下是安装说明附带我的翻译（英文水平有限，如有翻译错误欢迎指正）：</p>
-<h2 id="A-_Installing_the_favicon_with_animation_-(A-使用动态图标安装)">A. Installing the favicon with animation -(A.使用动态图标安装)</h2><blockquote>
-<ol>
-<li>Upload favicon.ico and animated_favicon1.gif to the root of your web folder.(1.上传 favicon.ico 和 animated_favicon1.gif 文件到你的网站根目录下。)<p></p></li>
-<li>Add the following HTML code to your web page, in betweenandtags:(2.添加以下HTML代码到你页面中和之间：)</li>
+<h1 id="A-_Installing_the_favicon_with_animation">A. Installing the favicon with animation</h1><ol>
+<li>Upload favicon.ico and animated_favicon1.gif to the root of your web folder(上传 favicon.ico 和 animated_favicon1.gif 文件到你的网站根目录下).</li>
+<li>Add the following HTML code to your web page, in between &lt;head&gt; and &lt;/head&gt; tags(添加以下HTML代码到你页面中&lt;head&gt;和&lt;/head&amp;gt之间):<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">link</span> <span class="attribute">rel</span>=<span class="value">"shortcut icon"</span> <span class="attribute">href</span>=<span class="value">"favicon.ico"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">link</span> <span class="attribute">rel</span>=<span class="value">"icon"</span> <span class="attribute">type</span>=<span class="value">"image/gif"</span> <span class="attribute">href</span>=<span class="value">"animated_favicon1.gif"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
 </ol>
-</blockquote>
-<p></p><p>```html</p>
-<pre><code>B. Installing <span class="operator">the</span> favicon <span class="keyword">without</span> animation -(B.不使用动态图标安装)
--
+<h1 id="B-_Installing_the_favicon_without_animation">B. Installing the favicon without animation</h1><ol>
+<li><p>Upload favicon.ico to the root of your web folder(上传 favicon.ico 文件到你的网站根目录下)</p>
+</li>
+<li><p>Add the following HTML code to your web page, in between &lt;head&gt; and &lt;/head&gt; tags:(2.添加以下HTML代码到你页面中&lt;head&gt;和&lt;/head&amp;gt之间：)</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">link</span> <span class="attribute">rel</span>=<span class="value">"shortcut icon"</span> <span class="attribute">href</span>=<span class="value">"favicon.ico"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
 
-&gt; <span class="number">1</span>\. Upload favicon.ico <span class="built_in">to</span> <span class="operator">the</span> root <span class="operator">of</span> your web <span class="built_in">folder</span>. (<span class="number">1.</span>上传 favicon.ico 文件到你的网站根目录下。)
-
-&gt; <span class="number">2</span>\. Add <span class="operator">the</span> following HTML code <span class="built_in">to</span> your web page, <span class="operator">in</span> betweenandtags:(<span class="number">2.</span>添加以下HTML代码到你页面中和之间：)
-
-```html
-</code></pre>
         
         
         <p class="article-more-link">
@@ -625,7 +671,7 @@ deb-src <span class="string">http:</span><span class="comment">//extras.ubuntu.c
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/好站收集/">好站收集</a>
+  <a class="article-category-link" href="/categories/sites/">sites</a>
 </div>
 
 
@@ -673,137 +719,39 @@ deb-src <span class="string">http:</span><span class="comment">//extras.ubuntu.c
 		  
 		
 		  
-			<li><a href="/categories/C-C/" title="C/C++">C/C++<sup>22</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/" title="CentOS">CentOS<sup>13</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/CentOS/" title="CentOS">CentOS<sup>8</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/Python/" title="Python">Python<sup>3</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/Python/" title="Python">Python<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/Python/" title="Python">Python<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/CentOS/RedHat/" title="RedHat">RedHat<sup>6</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/RedHat/" title="RedHat">RedHat<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/Python/RedHat/" title="RedHat">RedHat<sup>2</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/RedHat/" title="RedHat">RedHat<sup>7</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/CentOS/RedHat/Ubuntu/" title="Ubuntu">Ubuntu<sup>5</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/RedHat/Ubuntu/" title="Ubuntu">Ubuntu<sup>6</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/Ubuntu/" title="Ubuntu">Ubuntu<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/Ubuntu/" title="Ubuntu">Ubuntu<sup>5</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/CentOS/Ubuntu/" title="Ubuntu">Ubuntu<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/Python/RedHat/Ubuntu/" title="Ubuntu">Ubuntu<sup>2</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/Uncategorized/" title="Uncategorized">Uncategorized<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/好站收集/" title="好站收集">好站收集<sup>1</sup></a></li>
-		  
 		
 		  
 		
 		  
-			<li><a href="/categories/我的作品/" title="我的作品">我的作品<sup>1</sup></a></li>
+			<li><a href="/categories/interesting/" title="interesting">interesting<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/C-C/CentOS/RedHat/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
+			<li><a href="/categories/linux/" title="linux">linux<sup>25</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/C-C/Python/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
+			<li><a href="/categories/notices/" title="notices">notices<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/Ubuntu/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
+			<li><a href="/categories/programing/" title="programing">programing<sup>21</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/CentOS/RedHat/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
+			<li><a href="/categories/sites/" title="sites">sites<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/C-C/经验总结/" title="经验总结">经验总结<sup>9</sup></a></li>
+			<li><a href="/categories/summarys/" title="summarys">summarys<sup>8</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/CentOS/Python/RedHat/Ubuntu/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
+			<li><a href="/categories/works/" title="works">works<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/C-C/CentOS/RedHat/Ubuntu/经验总结/" title="经验总结">经验总结<sup>3</sup></a></li>
-		  
 		
-		  
-			<li><a href="/categories/RedHat/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/经验总结/" title="经验总结">经验总结<sup>7</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/RedHat/Ubuntu/经验总结/" title="经验总结">经验总结<sup>3</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/Ubuntu/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/CentOS/Ubuntu/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/闲言碎语/" title="闲言碎语">闲言碎语<sup>4</sup></a></li>
 		  
 		
 		</ul>
@@ -828,7 +776,15 @@ deb-src <span class="string">http:</span><span class="comment">//extras.ubuntu.c
 			
 		
 			
+				<li><a href="/tags/install/" title="install">install<sup>4</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/zlib/" title="zlib">zlib<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/yum/" title="yum">yum<sup>4</sup></a></li>
 			
 		
 			
@@ -836,11 +792,7 @@ deb-src <span class="string">http:</span><span class="comment">//extras.ubuntu.c
 			
 		
 			
-				<li><a href="/tags/install/" title="install">install<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/python/" title="python">python<sup>3</sup></a></li>
+				<li><a href="/tags/make/" title="make">make<sup>3</sup></a></li>
 			
 		
 			
@@ -848,23 +800,11 @@ deb-src <span class="string">http:</span><span class="comment">//extras.ubuntu.c
 			
 		
 			
-				<li><a href="/tags/yum/" title="yum">yum<sup>3</sup></a></li>
+				<li><a href="/tags/python/" title="python">python<sup>3</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/libc/" title="libc">libc<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/git/" title="git">git<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/sudo/" title="sudo">sudo<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/make/" title="make">make<sup>2</sup></a></li>
+				<li><a href="/tags/boost/" title="boost">boost<sup>2</sup></a></li>
 			
 		
 			
@@ -872,19 +812,7 @@ deb-src <span class="string">http:</span><span class="comment">//extras.ubuntu.c
 			
 		
 			
-				<li><a href="/tags/kernel-devel/" title="kernel-devel">kernel-devel<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/ln/" title="ln">ln<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/https/" title="https">https<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/gcc/" title="gcc">gcc<sup>2</sup></a></li>
+				<li><a href="/tags/编译/" title="编译">编译<sup>2</sup></a></li>
 			
 		
 			
@@ -892,7 +820,27 @@ deb-src <span class="string">http:</span><span class="comment">//extras.ubuntu.c
 			
 		
 			
-				<li><a href="/tags/编译/" title="编译">编译<sup>2</sup></a></li>
+				<li><a href="/tags/gcc/" title="gcc">gcc<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/ln/" title="ln">ln<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/git/" title="git">git<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/https/" title="https">https<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/kernel-devel/" title="kernel-devel">kernel-devel<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/kernel/" title="kernel">kernel<sup>2</sup></a></li>
 			
 		
 		</ul>

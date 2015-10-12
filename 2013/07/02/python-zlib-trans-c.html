@@ -11,67 +11,25 @@
     
 
     
-    <meta name="description" content="压缩enData = zlib.compress(data)[2:-4]
-
-
-&amp;gt; 对应：
-
-compress2(dstbuf, &amp;amp;amp;dstLen, strSrc, srcLen, 6);
-
-
-* * *
-
-# 解压
-
-deData = zlib.decompress(enData, -zlib.MAX_WBITS)
-
-
-&amp;gt; 对应：
-
-bool gzipInflate( c">
+    <meta name="description" content="压缩1enData = zlib.compress(data)[2:-4]
+对应：1compress2(dstbuf, &amp;amp;dstLen, strSrc, srcLen, 6);
+解压1deData = zlib.decompress(enData, -zlib.MAX_WBITS)
+对应：123456789101112131415161718192021222324252627282930">
 <meta property="og:type" content="article">
 <meta property="og:title" content="python的zlib压缩解压缩对应的C语言方式">
 <meta property="og:url" content="http://www.leelib.com/2013/07/02/python-zlib-trans-c.html">
 <meta property="og:site_name" content="李略帅">
-<meta property="og:description" content="压缩enData = zlib.compress(data)[2:-4]
-
-
-&amp;gt; 对应：
-
-compress2(dstbuf, &amp;amp;amp;dstLen, strSrc, srcLen, 6);
-
-
-* * *
-
-# 解压
-
-deData = zlib.decompress(enData, -zlib.MAX_WBITS)
-
-
-&amp;gt; 对应：
-
-bool gzipInflate( c">
-<meta property="og:updated_time" content="2015-09-17T09:03:43.982Z">
+<meta property="og:description" content="压缩1enData = zlib.compress(data)[2:-4]
+对应：1compress2(dstbuf, &amp;amp;dstLen, strSrc, srcLen, 6);
+解压1deData = zlib.decompress(enData, -zlib.MAX_WBITS)
+对应：123456789101112131415161718192021222324252627282930">
+<meta property="og:updated_time" content="2015-09-18T07:07:50.065Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="python的zlib压缩解压缩对应的C语言方式">
-<meta name="twitter:description" content="压缩enData = zlib.compress(data)[2:-4]
-
-
-&amp;gt; 对应：
-
-compress2(dstbuf, &amp;amp;amp;dstLen, strSrc, srcLen, 6);
-
-
-* * *
-
-# 解压
-
-deData = zlib.decompress(enData, -zlib.MAX_WBITS)
-
-
-&amp;gt; 对应：
-
-bool gzipInflate( c">
+<meta name="twitter:description" content="压缩1enData = zlib.compress(data)[2:-4]
+对应：1compress2(dstbuf, &amp;amp;dstLen, strSrc, srcLen, 6);
+解压1deData = zlib.decompress(enData, -zlib.MAX_WBITS)
+对应：123456789101112131415161718192021222324252627282930">
 
     
     <link rel="alternative" href="/atom.xml" title="李略帅" type="application/atom+xml">
@@ -149,98 +107,22 @@ bool gzipInflate( c">
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#压缩"><span class="toc-number">1.</span> <span class="toc-text">压缩</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#压缩"><span class="toc-number">1.</span> <span class="toc-text">压缩</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#解压"><span class="toc-number">2.</span> <span class="toc-text">解压</span></a></li></ol>
 		
 		</div>
 		
-		<h1 id="压缩">压缩</h1><pre><code>enData = zlib.compress(data)[<span class="number">2</span>:-<span class="number">4</span>]
-
-
-&gt; 对应：
-
-compress2(dstbuf, &amp;amp;dstLen, strSrc, srcLen, <span class="number">6</span>);
-
-
-* * *
-
-<span class="preprocessor"># 解压</span>
-
-deData = zlib.decompress(enData, -zlib.MAX_WBITS)
-
-
-&gt; 对应：
-
-<span class="function"><span class="keyword">bool</span> <span class="title">gzipInflate</span><span class="params">( <span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">string</span>&amp;amp; compressedBytes, <span class="built_in">std</span>::<span class="built_in">string</span>&amp;amp; uncompressedBytes )</span> </span>{
-    <span class="keyword">if</span> ( compressedBytes.size() == <span class="number">0</span> ) {
-        uncompressedBytes = compressedBytes ;
-        <span class="keyword">return</span> <span class="keyword">true</span> ;
-    }
-
-    uncompressedBytes.clear() ;
-
-    <span class="keyword">unsigned</span> full_length = compressedBytes.size() ;
-    <span class="keyword">unsigned</span> half_length = compressedBytes.size() / <span class="number">2</span>;
-
-    <span class="keyword">unsigned</span> uncompLength = full_length ;
-    <span class="keyword">char</span>* uncomp = (<span class="keyword">char</span>*) <span class="built_in">calloc</span>( <span class="keyword">sizeof</span>(<span class="keyword">char</span>), uncompLength );
-
-    z_stream strm;
-    strm.next_in = (Bytef *) compressedBytes.c_str();
-    strm.avail_in = compressedBytes.size() ;
-    strm.total_out = <span class="number">0</span>;
-    strm.zalloc = Z_NULL;
-    strm.zfree = Z_NULL;
-
-    <span class="keyword">bool</span> done = <span class="keyword">false</span> ;
-
-    <span class="comment">//if (inflateInit2(&amp;amp;strm, (16+MAX_WBITS)) != Z_OK)</span>
-    <span class="keyword">if</span> (inflateInit2(&amp;amp;strm, -MAX_WBITS) != Z_OK)
-    {
-        <span class="built_in">free</span>( uncomp );
-        <span class="keyword">return</span> <span class="keyword">false</span>;
-    }
-
-    <span class="keyword">while</span> (!done) {
-        <span class="comment">// If our output buffer is too small</span>
-        <span class="keyword">if</span> (strm.total_out &gt;= uncompLength ) {
-            <span class="comment">// Increase size of output buffer</span>
-            <span class="keyword">char</span>* uncomp2 = (<span class="keyword">char</span>*) <span class="built_in">calloc</span>( <span class="keyword">sizeof</span>(<span class="keyword">char</span>), uncompLength + half_length );
-            <span class="built_in">memcpy</span>( uncomp2, uncomp, uncompLength );
-            uncompLength += half_length ;
-            <span class="built_in">free</span>( uncomp );
-            uncomp = uncomp2 ;
-        }
-
-        strm.next_out = (Bytef *) (uncomp + strm.total_out);
-        strm.avail_out = uncompLength - strm.total_out;
-
-        <span class="comment">// Inflate another chunk.</span>
-        <span class="keyword">int</span> err = inflate (&amp;amp;strm, Z_SYNC_FLUSH);
-        <span class="keyword">if</span> (err == Z_STREAM_END) done = <span class="keyword">true</span>;
-        <span class="keyword">else</span> <span class="keyword">if</span> (err != Z_OK)  {
-            <span class="keyword">break</span>;
-        }
-    }
-
-    <span class="keyword">if</span> (inflateEnd (&amp;amp;strm) != Z_OK) {
-        <span class="built_in">free</span>( uncomp );
-        <span class="keyword">return</span> <span class="keyword">false</span>;
-    }
-
-    <span class="keyword">for</span> ( <span class="keyword">size_t</span> i=<span class="number">0</span>; i&lt;strm.total_out; ++i ) {
-        uncompressedBytes += uncomp[ i ];
-    }
-    <span class="built_in">free</span>( uncomp );
-    <span class="keyword">return</span> <span class="keyword">true</span> ;
-}
-</code></pre>  
+		<h1 id="压缩">压缩</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">enData = zlib.compress(data)[<span class="number">2</span>:-<span class="number">4</span>]</span><br></pre></td></tr></table></figure>
+<p>对应：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">compress2(dstbuf, &amp;dstLen, strSrc, srcLen, <span class="number">6</span>);</span><br></pre></td></tr></table></figure></p>
+<h1 id="解压">解压</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">deData = zlib.decompress(enData, -zlib.MAX_WBITS)</span><br></pre></td></tr></table></figure>
+<p>对应：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">gzipInflate</span><span class="params">( <span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">string</span>&amp; compressedBytes, <span class="built_in">std</span>::<span class="built_in">string</span>&amp; uncompressedBytes )</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> ( compressedBytes.size() == <span class="number">0</span> ) &#123;</span><br><span class="line">        uncompressedBytes = compressedBytes ;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span> ;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    uncompressedBytes.clear() ;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">unsigned</span> full_length = compressedBytes.size() ;</span><br><span class="line">    <span class="keyword">unsigned</span> half_length = compressedBytes.size() / <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">unsigned</span> uncompLength = full_length ;</span><br><span class="line">    <span class="keyword">char</span>* uncomp = (<span class="keyword">char</span>*) <span class="built_in">calloc</span>( <span class="keyword">sizeof</span>(<span class="keyword">char</span>), uncompLength );</span><br><span class="line"></span><br><span class="line">    z_stream strm;</span><br><span class="line">    strm.next_in = (Bytef *) compressedBytes.c_str();</span><br><span class="line">    strm.avail_in = compressedBytes.size() ;</span><br><span class="line">    strm.total_out = <span class="number">0</span>;</span><br><span class="line">    strm.zalloc = Z_NULL;</span><br><span class="line">    strm.zfree = Z_NULL;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">bool</span> done = <span class="keyword">false</span> ;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//if (inflateInit2(&amp;strm, (16+MAX_WBITS)) != Z_OK)</span></span><br><span class="line">    <span class="keyword">if</span> (inflateInit2(&amp;strm, -MAX_WBITS) != Z_OK)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">free</span>( uncomp );</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (!done) &#123;</span><br><span class="line">        <span class="comment">// If our output buffer is too small</span></span><br><span class="line">        <span class="keyword">if</span> (strm.total_out &gt;= uncompLength ) &#123;</span><br><span class="line">            <span class="comment">// Increase size of output buffer</span></span><br><span class="line">            <span class="keyword">char</span>* uncomp2 = (<span class="keyword">char</span>*) <span class="built_in">calloc</span>( <span class="keyword">sizeof</span>(<span class="keyword">char</span>), uncompLength + half_length );</span><br><span class="line">            <span class="built_in">memcpy</span>( uncomp2, uncomp, uncompLength );</span><br><span class="line">            uncompLength += half_length ;</span><br><span class="line">            <span class="built_in">free</span>( uncomp );</span><br><span class="line">            uncomp = uncomp2 ;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        strm.next_out = (Bytef *) (uncomp + strm.total_out);</span><br><span class="line">        strm.avail_out = uncompLength - strm.total_out;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Inflate another chunk.</span></span><br><span class="line">        <span class="keyword">int</span> err = inflate (&amp;strm, Z_SYNC_FLUSH);</span><br><span class="line">        <span class="keyword">if</span> (err == Z_STREAM_END) done = <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (err != Z_OK)  &#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (inflateEnd (&amp;strm) != Z_OK) &#123;</span><br><span class="line">        <span class="built_in">free</span>( uncomp );</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> ( <span class="keyword">size_t</span> i=<span class="number">0</span>; i&lt;strm.total_out; ++i ) &#123;</span><br><span class="line">        uncompressedBytes += uncomp[ i ];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">free</span>( uncomp );</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">true</span> ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+  
 	</div>
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/C-C/">C/C++</a>►<a class="article-category-link" href="/categories/C-C/Python/">Python</a>►<a class="article-category-link" href="/categories/C-C/Python/经验总结/">经验总结</a>
+  <a class="article-category-link" href="/categories/programing/">programing</a>
 </div>
 
 
@@ -295,7 +177,7 @@ deData = zlib.decompress(enData, -zlib.MAX_WBITS)
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#压缩"><span class="toc-number">1.</span> <span class="toc-text">压缩</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#压缩"><span class="toc-number">1.</span> <span class="toc-text">压缩</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#解压"><span class="toc-number">2.</span> <span class="toc-text">解压</span></a></li></ol>
  
   </div>
 
@@ -311,137 +193,39 @@ deData = zlib.decompress(enData, -zlib.MAX_WBITS)
 		  
 		
 		  
-			<li><a href="/categories/C-C/" title="C/C++">C/C++<sup>22</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/" title="CentOS">CentOS<sup>13</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/CentOS/" title="CentOS">CentOS<sup>8</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/Python/" title="Python">Python<sup>3</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/Python/" title="Python">Python<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/Python/" title="Python">Python<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/CentOS/RedHat/" title="RedHat">RedHat<sup>6</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/RedHat/" title="RedHat">RedHat<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/Python/RedHat/" title="RedHat">RedHat<sup>2</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/RedHat/" title="RedHat">RedHat<sup>7</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/CentOS/RedHat/Ubuntu/" title="Ubuntu">Ubuntu<sup>5</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/RedHat/Ubuntu/" title="Ubuntu">Ubuntu<sup>6</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/Ubuntu/" title="Ubuntu">Ubuntu<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/Ubuntu/" title="Ubuntu">Ubuntu<sup>5</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/CentOS/Ubuntu/" title="Ubuntu">Ubuntu<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/Python/RedHat/Ubuntu/" title="Ubuntu">Ubuntu<sup>2</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/Uncategorized/" title="Uncategorized">Uncategorized<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/好站收集/" title="好站收集">好站收集<sup>1</sup></a></li>
-		  
 		
 		  
 		
 		  
-			<li><a href="/categories/我的作品/" title="我的作品">我的作品<sup>1</sup></a></li>
+			<li><a href="/categories/interesting/" title="interesting">interesting<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/C-C/CentOS/RedHat/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
+			<li><a href="/categories/linux/" title="linux">linux<sup>25</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/C-C/Python/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
+			<li><a href="/categories/notices/" title="notices">notices<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/Ubuntu/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
+			<li><a href="/categories/programing/" title="programing">programing<sup>21</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/CentOS/RedHat/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
+			<li><a href="/categories/sites/" title="sites">sites<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/C-C/经验总结/" title="经验总结">经验总结<sup>9</sup></a></li>
+			<li><a href="/categories/summarys/" title="summarys">summarys<sup>8</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/CentOS/Python/RedHat/Ubuntu/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
+			<li><a href="/categories/works/" title="works">works<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/C-C/CentOS/RedHat/Ubuntu/经验总结/" title="经验总结">经验总结<sup>3</sup></a></li>
-		  
 		
-		  
-			<li><a href="/categories/RedHat/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/经验总结/" title="经验总结">经验总结<sup>7</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/RedHat/Ubuntu/经验总结/" title="经验总结">经验总结<sup>3</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/Ubuntu/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/CentOS/Ubuntu/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/闲言碎语/" title="闲言碎语">闲言碎语<sup>4</sup></a></li>
 		  
 		
 		</ul>
@@ -466,7 +250,15 @@ deData = zlib.decompress(enData, -zlib.MAX_WBITS)
 			
 		
 			
+				<li><a href="/tags/install/" title="install">install<sup>4</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/zlib/" title="zlib">zlib<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/yum/" title="yum">yum<sup>4</sup></a></li>
 			
 		
 			
@@ -474,11 +266,7 @@ deData = zlib.decompress(enData, -zlib.MAX_WBITS)
 			
 		
 			
-				<li><a href="/tags/install/" title="install">install<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/python/" title="python">python<sup>3</sup></a></li>
+				<li><a href="/tags/make/" title="make">make<sup>3</sup></a></li>
 			
 		
 			
@@ -486,23 +274,11 @@ deData = zlib.decompress(enData, -zlib.MAX_WBITS)
 			
 		
 			
-				<li><a href="/tags/yum/" title="yum">yum<sup>3</sup></a></li>
+				<li><a href="/tags/python/" title="python">python<sup>3</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/libc/" title="libc">libc<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/git/" title="git">git<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/sudo/" title="sudo">sudo<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/make/" title="make">make<sup>2</sup></a></li>
+				<li><a href="/tags/boost/" title="boost">boost<sup>2</sup></a></li>
 			
 		
 			
@@ -510,19 +286,7 @@ deData = zlib.decompress(enData, -zlib.MAX_WBITS)
 			
 		
 			
-				<li><a href="/tags/kernel-devel/" title="kernel-devel">kernel-devel<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/ln/" title="ln">ln<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/https/" title="https">https<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/gcc/" title="gcc">gcc<sup>2</sup></a></li>
+				<li><a href="/tags/编译/" title="编译">编译<sup>2</sup></a></li>
 			
 		
 			
@@ -530,7 +294,27 @@ deData = zlib.decompress(enData, -zlib.MAX_WBITS)
 			
 		
 			
-				<li><a href="/tags/编译/" title="编译">编译<sup>2</sup></a></li>
+				<li><a href="/tags/gcc/" title="gcc">gcc<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/ln/" title="ln">ln<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/git/" title="git">git<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/https/" title="https">https<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/kernel-devel/" title="kernel-devel">kernel-devel<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/kernel/" title="kernel">kernel<sup>2</sup></a></li>
 			
 		
 		</ul>

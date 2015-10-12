@@ -11,43 +11,19 @@
     
 
     
-    <meta name="description" content="安装新版本python：wget http://python.org/ftp/python/2.7.3/Python-2.7.3.tar.bz2
-tar xjf Python-2.7.3.tar.bz2
-cd Python-2.7.3
-./configure
-make
-make atlinstall
-
-
-这时 python2.7.3 版本已经安装成功了。
-但调用 python --version">
+    <meta name="description" content="安装新版本python123456wget http://python.org/ftp/python/2.7.3/Python-2.7.3.tar.bz2tar xjf Python-2.7.3.tar.bz2cd Python-2.7.3./configuremakemake atlinstall
+这时 python2.7.3 版本已经安装成功了。但调用 python —version 依然会显">
 <meta property="og:type" content="article">
 <meta property="og:title" content="如何安装新版本python，以及解决安装了新版python后，默认python依然调用旧版本的问题">
 <meta property="og:url" content="http://www.leelib.com/2013/07/10/fix-python-deff-version.html">
 <meta property="og:site_name" content="李略帅">
-<meta property="og:description" content="安装新版本python：wget http://python.org/ftp/python/2.7.3/Python-2.7.3.tar.bz2
-tar xjf Python-2.7.3.tar.bz2
-cd Python-2.7.3
-./configure
-make
-make atlinstall
-
-
-这时 python2.7.3 版本已经安装成功了。
-但调用 python --version">
-<meta property="og:updated_time" content="2015-09-17T09:03:43.936Z">
+<meta property="og:description" content="安装新版本python123456wget http://python.org/ftp/python/2.7.3/Python-2.7.3.tar.bz2tar xjf Python-2.7.3.tar.bz2cd Python-2.7.3./configuremakemake atlinstall
+这时 python2.7.3 版本已经安装成功了。但调用 python —version 依然会显">
+<meta property="og:updated_time" content="2015-09-18T07:07:50.009Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何安装新版本python，以及解决安装了新版python后，默认python依然调用旧版本的问题">
-<meta name="twitter:description" content="安装新版本python：wget http://python.org/ftp/python/2.7.3/Python-2.7.3.tar.bz2
-tar xjf Python-2.7.3.tar.bz2
-cd Python-2.7.3
-./configure
-make
-make atlinstall
-
-
-这时 python2.7.3 版本已经安装成功了。
-但调用 python --version">
+<meta name="twitter:description" content="安装新版本python123456wget http://python.org/ftp/python/2.7.3/Python-2.7.3.tar.bz2tar xjf Python-2.7.3.tar.bz2cd Python-2.7.3./configuremakemake atlinstall
+这时 python2.7.3 版本已经安装成功了。但调用 python —version 依然会显">
 
     
     <link rel="alternative" href="/atom.xml" title="李略帅" type="application/atom+xml">
@@ -125,25 +101,14 @@ make atlinstall
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#安装新版本python："><span class="toc-number">1.</span> <span class="toc-text">安装新版本python：</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#安装新版本python"><span class="toc-number">1.</span> <span class="toc-text">安装新版本python</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#解决办法就是重新建立一个链接并覆盖掉旧的"><span class="toc-number">2.</span> <span class="toc-text">解决办法就是重新建立一个链接并覆盖掉旧的</span></a></li></ol>
 		
 		</div>
 		
-		<h2 id="安装新版本python：">安装新版本python：</h2><pre><code>wget <span class="keyword">http</span>://python.org/<span class="keyword">ftp</span>/python/<span class="number">2.7</span>.3/Python-<span class="number">2.7</span>.3.tar.bz2
-tar xjf Python-<span class="number">2.7</span>.3.tar.bz2
-cd Python-<span class="number">2.7</span>.3
-./configure
-make
-make atlinstall
-
-
-这时 python2.7.3 版本已经安装成功了。
-但调用 python <span class="comment">--version 依然会显示并使用旧版本</span>
-
-<span class="comment">## 解决办法就是重新建立一个链接并覆盖掉旧的：</span>
-
-<span class="built_in">ln</span> -s /usr/<span class="built_in">local</span>/bin/python2.7 /usr/bin/python -f
-</code></pre><p>再调用 python —version 显示结果：<br>Python 2.7.3</p>
+		<h1 id="安装新版本python">安装新版本python</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">wget http://python.org/ftp/python/<span class="number">2.7</span>.<span class="number">3</span>/Python-<span class="number">2.7</span>.<span class="number">3</span>.tar.bz2</span><br><span class="line">tar xjf Python-<span class="number">2.7</span>.<span class="number">3</span>.tar.bz2</span><br><span class="line"><span class="built_in">cd</span> Python-<span class="number">2.7</span>.<span class="number">3</span></span><br><span class="line">./configure</span><br><span class="line">make</span><br><span class="line">make atlinstall</span><br></pre></td></tr></table></figure>
+<p>这时 python2.7.3 版本已经安装成功了。<br>但调用 <strong>python —version</strong> 依然会显示并使用旧版本</p>
+<h1 id="解决办法就是重新建立一个链接并覆盖掉旧的">解决办法就是重新建立一个链接并覆盖掉旧的</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ln <span class="operator">-s</span> /usr/<span class="built_in">local</span>/bin/python2.<span class="number">7</span> /usr/bin/python <span class="operator">-f</span></span><br></pre></td></tr></table></figure>
+<p>再调用 <strong>python —version</strong> 显示结果<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@centos]<span class="comment"># python --version</span></span><br><span class="line">Python <span class="number">2.7</span>.<span class="number">3</span></span><br></pre></td></tr></table></figure></p>
 <p>至此，问题解决 :)</p>
   
 	</div>
@@ -152,7 +117,7 @@ make atlinstall
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/CentOS/">CentOS</a>►<a class="article-category-link" href="/categories/CentOS/Python/">Python</a>►<a class="article-category-link" href="/categories/CentOS/Python/RedHat/">RedHat</a>►<a class="article-category-link" href="/categories/CentOS/Python/RedHat/Ubuntu/">Ubuntu</a>►<a class="article-category-link" href="/categories/CentOS/Python/RedHat/Ubuntu/经验总结/">经验总结</a>
+  <a class="article-category-link" href="/categories/linux/">linux</a>
 </div>
 
 
@@ -207,7 +172,7 @@ make atlinstall
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#安装新版本python："><span class="toc-number">1.</span> <span class="toc-text">安装新版本python：</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#安装新版本python"><span class="toc-number">1.</span> <span class="toc-text">安装新版本python</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#解决办法就是重新建立一个链接并覆盖掉旧的"><span class="toc-number">2.</span> <span class="toc-text">解决办法就是重新建立一个链接并覆盖掉旧的</span></a></li></ol>
  
   </div>
 
@@ -223,137 +188,39 @@ make atlinstall
 		  
 		
 		  
-			<li><a href="/categories/C-C/" title="C/C++">C/C++<sup>22</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/" title="CentOS">CentOS<sup>13</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/CentOS/" title="CentOS">CentOS<sup>8</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/Python/" title="Python">Python<sup>3</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/Python/" title="Python">Python<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/Python/" title="Python">Python<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/CentOS/RedHat/" title="RedHat">RedHat<sup>6</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/RedHat/" title="RedHat">RedHat<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/Python/RedHat/" title="RedHat">RedHat<sup>2</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/RedHat/" title="RedHat">RedHat<sup>7</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/CentOS/RedHat/Ubuntu/" title="Ubuntu">Ubuntu<sup>5</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/RedHat/Ubuntu/" title="Ubuntu">Ubuntu<sup>6</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/Ubuntu/" title="Ubuntu">Ubuntu<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/Ubuntu/" title="Ubuntu">Ubuntu<sup>5</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/CentOS/Ubuntu/" title="Ubuntu">Ubuntu<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/Python/RedHat/Ubuntu/" title="Ubuntu">Ubuntu<sup>2</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/Uncategorized/" title="Uncategorized">Uncategorized<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/好站收集/" title="好站收集">好站收集<sup>1</sup></a></li>
-		  
 		
 		  
 		
 		  
-			<li><a href="/categories/我的作品/" title="我的作品">我的作品<sup>1</sup></a></li>
+			<li><a href="/categories/interesting/" title="interesting">interesting<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/C-C/CentOS/RedHat/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
+			<li><a href="/categories/linux/" title="linux">linux<sup>25</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/C-C/Python/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
+			<li><a href="/categories/notices/" title="notices">notices<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/Ubuntu/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
+			<li><a href="/categories/programing/" title="programing">programing<sup>21</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/CentOS/RedHat/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
+			<li><a href="/categories/sites/" title="sites">sites<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/C-C/经验总结/" title="经验总结">经验总结<sup>9</sup></a></li>
+			<li><a href="/categories/summarys/" title="summarys">summarys<sup>8</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/CentOS/Python/RedHat/Ubuntu/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
+			<li><a href="/categories/works/" title="works">works<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/C-C/CentOS/RedHat/Ubuntu/经验总结/" title="经验总结">经验总结<sup>3</sup></a></li>
-		  
 		
-		  
-			<li><a href="/categories/RedHat/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/经验总结/" title="经验总结">经验总结<sup>7</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/RedHat/Ubuntu/经验总结/" title="经验总结">经验总结<sup>3</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/Ubuntu/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/CentOS/Ubuntu/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/闲言碎语/" title="闲言碎语">闲言碎语<sup>4</sup></a></li>
 		  
 		
 		</ul>
@@ -378,7 +245,15 @@ make atlinstall
 			
 		
 			
+				<li><a href="/tags/install/" title="install">install<sup>4</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/zlib/" title="zlib">zlib<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/yum/" title="yum">yum<sup>4</sup></a></li>
 			
 		
 			
@@ -386,11 +261,7 @@ make atlinstall
 			
 		
 			
-				<li><a href="/tags/install/" title="install">install<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/python/" title="python">python<sup>3</sup></a></li>
+				<li><a href="/tags/make/" title="make">make<sup>3</sup></a></li>
 			
 		
 			
@@ -398,23 +269,11 @@ make atlinstall
 			
 		
 			
-				<li><a href="/tags/yum/" title="yum">yum<sup>3</sup></a></li>
+				<li><a href="/tags/python/" title="python">python<sup>3</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/libc/" title="libc">libc<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/git/" title="git">git<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/sudo/" title="sudo">sudo<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/make/" title="make">make<sup>2</sup></a></li>
+				<li><a href="/tags/boost/" title="boost">boost<sup>2</sup></a></li>
 			
 		
 			
@@ -422,19 +281,7 @@ make atlinstall
 			
 		
 			
-				<li><a href="/tags/kernel-devel/" title="kernel-devel">kernel-devel<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/ln/" title="ln">ln<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/https/" title="https">https<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/gcc/" title="gcc">gcc<sup>2</sup></a></li>
+				<li><a href="/tags/编译/" title="编译">编译<sup>2</sup></a></li>
 			
 		
 			
@@ -442,7 +289,27 @@ make atlinstall
 			
 		
 			
-				<li><a href="/tags/编译/" title="编译">编译<sup>2</sup></a></li>
+				<li><a href="/tags/gcc/" title="gcc">gcc<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/ln/" title="ln">ln<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/git/" title="git">git<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/https/" title="https">https<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/kernel-devel/" title="kernel-devel">kernel-devel<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/kernel/" title="kernel">kernel<sup>2</sup></a></li>
 			
 		
 		</ul>

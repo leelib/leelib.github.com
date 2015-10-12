@@ -11,29 +11,17 @@
     
 
     
-    <meta name="description" content="在使用未注册的 RedHat Linux 企业版时。使用yum命令会出现如下提示：[root@localhost ~]# yum install httpd
-Loaded plugins: rhnplugin, security  
-This system is not registered with RHN.  
-RHN support will be disabled.  
-Setting u">
+    <meta name="description" content="错误原因在使用未注册的 RedHat Linux 企业版时。使用yum命令会出现如下提示：1234567[root@localhost ~]# yum install httpdLoaded plugins: rhnplugin, security  This system is not registered with RHN.  RHN support will be disabled.  Se">
 <meta property="og:type" content="article">
 <meta property="og:title" content="让RedHat系统使用CentOS的yum">
 <meta property="og:url" content="http://www.leelib.com/2012/04/25/redhat-use-centos-yum.html">
 <meta property="og:site_name" content="李略帅">
-<meta property="og:description" content="在使用未注册的 RedHat Linux 企业版时。使用yum命令会出现如下提示：[root@localhost ~]# yum install httpd
-Loaded plugins: rhnplugin, security  
-This system is not registered with RHN.  
-RHN support will be disabled.  
-Setting u">
+<meta property="og:description" content="错误原因在使用未注册的 RedHat Linux 企业版时。使用yum命令会出现如下提示：1234567[root@localhost ~]# yum install httpdLoaded plugins: rhnplugin, security  This system is not registered with RHN.  RHN support will be disabled.  Se">
 <meta property="og:image" content="http://www.leelib.com/wp-content/uploads/2012/04/redhat-300x225.jpg">
-<meta property="og:updated_time" content="2015-09-17T09:03:43.982Z">
+<meta property="og:updated_time" content="2015-09-18T07:07:50.068Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="让RedHat系统使用CentOS的yum">
-<meta name="twitter:description" content="在使用未注册的 RedHat Linux 企业版时。使用yum命令会出现如下提示：[root@localhost ~]# yum install httpd
-Loaded plugins: rhnplugin, security  
-This system is not registered with RHN.  
-RHN support will be disabled.  
-Setting u">
+<meta name="twitter:description" content="错误原因在使用未注册的 RedHat Linux 企业版时。使用yum命令会出现如下提示：1234567[root@localhost ~]# yum install httpdLoaded plugins: rhnplugin, security  This system is not registered with RHN.  RHN support will be disabled.  Se">
 
     
     <link rel="alternative" href="/atom.xml" title="李略帅" type="application/atom+xml">
@@ -111,51 +99,18 @@ Setting u">
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#在使用未注册的_RedHat_Linux_企业版时。使用yum命令会出现如下提示："><span class="toc-number">1.</span> <span class="toc-text">在使用未注册的 RedHat Linux 企业版时。使用yum命令会出现如下提示：</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#错误原因"><span class="toc-number">1.</span> <span class="toc-text">错误原因</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#解决方案"><span class="toc-number">2.</span> <span class="toc-text">解决方案</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#一键脚本"><span class="toc-number">3.</span> <span class="toc-text">一键脚本</span></a></li></ol>
 		
 		</div>
 		
 		<center><img src="/wp-content/uploads/2012/04/redhat-300x225.jpg" alt=""></center>
 
-<h2 id="在使用未注册的_RedHat_Linux_企业版时。使用yum命令会出现如下提示：">在使用未注册的 RedHat Linux 企业版时。使用yum命令会出现如下提示：</h2><pre><code>[root<span class="variable">@localhost</span> ~]<span class="comment"># yum install httpd</span>
-<span class="constant">Loaded </span><span class="symbol">plugins:</span> rhnplugin, security  
-<span class="constant">This </span>system is <span class="keyword">not</span> registered with <span class="constant">RHN.</span>  
-<span class="constant">RHN </span>support will be disabled.  
-<span class="constant">Setting </span>up <span class="constant">Install Process </span> 
-<span class="constant">No </span>package httpd available.  
-<span class="constant">Nothing </span>to <span class="keyword">do</span>
-
-
-而这种情况可以使用<span class="constant">CentOS的</span>yum来代替掉系统本身的yum
-脚本如下：
-
-<span class="comment">#!/bin/sh  </span>
-rpm -qa | grep yum | xargs rpm -e --nodeps  
-wget  <span class="symbol">http:</span>/<span class="regexp">/centos.ustc.edu.cn/centos</span><span class="regexp">/5/os</span><span class="regexp">/i386/</span><span class="constant">CentOS/</span>yum-metadata-parser-<span class="number">1.1</span>.<span class="number">2</span>-<span class="number">3</span>.el5.centos.i386.rpm  
-wget  <span class="symbol">http:</span>/<span class="regexp">/mirrors.ustc.edu.cn/centos</span><span class="regexp">/5/os</span><span class="regexp">/i386/</span><span class="constant">CentOS/</span>yum-fastestmirror-<span class="number">1.1</span>.<span class="number">16</span>-<span class="number">21</span>.el5.centos.noarch.rpm  
-wget  <span class="symbol">http:</span>/<span class="regexp">/mirrors.ustc.edu.cn/centos</span><span class="regexp">/5/os</span><span class="regexp">/i386/</span><span class="constant">CentOS/</span>yum-<span class="number">3.2</span>.<span class="number">22</span>-<span class="number">39</span>.el5.centos.noarch.rpm  
-rpm -ivh yum-metadata-parser-<span class="number">1.1</span>.<span class="number">2</span>-<span class="number">3</span>.el5.centos.i386.rpm  
-rpm -ivh yum-fastestmirror-<span class="number">1.1</span>.<span class="number">16</span>-<span class="number">21</span>.el5.centos.noarch.rpm  
-rpm -ivh yum-<span class="number">3.2</span>.<span class="number">22</span>-<span class="number">39</span>.el5.centos.noarch.rpm  
-wget <span class="symbol">http:</span>/<span class="regexp">/docs.linuxtone.org/soft</span><span class="regexp">/lemp/</span><span class="constant">CentOS-Base.</span>repo  
-mv <span class="constant">CentOS-Base.</span>repo /etc/yum.repos.d/<span class="constant">CentOS-Base.</span>repo  
-rm -f yum-metadata-parser-<span class="number">1.1</span>.<span class="number">2</span>-<span class="number">3</span>.el5.centos.i386.rpm  
-rm -f yum-fastestmirror-<span class="number">1.1</span>.<span class="number">16</span>-<span class="number">21</span>.el5.centos.noarch.rpm  
-rm -f yum-<span class="number">3.2</span>.<span class="number">22</span>-<span class="number">39</span>.el5.centos.noarch.rpm  
-rm -f <span class="constant">CentOS-Base.</span>repo
-
-
-将上面的脚本保存为：**redhat_use_centos_yum.sh**
-
-点击这里直接下载 [redhat_use_centos_yum.sh](<span class="regexp">/wp-content/uploads</span><span class="regexp">/2012/</span><span class="number">04</span>/redhat_use_centos_yum.sh)
-然后直接运行这个脚本即可。
-
-<span class="comment">## 如果闲麻烦也可以依次输入下面几条指令来下载并执行我已经写好的脚本，同样可以达到目的：</span>
-
-wget <span class="symbol">http:</span>/<span class="regexp">/www.leelib.com/wp</span>-content/uploads/<span class="number">2012</span>/<span class="number">04</span>/redhat_use_centos_yum.sh
-chmod <span class="number">777</span> redhat_use_centos_yum.sh
-sudo ./redhat_use_centos_yum.sh
-</code></pre><p>现在再试试yum命令是否已经没有了 This system is not registered with RHN. 提示，并且可以正常使用了呢！ :)</p>
+<h1 id="错误原因">错误原因</h1><p>在使用未注册的 RedHat Linux 企业版时。使用yum命令会出现如下提示：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]<span class="comment"># yum install httpd</span></span><br><span class="line">Loaded plugins: rhnplugin, security  </span><br><span class="line">This system is not registered with RHN.  </span><br><span class="line">RHN support will be disabled.  </span><br><span class="line">Setting up Install Process  </span><br><span class="line">No package httpd available.  </span><br><span class="line">Nothing to <span class="keyword">do</span></span><br></pre></td></tr></table></figure></p>
+<h1 id="解决方案">解决方案</h1><p>而这种情况可以使用CentOS的yum来代替掉系统本身的yum<br>脚本如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!/bin/sh  </span></span><br><span class="line">rpm -qa | grep yum | xargs rpm <span class="operator">-e</span> --nodeps  </span><br><span class="line">wget  http://centos.ustc.edu.cn/centos/<span class="number">5</span>/os/i386/CentOS/yum-metadata-parser-<span class="number">1.1</span>.<span class="number">2</span>-<span class="number">3</span>.el5.centos.i386.rpm  </span><br><span class="line">wget  http://mirrors.ustc.edu.cn/centos/<span class="number">5</span>/os/i386/CentOS/yum-fastestmirror-<span class="number">1.1</span>.<span class="number">16</span>-<span class="number">21</span>.el5.centos.noarch.rpm  </span><br><span class="line">wget  http://mirrors.ustc.edu.cn/centos/<span class="number">5</span>/os/i386/CentOS/yum-<span class="number">3.2</span>.<span class="number">22</span>-<span class="number">39</span>.el5.centos.noarch.rpm  </span><br><span class="line">rpm -ivh yum-metadata-parser-<span class="number">1.1</span>.<span class="number">2</span>-<span class="number">3</span>.el5.centos.i386.rpm  </span><br><span class="line">rpm -ivh yum-fastestmirror-<span class="number">1.1</span>.<span class="number">16</span>-<span class="number">21</span>.el5.centos.noarch.rpm  </span><br><span class="line">rpm -ivh yum-<span class="number">3.2</span>.<span class="number">22</span>-<span class="number">39</span>.el5.centos.noarch.rpm  </span><br><span class="line">wget http://docs.linuxtone.org/soft/lemp/CentOS-Base.repo  </span><br><span class="line">mv CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo  </span><br><span class="line">rm <span class="operator">-f</span> yum-metadata-parser-<span class="number">1.1</span>.<span class="number">2</span>-<span class="number">3</span>.el5.centos.i386.rpm  </span><br><span class="line">rm <span class="operator">-f</span> yum-fastestmirror-<span class="number">1.1</span>.<span class="number">16</span>-<span class="number">21</span>.el5.centos.noarch.rpm  </span><br><span class="line">rm <span class="operator">-f</span> yum-<span class="number">3.2</span>.<span class="number">22</span>-<span class="number">39</span>.el5.centos.noarch.rpm  </span><br><span class="line">rm <span class="operator">-f</span> CentOS-Base.repo</span><br></pre></td></tr></table></figure></p>
+<p>将上面的脚本保存为：<strong>redhat_use_centos_yum.sh</strong></p>
+<p>点击这里直接下载 <a href="/wp-content/uploads/2012/04/redhat_use_centos_yum.sh">redhat_use_centos_yum.sh</a><br>然后直接运行这个脚本即可。</p>
+<h1 id="一键脚本">一键脚本</h1><p>如果闲麻烦也可以依次输入下面几条指令来下载并执行我已经写好的脚本，同样可以达到目的：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget http://www.leelib.com/wp-content/uploads/<span class="number">2012</span>/<span class="number">04</span>/redhat_use_centos_yum.sh</span><br><span class="line">chmod <span class="number">777</span> redhat_use_centos_yum.sh</span><br><span class="line">sudo ./redhat_use_centos_yum.sh</span><br></pre></td></tr></table></figure></p>
+<p>现在再试试yum命令是否已经没有了 This system is not registered with RHN. 提示，并且可以正常使用了呢！ :)</p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -163,7 +118,7 @@ sudo ./redhat_use_centos_yum.sh
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/RedHat/">RedHat</a>►<a class="article-category-link" href="/categories/RedHat/经验总结/">经验总结</a>
+  <a class="article-category-link" href="/categories/linux/">linux</a>
 </div>
 
 
@@ -218,7 +173,7 @@ sudo ./redhat_use_centos_yum.sh
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#在使用未注册的_RedHat_Linux_企业版时。使用yum命令会出现如下提示："><span class="toc-number">1.</span> <span class="toc-text">在使用未注册的 RedHat Linux 企业版时。使用yum命令会出现如下提示：</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#错误原因"><span class="toc-number">1.</span> <span class="toc-text">错误原因</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#解决方案"><span class="toc-number">2.</span> <span class="toc-text">解决方案</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#一键脚本"><span class="toc-number">3.</span> <span class="toc-text">一键脚本</span></a></li></ol>
  
   </div>
 
@@ -234,137 +189,39 @@ sudo ./redhat_use_centos_yum.sh
 		  
 		
 		  
-			<li><a href="/categories/C-C/" title="C/C++">C/C++<sup>22</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/" title="CentOS">CentOS<sup>13</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/CentOS/" title="CentOS">CentOS<sup>8</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/Python/" title="Python">Python<sup>3</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/Python/" title="Python">Python<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/Python/" title="Python">Python<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/CentOS/RedHat/" title="RedHat">RedHat<sup>6</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/RedHat/" title="RedHat">RedHat<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/Python/RedHat/" title="RedHat">RedHat<sup>2</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/RedHat/" title="RedHat">RedHat<sup>7</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/CentOS/RedHat/Ubuntu/" title="Ubuntu">Ubuntu<sup>5</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/RedHat/Ubuntu/" title="Ubuntu">Ubuntu<sup>6</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/Ubuntu/" title="Ubuntu">Ubuntu<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/Ubuntu/" title="Ubuntu">Ubuntu<sup>5</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/CentOS/Ubuntu/" title="Ubuntu">Ubuntu<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/Python/RedHat/Ubuntu/" title="Ubuntu">Ubuntu<sup>2</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/Uncategorized/" title="Uncategorized">Uncategorized<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/好站收集/" title="好站收集">好站收集<sup>1</sup></a></li>
-		  
 		
 		  
 		
 		  
-			<li><a href="/categories/我的作品/" title="我的作品">我的作品<sup>1</sup></a></li>
+			<li><a href="/categories/interesting/" title="interesting">interesting<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/C-C/CentOS/RedHat/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
+			<li><a href="/categories/linux/" title="linux">linux<sup>25</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/C-C/Python/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
+			<li><a href="/categories/notices/" title="notices">notices<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/Ubuntu/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
+			<li><a href="/categories/programing/" title="programing">programing<sup>21</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/CentOS/RedHat/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
+			<li><a href="/categories/sites/" title="sites">sites<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/C-C/经验总结/" title="经验总结">经验总结<sup>9</sup></a></li>
+			<li><a href="/categories/summarys/" title="summarys">summarys<sup>8</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/CentOS/Python/RedHat/Ubuntu/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
+			<li><a href="/categories/works/" title="works">works<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/C-C/CentOS/RedHat/Ubuntu/经验总结/" title="经验总结">经验总结<sup>3</sup></a></li>
-		  
 		
-		  
-			<li><a href="/categories/RedHat/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/经验总结/" title="经验总结">经验总结<sup>7</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/RedHat/Ubuntu/经验总结/" title="经验总结">经验总结<sup>3</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/Ubuntu/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/CentOS/Ubuntu/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/闲言碎语/" title="闲言碎语">闲言碎语<sup>4</sup></a></li>
 		  
 		
 		</ul>
@@ -389,7 +246,15 @@ sudo ./redhat_use_centos_yum.sh
 			
 		
 			
+				<li><a href="/tags/install/" title="install">install<sup>4</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/zlib/" title="zlib">zlib<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/yum/" title="yum">yum<sup>4</sup></a></li>
 			
 		
 			
@@ -397,11 +262,7 @@ sudo ./redhat_use_centos_yum.sh
 			
 		
 			
-				<li><a href="/tags/install/" title="install">install<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/python/" title="python">python<sup>3</sup></a></li>
+				<li><a href="/tags/make/" title="make">make<sup>3</sup></a></li>
 			
 		
 			
@@ -409,23 +270,11 @@ sudo ./redhat_use_centos_yum.sh
 			
 		
 			
-				<li><a href="/tags/yum/" title="yum">yum<sup>3</sup></a></li>
+				<li><a href="/tags/python/" title="python">python<sup>3</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/libc/" title="libc">libc<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/git/" title="git">git<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/sudo/" title="sudo">sudo<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/make/" title="make">make<sup>2</sup></a></li>
+				<li><a href="/tags/boost/" title="boost">boost<sup>2</sup></a></li>
 			
 		
 			
@@ -433,19 +282,7 @@ sudo ./redhat_use_centos_yum.sh
 			
 		
 			
-				<li><a href="/tags/kernel-devel/" title="kernel-devel">kernel-devel<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/ln/" title="ln">ln<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/https/" title="https">https<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/gcc/" title="gcc">gcc<sup>2</sup></a></li>
+				<li><a href="/tags/编译/" title="编译">编译<sup>2</sup></a></li>
 			
 		
 			
@@ -453,7 +290,27 @@ sudo ./redhat_use_centos_yum.sh
 			
 		
 			
-				<li><a href="/tags/编译/" title="编译">编译<sup>2</sup></a></li>
+				<li><a href="/tags/gcc/" title="gcc">gcc<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/ln/" title="ln">ln<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/git/" title="git">git<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/https/" title="https">https<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/kernel-devel/" title="kernel-devel">kernel-devel<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/kernel/" title="kernel">kernel<sup>2</sup></a></li>
 			
 		
 		</ul>

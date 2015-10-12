@@ -13,29 +13,35 @@
     
     <meta name="description" content="在写代码的过程中,我发现使用VS2012编译出来的程序默认支持的系统版本略高
 刚发现在 Win7+VS2012 编译出来的程序默认PE信息(Optional Header):
+
 Major SubSystem Version = 6
 Minor SubSystem Version = 0
+
 导致的结果就是：在WinXP中运行便会提示 不是有效的Win32应用程序
-当时还以为是自己搞错编译选项，将程序编">
+当时还以为是自己搞错编译选项，将程">
 <meta property="og:type" content="article">
 <meta property="og:title" content="解决VS2012编译的程序在WinXP上运行异常">
 <meta property="og:url" content="http://www.leelib.com/2013/05/29/vs2012-build-app-run-in-winxp-failed.html">
 <meta property="og:site_name" content="李略帅">
 <meta property="og:description" content="在写代码的过程中,我发现使用VS2012编译出来的程序默认支持的系统版本略高
 刚发现在 Win7+VS2012 编译出来的程序默认PE信息(Optional Header):
+
 Major SubSystem Version = 6
 Minor SubSystem Version = 0
+
 导致的结果就是：在WinXP中运行便会提示 不是有效的Win32应用程序
-当时还以为是自己搞错编译选项，将程序编">
-<meta property="og:updated_time" content="2015-09-17T09:03:43.998Z">
+当时还以为是自己搞错编译选项，将程">
+<meta property="og:updated_time" content="2015-09-18T07:07:50.086Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="解决VS2012编译的程序在WinXP上运行异常">
 <meta name="twitter:description" content="在写代码的过程中,我发现使用VS2012编译出来的程序默认支持的系统版本略高
 刚发现在 Win7+VS2012 编译出来的程序默认PE信息(Optional Header):
+
 Major SubSystem Version = 6
 Minor SubSystem Version = 0
+
 导致的结果就是：在WinXP中运行便会提示 不是有效的Win32应用程序
-当时还以为是自己搞错编译选项，将程序编">
+当时还以为是自己搞错编译选项，将程">
 
     
     <link rel="alternative" href="/atom.xml" title="李略帅" type="application/atom+xml">
@@ -113,26 +119,74 @@ Minor SubSystem Version = 0
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#修正方案："><span class="toc-number">1.</span> <span class="toc-text">修正方案：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考内容："><span class="toc-number">2.</span> <span class="toc-text">参考内容：</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#解决方案"><span class="toc-number">1.</span> <span class="toc-text">解决方案</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考内容"><span class="toc-number">2.</span> <span class="toc-text">参考内容</span></a></li></ol>
 		
 		</div>
 		
 		<p>在写代码的过程中,我发现使用VS2012编译出来的程序默认支持的系统版本略高</p>
 <p>刚发现在 Win7+VS2012 编译出来的程序默认PE信息(Optional Header):</p>
-<pre><code><span class="label">Major</span> <span class="keyword">SubSystem </span>Version = <span class="number">6</span>
-<span class="label">Minor</span> <span class="keyword">SubSystem </span>Version = <span class="number">0</span>
-</code></pre><p>导致的结果就是：在WinXP中运行便会提示 <strong>不是有效的Win32应用程序</strong></p>
+<ul>
+<li>Major SubSystem Version = 6</li>
+<li>Minor SubSystem Version = 0</li>
+</ul>
+<p>导致的结果就是：在WinXP中运行便会提示 <strong>不是有效的Win32应用程序</strong></p>
 <p>当时还以为是自己搞错编译选项，将程序编译成x64的了。<br>结果后来使用PE工具才发现的这个问题。</p>
-<h2 id="修正方案：">修正方案：</h2><p>右击项目 -&gt; 属性 -&gt; 配置属性 -&gt; 链接器 -&gt; 系统 -&gt; 所需最低版本 填入”<strong>5.01</strong>“</p>
-<h2 id="参考内容：">参考内容：</h2><p><a href="http://msdn.microsoft.com/en-us/library/fcc1zstk(v=vs.110" target="_blank" rel="external">http://msdn.microsoft.com/en-us/library/fcc1zstk(v=vs.110).aspx</a>.aspx)</p>
-<font size="-12px"><br><br><table><br><thead><br><tr><br>  <th>Subsystem</th><br>  <th>Minimum</th><br>  <th>Default</th><br></tr><br></thead><br><tbody><br><tr><br>  <td>BOOT_APPLICATION</td><br>  <td>1.0</td><br>  <td>1.0</td><br></tr><br><tr><br>  <td>CONSOLE</td><br>  <td>5.01 (x86) 5.02 (x64) 6.02 (ARM)</td><br>  <td>6.00 (x86, x64) 6.02 (ARM)</td><br></tr><br><tr><br>  <td>WINDOWS</td><br>  <td>5.01 (x86) 5.02 (x64) 6.02 (ARM)</td><br>  <td>6.00 (x86, x64) 6.02 (ARM)</td><br></tr><br><tr><br>  <td>NATIVE (with DRIVER:WDM)</td><br>  <td>1.00 (x86) 1.10 (x64, ARM)</td><br>  <td>1.00 (x86) 1.10 (x64, ARM)</td><br></tr><br><tr><br>  <td>NATIVE (without /DRIVER:WDM)</td><br>  <td>4.00 (x86) 5.02 (x64) 6.02 (ARM)</td><br>  <td>4.00 (x86) 5.02 (x64) 6.02 (ARM)</td><br></tr><br><tr><br>  <td>POSIX</td><br>  <td>1.0</td><br>  <td>19.90</td><br></tr><br><tr><br>  <td>EFI_APPLICATION, EFI_BOOT_SERVICE_DRIVER, EFI_ROM, EFI_RUNTIME_DRIVER</td><br>  <td>1.0</td><br>  <td>1.0</td><br></tr><br></tbody><br></table><br><br></font>  
+<h2 id="解决方案">解决方案</h2><p>右击项目 -&gt; 属性 -&gt; 配置属性 -&gt; 链接器 -&gt; 系统 -&gt; 所需最低版本 填入”<strong>5.01</strong>“</p>
+<h2 id="参考内容">参考内容</h2><p><strong><a href="http://msdn.microsoft.com/en-us/library/fcc1zstk(v=vs.110).aspx" target="_blank" rel="external">http://msdn.microsoft.com/en-us/library/fcc1zstk(v=vs.110).aspx</a></strong></p>
+<table>
+<thead>
+<tr>
+<th>Subsystem</th>
+<th>Minimum</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BOOT_APPLICATION</td>
+<td>1.0</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>CONSOLE</td>
+<td>5.01 (x86) 5.02 (x64) 6.02 (ARM)</td>
+<td>6.00 (x86, x64) 6.02 (ARM)</td>
+</tr>
+<tr>
+<td>WINDOWS</td>
+<td>5.01 (x86) 5.02 (x64) 6.02 (ARM)</td>
+<td>6.00 (x86, x64) 6.02 (ARM)</td>
+</tr>
+<tr>
+<td>NATIVE (with DRIVER:WDM)</td>
+<td>1.00 (x86) 1.10 (x64, ARM)</td>
+<td>1.00 (x86) 1.10 (x64, ARM)</td>
+</tr>
+<tr>
+<td>NATIVE (without /DRIVER:WDM)</td>
+<td>4.00 (x86) 5.02 (x64) 6.02 (ARM)</td>
+<td>4.00 (x86) 5.02 (x64) 6.02 (ARM)</td>
+</tr>
+<tr>
+<td>POSIX</td>
+<td>1.0</td>
+<td>19.90</td>
+</tr>
+<tr>
+<td>EFI_APPLICATION, EFI_BOOT_SERVICE_DRIVER, EFI_ROM, EFI_RUNTIME_DRIVER</td>
+<td>1.0</td>
+<td>1.0</td>
+</tr>
+</tbody>
+</table>
+  
 	</div>
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/C-C/">C/C++</a>►<a class="article-category-link" href="/categories/C-C/经验总结/">经验总结</a>
+  <a class="article-category-link" href="/categories/programing/">programing</a>
 </div>
 
 
@@ -187,7 +241,7 @@ Minor SubSystem Version = 0
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#修正方案："><span class="toc-number">1.</span> <span class="toc-text">修正方案：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考内容："><span class="toc-number">2.</span> <span class="toc-text">参考内容：</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#解决方案"><span class="toc-number">1.</span> <span class="toc-text">解决方案</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考内容"><span class="toc-number">2.</span> <span class="toc-text">参考内容</span></a></li></ol>
  
   </div>
 
@@ -203,137 +257,39 @@ Minor SubSystem Version = 0
 		  
 		
 		  
-			<li><a href="/categories/C-C/" title="C/C++">C/C++<sup>22</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/" title="CentOS">CentOS<sup>13</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/CentOS/" title="CentOS">CentOS<sup>8</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/Python/" title="Python">Python<sup>3</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/Python/" title="Python">Python<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/Python/" title="Python">Python<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/CentOS/RedHat/" title="RedHat">RedHat<sup>6</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/RedHat/" title="RedHat">RedHat<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/Python/RedHat/" title="RedHat">RedHat<sup>2</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/RedHat/" title="RedHat">RedHat<sup>7</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/CentOS/RedHat/Ubuntu/" title="Ubuntu">Ubuntu<sup>5</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/RedHat/Ubuntu/" title="Ubuntu">Ubuntu<sup>6</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/Ubuntu/" title="Ubuntu">Ubuntu<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/Ubuntu/" title="Ubuntu">Ubuntu<sup>5</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/CentOS/Ubuntu/" title="Ubuntu">Ubuntu<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/Python/RedHat/Ubuntu/" title="Ubuntu">Ubuntu<sup>2</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/Uncategorized/" title="Uncategorized">Uncategorized<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/好站收集/" title="好站收集">好站收集<sup>1</sup></a></li>
-		  
 		
 		  
 		
 		  
-			<li><a href="/categories/我的作品/" title="我的作品">我的作品<sup>1</sup></a></li>
+			<li><a href="/categories/interesting/" title="interesting">interesting<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/C-C/CentOS/RedHat/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
+			<li><a href="/categories/linux/" title="linux">linux<sup>25</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/C-C/Python/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
+			<li><a href="/categories/notices/" title="notices">notices<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/Ubuntu/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
+			<li><a href="/categories/programing/" title="programing">programing<sup>21</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/CentOS/RedHat/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
+			<li><a href="/categories/sites/" title="sites">sites<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/C-C/经验总结/" title="经验总结">经验总结<sup>9</sup></a></li>
+			<li><a href="/categories/summarys/" title="summarys">summarys<sup>8</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/CentOS/Python/RedHat/Ubuntu/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
+			<li><a href="/categories/works/" title="works">works<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/C-C/CentOS/RedHat/Ubuntu/经验总结/" title="经验总结">经验总结<sup>3</sup></a></li>
-		  
 		
-		  
-			<li><a href="/categories/RedHat/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/经验总结/" title="经验总结">经验总结<sup>7</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/RedHat/Ubuntu/经验总结/" title="经验总结">经验总结<sup>3</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/Ubuntu/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/CentOS/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/C-C/CentOS/Ubuntu/经验总结/" title="经验总结">经验总结<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/闲言碎语/" title="闲言碎语">闲言碎语<sup>4</sup></a></li>
 		  
 		
 		</ul>
@@ -358,7 +314,15 @@ Minor SubSystem Version = 0
 			
 		
 			
+				<li><a href="/tags/install/" title="install">install<sup>4</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/zlib/" title="zlib">zlib<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/yum/" title="yum">yum<sup>4</sup></a></li>
 			
 		
 			
@@ -366,11 +330,7 @@ Minor SubSystem Version = 0
 			
 		
 			
-				<li><a href="/tags/install/" title="install">install<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/python/" title="python">python<sup>3</sup></a></li>
+				<li><a href="/tags/make/" title="make">make<sup>3</sup></a></li>
 			
 		
 			
@@ -378,23 +338,11 @@ Minor SubSystem Version = 0
 			
 		
 			
-				<li><a href="/tags/yum/" title="yum">yum<sup>3</sup></a></li>
+				<li><a href="/tags/python/" title="python">python<sup>3</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/libc/" title="libc">libc<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/git/" title="git">git<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/sudo/" title="sudo">sudo<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/make/" title="make">make<sup>2</sup></a></li>
+				<li><a href="/tags/boost/" title="boost">boost<sup>2</sup></a></li>
 			
 		
 			
@@ -402,19 +350,7 @@ Minor SubSystem Version = 0
 			
 		
 			
-				<li><a href="/tags/kernel-devel/" title="kernel-devel">kernel-devel<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/ln/" title="ln">ln<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/https/" title="https">https<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/gcc/" title="gcc">gcc<sup>2</sup></a></li>
+				<li><a href="/tags/编译/" title="编译">编译<sup>2</sup></a></li>
 			
 		
 			
@@ -422,7 +358,27 @@ Minor SubSystem Version = 0
 			
 		
 			
-				<li><a href="/tags/编译/" title="编译">编译<sup>2</sup></a></li>
+				<li><a href="/tags/gcc/" title="gcc">gcc<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/ln/" title="ln">ln<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/git/" title="git">git<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/https/" title="https">https<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/kernel-devel/" title="kernel-devel">kernel-devel<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/kernel/" title="kernel">kernel<sup>2</sup></a></li>
 			
 		
 		</ul>
