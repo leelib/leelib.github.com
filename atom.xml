@@ -5,7 +5,7 @@
   <subtitle><![CDATA[少壮不努力，一生在内地]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://www.leelib.com//"/>
-  <updated>2015-10-10T08:49:13.011Z</updated>
+  <updated>2016-05-09T03:08:02.599Z</updated>
   <id>http://www.leelib.com//</id>
   
   <author>
@@ -14,6 +14,93 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[使用pkgmgr安装telnet客户端]]></title>
+    <link href="http://www.leelib.com/2016/05/09/pkgmgr-install-telnet.html"/>
+    <id>http://www.leelib.com/2016/05/09/pkgmgr-install-telnet.html</id>
+    <published>2016-05-09T03:04:44.000Z</published>
+    <updated>2016-05-09T03:08:02.599Z</updated>
+    <content type="html"><![CDATA[<p>在 Windows Vista 以上的操作系统中可以使用pkgmgr对Windows功能的快捷安装<br>比如想要安装 <em>telnet客户端</em> 时，只需在控制台里面键入以下命令并回车：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pkgmgr /iu:<span class="string">"TelnetClient"</span></span><br></pre></td></tr></table></figure></p>
+<p>等几秒钟后 telnet 命令就可以使用了<br>就这么简单 :)</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>在 Windows Vista 以上的操作系统中可以使用pkgmgr对Windows功能的快捷安装<br>比如想要安装 <em>telnet客户端</em> 时，只需在控制台里面键入以下命令并回车：<br><figure class="highlight bash"><ta]]>
+    </summary>
+    
+      <category term="summarys" scheme="http://www.leelib.com/categories/summarys/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Eclipse-ADT在Windows下添加library的BUG]]></title>
+    <link href="http://www.leelib.com/2016/04/20/adt-add-library-bug.html"/>
+    <id>http://www.leelib.com/2016/04/20/adt-add-library-bug.html</id>
+    <published>2016-04-20T10:35:35.000Z</published>
+    <updated>2016-05-09T03:27:19.562Z</updated>
+    <content type="html"><![CDATA[<h1 id="问题出现">问题出现</h1><p>今天在Windows里使用 Cocos-Quick 创建的项目在使用ADT往Android里面部署的时候遇到了下面的问题<br><img src="/images/20160420/adt_add_library_bug.png" alt=""></p>
+<p>出现上图的情况是这样的操作步骤：</p>
+<ol>
+<li>添加 D:\Tools\Quick-Cocos2dx-Community\cocos\platform\android\java 到 Library 引用里</li>
+<li>点击 OK</li>
+<li>重新打开这个配置界面</li>
+</ol>
+<h1 id="问题解决">问题解决</h1><p>测试了许久后，无意间发现有次选错了路径后Library正常了</p>
+<blockquote>
+<p>当时我选择的 Quick 是 <strong> F:\Quick-Cocos2dx-Community </strong><br>选择的项目目录是 <strong> F:\Code\Cocos\QuickHello </strong></p>
+</blockquote>
+<p>终于发现了解决这个BUG的办法：<strong><em> 将项目和想要引用的Library放在同一个分区内 </em></strong><br>遂将项目和 Quick 放到同一个分区内后问题解决，效果如下：<br><img src="/images/20160420/adt_add_library_bug_ok.png" alt=""></p>
+<p>引起这个错误的原因是：<strong><em> Eclipse 本身并不是给Windows 这种多分区系统定制的，本身是用来给 MAC 或者 Linux 这种以目录为结构的系统使用的 </em></strong></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="问题出现">问题出现</h1><p>今天在Windows里使用 Cocos-Quick 创建的项目在使用ADT往Android里面部署的时候遇到了下面的问题<br><img src="/images/20160420/adt_add_library_bug.png]]>
+    </summary>
+    
+      <category term="programing" scheme="http://www.leelib.com/categories/programing/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Git的常用命令收集]]></title>
+    <link href="http://www.leelib.com/2016/01/21/git.html"/>
+    <id>http://www.leelib.com/2016/01/21/git.html</id>
+    <published>2016-01-21T15:43:59.000Z</published>
+    <updated>2016-04-20T10:34:24.916Z</updated>
+    <content type="html"><![CDATA[<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 拉取最新的代码</span></span><br><span class="line">git fetch --all</span><br><span class="line"><span class="comment"># 恢复到最后一次提交，放弃本地所有修改</span></span><br><span class="line">git reset --hard</span><br><span class="line"></span><br><span class="line"><span class="comment"># 列出所有设置</span></span><br><span class="line">git config <span class="operator">-l</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 抛弃对文件的修改</span></span><br><span class="line">git co  -- &lt;filename&gt;</span><br><span class="line"><span class="comment"># 抛弃对目录的修改</span></span><br><span class="line">git co .</span><br><span class="line"></span><br><span class="line"><span class="comment"># 从版本库中删除文件</span></span><br><span class="line">git rm &lt;filename&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 比较差异</span></span><br><span class="line">git diff</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看提交历史</span></span><br><span class="line">git <span class="built_in">log</span></span><br></pre></td></tr></table></figure>
+<p>本篇文章后续不定期更新</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class=]]>
+    </summary>
+    
+      <category term="git" scheme="http://www.leelib.com/tags/git/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[类 enable_shared_from_this 的经验总结]]></title>
+    <link href="http://www.leelib.com/2015/12/13/enable-shared-from-this.html"/>
+    <id>http://www.leelib.com/2015/12/13/enable-shared-from-this.html</id>
+    <published>2015-12-13T15:32:07.000Z</published>
+    <updated>2016-04-20T10:34:24.914Z</updated>
+    <content type="html"><![CDATA[<h1 id="不能再构造函数内使用_shared_from_this()_函数">不能再构造函数内使用 shared_from_this() 函数</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> class_a : <span class="keyword">public</span> <span class="built_in">std</span>::<span class="keyword">enable_shared_from_t</span>his&lt;class_a&gt;</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    class_a(<span class="keyword">void</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="function"><span class="keyword">auto</span> <span class="title">self</span><span class="params">(shared_from_this()</span>)</span>;<span class="comment">// 这里会报 bad_weak_ptr 错误</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h1 id="子类无法重复继承">子类无法重复继承</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> class_a : <span class="keyword">public</span> <span class="built_in">std</span>::<span class="keyword">enable_shared_from_t</span>his&lt;class_a&gt;</span><br><span class="line">&#123;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> class_b : <span class="keyword">public</span> class_a, <span class="keyword">public</span> <span class="built_in">std</span>::<span class="keyword">enable_shared_from_t</span>his&lt;class_a&gt;</span><br><span class="line">&#123;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>这段代码将无法通过编译。<br>如果想返回子类的 shared_from_this 指针，则可以进行如下操作<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> class_a : <span class="keyword">public</span> <span class="built_in">std</span>::<span class="keyword">enable_shared_from_t</span>his&lt;class_a&gt;</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">virtual</span> ~class_a()<span class="comment">// 为了确保 dynamic_pointer_cast 可以工作，需要父类拥有虚函数。</span></span><br><span class="line">    &#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> class_b : <span class="keyword">public</span> class_a</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;class_b&gt; <span class="keyword">shared_from_t</span>his(<span class="keyword">void</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">std</span>::dynamic_pointer_cast&lt;class_b&gt;(class_a::<span class="keyword">shared_from_t</span>his());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p><strong>通常来说如果定义一个类时，如果这个类可能被继承使用时，将这个类的析构函数定义为虚函数来确保析构的调用顺序</strong></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="不能再构造函数内使用_shared_from_this()_函数">不能再构造函数内使用 shared_from_this() 函数</h1><figure class="highlight c++"><table><tr><td class="gutter"><]]>
+    </summary>
+    
+      <category term="c++" scheme="http://www.leelib.com/tags/c/"/>
+    
+      <category term="enable_shared_from_this" scheme="http://www.leelib.com/tags/enable-shared-from-this/"/>
+    
+      <category term="shared_ptr" scheme="http://www.leelib.com/tags/shared-ptr/"/>
+    
+      <category term="programing" scheme="http://www.leelib.com/categories/programing/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[Windows10 下 boost::asio::serial_port 的 BUG]]></title>
@@ -479,134 +566,6 @@
       <category term="upgrade" scheme="http://www.leelib.com/tags/upgrade/"/>
     
       <category term="linux" scheme="http://www.leelib.com/categories/linux/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[Alienware系列 COMPAL Embedded System Control 驱动问题解决方案]]></title>
-    <link href="http://www.leelib.com/2014/03/30/fix-alienware-compal-embedded-system-control.html"/>
-    <id>http://www.leelib.com/2014/03/30/fix-alienware-compal-embedded-system-control.html</id>
-    <published>2014-03-29T21:05:56.000Z</published>
-    <updated>2015-09-18T07:07:50.002Z</updated>
-    <content type="html"><![CDATA[<p>每次重装系统后，装驱动很容易有一个名为“COMPAL Embedded System Control”的驱动未安装。<br>而使用驱动精灵等驱动智能安装类的软件安装后很容易出现驱动显示是装好了，但会提示个感叹号说明该设备无法正常工作。</p>
-<p>网上搜了半天终于找到一个说法：<br>这个驱动是热量控制，64位win7/win8无法完全安装设备管理器里更新驱动然后手动定位到C盘ProgramData里的Vista64安装即可</p>
-<p>尝试后问题解决。<br>记录此文章，留给跟我出现同样问题的朋友。希望能有所帮助。</p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p>每次重装系统后，装驱动很容易有一个名为“COMPAL Embedded System Control”的驱动未安装。<br>而使用驱动精灵等驱动智能安装类的软件安装后很容易出现驱动显示是装好了，但会提示个感叹号说明该设备无法正常工作。</p>
-<p>网上搜了半天终于找到一个]]>
-    </summary>
-    
-      <category term="summarys" scheme="http://www.leelib.com/categories/summarys/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[在使用boost库时发生 error C4996: 'std::_Copy_impl' 的解决方案]]></title>
-    <link href="http://www.leelib.com/2013/11/23/boost-c4996-std-copy-impl.html"/>
-    <id>http://www.leelib.com/2013/11/23/boost-c4996-std-copy-impl.html</id>
-    <published>2013-11-23T05:21:44.000Z</published>
-    <updated>2015-09-18T07:07:49.978Z</updated>
-    <content type="html"><![CDATA[<p>原本的程序是控制台的。<br>但最近需要移植到windows下使用。<br>所以以MFC来做UI，代码照搬。<br>一面的一处代码使用了如下语句：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">boost::split(v, data, boost::is_any_of(_T(<span class="string">"n"</span>)));</span><br></pre></td></tr></table></figure></p>
-<p>结果编译时出现了如下错误：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">error C4996: &#39;std::_Copy_impl&#39;</span><br></pre></td></tr></table></figure></p>
-<p>而且是无论怎么修改都不认，差点打算重写了。</p>
-<p>在网络中搜索了半天未果，只能自己分析。好在被我乱猜给猜对了。</p>
-<p>我猜是因为boost的string和std的string产生了冲突而导致的。<br>所以添加上boost的string引用后，问题得以解决。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;boost/algorithm/string.hpp&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>在此留字，希望能帮到遇到同样问题的人。</p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p>原本的程序是控制台的。<br>但最近需要移植到windows下使用。<br>所以以MFC来做UI，代码照搬。<br>一面的一处代码使用了如下语句：<br><figure class="highlight cpp"><table><tr><td class="gutter">]]>
-    </summary>
-    
-      <category term="C4996" scheme="http://www.leelib.com/tags/C4996/"/>
-    
-      <category term="boost" scheme="http://www.leelib.com/tags/boost/"/>
-    
-      <category term="is_any_of" scheme="http://www.leelib.com/tags/is-any-of/"/>
-    
-      <category term="mfc" scheme="http://www.leelib.com/tags/mfc/"/>
-    
-      <category term="split" scheme="http://www.leelib.com/tags/split/"/>
-    
-      <category term="string" scheme="http://www.leelib.com/tags/string/"/>
-    
-      <category term="programing" scheme="http://www.leelib.com/categories/programing/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[Starting httpd: (13)Permission denied: make_sock: could not bind to address 解决方案]]></title>
-    <link href="http://www.leelib.com/2013/11/01/httpd-permission-denied-make-sock-could-not-bind-to-address.html"/>
-    <id>http://www.leelib.com/2013/11/01/httpd-permission-denied-make-sock-could-not-bind-to-address.html</id>
-    <published>2013-11-01T00:36:55.000Z</published>
-    <updated>2015-09-18T07:07:50.044Z</updated>
-    <content type="html"><![CDATA[<h1 id="原因">原因</h1><p>修改了conf里面的Listen端口</p>
-<h1 id="解决">解决</h1><ol>
-<li>修改成SELinux安全机制里面默认允许的端口（80, 443, 488, 8008, 8009, 8443）等等。</li>
-<li>修改SELinux安全设置<br>如：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">semanage port <span class="operator">-a</span> -t http_port_t -p tcp &lt;listen port&gt;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-]]></content>
-    <summary type="html">
-    <![CDATA[<h1 id="原因">原因</h1><p>修改了conf里面的Listen端口</p>
-<h1 id="解决">解决</h1><ol>
-<li>修改成SELinux安全机制里面默认允许的端口（80, 443, 488, 8008, 8009, 8443）等等。</li>
-<li]]>
-    </summary>
-    
-      <category term="SELinux" scheme="http://www.leelib.com/tags/SELinux/"/>
-    
-      <category term="apache" scheme="http://www.leelib.com/tags/apache/"/>
-    
-      <category term="bind" scheme="http://www.leelib.com/tags/bind/"/>
-    
-      <category term="conf" scheme="http://www.leelib.com/tags/conf/"/>
-    
-      <category term="denied" scheme="http://www.leelib.com/tags/denied/"/>
-    
-      <category term="http_port" scheme="http://www.leelib.com/tags/http-port/"/>
-    
-      <category term="httpd" scheme="http://www.leelib.com/tags/httpd/"/>
-    
-      <category term="listen" scheme="http://www.leelib.com/tags/listen/"/>
-    
-      <category term="permission" scheme="http://www.leelib.com/tags/permission/"/>
-    
-      <category term="semanage" scheme="http://www.leelib.com/tags/semanage/"/>
-    
-      <category term="linux" scheme="http://www.leelib.com/categories/linux/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[解决WinRAR压缩包分卷乱序导致无法解压的问题]]></title>
-    <link href="http://www.leelib.com/2013/10/30/fix-winrar-order.html"/>
-    <id>http://www.leelib.com/2013/10/30/fix-winrar-order.html</id>
-    <published>2013-10-29T16:24:38.000Z</published>
-    <updated>2015-09-18T07:07:50.022Z</updated>
-    <content type="html"><![CDATA[<p>下载游戏：<strong>《古墓丽影9》中文免安装绿色豪华硬盘版[1.1.732.1升级档][解压即玩]</strong><br>光压缩包所有分卷加起来就有快10个G<br>结果用QQ旋风下载下来后成乱序的了<br>然后到网站上一看发现QQ旋风本身就把链接那些顺序没搞对。<br>参考下载地址：<a href="http://fenxiang.qq.com/x/3SSKsVNycfRNc3CJcuCA0~NHIcT5rX133GN0qnvKZltI" title="http://fenxiang.qq.com/x/3SSKsVNycfRNc3CJcuCA0~NHIcT5rX133GN0qnvKZltI" target="_blank" rel="external">Tomb.Raider.9.v1.1.732.1.CHS.Green.Edition</a></p>
-<p>自己根据使用7-zip打开压缩包的“之前分割”和“之后分割”信息拼凑了半天，结果还是有一个文件“bigfile.001.tiger”不能成功解压。最终放弃。</p>
-<p>结果在网上搜索了半天，竟然发现“360压缩”竟然宣称自己可以修复。</p>
-<p>原文在：<a href="http://yasuo.360.cn/update.html" title="http://yasuo.360.cn/update.html" target="_blank" rel="external">http://yasuo.360.cn/update.html</a></p>
-  <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1.6&#27491;&#24335;&#29256;&#65288;2011-5-26&#65289;&#10;  1.&#26234;&#33021;&#21387;&#32553;&#26041;&#24335;&#65292;360&#21387;&#32553;&#25903;&#25345;&#26234;&#33021;&#26497;&#36895;&#12289;&#24378;&#21147;&#21387;&#32553;&#12289;&#26631;&#20934;&#21387;&#32553;&#31561;&#21387;&#32553;&#26041;&#24335;&#12290;&#26234;&#33021;&#21387;&#32553;&#26681;&#25454;&#25991;&#20214;&#26234;&#33021;&#36873;&#25321;&#21387;&#32553;&#31639;&#27861;&#65292;&#22823;&#24133;&#25552;&#21319;&#21387;&#32553;&#36895;&#24230;&#12290;&#10;  2.&#22810;&#31181;&#26684;&#24335;&#25903;&#25345;&#65292;&#25903;&#25345;&#35299;&#21387;rar&#12289;zip&#12289;7z&#12289;iso&#31561;39&#31181;&#26684;&#24335;&#30340;&#21387;&#32553;&#25991;&#20214;&#12290;&#10;  3.&#35299;&#21387;&#36895;&#24230;&#26356;&#24555;&#65292;&#37319;&#29992;&#22810;&#32447;&#31243;&#35299;&#21387;&#22788;&#29702;&#65292;&#20248;&#21270;&#20102;&#35299;&#21387;&#36923;&#36753;&#65292;&#36895;&#24230;&#26356;&#24555;&#12290;&#10;  4.&#25439;&#22351;&#26684;&#24335;&#20860;&#23481;&#65292;&#23545;&#26684;&#24335;&#22836;&#26377;&#25439;&#22351;&#30340;&#21387;&#32553;&#21253;&#19968;&#26679;&#20462;&#22797;&#35299;&#21387;&#12290;&#10;* 5.&#20998;&#21367;&#21387;&#32553;&#26234;&#33021;&#35299;&#21387;&#65292;&#26234;&#33021;&#21028;&#26029;&#35299;&#21387;rar&#20998;&#21367;&#21253;&#26102;&#30340;&#25991;&#20214;&#22841;&#21517;&#20081;&#24207;&#38382;&#39064;&#12290;&#10;  6.&#26356;&#23433;&#20840;&#30340;&#21387;&#32553;&#36719;&#20214;&#65292;&#20869;&#21547;360&#20113;&#23433;&#20840;&#24341;&#25806;&#65292;&#23545;&#21387;&#32553;&#21253;&#20869;&#26408;&#39532;&#36827;&#34892;&#26816;&#27979;&#65292;&#26356;&#23433;&#20840;&#12290;&#10;  7.&#19981;&#26029;&#23436;&#21892;&#30340;&#32454;&#33410;&#20307;&#39564;&#65292;&#25903;&#25345;&#36339;&#36716;&#21040;&#26700;&#38754;&#12289;&#33258;&#21160;&#28040;&#37325;&#25991;&#20214;&#22841;&#31561;20&#22810;&#22788;&#30456;&#23545;&#20256;&#32479;&#21387;&#32553;&#36719;&#20214;&#30340;&#32454;&#33410;&#21151;&#33021;&#25913;&#36827;&#12290;</span><br></pre></td></tr></table></figure>
-<p>抱着尝试的心态，下载了一个最新版的安装上尝试后。发现真的正常解压了所有压缩包。<br>总算是解决了目前的尴尬问题，所以在此留文提醒有遇到跟我同样问题的朋友。</p>
-<p>成功解压版本：<a href="http://dl.360safe.com/360zip_beta_3.1.0.1071.exe" title="360zip_beta_3.1.0.1071" target="_blank" rel="external">360zip_beta_3.1.0.1071</a></p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p>下载游戏：<strong>《古墓丽影9》中文免安装绿色豪华硬盘版[1.1.732.1升级档][解压即玩]</strong><br>光压缩包所有分卷加起来就有快10个G<br>结果用QQ旋风下载下来后成乱序的了<br>然后到网站上一看发现QQ旋风本身就把链接那些顺序没搞对。<]]>
-    </summary>
-    
-      <category term="360" scheme="http://www.leelib.com/tags/360/"/>
-    
-      <category term="360zip" scheme="http://www.leelib.com/tags/360zip/"/>
-    
-      <category term="Tomb Raider" scheme="http://www.leelib.com/tags/Tomb-Raider/"/>
-    
-      <category term="disorder" scheme="http://www.leelib.com/tags/disorder/"/>
-    
-      <category term="winrar" scheme="http://www.leelib.com/tags/winrar/"/>
-    
-      <category term="summarys" scheme="http://www.leelib.com/categories/summarys/"/>
     
   </entry>
   

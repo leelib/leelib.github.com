@@ -83,6 +83,274 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2012/06/03/use-regex.html" title="正则表达式一句话经验" itemprop="url">正则表达式一句话经验</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="leaker" target="_blank" itemprop="author">leaker</a>
+		
+  <p class="article-time">
+    <time datetime="2012-06-03T08:00:24.000Z" itemprop="datePublished"> 发表于 2012-06-03</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h2 id="在正则表达式里想要匹配多行：">在正则表达式里想要匹配多行：</h2><p><strong>([\s\S]*)</strong></p>
+<h2 id="想要匹配到到一定区域内的内容可以考虑非贪婪匹配:">想要匹配到到一定区域内的内容可以考虑非贪婪匹配:</h2><blockquote>
+<p>例如想要匹配 “<strong><object name="暗黑3" size="12"></object></strong>” 中的name值“<strong>暗黑3</strong>”</p>
+</blockquote>
+<p>要使用表达式“<strong>&lt;object name=’(.+?)’</strong>” (非贪婪匹配)<br>  而不能使用“<strong>&lt;object name=’(.+)’</strong>” (贪婪匹配)。因为这个表达式会匹配出这样的结果“<strong>暗黑3’ size=’12</strong>”，这并不是我们想要的。</p>
+<hr>
+<h1 id="简单描述下贪婪匹配和非贪婪匹配：">简单描述下贪婪匹配和非贪婪匹配：</h1><h2 id="例如：针对字符串“LeeeeLeeeeL”">例如：针对字符串“<strong>LeeeeLeeeeL</strong>”</h2><blockquote>
+<p>贪婪模式：</p>
+</blockquote>
+<p>(L)(\w+) “\w+” 将匹配第一个”L”之后的所有字符。结果：”eeeeLeeeeL”<br>  (L)(\w+)(L) “\w+” 将匹配第一个”L”和最后一个”L”之间的所有字符。结果：”eeeeLeeee”</p>
+<blockquote>
+<p>非贪婪模式：</p>
+</blockquote>
+<p>(L)(\w+?) “\w+?” 将尽可能少的匹配第一个”L”之后的字符。结果：”e”<br>  (L)(\w+?)(L) “\w+?” 将匹配以第一个”L”开头以第二个”L”结尾的字符。结果：”eee”</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/summarys/">summarys</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/regex/">regex</a><a href="/tags/正则表达式/">正则表达式</a><a href="/tags/贪婪匹配/">贪婪匹配</a><a href="/tags/非贪婪匹配/">非贪婪匹配</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2012/05/24/fix-ubuntu-start-dante-error.html" title="解决ubuntu下dante不能正常启动的问题" itemprop="url">解决ubuntu下dante不能正常启动的问题</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="leaker" target="_blank" itemprop="author">leaker</a>
+		
+  <p class="article-time">
+    <time datetime="2012-05-23T22:36:37.000Z" itemprop="datePublished"> 发表于 2012-05-24</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>首先查看日志文件<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@ubuntu]<span class="comment"># cat /var/log/danted.log</span></span><br></pre></td></tr></table></figure></p>
+<p>发现里面有这样的记录<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">May 24 13:57:52 (1337839072) danted[13596]: socks_seteuid(): old: 0, new: 65534&#10;May 24 13:57:52 (1337839072) danted[13596]: socks_reseteuid(): current: 65534, new: 0&#10;May 24 13:57:52 (1337839072) danted[13596]: fixsettings(): setting the libwrap uid to 0 is not recommended&#10;May 24 13:57:52 (1337839072) danted[13596]: symbolfunction(): compiletime configuration error? Failed to open &#34;libc.so&#34;: /usr/lib/i386-linux-gnu/libc.so: invalid ELF header</span><br></pre></td></tr></table></figure></p>
+<p>说明程序在找/usr/lib/i386-linux-gnu/libc.so位置的libc.so没找到，所以解决办法就是创建一个链接命令如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ln -sf /lib/i386-linux-gnu/libc.so.<span class="number">6</span> /usr/lib/i386-linux-gnu/libc.so</span><br></pre></td></tr></table></figure></p>
+<p>再启动下服务<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service danted start</span><br></pre></td></tr></table></figure></p>
+<p>看看是不是启动成功啦！<br>(o≖◡≖)</p>
+<p>因为到现在位置在国内没有搜索到这个问题的解决办法，所以记录在这里。或许能帮到有需要的人。</p>
+<p>另外，这里有dante socks server的安装说明：<br><a href="http://wiki.kartbuilding.net/index.php/Dante_Socks_Server" target="_blank" rel="external">http://wiki.kartbuilding.net/index.php/Dante_Socks_Server</a></p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/linux/">linux</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/dante/">dante</a><a href="/tags/danted/">danted</a><a href="/tags/libc/">libc</a><a href="/tags/ubuntu/">ubuntu</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2012/05/16/cmake-use-relative-path.html" title="使CMake生成工程采用相对路径" itemprop="url">使CMake生成工程采用相对路径</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="leaker" target="_blank" itemprop="author">leaker</a>
+		
+  <p class="article-time">
+    <time datetime="2012-05-15T19:18:15.000Z" itemprop="datePublished"> 发表于 2012-05-16</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <center><img src="/wp-content/uploads/2012/05/cmake_ogre.png" alt=""></center>
+
+<h1 id="解决方案">解决方案</h1><p>在生成项目之前勾选上 <strong>CMAKE_USE_RELATIVE_PATHS</strong> 这个选项，效果如上图所示。</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/programing/">programing</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/cmake/">cmake</a><a href="/tags/ogre/">ogre</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2012/04/25/redhat-use-centos-yum.html" title="让RedHat系统使用CentOS的yum" itemprop="url">让RedHat系统使用CentOS的yum</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="leaker" target="_blank" itemprop="author">leaker</a>
+		
+  <p class="article-time">
+    <time datetime="2012-04-25T02:04:10.000Z" itemprop="datePublished"> 发表于 2012-04-25</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <center><img src="/wp-content/uploads/2012/04/redhat-300x225.jpg" alt=""></center>
+
+<h1 id="错误原因">错误原因</h1><p>在使用未注册的 RedHat Linux 企业版时。使用yum命令会出现如下提示：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]<span class="comment"># yum install httpd</span></span><br><span class="line">Loaded plugins: rhnplugin, security  </span><br><span class="line">This system is not registered with RHN.  </span><br><span class="line">RHN support will be disabled.  </span><br><span class="line">Setting up Install Process  </span><br><span class="line">No package httpd available.  </span><br><span class="line">Nothing to <span class="keyword">do</span></span><br></pre></td></tr></table></figure></p>
+<h1 id="解决方案">解决方案</h1><p>而这种情况可以使用CentOS的yum来代替掉系统本身的yum<br>脚本如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!/bin/sh  </span></span><br><span class="line">rpm -qa | grep yum | xargs rpm <span class="operator">-e</span> --nodeps  </span><br><span class="line">wget  http://centos.ustc.edu.cn/centos/<span class="number">5</span>/os/i386/CentOS/yum-metadata-parser-<span class="number">1.1</span>.<span class="number">2</span>-<span class="number">3</span>.el5.centos.i386.rpm  </span><br><span class="line">wget  http://mirrors.ustc.edu.cn/centos/<span class="number">5</span>/os/i386/CentOS/yum-fastestmirror-<span class="number">1.1</span>.<span class="number">16</span>-<span class="number">21</span>.el5.centos.noarch.rpm  </span><br><span class="line">wget  http://mirrors.ustc.edu.cn/centos/<span class="number">5</span>/os/i386/CentOS/yum-<span class="number">3.2</span>.<span class="number">22</span>-<span class="number">39</span>.el5.centos.noarch.rpm  </span><br><span class="line">rpm -ivh yum-metadata-parser-<span class="number">1.1</span>.<span class="number">2</span>-<span class="number">3</span>.el5.centos.i386.rpm  </span><br><span class="line">rpm -ivh yum-fastestmirror-<span class="number">1.1</span>.<span class="number">16</span>-<span class="number">21</span>.el5.centos.noarch.rpm  </span><br><span class="line">rpm -ivh yum-<span class="number">3.2</span>.<span class="number">22</span>-<span class="number">39</span>.el5.centos.noarch.rpm  </span><br><span class="line">wget http://docs.linuxtone.org/soft/lemp/CentOS-Base.repo  </span><br><span class="line">mv CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo  </span><br><span class="line">rm <span class="operator">-f</span> yum-metadata-parser-<span class="number">1.1</span>.<span class="number">2</span>-<span class="number">3</span>.el5.centos.i386.rpm  </span><br><span class="line">rm <span class="operator">-f</span> yum-fastestmirror-<span class="number">1.1</span>.<span class="number">16</span>-<span class="number">21</span>.el5.centos.noarch.rpm  </span><br><span class="line">rm <span class="operator">-f</span> yum-<span class="number">3.2</span>.<span class="number">22</span>-<span class="number">39</span>.el5.centos.noarch.rpm  </span><br><span class="line">rm <span class="operator">-f</span> CentOS-Base.repo</span><br></pre></td></tr></table></figure></p>
+<p>将上面的脚本保存为：<strong>redhat_use_centos_yum.sh</strong></p>
+<p>点击这里直接下载 <a href="/wp-content/uploads/2012/04/redhat_use_centos_yum.sh">redhat_use_centos_yum.sh</a><br>然后直接运行这个脚本即可。</p>
+<h1 id="一键脚本">一键脚本</h1><p>如果闲麻烦也可以依次输入下面几条指令来下载并执行我已经写好的脚本，同样可以达到目的：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget http://www.leelib.com/wp-content/uploads/<span class="number">2012</span>/<span class="number">04</span>/redhat_use_centos_yum.sh</span><br><span class="line">chmod <span class="number">777</span> redhat_use_centos_yum.sh</span><br><span class="line">sudo ./redhat_use_centos_yum.sh</span><br></pre></td></tr></table></figure></p>
+<p>现在再试试yum命令是否已经没有了 This system is not registered with RHN. 提示，并且可以正常使用了呢！ :)</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/linux/">linux</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/centos/">centos</a><a href="/tags/redhat/">redhat</a><a href="/tags/sh/">sh</a><a href="/tags/shell/">shell</a><a href="/tags/yum/">yum</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2012/04/24/asm-rol-to-c.html" title="汇编中ROL(循环左移)对应的C语言实现" itemprop="url">汇编中ROL(循环左移)对应的C语言实现</a>
   </h1>
   <p class="article-author">By
@@ -534,174 +802,9 @@ out.<span class="built_in">close</span>()
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2012/03/19/163-ubuntu-apt-sources.html" title="网易的Ubuntu更新源" itemprop="url">网易的Ubuntu更新源</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="leaker" target="_blank" itemprop="author">leaker</a>
-		
-  <p class="article-time">
-    <time datetime="2012-03-19T05:13:20.000Z" itemprop="datePublished"> 发表于 2012-03-19</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <center><img src="/wp-content/uploads/2012/03/ubuntu_splash.jpg" alt=""></center>
-
-<h1 id="步骤">步骤</h1><ol>
-<li>sudo gedit /etc/apt/sources.list<br>编辑你的源列表，将原来的内容全部删除并复制下面列表到文件中，然后保存列表。</li>
-<li>sudo apt-get update</li>
-</ol>
-<p>等第2步完成之后你就可以打开更新管理器更新了<br>顺便一提 网易的更新速度真的很快，我这里下载600K/s</p>
-<p>以下是更新列表内容：</p>
-<pre><code>deb <span class="string">http:</span><span class="comment">//mirrors.163.com/ubuntu/ precise main restricted</span>
-deb-src <span class="string">http:</span><span class="comment">//mirrors.163.com/ubuntu/ precise main restricted</span>
-deb <span class="string">http:</span><span class="comment">//mirrors.163.com/ubuntu/ precise-updates main restricted</span>
-deb-src <span class="string">http:</span><span class="comment">//mirrors.163.com/ubuntu/ precise-updates main restricted</span>
-deb <span class="string">http:</span><span class="comment">//mirrors.163.com/ubuntu/ precise universe</span>
-deb-src <span class="string">http:</span><span class="comment">//mirrors.163.com/ubuntu/ precise universe</span>
-deb <span class="string">http:</span><span class="comment">//mirrors.163.com/ubuntu/ precise-updates universe</span>
-deb-src <span class="string">http:</span><span class="comment">//mirrors.163.com/ubuntu/ precise-updates universe</span>
-deb <span class="string">http:</span><span class="comment">//mirrors.163.com/ubuntu/ precise multiverse</span>
-deb-src <span class="string">http:</span><span class="comment">//mirrors.163.com/ubuntu/ precise multiverse</span>
-deb <span class="string">http:</span><span class="comment">//mirrors.163.com/ubuntu/ precise-updates multiverse</span>
-deb-src <span class="string">http:</span><span class="comment">//mirrors.163.com/ubuntu/ precise-updates multiverse</span>
-deb <span class="string">http:</span><span class="comment">//mirrors.163.com/ubuntu/ precise-backports main restricted universe multiverse</span>
-deb-src <span class="string">http:</span><span class="comment">//mirrors.163.com/ubuntu/ precise-backports main restricted universe multiverse</span>
-deb <span class="string">http:</span><span class="comment">//mirrors.163.com/ubuntu/ precise-security main restricted</span>
-deb-src <span class="string">http:</span><span class="comment">//mirrors.163.com/ubuntu/ precise-security main restricted</span>
-deb <span class="string">http:</span><span class="comment">//mirrors.163.com/ubuntu/ precise-security universe</span>
-deb-src <span class="string">http:</span><span class="comment">//mirrors.163.com/ubuntu/ precise-security universe</span>
-deb <span class="string">http:</span><span class="comment">//mirrors.163.com/ubuntu/ precise-security multiverse</span>
-deb-src <span class="string">http:</span><span class="comment">//mirrors.163.com/ubuntu/ precise-security multiverse</span>
-deb <span class="string">http:</span><span class="comment">//extras.ubuntu.com/ubuntu precise main</span>
-deb-src <span class="string">http:</span><span class="comment">//extras.ubuntu.com/ubuntu precise main</span>
-</code></pre><p>你也可以在我这里下载自动修改脚本：<a href="/wp-content/uploads/2012/03/163source.7z">点我下载</a></p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/linux/">linux</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/sudo/">sudo</a><a href="/tags/ubuntu/">ubuntu</a><a href="/tags/更新源/">更新源</a><a href="/tags/网易/">网易</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2012/03/18/favicon-from-pics.html" title="一个可以在线生成网站favicon图标的网站" itemprop="url">一个可以在线生成网站favicon图标的网站</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="leaker" target="_blank" itemprop="author">leaker</a>
-		
-  <p class="article-time">
-    <time datetime="2012-03-18T12:34:12.000Z" itemprop="datePublished"> 发表于 2012-03-18</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p><center><img src="/wp-content/uploads/2012/03/favicon.jpg" alt="" title="FavIcon from Pics"></center><br>一个可以在线生成网站favicon图标的网站</p>
-<p>网站地址：<a href="http://www.chami.com/html-kit/services/favicon/" target="_blank" rel="external">http://www.chami.com/html-kit/services/favicon/</a></p>
-<p>可以同时生成静态（<strong>favicon.ico</strong>）和动态（<strong>animated_favicon1.gif</strong>）两种图标</p>
-<p>以下是安装说明附带我的翻译（英文水平有限，如有翻译错误欢迎指正）：</p>
-<h1 id="A-_Installing_the_favicon_with_animation">A. Installing the favicon with animation</h1><ol>
-<li>Upload favicon.ico and animated_favicon1.gif to the root of your web folder(上传 favicon.ico 和 animated_favicon1.gif 文件到你的网站根目录下).</li>
-<li>Add the following HTML code to your web page, in between &lt;head&gt; and &lt;/head&gt; tags(添加以下HTML代码到你页面中&lt;head&gt;和&lt;/head&amp;gt之间):<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">link</span> <span class="attribute">rel</span>=<span class="value">"shortcut icon"</span> <span class="attribute">href</span>=<span class="value">"favicon.ico"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">link</span> <span class="attribute">rel</span>=<span class="value">"icon"</span> <span class="attribute">type</span>=<span class="value">"image/gif"</span> <span class="attribute">href</span>=<span class="value">"animated_favicon1.gif"</span>&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h1 id="B-_Installing_the_favicon_without_animation">B. Installing the favicon without animation</h1><ol>
-<li><p>Upload favicon.ico to the root of your web folder(上传 favicon.ico 文件到你的网站根目录下)</p>
-</li>
-<li><p>Add the following HTML code to your web page, in between &lt;head&gt; and &lt;/head&gt; tags:(2.添加以下HTML代码到你页面中&lt;head&gt;和&lt;/head&amp;gt之间：)</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">link</span> <span class="attribute">rel</span>=<span class="value">"shortcut icon"</span> <span class="attribute">href</span>=<span class="value">"favicon.ico"</span>&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/sites/">sites</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/animated/">animated</a><a href="/tags/favicon/">favicon</a><a href="/tags/ico/">ico</a><a href="/tags/图标/">图标</a><a href="/tags/在线生成/">在线生成</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix">
-    <a class="extend prev" rel="prev" href="/page/5/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span>
+    <a class="extend prev" rel="prev" href="/page/5/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/7/">Next<span></span></a>
   </nav>
 
 </div>
@@ -735,7 +838,7 @@ deb-src <span class="string">http:</span><span class="comment">//extras.ubuntu.c
 		  
 		
 		  
-			<li><a href="/categories/programing/" title="programing">programing<sup>21</sup></a></li>
+			<li><a href="/categories/programing/" title="programing">programing<sup>23</sup></a></li>
 		  
 		
 		  
@@ -743,7 +846,7 @@ deb-src <span class="string">http:</span><span class="comment">//extras.ubuntu.c
 		  
 		
 		  
-			<li><a href="/categories/summarys/" title="summarys">summarys<sup>8</sup></a></li>
+			<li><a href="/categories/summarys/" title="summarys">summarys<sup>9</sup></a></li>
 		  
 		
 		  
@@ -804,7 +907,7 @@ deb-src <span class="string">http:</span><span class="comment">//extras.ubuntu.c
 			
 		
 			
-				<li><a href="/tags/boost/" title="boost">boost<sup>2</sup></a></li>
+				<li><a href="/tags/git/" title="git">git<sup>3</sup></a></li>
 			
 		
 			
@@ -828,7 +931,7 @@ deb-src <span class="string">http:</span><span class="comment">//extras.ubuntu.c
 			
 		
 			
-				<li><a href="/tags/git/" title="git">git<sup>2</sup></a></li>
+				<li><a href="/tags/kernel/" title="kernel">kernel<sup>2</sup></a></li>
 			
 		
 			
@@ -840,7 +943,7 @@ deb-src <span class="string">http:</span><span class="comment">//extras.ubuntu.c
 			
 		
 			
-				<li><a href="/tags/kernel/" title="kernel">kernel<sup>2</sup></a></li>
+				<li><a href="/tags/boost/" title="boost">boost<sup>2</sup></a></li>
 			
 		
 		</ul>
@@ -893,7 +996,7 @@ deb-src <span class="string">http:</span><span class="comment">//extras.ubuntu.c
 		
 
 		<p class="copyright">
-		Powered by <a href="http://hexo.io" target="_blank" title="hexo" rel="external nofollow">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman" rel="external nofollow">Jacman</a> © 2015 
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo" rel="external nofollow">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman" rel="external nofollow">Jacman</a> © 2016 
 		
 		<a href="/about" target="_blank" title="leaker">leaker</a>
 		

@@ -2,6 +2,26 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://www.leelib.com/2016/04/20/adt-add-library-bug.html</loc>
+    <lastmod>2016-05-09T03:27:19.562Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.leelib.com/2016/05/09/pkgmgr-install-telnet.html</loc>
+    <lastmod>2016-05-09T03:08:02.599Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.leelib.com/2016/01/21/git.html</loc>
+    <lastmod>2016-04-20T10:34:24.916Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.leelib.com/2015/12/13/enable-shared-from-this.html</loc>
+    <lastmod>2016-04-20T10:34:24.914Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://www.leelib.com/about/index.html</loc>
     <lastmod>2015-10-12T07:34:31.993Z</lastmod>
   </url>

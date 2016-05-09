@@ -83,6 +83,259 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2015/01/06/linux-auth-log.html" title="Linux里面查看登录日志，并统计次数和排序，查看尝试破解密码的IP" itemprop="url">Linux里面查看登录日志，并统计次数和排序，查看尝试破解密码的IP</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="leaker" target="_blank" itemprop="author">leaker</a>
+		
+  <p class="article-time">
+    <time datetime="2015-01-06T05:42:53.000Z" itemprop="datePublished"> 发表于 2015-01-06</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>仅需一条命令<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep <span class="string">"Failed password for root"</span> /var/<span class="built_in">log</span>/secure | awk <span class="string">'&#123;print $11&#125;'</span> | sort | uniq -c | sort -nr | more</span><br></pre></td></tr></table></figure></p>
+<p>结果类似下面这样：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">4377 103.41.124.18&#10;4368 103.41.124.65&#10;3900 62.210.178.226&#10;2214 103.41.124.33&#10; 409 62.210.142.105&#10; 404 115.231.222.45&#10; 152 122.225.97.91&#10;  95 122.225.109.205&#10;  81 109.195.69.233&#10;  42 74.52.105.154&#10;  21 87.106.184.62&#10;  21 87.106.1.211&#10;  21 82.165.154.23&#10;  21 69.64.64.62&#10;  21 67.226.156.239&#10;  21 61.40.192.52&#10;  21 60.213.190.98&#10;  21 27.251.179.130&#10;  21 222.77.190.33&#10;  21 211.172.219.251&#10;  21 210.249.105.10&#10;  15 220.194.46.36&#10;  12 203.184.128.106&#10;   1 60.190.71.52&#10;   1 193.104.41.58</span><br></pre></td></tr></table></figure></p>
+<p>这样我们就可以很清楚的了解有谁在尝试破解我们的密码了，之后做个相关安全策略就可以简单防治了</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/linux/">linux</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/awk/">awk</a><a href="/tags/grep/">grep</a><a href="/tags/linux/">linux</a><a href="/tags/secure/">secure</a><a href="/tags/sort/">sort</a><a href="/tags/uniq/">uniq</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2014/12/30/linux-git-remote-helper-for-https.html" title="Linux里Git出现fatal: Unable to find remote helper for &#39;https&#39;的解决方案" itemprop="url">Linux里Git出现fatal: Unable to find remote helper for &#39;https&#39;的解决方案</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="leaker" target="_blank" itemprop="author">leaker</a>
+		
+  <p class="article-time">
+    <time datetime="2014-12-30T15:42:43.000Z" itemprop="datePublished"> 发表于 2014-12-30</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>在Linux内源码编译安装的Git如果出现了 “<strong>Unable to find remote helper for ‘https’</strong>” 错误，则说明<strong>编译的时候没有发现系统有openssl开发包</strong>。</p>
+<p>解决办法就是在编译之前安装相关的开发包就可以了。</p>
+<h1 id="在CentOS系统中使用下面命令来安装">在CentOS系统中使用下面命令来安装</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install curl-devel expat-devel gettext-devel openssl-devel zlib-devel</span><br></pre></td></tr></table></figure>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/linux/">linux</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/fatal/">fatal</a><a href="/tags/git/">git</a><a href="/tags/https/">https</a><a href="/tags/linux/">linux</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2014/12/25/git-remote-helper-for-https.html" title="Windows里Git出现fatal: Unable to find remote helper for &#39;https&#39;的解决方案" itemprop="url">Windows里Git出现fatal: Unable to find remote helper for &#39;https&#39;的解决方案</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="leaker" target="_blank" itemprop="author">leaker</a>
+		
+  <p class="article-time">
+    <time datetime="2014-12-25T08:10:02.000Z" itemprop="datePublished"> 发表于 2014-12-25</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>在升级win8.1之后，重新安装的Git虽然可以正常使用<br>但遇到https时会报“<strong>Unable to find remote helper for ‘https’</strong>”的错误</p>
+<p>网络搜索了许久未果，于是自己研究</p>
+<blockquote>
+<ol>
+<li>检查安装的文件<br>结果：所有文件均完整<p></p></li>
+<li><p>检查文件的访问权限<br>结果：所有文件当前用户均可访问</p>
+</li>
+<li><p>为调用的git等exe文件授予管理员运行权限<br>结果：问题依旧存在</p>
+</li>
+</ol>
+</blockquote>
+<p></p><p>按理说，只要当前用户拥有文件的所有访问权限，就可以正常使用了。<br>并且，按这个错误来分析。应该是remote-https模块没有权限访问</p>
+<p>挣扎了半天，尝试重装解决。</p>
+<p>在重装的时候选择了 <strong>管理员权限运行</strong><br>结果意外的发现重装后，https可以正常使用了。</p>
+<p>至此问题解决。</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/summarys/">summarys</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/git/">git</a><a href="/tags/https/">https</a><a href="/tags/remote/">remote</a><a href="/tags/windows/">windows</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2014/11/21/python-simple-crypt-code.html" title="python代码简单加密解密工具" itemprop="url">python代码简单加密解密工具</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="leaker" target="_blank" itemprop="author">leaker</a>
+		
+  <p class="article-time">
+    <time datetime="2014-11-21T11:13:45.000Z" itemprop="datePublished"> 发表于 2014-11-21</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/env python</span></span><br><span class="line"><span class="string">"""</span><br><span class="line">:license: MIT</span><br><span class="line"></span><br><span class="line">Copyright (C) 2012 HustMoon</span><br><span class="line"></span><br><span class="line">Permission is hereby granted, free of charge, to any person obtaining a copy of</span><br><span class="line">this software and associated documentation files (the "Software"), to deal in</span><br><span class="line">the Software without restriction, including without limitation the rights to</span><br><span class="line">use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies</span><br><span class="line">of the Software, and to permit persons to whom the Software is furnished to do</span><br><span class="line">so, subject to the following conditions:</span><br><span class="line"></span><br><span class="line">The above copyright notice and this permission notice shall be included in all</span><br><span class="line">copies or substantial portions of the Software.</span><br><span class="line"></span><br><span class="line">THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR</span><br><span class="line">IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,</span><br><span class="line">FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE</span><br><span class="line">AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER</span><br><span class="line">LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,</span><br><span class="line">OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE</span><br><span class="line">SOFTWARE.</span><br><span class="line">"""</span></span><br><span class="line"><span class="keyword">from</span> __future__ <span class="keyword">import</span> with_statement</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> zlib, sys</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">b128encode</span><span class="params">(buf, escape=False)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> buf: <span class="keyword">return</span> <span class="string">''</span></span><br><span class="line">    buf = bytearray(buf)</span><br><span class="line">    res = bytearray((len(buf) * <span class="number">8</span> + <span class="number">6</span>) / <span class="number">7</span>)</span><br><span class="line">    p, s, i = <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> n <span class="keyword">in</span> buf:</span><br><span class="line">        res[i] = ((p &lt;&lt; (<span class="number">8</span> - s) | (n &gt;&gt; s)) &amp;amp; <span class="number">0x7F</span>) | <span class="number">0x80</span>; i += <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> s == <span class="number">7</span>:</span><br><span class="line">            res[i] = n | <span class="number">0x80</span>; i += <span class="number">1</span></span><br><span class="line">            p, s = <span class="number">0</span>, <span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            p, s = n, (s + <span class="number">1</span>) % <span class="number">8</span></span><br><span class="line">    <span class="keyword">if</span> s != <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">if</span> s == <span class="number">2</span> <span class="keyword">and</span> p &lt; <span class="number">0x80</span>:</span><br><span class="line">            i -= <span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            p = (p &lt;&lt; (<span class="number">8</span> - s)) &amp;amp; <span class="number">0x7F</span></span><br><span class="line">        p = chr(p)</span><br><span class="line">        <span class="keyword">if</span> escape:</span><br><span class="line">            p = p.encode(<span class="string">'string-escape'</span>)</span><br><span class="line">        res[i:] = p</span><br><span class="line">    <span class="keyword">return</span> str(res)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dcode</span><span class="params">()</span>:</span></span><br><span class="line">    code = <span class="string">r'''def code(__=code):</span><br><span class="line"> (_______)=(globals)();del((_______)['code'])</span><br><span class="line"> if(((_______).get('__doc__'))is((None))):</span><br><span class="line">  (__)=(map)((ord),(__)[(339):]);(______)=[0]*(((((len)((__))+(1))*(7))/(8)));((___),(____),(_____))=((0),(0),(0))</span><br><span class="line">  for((__))in((__)):</span><br><span class="line">   if((__)&lt;(128)):break</span><br><span class="line">   if((____)==(0)):((___),(____))=((__),(1))</span><br><span class="line">   else:</span><br><span class="line">    (______)[(_____)]=((((___)&lt;&lt;(____))|(((__)&amp;amp;(127))&gt;&gt;((7)-(____))))&amp;amp;(255));(_____)+=(1);((___),(____))=((__),(((____)+(1))%(8)))</span><br><span class="line">  if((__)&lt;(128)):</span><br><span class="line">   if((____)!=(0)):</span><br><span class="line">    (__)=((((___)&lt;&lt;(____))|((__)&gt;&gt;((7)-(____))))&amp;amp;(255))</span><br><span class="line">   (______)[(_____):]=[((__))]</span><br><span class="line">  elif((____)!=(0)):del((______)[(_____):])</span><br><span class="line">  exec((''.join((map)((chr),(______))).decode('zlib')))in((_______))</span><br><span class="line">  if(((_______).get('__doc__'))is((None))):(_______)['__doc__']=''</span><br><span class="line">code()</span><br><span class="line">'''</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">''</span>.join([c.encode(<span class="string">'string-escape'</span>) <span class="keyword">if</span> ord(c) &lt; <span class="number">128</span> <span class="keyword">else</span> c</span><br><span class="line">                    <span class="keyword">for</span> c <span class="keyword">in</span> zlib.compress(code, <span class="number">9</span>)])</span><br><span class="line">dcode = dcode()</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">encode</span><span class="params">(infile, outfile)</span>:</span></span><br><span class="line">    <span class="keyword">with</span> open(infile, <span class="string">'rU'</span>) <span class="keyword">as</span> fp:</span><br><span class="line">        code = fp.read().rstrip(<span class="string">'n'</span>) + <span class="string">'n'</span></span><br><span class="line">    code = b128encode(zlib.compress(code, <span class="number">9</span>), <span class="keyword">True</span>)</span><br><span class="line">    code = <span class="string">r'''# -*- coding: latin-1 -*-</span><br><span class="line">code = '%s'</span><br><span class="line">exec(code.decode('zlib'))</span><br><span class="line">'''</span> % (dcode + code)</span><br><span class="line">    <span class="keyword">with</span> open(outfile, <span class="string">'wb'</span>) <span class="keyword">as</span> fp:</span><br><span class="line">        fp.write(code)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">decode</span><span class="params">(infile, outfile)</span>:</span></span><br><span class="line">    <span class="keyword">with</span> open(infile, <span class="string">'rU'</span>) <span class="keyword">as</span> fp:</span><br><span class="line">        code = fp.read().rstrip(<span class="string">'n'</span>) + <span class="string">'n'</span></span><br><span class="line">    code = code.replace(<span class="string">"exec(code.decode('zlib'))"</span>, <span class="string">"exec(code.decode('zlib')"</span></span><br><span class="line">        <span class="string">".replace('exec','fp.write').replace('in((_______))',''))"</span>)</span><br><span class="line">    <span class="keyword">with</span> open(outfile, <span class="string">'wb'</span>) <span class="keyword">as</span> fp:</span><br><span class="line">        eval(compile(code, <span class="string">'s'</span>, <span class="string">'exec'</span>), &#123;<span class="string">'fp'</span>:fp&#125;)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">if</span> sys.argv[<span class="number">1</span>] == <span class="string">'-d'</span>:</span><br><span class="line">            func = decode</span><br><span class="line">            infile, outfile = sys.argv[<span class="number">2</span>:<span class="number">4</span>]</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            func = encode</span><br><span class="line">            infile, outfile = sys.argv[<span class="number">1</span>:<span class="number">3</span>]</span><br><span class="line">    <span class="keyword">except</span> ValueError:</span><br><span class="line">        <span class="keyword">print</span> &gt;&gt;sys.stderr, <span class="string">'Usage: zipcode.py [-d] infile.py outfile.py'</span></span><br><span class="line">        <span class="keyword">raise</span> SystemExit(-<span class="number">1</span>)</span><br><span class="line">    func(infile, outfile)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/programing/">programing</a>
+</div>
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2014/11/21/vs2013-use-atl.html" title="VS2013上直接使用ATL的注意事项" itemprop="url">VS2013上直接使用ATL的注意事项</a>
   </h1>
   <p class="article-author">By
@@ -447,262 +700,9 @@
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2014/03/30/fix-alienware-compal-embedded-system-control.html" title="Alienware系列 COMPAL Embedded System Control 驱动问题解决方案" itemprop="url">Alienware系列 COMPAL Embedded System Control 驱动问题解决方案</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="leaker" target="_blank" itemprop="author">leaker</a>
-		
-  <p class="article-time">
-    <time datetime="2014-03-29T21:05:56.000Z" itemprop="datePublished"> 发表于 2014-03-30</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>每次重装系统后，装驱动很容易有一个名为“COMPAL Embedded System Control”的驱动未安装。<br>而使用驱动精灵等驱动智能安装类的软件安装后很容易出现驱动显示是装好了，但会提示个感叹号说明该设备无法正常工作。</p>
-<p>网上搜了半天终于找到一个说法：<br>这个驱动是热量控制，64位win7/win8无法完全安装设备管理器里更新驱动然后手动定位到C盘ProgramData里的Vista64安装即可</p>
-<p>尝试后问题解决。<br>记录此文章，留给跟我出现同样问题的朋友。希望能有所帮助。</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/summarys/">summarys</a>
-</div>
-
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2013/11/23/boost-c4996-std-copy-impl.html" title="在使用boost库时发生 error C4996: &#39;std::_Copy_impl&#39; 的解决方案" itemprop="url">在使用boost库时发生 error C4996: &#39;std::_Copy_impl&#39; 的解决方案</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="leaker" target="_blank" itemprop="author">leaker</a>
-		
-  <p class="article-time">
-    <time datetime="2013-11-23T05:21:44.000Z" itemprop="datePublished"> 发表于 2013-11-23</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>原本的程序是控制台的。<br>但最近需要移植到windows下使用。<br>所以以MFC来做UI，代码照搬。<br>一面的一处代码使用了如下语句：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">boost::split(v, data, boost::is_any_of(_T(<span class="string">"n"</span>)));</span><br></pre></td></tr></table></figure></p>
-<p>结果编译时出现了如下错误：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">error C4996: &#39;std::_Copy_impl&#39;</span><br></pre></td></tr></table></figure></p>
-<p>而且是无论怎么修改都不认，差点打算重写了。</p>
-<p>在网络中搜索了半天未果，只能自己分析。好在被我乱猜给猜对了。</p>
-<p>我猜是因为boost的string和std的string产生了冲突而导致的。<br>所以添加上boost的string引用后，问题得以解决。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;boost/algorithm/string.hpp&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>在此留字，希望能帮到遇到同样问题的人。</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/programing/">programing</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/C4996/">C4996</a><a href="/tags/boost/">boost</a><a href="/tags/is-any-of/">is_any_of</a><a href="/tags/mfc/">mfc</a><a href="/tags/split/">split</a><a href="/tags/string/">string</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2013/11/01/httpd-permission-denied-make-sock-could-not-bind-to-address.html" title="Starting httpd: (13)Permission denied: make_sock: could not bind to address 解决方案" itemprop="url">Starting httpd: (13)Permission denied: make_sock: could not bind to address 解决方案</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="leaker" target="_blank" itemprop="author">leaker</a>
-		
-  <p class="article-time">
-    <time datetime="2013-11-01T00:36:55.000Z" itemprop="datePublished"> 发表于 2013-11-01</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h1 id="原因">原因</h1><p>修改了conf里面的Listen端口</p>
-<h1 id="解决">解决</h1><ol>
-<li>修改成SELinux安全机制里面默认允许的端口（80, 443, 488, 8008, 8009, 8443）等等。</li>
-<li>修改SELinux安全设置<br>如：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">semanage port <span class="operator">-a</span> -t http_port_t -p tcp &lt;listen port&gt;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/linux/">linux</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/SELinux/">SELinux</a><a href="/tags/apache/">apache</a><a href="/tags/bind/">bind</a><a href="/tags/conf/">conf</a><a href="/tags/denied/">denied</a><a href="/tags/http-port/">http_port</a><a href="/tags/httpd/">httpd</a><a href="/tags/listen/">listen</a><a href="/tags/permission/">permission</a><a href="/tags/semanage/">semanage</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2013/10/30/fix-winrar-order.html" title="解决WinRAR压缩包分卷乱序导致无法解压的问题" itemprop="url">解决WinRAR压缩包分卷乱序导致无法解压的问题</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="leaker" target="_blank" itemprop="author">leaker</a>
-		
-  <p class="article-time">
-    <time datetime="2013-10-29T16:24:38.000Z" itemprop="datePublished"> 发表于 2013-10-30</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>下载游戏：<strong>《古墓丽影9》中文免安装绿色豪华硬盘版[1.1.732.1升级档][解压即玩]</strong><br>光压缩包所有分卷加起来就有快10个G<br>结果用QQ旋风下载下来后成乱序的了<br>然后到网站上一看发现QQ旋风本身就把链接那些顺序没搞对。<br>参考下载地址：<a href="http://fenxiang.qq.com/x/3SSKsVNycfRNc3CJcuCA0~NHIcT5rX133GN0qnvKZltI" title="http://fenxiang.qq.com/x/3SSKsVNycfRNc3CJcuCA0~NHIcT5rX133GN0qnvKZltI" target="_blank" rel="external">Tomb.Raider.9.v1.1.732.1.CHS.Green.Edition</a></p>
-<p>自己根据使用7-zip打开压缩包的“之前分割”和“之后分割”信息拼凑了半天，结果还是有一个文件“bigfile.001.tiger”不能成功解压。最终放弃。</p>
-<p>结果在网上搜索了半天，竟然发现“360压缩”竟然宣称自己可以修复。</p>
-<p>原文在：<a href="http://yasuo.360.cn/update.html" title="http://yasuo.360.cn/update.html" target="_blank" rel="external">http://yasuo.360.cn/update.html</a></p>
-  <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1.6&#27491;&#24335;&#29256;&#65288;2011-5-26&#65289;&#10;  1.&#26234;&#33021;&#21387;&#32553;&#26041;&#24335;&#65292;360&#21387;&#32553;&#25903;&#25345;&#26234;&#33021;&#26497;&#36895;&#12289;&#24378;&#21147;&#21387;&#32553;&#12289;&#26631;&#20934;&#21387;&#32553;&#31561;&#21387;&#32553;&#26041;&#24335;&#12290;&#26234;&#33021;&#21387;&#32553;&#26681;&#25454;&#25991;&#20214;&#26234;&#33021;&#36873;&#25321;&#21387;&#32553;&#31639;&#27861;&#65292;&#22823;&#24133;&#25552;&#21319;&#21387;&#32553;&#36895;&#24230;&#12290;&#10;  2.&#22810;&#31181;&#26684;&#24335;&#25903;&#25345;&#65292;&#25903;&#25345;&#35299;&#21387;rar&#12289;zip&#12289;7z&#12289;iso&#31561;39&#31181;&#26684;&#24335;&#30340;&#21387;&#32553;&#25991;&#20214;&#12290;&#10;  3.&#35299;&#21387;&#36895;&#24230;&#26356;&#24555;&#65292;&#37319;&#29992;&#22810;&#32447;&#31243;&#35299;&#21387;&#22788;&#29702;&#65292;&#20248;&#21270;&#20102;&#35299;&#21387;&#36923;&#36753;&#65292;&#36895;&#24230;&#26356;&#24555;&#12290;&#10;  4.&#25439;&#22351;&#26684;&#24335;&#20860;&#23481;&#65292;&#23545;&#26684;&#24335;&#22836;&#26377;&#25439;&#22351;&#30340;&#21387;&#32553;&#21253;&#19968;&#26679;&#20462;&#22797;&#35299;&#21387;&#12290;&#10;* 5.&#20998;&#21367;&#21387;&#32553;&#26234;&#33021;&#35299;&#21387;&#65292;&#26234;&#33021;&#21028;&#26029;&#35299;&#21387;rar&#20998;&#21367;&#21253;&#26102;&#30340;&#25991;&#20214;&#22841;&#21517;&#20081;&#24207;&#38382;&#39064;&#12290;&#10;  6.&#26356;&#23433;&#20840;&#30340;&#21387;&#32553;&#36719;&#20214;&#65292;&#20869;&#21547;360&#20113;&#23433;&#20840;&#24341;&#25806;&#65292;&#23545;&#21387;&#32553;&#21253;&#20869;&#26408;&#39532;&#36827;&#34892;&#26816;&#27979;&#65292;&#26356;&#23433;&#20840;&#12290;&#10;  7.&#19981;&#26029;&#23436;&#21892;&#30340;&#32454;&#33410;&#20307;&#39564;&#65292;&#25903;&#25345;&#36339;&#36716;&#21040;&#26700;&#38754;&#12289;&#33258;&#21160;&#28040;&#37325;&#25991;&#20214;&#22841;&#31561;20&#22810;&#22788;&#30456;&#23545;&#20256;&#32479;&#21387;&#32553;&#36719;&#20214;&#30340;&#32454;&#33410;&#21151;&#33021;&#25913;&#36827;&#12290;</span><br></pre></td></tr></table></figure>
-<p>抱着尝试的心态，下载了一个最新版的安装上尝试后。发现真的正常解压了所有压缩包。<br>总算是解决了目前的尴尬问题，所以在此留文提醒有遇到跟我同样问题的朋友。</p>
-<p>成功解压版本：<a href="http://dl.360safe.com/360zip_beta_3.1.0.1071.exe" title="360zip_beta_3.1.0.1071" target="_blank" rel="external">360zip_beta_3.1.0.1071</a></p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/summarys/">summarys</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/360/">360</a><a href="/tags/360zip/">360zip</a><a href="/tags/Tomb-Raider/">Tomb Raider</a><a href="/tags/disorder/">disorder</a><a href="/tags/winrar/">winrar</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix">
-    <a class="extend prev" rel="prev" href="/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/3/">Next<span></span></a>
+    <a class="extend prev" rel="prev" href="/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/3/">Next<span></span></a>
   </nav>
 
 </div>
@@ -736,7 +736,7 @@
 		  
 		
 		  
-			<li><a href="/categories/programing/" title="programing">programing<sup>21</sup></a></li>
+			<li><a href="/categories/programing/" title="programing">programing<sup>23</sup></a></li>
 		  
 		
 		  
@@ -744,7 +744,7 @@
 		  
 		
 		  
-			<li><a href="/categories/summarys/" title="summarys">summarys<sup>8</sup></a></li>
+			<li><a href="/categories/summarys/" title="summarys">summarys<sup>9</sup></a></li>
 		  
 		
 		  
@@ -805,7 +805,7 @@
 			
 		
 			
-				<li><a href="/tags/boost/" title="boost">boost<sup>2</sup></a></li>
+				<li><a href="/tags/git/" title="git">git<sup>3</sup></a></li>
 			
 		
 			
@@ -829,7 +829,7 @@
 			
 		
 			
-				<li><a href="/tags/git/" title="git">git<sup>2</sup></a></li>
+				<li><a href="/tags/kernel/" title="kernel">kernel<sup>2</sup></a></li>
 			
 		
 			
@@ -841,7 +841,7 @@
 			
 		
 			
-				<li><a href="/tags/kernel/" title="kernel">kernel<sup>2</sup></a></li>
+				<li><a href="/tags/boost/" title="boost">boost<sup>2</sup></a></li>
 			
 		
 		</ul>
@@ -894,7 +894,7 @@
 		
 
 		<p class="copyright">
-		Powered by <a href="http://hexo.io" target="_blank" title="hexo" rel="external nofollow">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman" rel="external nofollow">Jacman</a> © 2015 
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo" rel="external nofollow">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman" rel="external nofollow">Jacman</a> © 2016 
 		
 		<a href="/about" target="_blank" title="leaker">leaker</a>
 		
