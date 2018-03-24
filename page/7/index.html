@@ -1,0 +1,559 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>李略帅</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="leaker">
+    
+
+    
+    <meta property="og:type" content="website">
+<meta property="og:title" content="李略帅">
+<meta property="og:url" content="http://www.leelib.com/page/7/index.html">
+<meta property="og:site_name" content="李略帅">
+<meta property="og:locale" content="zh-CN">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="李略帅">
+
+    
+    <link rel="alternative" href="/atom.xml" title="李略帅" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="李略帅" title="李略帅"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="李略帅">李略帅</a></h1>
+				<h2 class="blog-motto">少壮不努力，一生在内地</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">主页</a></li>
+					
+						<li><a href="/archives/index.html">归档</a></li>
+					
+						<li><a href="/about/index.html">关于</a></li>
+					
+						<li><a href="/disappear/index.html">消失</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="/search/index.html" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" autocomplete="off" name="q" maxlength="20" placeholder="搜索" />
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main">
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2012/03/19/163-ubuntu-apt-sources.html" title="网易的Ubuntu更新源" itemprop="url">网易的Ubuntu更新源</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about/index.html" title="leaker" target="_blank" itemprop="author">leaker</a>
+		
+  <p class="article-time">
+    <time datetime="2012-03-19T06:13:20.000Z" itemprop="datePublished"> 发表于 2012-03-19</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <center><img src="/wp-content/uploads/2012/03/ubuntu_splash.jpg" alt=""></center>
+
+<h1 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h1><ol>
+<li>sudo gedit /etc/apt/sources.list<br>编辑你的源列表，将原来的内容全部删除并复制下面列表到文件中，然后保存列表。</li>
+<li>sudo apt-get update</li>
+</ol>
+<p>等第2步完成之后你就可以打开更新管理器更新了<br>顺便一提 网易的更新速度真的很快，我这里下载600K/s</p>
+<p>以下是更新列表内容：</p>
+<pre><code>deb http://mirrors.163.com/ubuntu/ precise main restricted
+deb-src http://mirrors.163.com/ubuntu/ precise main restricted
+deb http://mirrors.163.com/ubuntu/ precise-updates main restricted
+deb-src http://mirrors.163.com/ubuntu/ precise-updates main restricted
+deb http://mirrors.163.com/ubuntu/ precise universe
+deb-src http://mirrors.163.com/ubuntu/ precise universe
+deb http://mirrors.163.com/ubuntu/ precise-updates universe
+deb-src http://mirrors.163.com/ubuntu/ precise-updates universe
+deb http://mirrors.163.com/ubuntu/ precise multiverse
+deb-src http://mirrors.163.com/ubuntu/ precise multiverse
+deb http://mirrors.163.com/ubuntu/ precise-updates multiverse
+deb-src http://mirrors.163.com/ubuntu/ precise-updates multiverse
+deb http://mirrors.163.com/ubuntu/ precise-backports main restricted universe multiverse
+deb-src http://mirrors.163.com/ubuntu/ precise-backports main restricted universe multiverse
+deb http://mirrors.163.com/ubuntu/ precise-security main restricted
+deb-src http://mirrors.163.com/ubuntu/ precise-security main restricted
+deb http://mirrors.163.com/ubuntu/ precise-security universe
+deb-src http://mirrors.163.com/ubuntu/ precise-security universe
+deb http://mirrors.163.com/ubuntu/ precise-security multiverse
+deb-src http://mirrors.163.com/ubuntu/ precise-security multiverse
+deb http://extras.ubuntu.com/ubuntu precise main
+deb-src http://extras.ubuntu.com/ubuntu precise main
+</code></pre><p>你也可以在我这里下载自动修改脚本：<a href="/wp-content/uploads/2012/03/163source.7z">点我下载</a></p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/linux/index.html">linux</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/sudo/index.html">sudo</a><a href="/tags/ubuntu/index.html">ubuntu</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2012/03/18/favicon-from-pics.html" title="一个可以在线生成网站favicon图标的网站" itemprop="url">一个可以在线生成网站favicon图标的网站</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about/index.html" title="leaker" target="_blank" itemprop="author">leaker</a>
+		
+  <p class="article-time">
+    <time datetime="2012-03-18T13:34:12.000Z" itemprop="datePublished"> 发表于 2012-03-18</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p><center><img src="/wp-content/uploads/2012/03/favicon.jpg" alt="" title="FavIcon from Pics"></center><br>一个可以在线生成网站favicon图标的网站</p>
+<p>网站地址：<a href="http://www.chami.com/html-kit/services/favicon/" target="_blank" rel="noopener">http://www.chami.com/html-kit/services/favicon/</a></p>
+<p>可以同时生成静态（<strong>favicon.ico</strong>）和动态（<strong>animated_favicon1.gif</strong>）两种图标</p>
+<p>以下是安装说明附带我的翻译（英文水平有限，如有翻译错误欢迎指正）：</p>
+<h1 id="A-Installing-the-favicon-with-animation"><a href="#A-Installing-the-favicon-with-animation" class="headerlink" title="A. Installing the favicon with animation"></a>A. Installing the favicon with animation</h1><ol>
+<li>Upload favicon.ico and animated_favicon1.gif to the root of your web folder(上传 favicon.ico 和 animated_favicon1.gif 文件到你的网站根目录下).</li>
+<li>Add the following HTML code to your web page, in between &lt;head&gt; and &lt;/head&gt; tags(添加以下HTML代码到你页面中&lt;head&gt;和&lt;/head&amp;gt之间):<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"shortcut icon"</span> <span class="attr">href</span>=<span class="string">"favicon.ico"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"icon"</span> <span class="attr">type</span>=<span class="string">"image/gif"</span> <span class="attr">href</span>=<span class="string">"animated_favicon1.gif"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="B-Installing-the-favicon-without-animation"><a href="#B-Installing-the-favicon-without-animation" class="headerlink" title="B. Installing the favicon without animation"></a>B. Installing the favicon without animation</h1><ol>
+<li><p>Upload favicon.ico to the root of your web folder(上传 favicon.ico 文件到你的网站根目录下)</p>
+</li>
+<li><p>Add the following HTML code to your web page, in between &lt;head&gt; and &lt;/head&gt; tags:(2.添加以下HTML代码到你页面中&lt;head&gt;和&lt;/head&amp;gt之间：)</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"shortcut icon"</span> <span class="attr">href</span>=<span class="string">"favicon.ico"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/sites/index.html">sites</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/animated/index.html">animated</a><a href="/tags/favicon/index.html">favicon</a><a href="/tags/ico/index.html">ico</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+
+  <nav id="page-nav" class="clearfix">
+    <a class="extend prev" rel="prev" href="/page/6/index.html"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/index.html">5</a><a class="page-number" href="/page/6/index.html">6</a><span class="page-number current">7</span>
+  </nav>
+
+</div>
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+		
+		  
+		
+		  
+		
+		  
+			<li><a href="/categories/interesting/index.html" title="interesting">interesting<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/linux/index.html" title="linux">linux<sup>25</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/notices/index.html" title="notices">notices<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/programing/index.html" title="programing">programing<sup>23</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/sites/index.html" title="sites">sites<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/summarys/index.html" title="summarys">summarys<sup>9</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/works/index.html" title="works">works<sup>1</sup></a></li>
+		  
+		
+		  
+		
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/linux/index.html" title="linux">linux<sup>9</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/ubuntu/index.html" title="ubuntu">ubuntu<sup>7</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/centos/index.html" title="centos">centos<sup>5</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/zlib/index.html" title="zlib">zlib<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/install/index.html" title="install">install<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/yum/index.html" title="yum">yum<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/make/index.html" title="make">make<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/git/index.html" title="git">git<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/c/index.html" title="c">c<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/windows/index.html" title="windows">windows<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/python/index.html" title="python">python<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/kernel/index.html" title="kernel">kernel<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/sudo/index.html" title="sudo">sudo<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/SAFESEH/index.html" title="SAFESEH">SAFESEH<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/libc/index.html" title="libc">libc<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/gcc/index.html" title="gcc">gcc<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/boost/index.html" title="boost">boost<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/ln/index.html" title="ln">ln<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/compress/index.html" title="compress">compress<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/https/index.html" title="https">https<sup>2</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello, I&#39;m Leaker&#39;s Blog in github. <br/>
+			Living without an aim is like sailing without a compass.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2018 
+		
+		<a href="/about/index.html" target="_blank" title="leaker">leaker</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+ </html>

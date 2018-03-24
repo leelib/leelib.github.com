@@ -1,0 +1,1017 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>李略帅</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="leaker">
+    
+
+    
+    <meta property="og:type" content="website">
+<meta property="og:title" content="李略帅">
+<meta property="og:url" content="http://www.leelib.com/page/2/index.html">
+<meta property="og:site_name" content="李略帅">
+<meta property="og:locale" content="zh-CN">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="李略帅">
+
+    
+    <link rel="alternative" href="/atom.xml" title="李略帅" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="李略帅" title="李略帅"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="李略帅">李略帅</a></h1>
+				<h2 class="blog-motto">少壮不努力，一生在内地</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">主页</a></li>
+					
+						<li><a href="/archives/index.html">归档</a></li>
+					
+						<li><a href="/about/index.html">关于</a></li>
+					
+						<li><a href="/disappear/index.html">消失</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="/search/index.html" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" autocomplete="off" name="q" maxlength="20" placeholder="搜索" />
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main">
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/01/06/linux-auth-log.html" title="Linux里面查看登录日志，并统计次数和排序，查看尝试破解密码的IP" itemprop="url">Linux里面查看登录日志，并统计次数和排序，查看尝试破解密码的IP</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about/index.html" title="leaker" target="_blank" itemprop="author">leaker</a>
+		
+  <p class="article-time">
+    <time datetime="2015-01-06T06:42:53.000Z" itemprop="datePublished"> 发表于 2015-01-06</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>仅需一条命令<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep <span class="string">"Failed password for root"</span> /var/<span class="built_in">log</span>/secure | awk <span class="string">'&#123;print $11&#125;'</span> | sort | uniq -c | sort -nr | more</span><br></pre></td></tr></table></figure></p>
+<p>结果类似下面这样：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">4377 103.41.124.18</span><br><span class="line">4368 103.41.124.65</span><br><span class="line">3900 62.210.178.226</span><br><span class="line">2214 103.41.124.33</span><br><span class="line"> 409 62.210.142.105</span><br><span class="line"> 404 115.231.222.45</span><br><span class="line"> 152 122.225.97.91</span><br><span class="line">  95 122.225.109.205</span><br><span class="line">  81 109.195.69.233</span><br><span class="line">  42 74.52.105.154</span><br><span class="line">  21 87.106.184.62</span><br><span class="line">  21 87.106.1.211</span><br><span class="line">  21 82.165.154.23</span><br><span class="line">  21 69.64.64.62</span><br><span class="line">  21 67.226.156.239</span><br><span class="line">  21 61.40.192.52</span><br><span class="line">  21 60.213.190.98</span><br><span class="line">  21 27.251.179.130</span><br><span class="line">  21 222.77.190.33</span><br><span class="line">  21 211.172.219.251</span><br><span class="line">  21 210.249.105.10</span><br><span class="line">  15 220.194.46.36</span><br><span class="line">  12 203.184.128.106</span><br><span class="line">   1 60.190.71.52</span><br><span class="line">   1 193.104.41.58</span><br></pre></td></tr></table></figure></p>
+<p>这样我们就可以很清楚的了解有谁在尝试破解我们的密码了，之后做个相关安全策略就可以简单防治了</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/linux/index.html">linux</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/linux/index.html">linux</a><a href="/tags/awk/index.html">awk</a><a href="/tags/grep/index.html">grep</a><a href="/tags/secure/index.html">secure</a><a href="/tags/sort/index.html">sort</a><a href="/tags/uniq/index.html">uniq</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2014/12/30/linux-git-remote-helper-for-https.html" title="Linux里Git出现fatal: Unable to find remote helper for &#39;https&#39;的解决方案" itemprop="url">Linux里Git出现fatal: Unable to find remote helper for &#39;https&#39;的解决方案</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about/index.html" title="leaker" target="_blank" itemprop="author">leaker</a>
+		
+  <p class="article-time">
+    <time datetime="2014-12-30T16:42:43.000Z" itemprop="datePublished"> 发表于 2014-12-30</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>在Linux内源码编译安装的Git如果出现了 “<strong>Unable to find remote helper for ‘https’</strong>” 错误，则说明<strong>编译的时候没有发现系统有openssl开发包</strong>。</p>
+<p>解决办法就是在编译之前安装相关的开发包就可以了。</p>
+<h1 id="在CentOS系统中使用下面命令来安装"><a href="#在CentOS系统中使用下面命令来安装" class="headerlink" title="在CentOS系统中使用下面命令来安装"></a>在CentOS系统中使用下面命令来安装</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install curl-devel expat-devel gettext-devel openssl-devel zlib-devel</span><br></pre></td></tr></table></figure>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/linux/index.html">linux</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/linux/index.html">linux</a><a href="/tags/git/index.html">git</a><a href="/tags/https/index.html">https</a><a href="/tags/fatal/index.html">fatal</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2014/12/25/git-remote-helper-for-https.html" title="Windows里Git出现fatal: Unable to find remote helper for &#39;https&#39;的解决方案" itemprop="url">Windows里Git出现fatal: Unable to find remote helper for &#39;https&#39;的解决方案</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about/index.html" title="leaker" target="_blank" itemprop="author">leaker</a>
+		
+  <p class="article-time">
+    <time datetime="2014-12-25T09:10:02.000Z" itemprop="datePublished"> 发表于 2014-12-25</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>在升级win8.1之后，重新安装的Git虽然可以正常使用<br>但遇到https时会报“<strong>Unable to find remote helper for ‘https’</strong>”的错误</p>
+<p>网络搜索了许久未果，于是自己研究</p>
+<blockquote>
+<ol>
+<li>检查安装的文件<br>结果：所有文件均完整<p></p></li>
+<li><p>检查文件的访问权限<br>结果：所有文件当前用户均可访问</p>
+</li>
+<li><p>为调用的git等exe文件授予管理员运行权限<br>结果：问题依旧存在</p>
+</li>
+</ol>
+</blockquote>
+<p></p><p>按理说，只要当前用户拥有文件的所有访问权限，就可以正常使用了。<br>并且，按这个错误来分析。应该是remote-https模块没有权限访问</p>
+<p>挣扎了半天，尝试重装解决。</p>
+<p>在重装的时候选择了 <strong>管理员权限运行</strong><br>结果意外的发现重装后，https可以正常使用了。</p>
+<p>至此问题解决。</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/summarys/index.html">summarys</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/git/index.html">git</a><a href="/tags/https/index.html">https</a><a href="/tags/remote/index.html">remote</a><a href="/tags/windows/index.html">windows</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2014/11/21/python-simple-crypt-code.html" title="python代码简单加密解密工具" itemprop="url">python代码简单加密解密工具</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about/index.html" title="leaker" target="_blank" itemprop="author">leaker</a>
+		
+  <p class="article-time">
+    <time datetime="2014-11-21T12:13:45.000Z" itemprop="datePublished"> 发表于 2014-11-21</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/env python</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">:license: MIT</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Copyright (C) 2012 HustMoon</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Permission is hereby granted, free of charge, to any person obtaining a copy of</span></span><br><span class="line"><span class="string">this software and associated documentation files (the "Software"), to deal in</span></span><br><span class="line"><span class="string">the Software without restriction, including without limitation the rights to</span></span><br><span class="line"><span class="string">use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies</span></span><br><span class="line"><span class="string">of the Software, and to permit persons to whom the Software is furnished to do</span></span><br><span class="line"><span class="string">so, subject to the following conditions:</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">The above copyright notice and this permission notice shall be included in all</span></span><br><span class="line"><span class="string">copies or substantial portions of the Software.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR</span></span><br><span class="line"><span class="string">IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,</span></span><br><span class="line"><span class="string">FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE</span></span><br><span class="line"><span class="string">AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER</span></span><br><span class="line"><span class="string">LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,</span></span><br><span class="line"><span class="string">OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE</span></span><br><span class="line"><span class="string">SOFTWARE.</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="keyword">from</span> __future__ <span class="keyword">import</span> with_statement</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> zlib, sys</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">b128encode</span><span class="params">(buf, escape=False)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> buf: <span class="keyword">return</span> <span class="string">''</span></span><br><span class="line">    buf = bytearray(buf)</span><br><span class="line">    res = bytearray((len(buf) * <span class="number">8</span> + <span class="number">6</span>) / <span class="number">7</span>)</span><br><span class="line">    p, s, i = <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> n <span class="keyword">in</span> buf:</span><br><span class="line">        res[i] = ((p &lt;&lt; (<span class="number">8</span> - s) | (n &gt;&gt; s)) &amp;amp; <span class="number">0x7F</span>) | <span class="number">0x80</span>; i += <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> s == <span class="number">7</span>:</span><br><span class="line">            res[i] = n | <span class="number">0x80</span>; i += <span class="number">1</span></span><br><span class="line">            p, s = <span class="number">0</span>, <span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            p, s = n, (s + <span class="number">1</span>) % <span class="number">8</span></span><br><span class="line">    <span class="keyword">if</span> s != <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">if</span> s == <span class="number">2</span> <span class="keyword">and</span> p &lt; <span class="number">0x80</span>:</span><br><span class="line">            i -= <span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            p = (p &lt;&lt; (<span class="number">8</span> - s)) &amp;amp; <span class="number">0x7F</span></span><br><span class="line">        p = chr(p)</span><br><span class="line">        <span class="keyword">if</span> escape:</span><br><span class="line">            p = p.encode(<span class="string">'string-escape'</span>)</span><br><span class="line">        res[i:] = p</span><br><span class="line">    <span class="keyword">return</span> str(res)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dcode</span><span class="params">()</span>:</span></span><br><span class="line">    code = <span class="string">r'''def code(__=code):</span></span><br><span class="line"><span class="string"> (_______)=(globals)();del((_______)['code'])</span></span><br><span class="line"><span class="string"> if(((_______).get('__doc__'))is((None))):</span></span><br><span class="line"><span class="string">  (__)=(map)((ord),(__)[(339):]);(______)=[0]*(((((len)((__))+(1))*(7))/(8)));((___),(____),(_____))=((0),(0),(0))</span></span><br><span class="line"><span class="string">  for((__))in((__)):</span></span><br><span class="line"><span class="string">   if((__)&lt;(128)):break</span></span><br><span class="line"><span class="string">   if((____)==(0)):((___),(____))=((__),(1))</span></span><br><span class="line"><span class="string">   else:</span></span><br><span class="line"><span class="string">    (______)[(_____)]=((((___)&lt;&lt;(____))|(((__)&amp;amp;(127))&gt;&gt;((7)-(____))))&amp;amp;(255));(_____)+=(1);((___),(____))=((__),(((____)+(1))%(8)))</span></span><br><span class="line"><span class="string">  if((__)&lt;(128)):</span></span><br><span class="line"><span class="string">   if((____)!=(0)):</span></span><br><span class="line"><span class="string">    (__)=((((___)&lt;&lt;(____))|((__)&gt;&gt;((7)-(____))))&amp;amp;(255))</span></span><br><span class="line"><span class="string">   (______)[(_____):]=[((__))]</span></span><br><span class="line"><span class="string">  elif((____)!=(0)):del((______)[(_____):])</span></span><br><span class="line"><span class="string">  exec((''.join((map)((chr),(______))).decode('zlib')))in((_______))</span></span><br><span class="line"><span class="string">  if(((_______).get('__doc__'))is((None))):(_______)['__doc__']=''</span></span><br><span class="line"><span class="string">code()</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">''</span>.join([c.encode(<span class="string">'string-escape'</span>) <span class="keyword">if</span> ord(c) &lt; <span class="number">128</span> <span class="keyword">else</span> c</span><br><span class="line">                    <span class="keyword">for</span> c <span class="keyword">in</span> zlib.compress(code, <span class="number">9</span>)])</span><br><span class="line">dcode = dcode()</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">encode</span><span class="params">(infile, outfile)</span>:</span></span><br><span class="line">    <span class="keyword">with</span> open(infile, <span class="string">'rU'</span>) <span class="keyword">as</span> fp:</span><br><span class="line">        code = fp.read().rstrip(<span class="string">'n'</span>) + <span class="string">'n'</span></span><br><span class="line">    code = b128encode(zlib.compress(code, <span class="number">9</span>), <span class="keyword">True</span>)</span><br><span class="line">    code = <span class="string">r'''# -*- coding: latin-1 -*-</span></span><br><span class="line"><span class="string">code = '%s'</span></span><br><span class="line"><span class="string">exec(code.decode('zlib'))</span></span><br><span class="line"><span class="string">'''</span> % (dcode + code)</span><br><span class="line">    <span class="keyword">with</span> open(outfile, <span class="string">'wb'</span>) <span class="keyword">as</span> fp:</span><br><span class="line">        fp.write(code)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">decode</span><span class="params">(infile, outfile)</span>:</span></span><br><span class="line">    <span class="keyword">with</span> open(infile, <span class="string">'rU'</span>) <span class="keyword">as</span> fp:</span><br><span class="line">        code = fp.read().rstrip(<span class="string">'n'</span>) + <span class="string">'n'</span></span><br><span class="line">    code = code.replace(<span class="string">"exec(code.decode('zlib'))"</span>, <span class="string">"exec(code.decode('zlib')"</span></span><br><span class="line">        <span class="string">".replace('exec','fp.write').replace('in((_______))',''))"</span>)</span><br><span class="line">    <span class="keyword">with</span> open(outfile, <span class="string">'wb'</span>) <span class="keyword">as</span> fp:</span><br><span class="line">        eval(compile(code, <span class="string">'s'</span>, <span class="string">'exec'</span>), &#123;<span class="string">'fp'</span>:fp&#125;)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">if</span> sys.argv[<span class="number">1</span>] == <span class="string">'-d'</span>:</span><br><span class="line">            func = decode</span><br><span class="line">            infile, outfile = sys.argv[<span class="number">2</span>:<span class="number">4</span>]</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            func = encode</span><br><span class="line">            infile, outfile = sys.argv[<span class="number">1</span>:<span class="number">3</span>]</span><br><span class="line">    <span class="keyword">except</span> ValueError:</span><br><span class="line">        <span class="keyword">print</span> &gt;&gt;sys.stderr, <span class="string">'Usage: zipcode.py [-d] infile.py outfile.py'</span></span><br><span class="line">        <span class="keyword">raise</span> SystemExit(<span class="number">-1</span>)</span><br><span class="line">    func(infile, outfile)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/programing/index.html">programing</a>
+</div>
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2014/11/21/vs2013-use-atl.html" title="VS2013上直接使用ATL的注意事项" itemprop="url">VS2013上直接使用ATL的注意事项</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about/index.html" title="leaker" target="_blank" itemprop="author">leaker</a>
+		
+  <p class="article-time">
+    <time datetime="2014-11-21T05:15:21.000Z" itemprop="datePublished"> 发表于 2014-11-21</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h3 id="不再需要导入atl-lib库了，直接包含以下头文件就可以了"><a href="#不再需要导入atl-lib库了，直接包含以下头文件就可以了" class="headerlink" title="不再需要导入atl.lib库了，直接包含以下头文件就可以了"></a>不再需要导入atl.lib库了，直接包含以下头文件就可以了</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;atlbase.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;atlcom.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;atlctl.h&gt;</span></span></span><br></pre></td></tr></table></figure>
+<h3 id="要使用-AtlAxAttachControl-等函数的话，则必须初始化ATL模块"><a href="#要使用-AtlAxAttachControl-等函数的话，则必须初始化ATL模块" class="headerlink" title="要使用 AtlAxAttachControl 等函数的话，则必须初始化ATL模块"></a>要使用 AtlAxAttachControl 等函数的话，则必须初始化ATL模块</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">CComModule _Module;</span><br><span class="line">_pAtlModule = &amp;amp;_Module;</span><br></pre></td></tr></table></figure>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/programing/index.html">programing</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/atl/index.html">atl</a><a href="/tags/com/index.html">com</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2014/11/01/centos-install-go.html" title="CentOS安装GO编译环境" itemprop="url">CentOS安装GO编译环境</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about/index.html" title="leaker" target="_blank" itemprop="author">leaker</a>
+		
+  <p class="article-time">
+    <time datetime="2014-11-01T01:42:17.000Z" itemprop="datePublished"> 发表于 2014-11-01</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>我们这里使用源码编译安装，直接按顺序执行下列命令就可以成功(我都是假设已经有root权限的情况下，所以执行之前请确认自己已有root权限)：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">yum install -y mercurial gcc-c++ gcc</span><br><span class="line">mkdir /usr/<span class="built_in">local</span></span><br><span class="line"><span class="built_in">cd</span> /usr/<span class="built_in">local</span></span><br><span class="line">hg <span class="built_in">clone</span> -r release https://go.googlecode.com/hg/ go</span><br><span class="line"><span class="built_in">cd</span> /usr/<span class="built_in">local</span>/go/src</span><br><span class="line">chmox +x all.bash</span><br><span class="line">./all.bash</span><br><span class="line">mkdir /root/go</span><br><span class="line"><span class="built_in">export</span> GOROOT=/usr/<span class="built_in">local</span>/go</span><br><span class="line"><span class="built_in">export</span> GOPATH=/root/go</span><br><span class="line"><span class="built_in">export</span> GOBIN=/usr/<span class="built_in">local</span>/go/bin</span><br><span class="line"><span class="built_in">export</span> GOOS=linux</span><br><span class="line"><span class="built_in">export</span> PATH=.:<span class="variable">$PATH</span>:/usr/<span class="built_in">local</span>/go/bin</span><br></pre></td></tr></table></figure>
+<p>现在应该已经可以执行go命令测试了：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@root]<span class="comment"># go version</span></span><br><span class="line">go version go1.3.3 linux/amd64</span><br></pre></td></tr></table></figure></p>
+<p>如果想要每次进入bash时都拥有go环境，则需要新建一个文件：<strong>/etc/profile.d/go.sh</strong> 并写入以下内容<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> GOROOT=/usr/<span class="built_in">local</span>/go</span><br><span class="line"><span class="built_in">export</span> GOPATH=/root/go</span><br><span class="line"><span class="built_in">export</span> GOBIN=/usr/<span class="built_in">local</span>/go/bin</span><br><span class="line"><span class="built_in">export</span> GOOS=linux</span><br><span class="line"><span class="built_in">export</span> PATH=.:<span class="variable">$PATH</span>:/usr/<span class="built_in">local</span>/go/bin</span><br></pre></td></tr></table></figure></p>
+<p>现在随时都可以执行go命令了。</p>
+<p>:)</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/linux/index.html">linux</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/bash/index.html">bash</a><a href="/tags/centos/index.html">centos</a><a href="/tags/export/index.html">export</a><a href="/tags/go/index.html">go</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2014/10/31/yum-install-last-nginx.html" title="让CentOS的yum命令可以直接安装最新的nginx" itemprop="url">让CentOS的yum命令可以直接安装最新的nginx</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about/index.html" title="leaker" target="_blank" itemprop="author">leaker</a>
+		
+  <p class="article-time">
+    <time datetime="2014-10-31T15:46:53.000Z" itemprop="datePublished"> 发表于 2014-10-31</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h1 id="添加nginx的repo"><a href="#添加nginx的repo" class="headerlink" title="添加nginx的repo"></a>添加nginx的repo</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">'[nginx]</span></span><br><span class="line"><span class="string">name=nginx repo</span></span><br><span class="line"><span class="string">baseurl=http://nginx.org/packages/centos/7/x86_64</span></span><br><span class="line"><span class="string">gpgcheck=0</span></span><br><span class="line"><span class="string">enabled=1'</span> &gt; /etc/yum.repos.d/nginx.repo</span><br></pre></td></tr></table></figure>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum update</span><br><span class="line">yum install nginx</span><br></pre></td></tr></table></figure>
+<p>是不是直接安装了最新版的nginx呢<br> ( ͡° ͜ʖ ͡°) </p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/linux/index.html">linux</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/yum/index.html">yum</a><a href="/tags/nginx/index.html">nginx</a><a href="/tags/repos/index.html">repos</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2014/06/29/fix-yum-openssl-devel-multilib-version-problems-found.html" title="解决yum安装 openssl-devel时产生的Multilib version problems found错误" itemprop="url">解决yum安装 openssl-devel时产生的Multilib version problems found错误</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about/index.html" title="leaker" target="_blank" itemprop="author">leaker</a>
+		
+  <p class="article-time">
+    <time datetime="2014-06-28T23:56:31.000Z" itemprop="datePublished"> 发表于 2014-06-29</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>今天给一台CentOS系统安装openssl-devel时，出现了如下信息：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line">[root@centos]<span class="comment"># yum install -y openssl-devel</span></span><br><span class="line">Loaded plugins: fastestmirror, security</span><br><span class="line">Repository updates is listed more than once <span class="keyword">in</span> the configuration</span><br><span class="line">Repository centosplus is listed more than once <span class="keyword">in</span> the configuration</span><br><span class="line">Repository contrib is listed more than once <span class="keyword">in</span> the configuration</span><br><span class="line">Repository extras is listed more than once <span class="keyword">in</span> the configuration</span><br><span class="line">Loading mirror speeds from cached hostfile</span><br><span class="line"> * base: mirrors.tuna.tsinghua.edu.cn</span><br><span class="line"> * extras: mirrors.tuna.tsinghua.edu.cn</span><br><span class="line"> * updates: mirrors.tuna.tsinghua.edu.cn</span><br><span class="line">Setting up Install Process</span><br><span class="line">Resolving Dependencies</span><br><span class="line">--&gt; Running transaction check</span><br><span class="line">---&gt; Package openssl-devel.x86_64 0:1.0.1e-16.el6_5.14 will be installed</span><br><span class="line">--&gt; Processing Dependency: krb5-devel <span class="keyword">for</span> package: openssl-devel-1.0.1e-16.el6_5.14.x86_64</span><br><span class="line">--&gt; Running transaction check</span><br><span class="line">---&gt; Package krb5-devel.x86_64 0:1.10.3-15.el6_5.1 will be installed</span><br><span class="line">--&gt; Processing Dependency: libselinux-devel <span class="keyword">for</span> package: krb5-devel-1.10.3-15.el6_5.1.x86_64</span><br><span class="line">--&gt; Processing Dependency: libcom_err-devel <span class="keyword">for</span> package: krb5-devel-1.10.3-15.el6_5.1.x86_64</span><br><span class="line">--&gt; Processing Dependency: keyutils-libs-devel <span class="keyword">for</span> package: krb5-devel-1.10.3-15.el6_5.1.x86_64</span><br><span class="line">--&gt; Running transaction check</span><br><span class="line">---&gt; Package keyutils-libs-devel.x86_64 0:1.4-4.el6 will be installed</span><br><span class="line">---&gt; Package libcom_err-devel.x86_64 0:1.41.12-18.el6 will be installed</span><br><span class="line">---&gt; Package libselinux-devel.x86_64 0:2.0.94-5.3.el6_4.1 will be installed</span><br><span class="line">--&gt; Processing Dependency: libselinux = 2.0.94-5.3.el6_4.1 <span class="keyword">for</span> package: libselinux-devel-2.0.94-5.3.el6_4.1.x86_64</span><br><span class="line">--&gt; Processing Dependency: libsepol-devel &gt;= 2.0.32-1 <span class="keyword">for</span> package: libselinux-devel-2.0.94-5.3.el6_4.1.x86_64</span><br><span class="line">--&gt; Processing Dependency: pkgconfig(libsepol) <span class="keyword">for</span> package: libselinux-devel-2.0.94-5.3.el6_4.1.x86_64</span><br><span class="line">--&gt; Running transaction check</span><br><span class="line">---&gt; Package libselinux.i686 0:2.0.94-5.3.el6_4.1 will be installed</span><br><span class="line">--&gt; Processing Dependency: libdl.so.2(GLIBC_2.1) <span class="keyword">for</span> package: libselinux-2.0.94-5.3.el6_4.1.i686</span><br><span class="line">--&gt; Processing Dependency: libdl.so.2(GLIBC_2.0) <span class="keyword">for</span> package: libselinux-2.0.94-5.3.el6_4.1.i686</span><br><span class="line">--&gt; Processing Dependency: libdl.so.2 <span class="keyword">for</span> package: libselinux-2.0.94-5.3.el6_4.1.i686</span><br><span class="line">--&gt; Processing Dependency: libc.so.6(GLIBC_2.8) <span class="keyword">for</span> package: libselinux-2.0.94-5.3.el6_4.1.i686</span><br><span class="line">--&gt; Processing Dependency: ld-linux.so.2(GLIBC_2.3) <span class="keyword">for</span> package: libselinux-2.0.94-5.3.el6_4.1.i686</span><br><span class="line">--&gt; Processing Dependency: ld-linux.so.2 <span class="keyword">for</span> package: libselinux-2.0.94-5.3.el6_4.1.i686</span><br><span class="line">---&gt; Package libsepol-devel.x86_64 0:2.0.41-4.el6 will be installed</span><br><span class="line">--&gt; Running transaction check</span><br><span class="line">---&gt; Package glibc.i686 0:2.12-1.132.el6_5.2 will be installed</span><br><span class="line">--&gt; Processing Dependency: libfreebl3.so(NSSRAWHASH_3.12.3) <span class="keyword">for</span> package: glibc-2.12-1.132.el6_5.2.i686</span><br><span class="line">--&gt; Processing Dependency: libfreebl3.so <span class="keyword">for</span> package: glibc-2.12-1.132.el6_5.2.i686</span><br><span class="line">--&gt; Running transaction check</span><br><span class="line">---&gt; Package nss-softokn-freebl.i686 0:3.14.3-10.el6_5 will be installed</span><br><span class="line">--&gt; Finished Dependency Resolution</span><br><span class="line">Error:  Multilib version problems found. This often means that the root</span><br><span class="line">       cause is something <span class="keyword">else</span> and multilib version checking is just</span><br><span class="line">       pointing out that there is a problem. Eg.:</span><br><span class="line"></span><br><span class="line">         1\. You have an upgrade <span class="keyword">for</span> libselinux <span class="built_in">which</span> is missing some</span><br><span class="line">            dependency that another package requires. Yum is trying to</span><br><span class="line">            solve this by installing an older version of libselinux of the</span><br><span class="line">            different architecture. If you exclude the bad architecture</span><br><span class="line">            yum will tell you what the root cause is (<span class="built_in">which</span> package</span><br><span class="line">            requires what). You can try redoing the upgrade with</span><br><span class="line">            --exclude libselinux.otherarch ... this should give you an error</span><br><span class="line">            message showing the root cause of the problem.</span><br><span class="line"></span><br><span class="line">         2\. You have multiple architectures of libselinux installed, but</span><br><span class="line">            yum can only see an upgrade <span class="keyword">for</span> one of those arcitectures.</span><br><span class="line">            If you don<span class="string">'t want/need both architectures anymore then you</span></span><br><span class="line"><span class="string">            can remove the one with the missing update and everything</span></span><br><span class="line"><span class="string">            will work.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">         3\. You have duplicate versions of libselinux installed already.</span></span><br><span class="line"><span class="string">            You can use "yum check" to get yum show these errors.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">       ...you can also use --setopt=protected_multilib=false to remove</span></span><br><span class="line"><span class="string">       this checking, however this is almost never the correct thing to</span></span><br><span class="line"><span class="string">       do as something else is very likely to go wrong (often causing</span></span><br><span class="line"><span class="string">       much more problems).</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">       Protected multilib versions: libselinux-2.0.94-5.3.el6_4.1.i686 != libselinux-2.0.94-5.3.0.1.el6.centos.plus.x86_64</span></span><br><span class="line"><span class="string"> You could try using --skip-broken to work around the problem</span></span><br><span class="line"><span class="string"> You could try running: rpm -Va --nofiles --nodigest</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>最后在一个日文的网站上找到了解决办法：</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install --enablerepo=centosplus openssl-devel</span><br></pre></td></tr></table></figure></p>
+<p>参考：<a href="http://blog.urban-theory.net/2014/06/16/openssl-devel-install-fails-on-centos-with-docker" target="_blank" rel="noopener">http://blog.urban-theory.net/2014/06/16/openssl-devel-install-fails-on-centos-with-docker</a></p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/linux/index.html">linux</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/centos/index.html">centos</a><a href="/tags/install/index.html">install</a><a href="/tags/linux/index.html">linux</a><a href="/tags/yum/index.html">yum</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2014/04/08/dmesg-tail.html" title="一句话经验" itemprop="url">一句话经验</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about/index.html" title="leaker" target="_blank" itemprop="author">leaker</a>
+		
+  <p class="article-time">
+    <time datetime="2014-04-07T17:37:23.000Z" itemprop="datePublished"> 发表于 2014-04-08</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>当内核加载失败时，使用以下命令查看出错记录，可以帮助找到问题所在：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dmesg | tail -n 30</span><br></pre></td></tr></table></figure></p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/linux/index.html">linux</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/dmesg/index.html">dmesg</a><a href="/tags/tail/index.html">tail</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2014/04/08/upgrade-linux-kernel-to-3-8-10.html" title="升级Linux内核3.8.10记录" itemprop="url">升级Linux内核3.8.10记录</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about/index.html" title="leaker" target="_blank" itemprop="author">leaker</a>
+		
+  <p class="article-time">
+    <time datetime="2014-04-07T17:10:19.000Z" itemprop="datePublished"> 发表于 2014-04-08</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">yum install rpmdevtools yum-utils ncurses-devel make rpm-build rpm-devel</span><br><span class="line">wget https://www.kernel.org/pub/linux/kernel/v3.x/linux-3.8.10.tar.gz</span><br><span class="line">tar xvf linux-3.8.10.tar.gz</span><br><span class="line"><span class="built_in">cd</span> linux-3.8.10</span><br><span class="line">make mrproper <span class="comment"># 第一次可忽略</span></span><br><span class="line">make menuconfig <span class="comment"># 记得保存</span></span><br><span class="line">make</span><br><span class="line">make modules_install</span><br><span class="line">make install</span><br><span class="line">new-kernel-pkg --mkinitrd --depmod --install 3.8.10</span><br></pre></td></tr></table></figure>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/linux/index.html">linux</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/install/index.html">install</a><a href="/tags/make/index.html">make</a><a href="/tags/kernel/index.html">kernel</a><a href="/tags/upgrade/index.html">upgrade</a><a href="/tags/mrproper/index.html">mrproper</a><a href="/tags/menuconfig/index.html">menuconfig</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+
+  <nav id="page-nav" class="clearfix">
+    <a class="extend prev" rel="prev" href="/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/index.html">3</a><a class="page-number" href="/page/4/index.html">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/index.html">7</a><a class="extend next" rel="next" href="/page/3/index.html">Next<span></span></a>
+  </nav>
+
+</div>
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+		
+		  
+		
+		  
+		
+		  
+			<li><a href="/categories/interesting/index.html" title="interesting">interesting<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/linux/index.html" title="linux">linux<sup>25</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/notices/index.html" title="notices">notices<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/programing/index.html" title="programing">programing<sup>23</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/sites/index.html" title="sites">sites<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/summarys/index.html" title="summarys">summarys<sup>9</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/works/index.html" title="works">works<sup>1</sup></a></li>
+		  
+		
+		  
+		
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/linux/index.html" title="linux">linux<sup>9</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/ubuntu/index.html" title="ubuntu">ubuntu<sup>7</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/centos/index.html" title="centos">centos<sup>5</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/zlib/index.html" title="zlib">zlib<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/install/index.html" title="install">install<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/yum/index.html" title="yum">yum<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/make/index.html" title="make">make<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/git/index.html" title="git">git<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/c/index.html" title="c">c<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/windows/index.html" title="windows">windows<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/python/index.html" title="python">python<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/kernel/index.html" title="kernel">kernel<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/sudo/index.html" title="sudo">sudo<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/SAFESEH/index.html" title="SAFESEH">SAFESEH<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/libc/index.html" title="libc">libc<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/gcc/index.html" title="gcc">gcc<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/boost/index.html" title="boost">boost<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/ln/index.html" title="ln">ln<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/compress/index.html" title="compress">compress<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/https/index.html" title="https">https<sup>2</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello, I&#39;m Leaker&#39;s Blog in github. <br/>
+			Living without an aim is like sailing without a compass.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2018 
+		
+		<a href="/about/index.html" target="_blank" title="leaker">leaker</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+ </html>

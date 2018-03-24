@@ -1,0 +1,555 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>python代码简单加密解密工具 | 李略帅</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="leaker">
+    
+
+    
+    <meta name="description" content="12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394959697989910010110210">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python代码简单加密解密工具">
+<meta property="og:url" content="http://www.leelib.com/2014/11/21/python-simple-crypt-code.html">
+<meta property="og:site_name" content="李略帅">
+<meta property="og:description" content="12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394959697989910010110210">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-03-24T05:40:35.313Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python代码简单加密解密工具">
+<meta name="twitter:description" content="12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394959697989910010110210">
+
+    
+    <link rel="alternative" href="/atom.xml" title="李略帅" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="李略帅" title="李略帅"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="李略帅">李略帅</a></h1>
+				<h2 class="blog-motto">少壮不努力，一生在内地</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">主页</a></li>
+					
+						<li><a href="/archives/index.html">归档</a></li>
+					
+						<li><a href="/about/index.html">关于</a></li>
+					
+						<li><a href="/disappear/index.html">消失</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="/search/index.html" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" autocomplete="off" name="q" maxlength="20" placeholder="搜索" />
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2014/11/21/python-simple-crypt-code.html" title="python代码简单加密解密工具" itemprop="url">python代码简单加密解密工具</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about/index.html" title="leaker" target="_blank" itemprop="author">leaker</a>
+		
+  <p class="article-time">
+    <time datetime="2014-11-21T12:13:45.000Z" itemprop="datePublished"> 发表于 2014-11-21</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			
+		
+		</div>
+		
+		<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/env python</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">:license: MIT</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Copyright (C) 2012 HustMoon</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Permission is hereby granted, free of charge, to any person obtaining a copy of</span></span><br><span class="line"><span class="string">this software and associated documentation files (the "Software"), to deal in</span></span><br><span class="line"><span class="string">the Software without restriction, including without limitation the rights to</span></span><br><span class="line"><span class="string">use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies</span></span><br><span class="line"><span class="string">of the Software, and to permit persons to whom the Software is furnished to do</span></span><br><span class="line"><span class="string">so, subject to the following conditions:</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">The above copyright notice and this permission notice shall be included in all</span></span><br><span class="line"><span class="string">copies or substantial portions of the Software.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR</span></span><br><span class="line"><span class="string">IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,</span></span><br><span class="line"><span class="string">FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE</span></span><br><span class="line"><span class="string">AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER</span></span><br><span class="line"><span class="string">LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,</span></span><br><span class="line"><span class="string">OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE</span></span><br><span class="line"><span class="string">SOFTWARE.</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="keyword">from</span> __future__ <span class="keyword">import</span> with_statement</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> zlib, sys</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">b128encode</span><span class="params">(buf, escape=False)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> buf: <span class="keyword">return</span> <span class="string">''</span></span><br><span class="line">    buf = bytearray(buf)</span><br><span class="line">    res = bytearray((len(buf) * <span class="number">8</span> + <span class="number">6</span>) / <span class="number">7</span>)</span><br><span class="line">    p, s, i = <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> n <span class="keyword">in</span> buf:</span><br><span class="line">        res[i] = ((p &lt;&lt; (<span class="number">8</span> - s) | (n &gt;&gt; s)) &amp;amp; <span class="number">0x7F</span>) | <span class="number">0x80</span>; i += <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> s == <span class="number">7</span>:</span><br><span class="line">            res[i] = n | <span class="number">0x80</span>; i += <span class="number">1</span></span><br><span class="line">            p, s = <span class="number">0</span>, <span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            p, s = n, (s + <span class="number">1</span>) % <span class="number">8</span></span><br><span class="line">    <span class="keyword">if</span> s != <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">if</span> s == <span class="number">2</span> <span class="keyword">and</span> p &lt; <span class="number">0x80</span>:</span><br><span class="line">            i -= <span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            p = (p &lt;&lt; (<span class="number">8</span> - s)) &amp;amp; <span class="number">0x7F</span></span><br><span class="line">        p = chr(p)</span><br><span class="line">        <span class="keyword">if</span> escape:</span><br><span class="line">            p = p.encode(<span class="string">'string-escape'</span>)</span><br><span class="line">        res[i:] = p</span><br><span class="line">    <span class="keyword">return</span> str(res)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dcode</span><span class="params">()</span>:</span></span><br><span class="line">    code = <span class="string">r'''def code(__=code):</span></span><br><span class="line"><span class="string"> (_______)=(globals)();del((_______)['code'])</span></span><br><span class="line"><span class="string"> if(((_______).get('__doc__'))is((None))):</span></span><br><span class="line"><span class="string">  (__)=(map)((ord),(__)[(339):]);(______)=[0]*(((((len)((__))+(1))*(7))/(8)));((___),(____),(_____))=((0),(0),(0))</span></span><br><span class="line"><span class="string">  for((__))in((__)):</span></span><br><span class="line"><span class="string">   if((__)&lt;(128)):break</span></span><br><span class="line"><span class="string">   if((____)==(0)):((___),(____))=((__),(1))</span></span><br><span class="line"><span class="string">   else:</span></span><br><span class="line"><span class="string">    (______)[(_____)]=((((___)&lt;&lt;(____))|(((__)&amp;amp;(127))&gt;&gt;((7)-(____))))&amp;amp;(255));(_____)+=(1);((___),(____))=((__),(((____)+(1))%(8)))</span></span><br><span class="line"><span class="string">  if((__)&lt;(128)):</span></span><br><span class="line"><span class="string">   if((____)!=(0)):</span></span><br><span class="line"><span class="string">    (__)=((((___)&lt;&lt;(____))|((__)&gt;&gt;((7)-(____))))&amp;amp;(255))</span></span><br><span class="line"><span class="string">   (______)[(_____):]=[((__))]</span></span><br><span class="line"><span class="string">  elif((____)!=(0)):del((______)[(_____):])</span></span><br><span class="line"><span class="string">  exec((''.join((map)((chr),(______))).decode('zlib')))in((_______))</span></span><br><span class="line"><span class="string">  if(((_______).get('__doc__'))is((None))):(_______)['__doc__']=''</span></span><br><span class="line"><span class="string">code()</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">''</span>.join([c.encode(<span class="string">'string-escape'</span>) <span class="keyword">if</span> ord(c) &lt; <span class="number">128</span> <span class="keyword">else</span> c</span><br><span class="line">                    <span class="keyword">for</span> c <span class="keyword">in</span> zlib.compress(code, <span class="number">9</span>)])</span><br><span class="line">dcode = dcode()</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">encode</span><span class="params">(infile, outfile)</span>:</span></span><br><span class="line">    <span class="keyword">with</span> open(infile, <span class="string">'rU'</span>) <span class="keyword">as</span> fp:</span><br><span class="line">        code = fp.read().rstrip(<span class="string">'n'</span>) + <span class="string">'n'</span></span><br><span class="line">    code = b128encode(zlib.compress(code, <span class="number">9</span>), <span class="keyword">True</span>)</span><br><span class="line">    code = <span class="string">r'''# -*- coding: latin-1 -*-</span></span><br><span class="line"><span class="string">code = '%s'</span></span><br><span class="line"><span class="string">exec(code.decode('zlib'))</span></span><br><span class="line"><span class="string">'''</span> % (dcode + code)</span><br><span class="line">    <span class="keyword">with</span> open(outfile, <span class="string">'wb'</span>) <span class="keyword">as</span> fp:</span><br><span class="line">        fp.write(code)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">decode</span><span class="params">(infile, outfile)</span>:</span></span><br><span class="line">    <span class="keyword">with</span> open(infile, <span class="string">'rU'</span>) <span class="keyword">as</span> fp:</span><br><span class="line">        code = fp.read().rstrip(<span class="string">'n'</span>) + <span class="string">'n'</span></span><br><span class="line">    code = code.replace(<span class="string">"exec(code.decode('zlib'))"</span>, <span class="string">"exec(code.decode('zlib')"</span></span><br><span class="line">        <span class="string">".replace('exec','fp.write').replace('in((_______))',''))"</span>)</span><br><span class="line">    <span class="keyword">with</span> open(outfile, <span class="string">'wb'</span>) <span class="keyword">as</span> fp:</span><br><span class="line">        eval(compile(code, <span class="string">'s'</span>, <span class="string">'exec'</span>), &#123;<span class="string">'fp'</span>:fp&#125;)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">if</span> sys.argv[<span class="number">1</span>] == <span class="string">'-d'</span>:</span><br><span class="line">            func = decode</span><br><span class="line">            infile, outfile = sys.argv[<span class="number">2</span>:<span class="number">4</span>]</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            func = encode</span><br><span class="line">            infile, outfile = sys.argv[<span class="number">1</span>:<span class="number">3</span>]</span><br><span class="line">    <span class="keyword">except</span> ValueError:</span><br><span class="line">        <span class="keyword">print</span> &gt;&gt;sys.stderr, <span class="string">'Usage: zipcode.py [-d] infile.py outfile.py'</span></span><br><span class="line">        <span class="keyword">raise</span> SystemExit(<span class="number">-1</span>)</span><br><span class="line">    func(infile, outfile)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/programing/index.html">programing</a>
+</div>
+
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://www.leelib.com/2014/11/21/python-simple-crypt-code.html" data-title="python代码简单加密解密工具 | 李略帅" data-tsina="" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2014/12/25/git-remote-helper-for-https.html" title="Windows里Git出现fatal: Unable to find remote helper for &#39;https&#39;的解决方案">
+  <strong>上一篇：</strong><br/>
+  <span>
+  Windows里Git出现fatal: Unable to find remote helper for &#39;https&#39;的解决方案</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2014/11/21/vs2013-use-atl.html"  title="VS2013上直接使用ATL的注意事项">
+ <strong>下一篇：</strong><br/> 
+ <span>VS2013上直接使用ATL的注意事项
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ 
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+		
+		  
+		
+		  
+		
+		  
+			<li><a href="/categories/interesting/index.html" title="interesting">interesting<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/linux/index.html" title="linux">linux<sup>25</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/notices/index.html" title="notices">notices<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/programing/index.html" title="programing">programing<sup>23</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/sites/index.html" title="sites">sites<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/summarys/index.html" title="summarys">summarys<sup>9</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/works/index.html" title="works">works<sup>1</sup></a></li>
+		  
+		
+		  
+		
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/linux/index.html" title="linux">linux<sup>9</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/ubuntu/index.html" title="ubuntu">ubuntu<sup>7</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/centos/index.html" title="centos">centos<sup>5</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/zlib/index.html" title="zlib">zlib<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/install/index.html" title="install">install<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/yum/index.html" title="yum">yum<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/make/index.html" title="make">make<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/git/index.html" title="git">git<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/c/index.html" title="c">c<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/windows/index.html" title="windows">windows<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/python/index.html" title="python">python<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/kernel/index.html" title="kernel">kernel<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/sudo/index.html" title="sudo">sudo<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/SAFESEH/index.html" title="SAFESEH">SAFESEH<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/libc/index.html" title="libc">libc<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/gcc/index.html" title="gcc">gcc<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/boost/index.html" title="boost">boost<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/ln/index.html" title="ln">ln<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/compress/index.html" title="compress">compress<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/https/index.html" title="https">https<sup>2</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello, I&#39;m Leaker&#39;s Blog in github. <br/>
+			Living without an aim is like sailing without a compass.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2018 
+		
+		<a href="/about/index.html" target="_blank" title="leaker">leaker</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
